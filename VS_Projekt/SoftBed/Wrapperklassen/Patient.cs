@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wrapperklassen
 {
-    class Patient : Person
+    public class Patient : Person
     {
         private int _versicherungsnr;
         private string _gebdat;
@@ -19,5 +19,23 @@ namespace Wrapperklassen
         public string Beschwerde { get => _beschwerde; set => _beschwerde = value; }
         public string Aufnahmedatum { get => _aufnahmedatum; set => _aufnahmedatum = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
+
+        public Patient()
+        {
+
+        }
+
+        public Patient(string vorname, string nachname, int versnr, string gebdat, string station, string beschwerde, string aufnahmedatum, string geschlecht)
+        {
+            Vorname = vorname;
+            Nachname = nachname;
+            Versicherungsnr = versnr;
+            Gebdat = gebdat;
+            Station = station;
+            Beschwerde = beschwerde;
+            Aufnahmedatum = aufnahmedatum;
+            Geschlecht = geschlecht;
+        }
+
     }
 }
