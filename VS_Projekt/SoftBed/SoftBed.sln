@@ -13,6 +13,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wrapperklassen", "Wrapperklassen\Wrapperklassen.csproj", "{2D1DDC83-A37B-4E5A-B0A1-0CE55BF153CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E7047F4F-AA15-4709-AB58-C5BF4E7FCA82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9EDA2539-8338-4567-A8C0-B0E8E8376FA6} = {9EDA2539-8338-4567-A8C0-B0E8E8376FA6}
+		{2D1DDC83-A37B-4E5A-B0A1-0CE55BF153CD} = {2D1DDC83-A37B-4E5A-B0A1-0CE55BF153CD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
