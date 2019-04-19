@@ -49,8 +49,7 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy);
 
-            Assert.IsTrue(patientenManagement.PatientLoeschen(1)); //dürfen nicht gleich sein, wenn Loeschen funktioniert hat.
-
+            Assert.IsTrue(patientenManagement.PatientLoeschen(1)); 
         }
 
 
@@ -77,9 +76,7 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy1);
 
-            bool result = patientenManagement.PatientAendern(dummy2,232); //sollte keinen neuen Patienten anlegen, sondern die ID des vorhandenen Patienten zurückgeben.
-
-            Assert.IsTrue(result); //müssen gleich sein, da Patient immer noch derselbe
-        }
+            bool result = patientenManagement.PatientAendern(dummy2,232);
+            Assert.IsTrue(result); 
     }
 }
