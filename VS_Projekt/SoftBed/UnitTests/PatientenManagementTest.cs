@@ -49,7 +49,7 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy);
 
-            Assert.IsTrue(patientenManagement.PatientLoeschen(1)); 
+            Assert.IsTrue(patientenManagement.PatientLoeschen(121)); 
         }
 
 
@@ -60,8 +60,8 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy);
 
-            bool result1 = patientenManagement.PatientLoeschen(1);
-            bool result2 = patientenManagement.PatientLoeschen(1);
+            bool result1 = patientenManagement.PatientLoeschen(120);
+            bool result2 = patientenManagement.PatientLoeschen(120);
 
 
             Assert.IsTrue(result1 && !result2);
