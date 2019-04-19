@@ -71,12 +71,13 @@ namespace UnitTests
         [TestMethod]
         public void PatientAendernTest()
         {
-            Patient dummy1 = new Patient("Felix", "Fuß", 232, "01.04.2010", "IM", "", "12.04.2019", "maennlich"); 
+            Patient dummy1 = new Patient("Felix", "Fuß", 232, "01.04.2010", "IM", "", "12.04.2019", "maennlich");
             Patient dummy2 = new Patient("Felix", "Fuß", 232, "01.04.2010", "P", "", "12.04.2019", "maennlich");
 
             patientenManagement.PatientAnlegen(dummy1);
 
-            bool result = patientenManagement.PatientAendern(dummy2,232);
-            Assert.IsTrue(result); 
+            bool result = patientenManagement.PatientAendern(dummy2, 232);
+            Assert.IsTrue(result);
+        }
     }
 }
