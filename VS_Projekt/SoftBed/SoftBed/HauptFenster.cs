@@ -16,5 +16,20 @@ namespace SoftBed
         {
             InitializeComponent();
         }
+
+        private void patVerwBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void verlAugefBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void abmeldenBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

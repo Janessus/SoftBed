@@ -88,7 +88,7 @@
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(138, 36);
             this.loginBtn.TabIndex = 4;
-            this.loginBtn.Text = "login";
+            this.loginBtn.Text = "anmelden";
             this.loginBtn.UseVisualStyleBackColor = false;
             // 
             // LoginScreen
@@ -102,7 +102,7 @@
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.loginLbl);
             this.Name = "LoginScreen";
-            this.Text = "Form1";
+            this.Text = "LoginScreen";
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
