@@ -76,6 +76,7 @@
             this.transferListeDGV.Enabled = false;
             this.transferListeDGV.Location = new System.Drawing.Point(707, 88);
             this.transferListeDGV.Name = "transferListeDGV";
+            this.transferListeDGV.RowHeadersVisible = false;
             this.transferListeDGV.Size = new System.Drawing.Size(443, 401);
             this.transferListeDGV.TabIndex = 1;
             // 

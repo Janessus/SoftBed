@@ -294,6 +294,7 @@
             this.patAnzDGV.Enabled = false;
             this.patAnzDGV.Location = new System.Drawing.Point(568, 238);
             this.patAnzDGV.Name = "patAnzDGV";
+            this.patAnzDGV.RowHeadersVisible = false;
             this.patAnzDGV.Size = new System.Drawing.Size(582, 52);
             this.patAnzDGV.TabIndex = 28;
             // 
