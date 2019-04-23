@@ -59,6 +59,7 @@
             this.gesKHProgBar.Enabled = false;
             this.gesKHProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.gesKHProgBar.Location = new System.Drawing.Point(12, 606);
+            this.gesKHProgBar.Maximum = 260;
             this.gesKHProgBar.Name = "gesKHProgBar";
             this.gesKHProgBar.Size = new System.Drawing.Size(1138, 32);
             this.gesKHProgBar.TabIndex = 0;
@@ -109,6 +110,7 @@
             // itsProgBar
             // 
             this.itsProgBar.Location = new System.Drawing.Point(12, 574);
+            this.itsProgBar.Maximum = 10;
             this.itsProgBar.Name = "itsProgBar";
             this.itsProgBar.Size = new System.Drawing.Size(374, 26);
             this.itsProgBar.TabIndex = 3;
@@ -214,6 +216,7 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(147, 297);
+            this.progressBar1.Maximum = 50;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(374, 26);
             this.progressBar1.TabIndex = 13;
@@ -221,6 +224,7 @@
             // progressBar2
             // 
             this.progressBar2.Location = new System.Drawing.Point(147, 335);
+            this.progressBar2.Maximum = 50;
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(374, 26);
             this.progressBar2.TabIndex = 14;
@@ -228,6 +232,7 @@
             // progressBar3
             // 
             this.progressBar3.Location = new System.Drawing.Point(147, 377);
+            this.progressBar3.Maximum = 50;
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(374, 26);
             this.progressBar3.TabIndex = 15;
@@ -235,6 +240,7 @@
             // progressBar4
             // 
             this.progressBar4.Location = new System.Drawing.Point(147, 417);
+            this.progressBar4.Maximum = 50;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(374, 26);
             this.progressBar4.TabIndex = 16;
@@ -242,6 +248,7 @@
             // progressBar5
             // 
             this.progressBar5.Location = new System.Drawing.Point(147, 458);
+            this.progressBar5.Maximum = 50;
             this.progressBar5.Name = "progressBar5";
             this.progressBar5.Size = new System.Drawing.Size(374, 26);
             this.progressBar5.TabIndex = 17;
