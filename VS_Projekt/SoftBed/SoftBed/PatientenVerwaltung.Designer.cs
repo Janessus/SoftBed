@@ -250,9 +250,9 @@
             this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editMeldungLdl.Location = new System.Drawing.Point(32, 552);
             this.editMeldungLdl.Name = "editMeldungLdl";
-            this.editMeldungLdl.Size = new System.Drawing.Size(190, 20);
+            this.editMeldungLdl.Size = new System.Drawing.Size(266, 20);
             this.editMeldungLdl.TabIndex = 24;
-            this.editMeldungLdl.Text = "hier kommt eine Meldung!";
+            this.editMeldungLdl.Text = "hier kommt der Verlegungsvorschlag";
             // 
             // patSucheLbl
             // 
