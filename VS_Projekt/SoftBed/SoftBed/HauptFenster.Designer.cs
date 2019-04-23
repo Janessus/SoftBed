@@ -29,11 +29,7 @@
         private void InitializeComponent()
         {
             this.gesKHProgBar = new System.Windows.Forms.ProgressBar();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.nameColmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vonClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nachClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transferListeDGV = new System.Windows.Forms.DataGridView();
             this.progBarGesLbl = new System.Windows.Forms.Label();
             this.itsProgBar = new System.Windows.Forms.ProgressBar();
             this.auslastungITSLbl = new System.Windows.Forms.Label();
@@ -45,13 +41,17 @@
             this.onkLbl = new System.Windows.Forms.Label();
             this.OrthLbl = new System.Windows.Forms.Label();
             this.pädLbl = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar4 = new System.Windows.Forms.ProgressBar();
-            this.progressBar5 = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.gynProgBar = new System.Windows.Forms.ProgressBar();
+            this.iMProgBar = new System.Windows.Forms.ProgressBar();
+            this.onkProgBar = new System.Windows.Forms.ProgressBar();
+            this.orthProgBar = new System.Windows.Forms.ProgressBar();
+            this.paedProgBar = new System.Windows.Forms.ProgressBar();
+            this.bettbelegLbl = new System.Windows.Forms.Label();
+            this.nameColmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vonClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nachClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // gesKHProgBar
@@ -64,40 +64,20 @@
             this.gesKHProgBar.Size = new System.Drawing.Size(1138, 32);
             this.gesKHProgBar.TabIndex = 0;
             // 
-            // dataGridView1
+            // transferListeDGV
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.transferListeDGV.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.transferListeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.transferListeDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameColmn,
             this.firstNameClmn,
             this.vonClmn,
             this.nachClmn});
-            this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(707, 88);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(443, 401);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // nameColmn
-            // 
-            this.nameColmn.HeaderText = "Nachname";
-            this.nameColmn.Name = "nameColmn";
-            // 
-            // firstNameClmn
-            // 
-            this.firstNameClmn.HeaderText = "Vorname";
-            this.firstNameClmn.Name = "firstNameClmn";
-            // 
-            // vonClmn
-            // 
-            this.vonClmn.HeaderText = "Von";
-            this.vonClmn.Name = "vonClmn";
-            // 
-            // nachClmn
-            // 
-            this.nachClmn.HeaderText = "Nach";
-            this.nachClmn.Name = "nachClmn";
+            this.transferListeDGV.Enabled = false;
+            this.transferListeDGV.Location = new System.Drawing.Point(707, 88);
+            this.transferListeDGV.Name = "transferListeDGV";
+            this.transferListeDGV.Size = new System.Drawing.Size(443, 401);
+            this.transferListeDGV.TabIndex = 1;
             // 
             // progBarGesLbl
             // 
@@ -217,61 +197,85 @@
             this.pädLbl.TabIndex = 12;
             this.pädLbl.Text = "Pädiatrie";
             // 
-            // progressBar1
+            // gynProgBar
             // 
-            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.progressBar1.Location = new System.Drawing.Point(150, 300);
-            this.progressBar1.Maximum = 50;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(374, 26);
-            this.progressBar1.TabIndex = 13;
+            this.gynProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.gynProgBar.Location = new System.Drawing.Point(150, 300);
+            this.gynProgBar.Maximum = 50;
+            this.gynProgBar.Name = "gynProgBar";
+            this.gynProgBar.Size = new System.Drawing.Size(374, 26);
+            this.gynProgBar.TabIndex = 13;
             // 
-            // progressBar2
+            // iMProgBar
             // 
-            this.progressBar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.progressBar2.Location = new System.Drawing.Point(150, 338);
-            this.progressBar2.Maximum = 50;
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(374, 26);
-            this.progressBar2.TabIndex = 14;
+            this.iMProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.iMProgBar.Location = new System.Drawing.Point(150, 338);
+            this.iMProgBar.Maximum = 50;
+            this.iMProgBar.Name = "iMProgBar";
+            this.iMProgBar.Size = new System.Drawing.Size(374, 26);
+            this.iMProgBar.TabIndex = 14;
             // 
-            // progressBar3
+            // onkProgBar
             // 
-            this.progressBar3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.progressBar3.Location = new System.Drawing.Point(150, 380);
-            this.progressBar3.Maximum = 50;
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(374, 26);
-            this.progressBar3.TabIndex = 15;
+            this.onkProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.onkProgBar.Location = new System.Drawing.Point(150, 380);
+            this.onkProgBar.Maximum = 50;
+            this.onkProgBar.Name = "onkProgBar";
+            this.onkProgBar.Size = new System.Drawing.Size(374, 26);
+            this.onkProgBar.TabIndex = 15;
             // 
-            // progressBar4
+            // orthProgBar
             // 
-            this.progressBar4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.progressBar4.Location = new System.Drawing.Point(150, 420);
-            this.progressBar4.Maximum = 50;
-            this.progressBar4.Name = "progressBar4";
-            this.progressBar4.Size = new System.Drawing.Size(374, 26);
-            this.progressBar4.TabIndex = 16;
+            this.orthProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.orthProgBar.Location = new System.Drawing.Point(150, 420);
+            this.orthProgBar.Maximum = 50;
+            this.orthProgBar.Name = "orthProgBar";
+            this.orthProgBar.Size = new System.Drawing.Size(374, 26);
+            this.orthProgBar.TabIndex = 16;
             // 
-            // progressBar5
+            // paedProgBar
             // 
-            this.progressBar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.progressBar5.Location = new System.Drawing.Point(150, 461);
-            this.progressBar5.Maximum = 50;
-            this.progressBar5.Name = "progressBar5";
-            this.progressBar5.Size = new System.Drawing.Size(374, 26);
-            this.progressBar5.TabIndex = 17;
+            this.paedProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.paedProgBar.Location = new System.Drawing.Point(150, 461);
+            this.paedProgBar.Maximum = 50;
+            this.paedProgBar.Name = "paedProgBar";
+            this.paedProgBar.Size = new System.Drawing.Size(374, 26);
+            this.paedProgBar.TabIndex = 17;
             // 
-            // label1
+            // bettbelegLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(146, 254);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 24);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Bettenbelegung";
+            this.bettbelegLbl.AutoSize = true;
+            this.bettbelegLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bettbelegLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bettbelegLbl.Location = new System.Drawing.Point(146, 254);
+            this.bettbelegLbl.Name = "bettbelegLbl";
+            this.bettbelegLbl.Size = new System.Drawing.Size(158, 24);
+            this.bettbelegLbl.TabIndex = 18;
+            this.bettbelegLbl.Text = "Bettenbelegung";
+            // 
+            // nameColmn
+            // 
+            this.nameColmn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameColmn.HeaderText = "Nachname";
+            this.nameColmn.Name = "nameColmn";
+            // 
+            // firstNameClmn
+            // 
+            this.firstNameClmn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.firstNameClmn.HeaderText = "Vorname";
+            this.firstNameClmn.Name = "firstNameClmn";
+            // 
+            // vonClmn
+            // 
+            this.vonClmn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.vonClmn.HeaderText = "Von";
+            this.vonClmn.Name = "vonClmn";
+            // 
+            // nachClmn
+            // 
+            this.nachClmn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nachClmn.HeaderText = "Nach";
+            this.nachClmn.Name = "nachClmn";
             // 
             // HauptFenster
             // 
@@ -279,12 +283,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar5);
-            this.Controls.Add(this.progressBar4);
-            this.Controls.Add(this.progressBar3);
-            this.Controls.Add(this.progressBar2);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.bettbelegLbl);
+            this.Controls.Add(this.paedProgBar);
+            this.Controls.Add(this.orthProgBar);
+            this.Controls.Add(this.onkProgBar);
+            this.Controls.Add(this.iMProgBar);
+            this.Controls.Add(this.gynProgBar);
             this.Controls.Add(this.pädLbl);
             this.Controls.Add(this.OrthLbl);
             this.Controls.Add(this.onkLbl);
@@ -296,11 +300,11 @@
             this.Controls.Add(this.auslastungITSLbl);
             this.Controls.Add(this.itsProgBar);
             this.Controls.Add(this.progBarGesLbl);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.transferListeDGV);
             this.Controls.Add(this.gesKHProgBar);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,11 +313,7 @@
         #endregion
 
         private System.Windows.Forms.ProgressBar gesKHProgBar;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameColmn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vonClmn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nachClmn;
+        private System.Windows.Forms.DataGridView transferListeDGV;
         private System.Windows.Forms.Label progBarGesLbl;
         private System.Windows.Forms.ProgressBar itsProgBar;
         private System.Windows.Forms.Label auslastungITSLbl;
@@ -325,11 +325,15 @@
         private System.Windows.Forms.Label onkLbl;
         private System.Windows.Forms.Label OrthLbl;
         private System.Windows.Forms.Label pädLbl;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar4;
-        private System.Windows.Forms.ProgressBar progressBar5;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar gynProgBar;
+        private System.Windows.Forms.ProgressBar iMProgBar;
+        private System.Windows.Forms.ProgressBar onkProgBar;
+        private System.Windows.Forms.ProgressBar orthProgBar;
+        private System.Windows.Forms.ProgressBar paedProgBar;
+        private System.Windows.Forms.Label bettbelegLbl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameColmn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vonClmn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nachClmn;
     }
 }
