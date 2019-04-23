@@ -66,12 +66,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameColmn,
             this.firstNameClmn,
             this.vonClmn,
             this.nachClmn});
+            this.dataGridView1.Enabled = false;
             this.dataGridView1.Location = new System.Drawing.Point(707, 88);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(443, 401);
@@ -101,15 +103,16 @@
             // 
             this.progBarGesLbl.AutoSize = true;
             this.progBarGesLbl.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.progBarGesLbl.Location = new System.Drawing.Point(15, 612);
+            this.progBarGesLbl.Location = new System.Drawing.Point(12, 583);
             this.progBarGesLbl.Name = "progBarGesLbl";
-            this.progBarGesLbl.Size = new System.Drawing.Size(207, 20);
+            this.progBarGesLbl.Size = new System.Drawing.Size(206, 20);
             this.progBarGesLbl.TabIndex = 2;
-            this.progBarGesLbl.Text = "Auslastung Betten Gesamt";
+            this.progBarGesLbl.Text = "Auslastung Betten gesamt";
             // 
             // itsProgBar
             // 
-            this.itsProgBar.Location = new System.Drawing.Point(12, 574);
+            this.itsProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.itsProgBar.Location = new System.Drawing.Point(12, 554);
             this.itsProgBar.Maximum = 10;
             this.itsProgBar.Name = "itsProgBar";
             this.itsProgBar.Size = new System.Drawing.Size(374, 26);
@@ -118,8 +121,9 @@
             // auslastungITSLbl
             // 
             this.auslastungITSLbl.AutoSize = true;
+            this.auslastungITSLbl.BackColor = System.Drawing.Color.Transparent;
             this.auslastungITSLbl.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.auslastungITSLbl.Location = new System.Drawing.Point(15, 577);
+            this.auslastungITSLbl.Location = new System.Drawing.Point(8, 531);
             this.auslastungITSLbl.Name = "auslastungITSLbl";
             this.auslastungITSLbl.Size = new System.Drawing.Size(206, 20);
             this.auslastungITSLbl.TabIndex = 4;
@@ -163,7 +167,7 @@
             this.gynLbl.AutoSize = true;
             this.gynLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gynLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.gynLbl.Location = new System.Drawing.Point(24, 303);
+            this.gynLbl.Location = new System.Drawing.Point(27, 306);
             this.gynLbl.Name = "gynLbl";
             this.gynLbl.Size = new System.Drawing.Size(97, 20);
             this.gynLbl.TabIndex = 8;
@@ -174,7 +178,7 @@
             this.iMLbl.AutoSize = true;
             this.iMLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.iMLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iMLbl.Location = new System.Drawing.Point(10, 341);
+            this.iMLbl.Location = new System.Drawing.Point(13, 344);
             this.iMLbl.Name = "iMLbl";
             this.iMLbl.Size = new System.Drawing.Size(111, 20);
             this.iMLbl.TabIndex = 9;
@@ -185,7 +189,7 @@
             this.onkLbl.AutoSize = true;
             this.onkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.onkLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.onkLbl.Location = new System.Drawing.Point(41, 383);
+            this.onkLbl.Location = new System.Drawing.Point(44, 386);
             this.onkLbl.Name = "onkLbl";
             this.onkLbl.Size = new System.Drawing.Size(80, 20);
             this.onkLbl.TabIndex = 10;
@@ -196,7 +200,7 @@
             this.OrthLbl.AutoSize = true;
             this.OrthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrthLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.OrthLbl.Location = new System.Drawing.Point(33, 423);
+            this.OrthLbl.Location = new System.Drawing.Point(36, 426);
             this.OrthLbl.Name = "OrthLbl";
             this.OrthLbl.Size = new System.Drawing.Size(88, 20);
             this.OrthLbl.TabIndex = 11;
@@ -207,7 +211,7 @@
             this.pädLbl.AutoSize = true;
             this.pädLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pädLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.pädLbl.Location = new System.Drawing.Point(50, 464);
+            this.pädLbl.Location = new System.Drawing.Point(53, 467);
             this.pädLbl.Name = "pädLbl";
             this.pädLbl.Size = new System.Drawing.Size(71, 20);
             this.pädLbl.TabIndex = 12;
@@ -215,7 +219,8 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(147, 297);
+            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.progressBar1.Location = new System.Drawing.Point(150, 300);
             this.progressBar1.Maximum = 50;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(374, 26);
@@ -223,7 +228,8 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(147, 335);
+            this.progressBar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.progressBar2.Location = new System.Drawing.Point(150, 338);
             this.progressBar2.Maximum = 50;
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(374, 26);
@@ -231,7 +237,8 @@
             // 
             // progressBar3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(147, 377);
+            this.progressBar3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.progressBar3.Location = new System.Drawing.Point(150, 380);
             this.progressBar3.Maximum = 50;
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(374, 26);
@@ -239,7 +246,8 @@
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(147, 417);
+            this.progressBar4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.progressBar4.Location = new System.Drawing.Point(150, 420);
             this.progressBar4.Maximum = 50;
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(374, 26);
@@ -247,7 +255,8 @@
             // 
             // progressBar5
             // 
-            this.progressBar5.Location = new System.Drawing.Point(147, 458);
+            this.progressBar5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
+            this.progressBar5.Location = new System.Drawing.Point(150, 461);
             this.progressBar5.Maximum = 50;
             this.progressBar5.Name = "progressBar5";
             this.progressBar5.Size = new System.Drawing.Size(374, 26);
@@ -258,7 +267,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(143, 251);
+            this.label1.Location = new System.Drawing.Point(146, 254);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 24);
             this.label1.TabIndex = 18;
@@ -268,6 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar5);

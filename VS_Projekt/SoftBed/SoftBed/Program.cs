@@ -16,7 +16,7 @@ namespace SoftBed
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PatientenVerwaltung());
+            Application.Run(new HauptFenster());
         }
     }
 }
