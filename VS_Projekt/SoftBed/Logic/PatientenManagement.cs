@@ -9,9 +9,6 @@ namespace Logic
     {
 
         private static PatientenManagement _instance = null;
-        private static Patient _currentPatient;
-
-        public static Patient CurrentPatient { get => _currentPatient; set => _currentPatient = value; }
 
         private PatientenManagement()
         {
@@ -28,17 +25,23 @@ namespace Logic
 
         public bool PatientAnlegen(Patient newPatient)
         {
-            return false;
+            bool request = DatabaseManagement.GetInstance().addPatient(newPatient);
+
+            return request;
         }
 
         public bool PatientLoeschen(int versNr)
         {
-            return false;
+            bool request = DatabaseManagement.GetInstance().deletePatient(versNr);
+
+            return request;
         }
 
-        public bool PatientAendern(Patient newPatient, int versNr)
+        public bool PatientAendern(Patient newPatient)
         {
-            return false;
+            bool request = DatabaseManagement.GetInstance().updatePatient(newPatient);
+
+            return request;
         }
 
     }
