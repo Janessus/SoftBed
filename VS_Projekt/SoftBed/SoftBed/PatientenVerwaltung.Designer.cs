@@ -55,6 +55,7 @@
             this.nameColmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bettNrClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entlassenBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.patAnzDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -209,7 +210,7 @@
             this.sucheBtn.Name = "sucheBtn";
             this.sucheBtn.Size = new System.Drawing.Size(196, 29);
             this.sucheBtn.TabIndex = 20;
-            this.sucheBtn.Text = "Patient Suchen";
+            this.sucheBtn.Text = "Patient suchen";
             this.sucheBtn.UseVisualStyleBackColor = true;
             this.sucheBtn.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -292,7 +293,7 @@
             this.firstNameClmn,
             this.bettNrClmn});
             this.patAnzDGV.Enabled = false;
-            this.patAnzDGV.Location = new System.Drawing.Point(568, 238);
+            this.patAnzDGV.Location = new System.Drawing.Point(568, 273);
             this.patAnzDGV.Name = "patAnzDGV";
             this.patAnzDGV.RowHeadersVisible = false;
             this.patAnzDGV.Size = new System.Drawing.Size(582, 52);
@@ -322,12 +323,24 @@
             this.bettNrClmn.HeaderText = "Bettnr.";
             this.bettNrClmn.Name = "bettNrClmn";
             // 
+            // entlassenBtn
+            // 
+            this.entlassenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entlassenBtn.Location = new System.Drawing.Point(788, 339);
+            this.entlassenBtn.Name = "entlassenBtn";
+            this.entlassenBtn.Size = new System.Drawing.Size(141, 29);
+            this.entlassenBtn.TabIndex = 29;
+            this.entlassenBtn.Text = "Patient entlassen";
+            this.entlassenBtn.UseVisualStyleBackColor = true;
+            this.entlassenBtn.Click += new System.EventHandler(this.entlassenBtn_Click);
+            // 
             // PatientenVerwaltung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.Controls.Add(this.entlassenBtn);
             this.Controls.Add(this.patAnzDGV);
             this.Controls.Add(this.versNrSucheTxt);
             this.Controls.Add(this.versNrSucheLbl);
@@ -389,5 +402,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bettNrClmn;
+        private System.Windows.Forms.Button entlassenBtn;
     }
 }

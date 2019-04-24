@@ -31,5 +31,10 @@ namespace SoftBed
         {
 
         }
+
+        private void entlassenBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adminbereich.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adminbereich.Designer.cs">
+      <DependentUpon>Adminbereich.cs</DependentUpon>
+    </Compile>
     <Compile Include="HauptFenster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Adminbereich.resx">
+      <DependentUpon>Adminbereich.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HauptFenster.resx">
       <DependentUpon>HauptFenster.cs</DependentUpon>
     </EmbeddedResource>
