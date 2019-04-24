@@ -5,7 +5,7 @@ using Wrapperklassen;
 
 namespace Logic
 {
-    class UpdateManagement : LogicController
+    public class UpdateManagement : LogicController
     {
         public static UpdateManagement _instance = null;
 
@@ -38,8 +38,9 @@ namespace Logic
             return null;
         }
 
-
-
-
+        public Verlegungsliste[] GetCurrentVerlegungsliste()
+        {
+            return null;
+        }
     }
 }
