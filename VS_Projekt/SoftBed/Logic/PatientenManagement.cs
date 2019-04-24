@@ -25,21 +25,21 @@ namespace Logic
 
         public bool PatientAnlegen(Patient newPatient)
         {
-            bool request = DatabaseManagement.GetInstance().addPatient(newPatient);
+            bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient);
 
             return request;
         }
 
         public bool PatientLoeschen(int versNr)
         {
-            bool request = DatabaseManagement.GetInstance().deletePatient(versNr);
+            bool request = DatabaseManagement.GetInstance().PatientLoeschen(versNr);
 
             return request;
         }
 
         public bool PatientAendern(Patient newPatient)
         {
-            bool request = DatabaseManagement.GetInstance().updatePatient(newPatient);
+            bool request = DatabaseManagement.GetInstance().PatientAendern(newPatient);
 
             return request;
         }

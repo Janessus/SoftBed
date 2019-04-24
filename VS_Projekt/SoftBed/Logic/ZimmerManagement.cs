@@ -5,7 +5,7 @@ using Wrapperklassen;
 
 namespace Logic
 {
-    class ZimmerManagement : LogicController
+    public class ZimmerManagement : LogicController
     {
         private static ZimmerManagement _instance = null;
 
@@ -14,7 +14,7 @@ namespace Logic
 
         }
 
-        public ZimmerManagement GetInstance()
+        public static ZimmerManagement GetInstance()
         {
             if (_instance == null)
             {
