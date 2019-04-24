@@ -76,7 +76,7 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy1);
 
-            bool result = patientenManagement.PatientAendern(dummy2, 232);
+            bool result = patientenManagement.PatientAendern(dummy2);
             Assert.IsTrue(result);
         }
     }
