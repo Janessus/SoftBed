@@ -19,7 +19,7 @@ namespace SoftBed
 
         private UserManagement userManage = UserManagement.GetInstance();
         
-
+        
 
         public LoginScreen()
         {
@@ -61,8 +61,9 @@ namespace SoftBed
         {
             this.SetVisibleCore(false);
             Form adminArea = new Adminbereich();
-            adminArea.Show();
-            this.Hide();
+            adminArea.ShowDialog();
+            
+            //this.Hide();
         }
 
 
