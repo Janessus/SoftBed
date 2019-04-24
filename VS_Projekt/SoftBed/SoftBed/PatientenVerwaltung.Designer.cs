@@ -201,7 +201,7 @@
             this.aufnahmeBtn.TabIndex = 19;
             this.aufnahmeBtn.Text = "Patient aufnehmen";
             this.aufnahmeBtn.UseVisualStyleBackColor = true;
-            this.aufnahmeBtn.Click += new System.EventHandler(this.button1_Click);
+            this.aufnahmeBtn.Click += new System.EventHandler(this.aufnahmeBtn_Click);
             // 
             // sucheBtn
             // 
@@ -212,7 +212,7 @@
             this.sucheBtn.TabIndex = 20;
             this.sucheBtn.Text = "Patient suchen";
             this.sucheBtn.UseVisualStyleBackColor = true;
-            this.sucheBtn.Click += new System.EventHandler(this.button2_Click);
+            this.sucheBtn.Click += new System.EventHandler(this.sucheBtn_Click);
             // 
             // patAufnLbl
             // 
@@ -233,7 +233,7 @@
             this.zurueckBtn.TabIndex = 22;
             this.zurueckBtn.Text = "< Zurück";
             this.zurueckBtn.UseVisualStyleBackColor = true;
-            this.zurueckBtn.Click += new System.EventHandler(this.button3_Click);
+            this.zurueckBtn.Click += new System.EventHandler(this.zurueckBtn_Click);
             // 
             // meldungLbl
             // 
