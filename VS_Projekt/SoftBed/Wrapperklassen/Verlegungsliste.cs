@@ -6,12 +6,8 @@ namespace Wrapperklassen
 {
     public class Verlegungsliste
     {
-        private Person _person;
-        private string _von;
-        private string _nach;
+        private List<VerlegungslistenItem> _transferliste;
 
-        public Person Person { get => _person; set => _person = value; }
-        public string Von { get => _von; set => _von = value; }
-        public string Nach { get => _nach; set => _nach = value; }
+        public List<VerlegungslistenItem> Transferliste { get => _transferliste; set => _transferliste = value; }
     }
 }
