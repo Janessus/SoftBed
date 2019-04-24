@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +14,11 @@ namespace SoftBed
     public partial class LoginScreen : Form
     {
         //const define of admin
-        public const String sAdmin = "admin";
-        public const String sAdminPW = "admin";
+        private const String sAdmin = "admin";
+        private const String sAdminPW = "admin";
+
+        private UserManagement userManage = UserManagement.GetInstance();
+        
 
 
         public LoginScreen()
@@ -22,20 +26,56 @@ namespace SoftBed
             InitializeComponent();
         }
 
+        /**
+         * actionListener at loginBtn
+         * tests wether user and pw are valid or not
+         * and if it's admin and opens next GUI
+         */
         private void loginBtn_Click(object sender, EventArgs e)
         {
             String sUser = userTxt.Text;
             String sPW = pwTxt.Text;
 
-            if (sUser == sAdmin && sPW == sAdminPW)
+            if (sUser.Equals(sAdmin)  && sPW.Equals(sAdminPW))
             {
-
+                openAdminbereich();
             }
             else
             {
-
+                if (userManage.UserLogin(sUser, sPW) == true)
+                {
+                    openHauptFenster();
+                }
+                else
+                {
+                    noteLbl.Text = "Ungültiger Benutzer oder Passwort!";
+                }
             }
+        }
 
+
+        /**
+         * opens adminArea and hides LoginScreen
+         */
+        private void openAdminbereich()
+        {
+            this.SetVisibleCore(false);
+            Form adminArea = new Adminbereich();
+            adminArea.Show();
+            this.Hide();
+        }
+
+
+
+        /**
+         * opens mainWindow and hides LoginScreen
+         */
+        private void openHauptFenster()
+        {
+            this.SetVisibleCore(false);
+            Form mainWindow = new HauptFenster();
+            mainWindow.Show();
+            this.Hide();
         }
     }
 }
