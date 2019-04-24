@@ -21,5 +21,10 @@ namespace SoftBed
         {
 
         }
+
+        private void usrAnlBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

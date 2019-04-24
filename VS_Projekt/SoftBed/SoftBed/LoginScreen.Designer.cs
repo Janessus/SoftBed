@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginScreen));
             this.loginLbl = new System.Windows.Forms.Label();
             this.userTxt = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pwTxt = new System.Windows.Forms.TextBox();
             this.logoBox = new System.Windows.Forms.PictureBox();
             this.loginBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
@@ -40,31 +40,31 @@
             // loginLbl
             // 
             this.loginLbl.AutoSize = true;
-            this.loginLbl.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.loginLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginLbl.Location = new System.Drawing.Point(320, 258);
             this.loginLbl.Name = "loginLbl";
-            this.loginLbl.Size = new System.Drawing.Size(89, 36);
+            this.loginLbl.Size = new System.Drawing.Size(86, 33);
             this.loginLbl.TabIndex = 0;
             this.loginLbl.Text = "Login";
             // 
             // userTxt
             // 
-            this.userTxt.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userTxt.Location = new System.Drawing.Point(326, 312);
             this.userTxt.Name = "userTxt";
-            this.userTxt.Size = new System.Drawing.Size(137, 29);
+            this.userTxt.Size = new System.Drawing.Size(137, 26);
             this.userTxt.TabIndex = 1;
             this.userTxt.Text = "User";
             // 
-            // textBox1
+            // pwTxt
             // 
-            this.textBox1.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(325, 347);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(138, 29);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "abcdefghijk";
+            this.pwTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pwTxt.Location = new System.Drawing.Point(325, 347);
+            this.pwTxt.Name = "pwTxt";
+            this.pwTxt.PasswordChar = '*';
+            this.pwTxt.Size = new System.Drawing.Size(138, 26);
+            this.pwTxt.TabIndex = 2;
+            this.pwTxt.Text = "abcdefghijk";
             // 
             // logoBox
             // 
@@ -83,13 +83,14 @@
             this.loginBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(162)))), ((int)(((byte)(62)))));
             this.loginBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(162)))), ((int)(((byte)(62)))));
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.loginBtn.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.Location = new System.Drawing.Point(325, 387);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(138, 36);
             this.loginBtn.TabIndex = 4;
             this.loginBtn.Text = "anmelden";
             this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // LoginScreen
             // 
@@ -99,7 +100,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.logoBox);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pwTxt);
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.loginLbl);
             this.Name = "LoginScreen";
@@ -114,7 +115,7 @@
 
         private System.Windows.Forms.Label loginLbl;
         private System.Windows.Forms.TextBox userTxt;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox pwTxt;
         private System.Windows.Forms.PictureBox logoBox;
         private System.Windows.Forms.Button loginBtn;
     }
