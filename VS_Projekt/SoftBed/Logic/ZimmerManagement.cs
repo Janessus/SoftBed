@@ -47,6 +47,7 @@ namespace Logic
         public bool KHFastVoll()
         {
 
+            return false;
         }
     }
 }
