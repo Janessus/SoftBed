@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data.SqlClient;
 using Wrapperklassen;
 
@@ -24,72 +22,101 @@ namespace Logic
             return _instance;
         }
 
-
+        //Not working yet, connectionString has to be assigned first
         private SqlConnection Connect()
         {
+            SqlConnection connection;
+            String connectionString = null;
 
+            connection = new SqlConnection(connectionString);
+
+            return connection;
         }
+
 
         private bool ExecuteQuery()
         {
+            SqlConnection connection = Connect();
+            SqlCommand command = null;
+            String query = null;
 
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
+
+            return false;
         }
 
-        public User GetUser()
+        public User GetUser(int userID)
         {
 
+            return null;
         }
 
-        public bool UserAnlegen()
+        public bool UserAnlegen(User user)
         {
 
+            return false;
         }
 
-        public bool UserLoeschen()
+        public bool UserLoeschen(int userID)
         {
 
+            return false;
         }
 
-        public Patient GetPatient()
+        public Patient GetPatient(int versicherungsNummer)
         {
 
+            return null;
         }
 
-        public bool PatientAendern()
+        public bool PatientAendern(Patient patient)
         {
 
+            return false;
         }
 
-        public bool PatientLoeschen()
+        public bool PatientLoeschen(int versicherungsNummer)
         {
 
+            return false;
         }
 
-        public bool PatientAnlegen()
+        public bool PatientAnlegen(Patient patient)
         {
 
+            return false;
         }
 
 
         public Bettenbelegung GetBettenbelegung()
         {
 
+            return null;
         }
 
         public Verlegungsliste GetVerlegungsliste()
         {
 
+            return null;
         }
 
         public String GetPassendesBett()
         {
 
+            return null;
         }
-
-
-
-
-
 
 
 
