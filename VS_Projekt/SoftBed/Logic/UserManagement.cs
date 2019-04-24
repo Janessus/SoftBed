@@ -9,6 +9,7 @@ namespace Logic
     {
         private static UserManagement _instance = null;
         private static User _currentUser;
+        
 
         public static User CurrentUser { get => _currentUser; set => _currentUser = value; }
 
@@ -64,6 +65,15 @@ namespace Logic
          */
         public bool UserLogin(string userName, string password)
         {
+            User requestedUser = null; //später dbms
+            if(requestedUser != null)
+            {
+                if(requestedUser.Passwort == password)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -71,9 +81,9 @@ namespace Logic
          * funktion zum logout einer Users
          */
          public void UserLogout()
-        {
+         {
             CurrentUser = new User("Dummy", "Dummy", "Dummy", "Dummy", "Dummy");
-        }
+         }
 
     }
 }
