@@ -57,7 +57,7 @@ namespace Logic
             return false;
         }
 
-        public User GetUser(int userID)
+        public User GetUser(string userName)
         {
 
             return null;

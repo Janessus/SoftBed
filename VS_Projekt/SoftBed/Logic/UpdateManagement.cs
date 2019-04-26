@@ -7,7 +7,7 @@ namespace Logic
 {
     public class UpdateManagement : LogicController
     {
-        public static UpdateManagement _instance = null;
+        private static UpdateManagement _instance = null;
 
         private UpdateManagement()
         {
@@ -25,22 +25,28 @@ namespace Logic
 
         public Patient GetPatient(int versNr)
         {
-            return null;
+            Patient patient = DatabaseManagement.GetInstance().GetPatient(versNr);
+
+            return patient;
         }
 
         public User GetUser(string userName)
         {
-            return null;
+            User user = DatabaseManagement.GetInstance().GetUser(userName);
+
+            return user;
         }
 
         public Bettenbelegung GetCurrentBettenbelegung()
         {
-            return null;
+            Bettenbelegung bettenbelegung = DatabaseManagement.GetInstance().GetBettenbelegung();
+            return bettenbelegung;
         }
 
-        public Verlegungsliste[] GetCurrentVerlegungsliste()
+        public Verlegungsliste GetCurrentVerlegungsliste()
         {
-            return null;
+            Verlegungsliste verlegungsliste = DatabaseManagement.GetInstance().GetVerlegungsliste();
+            return verlegungsliste;
         }
     }
 }
