@@ -49,27 +49,6 @@ namespace UnitTests
         }
 
         /**
-         * Test zum User Ändern
-         * schlägt fehl wenn User nicht angelegt werden kann oder nicht existenter User geändert werden kann
-         */
-        [TestMethod]
-        public void UserAendernTest()
-        {
-            UserManagement userManagement = UserManagement.GetInstance();
-            User dummy = new User("John", "Doe", "Standard", "JonnyBoy", "1234");
-            User dummy2 = new User("Bat", "Man", "Azubi", "Bat42", "Batman");
-            userManagement.UserAnlegen(dummy);
-
-            bool firstTime = userManagement.UserAendern(dummy.Benutzername, dummy2);    //klappt
-
-            bool secondTime = userManagement.UserAendern("nope", dummy2);   //klappt nicht, da User nicht existiert
-
-            Assert.IsTrue(firstTime && !secondTime);
-
-
-        }
-
-        /**
          * Test zum Login
          * schlägt fehl wenn gewollter User nicht dem eingeloggten User entspricht
          */

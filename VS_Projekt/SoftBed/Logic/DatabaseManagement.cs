@@ -69,7 +69,7 @@ namespace Logic
             return false;
         }
 
-        public bool UserLoeschen(int userID)
+        public bool UserLoeschen(string userName)
         {
 
             return false;

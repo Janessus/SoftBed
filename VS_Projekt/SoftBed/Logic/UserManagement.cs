@@ -34,7 +34,8 @@ namespace Logic
          */
         public bool UserAnlegen(User newUser)
         {
-            return false;
+            bool result = DatabaseManagement.GetInstance().UserAnlegen(newUser);
+            return result;
         }
 
         /**
@@ -44,18 +45,8 @@ namespace Logic
          */
         public bool UserLöschen(string userName)
         {
-            return false;
-        }
-
-        /**
-         * funktion zum bearbeiten eines Users
-         * @param Benutzername des alten Users
-         * @param neuer User mit dem er überschrieben werden soll
-         * @return true falls geklappt, false falls nicht möglich
-         */
-        public bool UserAendern(string userName, User newUser)
-        {
-            return false;
+            bool result = DatabaseManagement.GetInstance().UserLoeschen(userName);
+            return result;
         }
 
         /**
@@ -65,7 +56,7 @@ namespace Logic
          */
         public bool UserLogin(string userName, string password)
         {
-            User requestedUser = null; //später dbms
+            User requestedUser = DatabaseManagement.GetInstance().GetUser(userName);
             if(requestedUser != null)
             {
                 if(requestedUser.Passwort == password)
