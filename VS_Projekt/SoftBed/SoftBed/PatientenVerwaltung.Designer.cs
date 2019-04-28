@@ -41,7 +41,6 @@
             this.versNrAufnLbl = new System.Windows.Forms.Label();
             this.abteilungLbl = new System.Windows.Forms.Label();
             this.abteilungDropDown = new System.Windows.Forms.ComboBox();
-            this.aufnahmeBtn = new System.Windows.Forms.Button();
             this.sucheBtn = new System.Windows.Forms.Button();
             this.patAufnLbl = new System.Windows.Forms.Label();
             this.zurueckBtn = new System.Windows.Forms.Button();
@@ -56,6 +55,8 @@
             this.firstNameClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bettNrClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entlassenBtn = new System.Windows.Forms.Button();
+            this.akzeptierenBtn = new System.Windows.Forms.Button();
+            this.zimmerSuchenBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.patAnzDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,17 +193,6 @@
             this.abteilungDropDown.TabIndex = 18;
             this.abteilungDropDown.TabStop = false;
             // 
-            // aufnahmeBtn
-            // 
-            this.aufnahmeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aufnahmeBtn.Location = new System.Drawing.Point(156, 396);
-            this.aufnahmeBtn.Name = "aufnahmeBtn";
-            this.aufnahmeBtn.Size = new System.Drawing.Size(190, 29);
-            this.aufnahmeBtn.TabIndex = 19;
-            this.aufnahmeBtn.Text = "Patient aufnehmen";
-            this.aufnahmeBtn.UseVisualStyleBackColor = true;
-            this.aufnahmeBtn.Click += new System.EventHandler(this.aufnahmeBtn_Click);
-            // 
             // sucheBtn
             // 
             this.sucheBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -249,7 +239,7 @@
             // 
             this.editMeldungLdl.AutoSize = true;
             this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editMeldungLdl.Location = new System.Drawing.Point(32, 552);
+            this.editMeldungLdl.Location = new System.Drawing.Point(32, 537);
             this.editMeldungLdl.Name = "editMeldungLdl";
             this.editMeldungLdl.Size = new System.Drawing.Size(266, 20);
             this.editMeldungLdl.TabIndex = 24;
@@ -334,12 +324,36 @@
             this.entlassenBtn.UseVisualStyleBackColor = true;
             this.entlassenBtn.Click += new System.EventHandler(this.entlassenBtn_Click);
             // 
+            // akzeptierenBtn
+            // 
+            this.akzeptierenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.akzeptierenBtn.Location = new System.Drawing.Point(36, 585);
+            this.akzeptierenBtn.Name = "akzeptierenBtn";
+            this.akzeptierenBtn.Size = new System.Drawing.Size(188, 29);
+            this.akzeptierenBtn.TabIndex = 30;
+            this.akzeptierenBtn.Text = "Vorschlag akzeptieren";
+            this.akzeptierenBtn.UseVisualStyleBackColor = true;
+            this.akzeptierenBtn.Click += new System.EventHandler(this.akzeptierenBtn_Click);
+            // 
+            // zimmerSuchenBtn
+            // 
+            this.zimmerSuchenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.zimmerSuchenBtn.Location = new System.Drawing.Point(156, 397);
+            this.zimmerSuchenBtn.Name = "zimmerSuchenBtn";
+            this.zimmerSuchenBtn.Size = new System.Drawing.Size(190, 29);
+            this.zimmerSuchenBtn.TabIndex = 31;
+            this.zimmerSuchenBtn.Text = "Zimmer suchen";
+            this.zimmerSuchenBtn.UseVisualStyleBackColor = true;
+            this.zimmerSuchenBtn.Click += new System.EventHandler(this.zimmerSuchenBtn_Click);
+            // 
             // PatientenVerwaltung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.Controls.Add(this.zimmerSuchenBtn);
+            this.Controls.Add(this.akzeptierenBtn);
             this.Controls.Add(this.entlassenBtn);
             this.Controls.Add(this.patAnzDGV);
             this.Controls.Add(this.versNrSucheTxt);
@@ -350,7 +364,6 @@
             this.Controls.Add(this.zurueckBtn);
             this.Controls.Add(this.patAufnLbl);
             this.Controls.Add(this.sucheBtn);
-            this.Controls.Add(this.aufnahmeBtn);
             this.Controls.Add(this.abteilungDropDown);
             this.Controls.Add(this.abteilungLbl);
             this.Controls.Add(this.versNrAufnTxt);
@@ -388,7 +401,6 @@
         private System.Windows.Forms.Label versNrAufnLbl;
         private System.Windows.Forms.Label abteilungLbl;
         private System.Windows.Forms.ComboBox abteilungDropDown;
-        private System.Windows.Forms.Button aufnahmeBtn;
         private System.Windows.Forms.Button sucheBtn;
         private System.Windows.Forms.Label patAufnLbl;
         private System.Windows.Forms.Button zurueckBtn;
@@ -403,5 +415,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bettNrClmn;
         private System.Windows.Forms.Button entlassenBtn;
+        private System.Windows.Forms.Button akzeptierenBtn;
+        private System.Windows.Forms.Button zimmerSuchenBtn;
     }
 }
