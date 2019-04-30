@@ -69,8 +69,7 @@ namespace SoftBed
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
             Patient pPatient = getPatientFromGUI();
-            pPatientenManagement.PatientAnlegen(pPatient);
-            String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient.Versicherungsnr);
+            String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
             editMeldungLdl.Text = roomSuggestion;
         }
 
@@ -87,6 +86,8 @@ namespace SoftBed
             if (showTransferConfirmingDialog() == DialogResult.Yes)
             {
                 // Transfer has been accepted, can write into DB
+                Patient pPatient = getPatientFromGUI();
+                pPatientenManagement.PatientAnlegen(pPatient);
                 pZimmerManagement.PatientenTransfer(currentPatientenVNr);
             }
         }
