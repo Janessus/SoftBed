@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PatientenManagementTest.cs" />
+    <Compile Include="UpdateManagementTest.cs" />
     <Compile Include="UserManagementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZimmerManagementTest.cs" />
