@@ -36,7 +36,7 @@ namespace Logic
             return false;
         }
 
-        public string suchePassendesBett(int versNr)
+        public string suchePassendesBett(Patient patient)
         {
             //TODO
             return null;
