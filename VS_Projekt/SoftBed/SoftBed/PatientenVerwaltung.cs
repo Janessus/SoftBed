@@ -27,6 +27,7 @@ namespace SoftBed
         /**
          * Action Listener for entlassen Button
          * shows confirming dialog and deletes only, if User confirmed the second time
+         * ACHTUNG: fehlt noch Überprüfung: Ist Patient selektiert?
          */
         private void entlassenBtn_Click(object sender, EventArgs e)
         {
@@ -38,9 +39,13 @@ namespace SoftBed
 
         }
 
+        // suche Patient
         private void sucheBtn_Click(object sender, EventArgs e)
         {
+            if (!versNrSucheTxt.Text.Equals(""))
+            {
 
+            }
         }
 
         private void aufnahmeBtn_Click(object sender, EventArgs e)
@@ -53,36 +58,6 @@ namespace SoftBed
             this.Close();
         }
 
-
-        /**
-         * shows dialog for User to confirm deleting
-         * @return which button has been clicked
-         */
-        private DialogResult showDeleteConfirmingDialog()
-        {
-            string messageBoxText = "Wollen Sie den Patienten wirklich entlassen?";
-            string caption = "Bestätigung";
-            MessageBoxButtons button = MessageBoxButtons.YesNo;
-
-            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
-
-            return result;
-        }
-
-        /**
-         * shows dialog for User to confirm transfering
-         * @return which button has been clicked
-         */
-        private DialogResult showTransferConfirmingDialog()
-        {
-            string messageBoxText = "Wollen Sie den Patienten wirklich in das vorgeschlagene Zimmer legen?";
-            string caption = "Bestätigung";
-            MessageBoxButtons button = MessageBoxButtons.YesNo;
-
-            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
-
-            return result;
-        }
 
 
         /**
@@ -145,5 +120,39 @@ namespace SoftBed
             
             return guiPatient;
         }
+
+
+
+
+        /**
+         * shows dialog for User to confirm deleting
+         * @return which button has been clicked
+         */
+        private DialogResult showDeleteConfirmingDialog()
+        {
+            string messageBoxText = "Wollen Sie den Patienten wirklich entlassen?";
+            string caption = "Bestätigung";
+            MessageBoxButtons button = MessageBoxButtons.YesNo;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+
+            return result;
+        }
+
+        /**
+         * shows dialog for User to confirm transfering
+         * @return which button has been clicked
+         */
+        private DialogResult showTransferConfirmingDialog()
+        {
+            string messageBoxText = "Wollen Sie den Patienten wirklich in das vorgeschlagene Zimmer legen?";
+            string caption = "Bestätigung";
+            MessageBoxButtons button = MessageBoxButtons.YesNo;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+
+            return result;
+        }
+
     }
 }
