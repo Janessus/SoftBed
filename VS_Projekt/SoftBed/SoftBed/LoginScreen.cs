@@ -62,8 +62,7 @@ namespace SoftBed
             this.SetVisibleCore(false);
             Form adminArea = new Adminbereich();
             adminArea.ShowDialog();
-            
-            //this.Hide();
+            this.SetVisibleCore(true);
         }
 
 
@@ -76,7 +75,7 @@ namespace SoftBed
             this.SetVisibleCore(false);
             Form mainWindow = new HauptFenster();
             mainWindow.Show();
-            this.Hide();
+            this.SetVisibleCore(true);
         }
     }
 }
