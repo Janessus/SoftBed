@@ -10,8 +10,12 @@ namespace UnitTests
     {
         private PatientenManagement patientenManagement = PatientenManagement.GetInstance();
 
-        [TestMethod]
 
+        /**
+        * Test zum Anlegen eines Patienten
+        * schlaegt fehl, wenn Patient nicht erfolgreich angelegt werden kann
+        */
+        [TestMethod]
         public void PatientAnlegenTest()
         {
             Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
@@ -19,6 +23,10 @@ namespace UnitTests
             Assert.IsTrue(patientenManagement.PatientAnlegen(dummy));
         }
 
+        /**
+        * Test zum Anlegen eines Patienten
+        * schlaegt fehl, wenn ein und der Patient zweimal angelegt werden kann
+        */
         [TestMethod]
         public void PatientZweimalAnlegenTest()
         {
@@ -30,6 +38,10 @@ namespace UnitTests
             Assert.IsTrue(result1 && !result2);
         }
 
+        /**
+        * Test zum Anlegen zweier Patienten
+        * schlaegt fehl, wenn zwei unterschiedliche Patienten nicht erfolgreich angelegt werden können
+        */
         [TestMethod]
         public void ZweiUngleichePatientenAnlegenTest()
         {
@@ -42,6 +54,10 @@ namespace UnitTests
             Assert.IsTrue(result1 && result2);
         }
 
+        /**
+        * Test zum Loeschen eines Patienten
+        * schlaegt fehl, wenn Patient nicht erfolgreich gelöscht werden kann
+        */
         [TestMethod]
         public void PatientLoeschenTest()
         {
@@ -52,7 +68,10 @@ namespace UnitTests
             Assert.IsTrue(patientenManagement.PatientLoeschen(121)); 
         }
 
-
+        /**
+        * Test zum Loeschen eines Patienten
+        * schlaegt fehl, wenn ein und der Patient zweimal gelöscht werden kann
+        */
         [TestMethod]
         public void PatientZweimalLoeschen()
         {
@@ -67,7 +86,10 @@ namespace UnitTests
             Assert.IsTrue(result1 && !result2);
 
         }
-
+        /**
+        * Test zum Aendern eines Patienten
+        * schlaegt fehl, wenn Patient nicht geaendert werden kann
+        */
         [TestMethod]
         public void PatientAendernTest()
         {
@@ -76,7 +98,7 @@ namespace UnitTests
 
             patientenManagement.PatientAnlegen(dummy1);
 
-            bool result = patientenManagement.PatientAendern(dummy2);
+            bool result = patientenManagement.PatientAendern(dummy2); //Station soll geaendert werden
             Assert.IsTrue(result);
         }
     }

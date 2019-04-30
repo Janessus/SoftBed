@@ -30,7 +30,10 @@ namespace UnitTests
 
         }
 
-
+        /**
+        * Test zum Senden einer E-Mail, wenn das Krankenhaus fast voll ist.
+        * schlaegt fehl, wenn E-Mail nicht erfolgreich gesendet wurde.
+        */
         [TestMethod]
         public void KHFastVollTest()
         {

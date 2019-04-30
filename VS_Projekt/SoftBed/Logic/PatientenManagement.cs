@@ -14,6 +14,10 @@ namespace Logic
         {
         }
 
+        /**
+         * legt ein Singleton-Objekt an und gibt eins zurueck, wenn bereits vorhanden
+         * @return ein Singleton-Objekt
+         */
         public static PatientenManagement GetInstance()
         {
             if (_instance == null)
@@ -23,6 +27,10 @@ namespace Logic
             return _instance;
         }
 
+        /**
+         * uebergibt dem Databasemanagement einen neuen Patienten zum Anlegen
+         * @return true, wenn Patient erfolgreich angelegt und false, wenn nicht erfolgreich
+         */
         public bool PatientAnlegen(Patient newPatient)
         {
             bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient);
@@ -30,6 +38,11 @@ namespace Logic
             return request;
         }
 
+        /**
+         * uebergibt dem Databasemanagement eine Versichertennummer,
+         * um den dazugehoerigen Patienten zu loeschen
+         * @return true, wenn Patient erfolgreich geloescht und false, wenn nicht erfolgreich
+         */
         public bool PatientLoeschen(int versNr)
         {
             bool request = DatabaseManagement.GetInstance().PatientLoeschen(versNr);
@@ -37,6 +50,10 @@ namespace Logic
             return request;
         }
 
+        /**
+         * uebergibt dem Databasemanagement einen Patienten  mit geaendert Attributen
+         * @return true, wenn Patient erfolgreich geaendert und false, wenn nicht erfolgreich
+         */
         public bool PatientAendern(Patient newPatient)
         {
             bool request = DatabaseManagement.GetInstance().PatientAendern(newPatient);

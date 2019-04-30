@@ -16,6 +16,10 @@ namespace Logic
 
         }
 
+        /**
+         * legt ein Singleton-Objekt an und gibt eins zurueck, wenn bereits vorhanden
+         * @return ein Singleton-Objekt
+         */
         public static ZimmerManagement GetInstance()
         {
             if (_instance == null)
@@ -28,14 +32,20 @@ namespace Logic
 
         public bool PatientenTransfer(int versNr)
         {
+            //TODO
             return false;
         }
 
         public string suchePassendesBett(int versNr)
         {
+            //TODO
             return null;
         }
 
+        /**
+         * errechnet die Gesamtauslastung des Krankenhauses
+         * @return Anazahl der belegten Betten im gesamten KH
+         */
         public int KHFülle()
         {
             Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
@@ -46,6 +56,11 @@ namespace Logic
             return gesAuslast;
         }
 
+
+        /**
+         * sendet eine E-Mail an umliegende Krankenhaeuser
+         * @return true, wenn E-Mail erfolgreich gesendet wurde und false, wenn das Senden nicht erfolgreich war
+         */
         public bool KHFastVoll()
         {
             if (KHFülle() >= 225)
@@ -65,7 +80,7 @@ namespace Logic
 
                     mail.Subject = "Die Kapazizäten unseres Krankehauses sind erschöpft!";
                     mail.Body = "Sehr geehrte Kolleginnen und Kollegen,\n" +
-                                "die Betten auf unseren Stationen sind fast vollstänig belegt.\n" +
+                                "die Betten auf unseren Stationen sind fast vollständig belegt.\n" +
                                 "Dies ist eine Anfrage, Patienten an sie zu transferieren, wenn keine Kapaziäten mehr vorhanden sind.\n" +
                                 "Mit freundlichen Grüßen";
                     smtp.Send(mail);
