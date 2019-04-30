@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests
 {
     [TestClass]
-    class ZimmerManagementTest
+    public class ZimmerManagementTest
     {
         [TestMethod]
         public void PatientenTransferTest()
@@ -34,11 +34,8 @@ namespace UnitTests
         [TestMethod]
         public void KHFastVollTest()
         {
-
+            ZimmerManagement zimmerManagement = ZimmerManagement.GetInstance();
+            Assert.IsTrue(zimmerManagement.KHFastVoll());
         }
-
-
-
-
     }
 }

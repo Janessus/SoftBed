@@ -14,7 +14,7 @@ namespace UnitTests
 
         public void PatientAnlegenTest()
         {
-            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", "10.04.2019", "maennlich");
+            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
 
             Assert.IsTrue(patientenManagement.PatientAnlegen(dummy));
         }
@@ -22,7 +22,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientZweimalAnlegenTest()
         {
-            Patient dummy = new Patient("Maxim","Muster", 124, "01.01.1990", "IM","","16.04.2019","maennlich");
+            Patient dummy = new Patient("Maxim","Muster", 124, "01.01.1990", "IM","", new DateTime(2019, 04, 01), "maennlich");
 
             bool result1 = patientenManagement.PatientAnlegen(dummy);
             bool result2 = patientenManagement.PatientAnlegen(dummy);
@@ -33,8 +33,8 @@ namespace UnitTests
         [TestMethod]
         public void ZweiUngleichePatientenAnlegenTest()
         {
-            Patient dummy1 = new Patient("Max", "Mustermann", 321, "07.01.1994", "IM", "", "01.04.2019", "maennlich");
-            Patient dummy2 = new Patient("Helga", "Hase", 322, "07.01.1989", "Gy", "", "01.03.2019", "weiblich");
+            Patient dummy1 = new Patient("Max", "Mustermann", 321, "07.01.1994", "IM", "", new DateTime(2019,04,01), "maennlich");
+            Patient dummy2 = new Patient("Helga", "Hase", 322, "07.01.1989", "Gy", "", new DateTime(2019, 04, 01), "weiblich");
 
             bool result1 = patientenManagement.PatientAnlegen(dummy1);
             bool result2 = patientenManagement.PatientAnlegen(dummy2);
@@ -45,7 +45,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientLoeschenTest()
         {
-            Patient dummy = new Patient("Horst", "Salz", 121, "05.07.1950", "On", "", "06.04.2019", "maennlich");
+            Patient dummy = new Patient("Horst", "Salz", 121, "05.07.1950", "On", "", new DateTime(2019, 04, 01), "maennlich");
 
             patientenManagement.PatientAnlegen(dummy);
 
@@ -56,7 +56,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientZweimalLoeschen()
         {
-            Patient dummy = new Patient("Emma", "Erdbeer", 120, "´20.06.2008", "P", "", "09.03.2019", "weiblich");
+            Patient dummy = new Patient("Emma", "Erdbeer", 120, "´20.06.2008", "P", "", new DateTime(2019, 04, 01), "weiblich");
 
             patientenManagement.PatientAnlegen(dummy);
 
@@ -71,8 +71,8 @@ namespace UnitTests
         [TestMethod]
         public void PatientAendernTest()
         {
-            Patient dummy1 = new Patient("Felix", "Fuß", 232, "01.04.2010", "IM", "", "12.04.2019", "maennlich");
-            Patient dummy2 = new Patient("Felix", "Fuß", 232, "01.04.2010", "P", "", "12.04.2019", "maennlich");
+            Patient dummy1 = new Patient("Felix", "Fuß", 232, "01.04.2010", "IM", "", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy2 = new Patient("Felix", "Fuß", 232, "01.04.2010", "P", "", new DateTime(2019, 04, 01), "maennlich");
 
             patientenManagement.PatientAnlegen(dummy1);
 
