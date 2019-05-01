@@ -19,6 +19,9 @@ namespace SoftBed
         public Adminbereich()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 100);
         }
 
 

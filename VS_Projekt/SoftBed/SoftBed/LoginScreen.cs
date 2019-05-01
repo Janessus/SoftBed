@@ -24,6 +24,8 @@ namespace SoftBed
         public LoginScreen()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 100);
         }
 
         /**

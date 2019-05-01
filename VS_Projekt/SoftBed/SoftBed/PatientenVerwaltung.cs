@@ -17,11 +17,14 @@ namespace SoftBed
 
         private PatientenManagement pPatientenManagement = PatientenManagement.GetInstance();
         private ZimmerManagement pZimmerManagement = ZimmerManagement.GetInstance();
+        private UpdateManagement pUpdateManagement = UpdateManagement.GetInstance();
         private int currentPatientenVNr = 0;
 
         public PatientenVerwaltung()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 100);
         }
 
         /**
@@ -34,17 +37,30 @@ namespace SoftBed
             // If the yes button was pressed ...
             if (showDeleteConfirmingDialog() == DialogResult.Yes)
             {
-                pPatientenManagement.PatientLoeschen(Int32.Parse(versNrSucheTxt.Text));
+                // If the yes button was pressed ...
+                if (showDeleteConfirmingDialog() == DialogResult.Yes)
+                {
+                    pPatientenManagement.PatientLoeschen(Int32.Parse(versNrSucheTxt.Text));
+                }
             }
 
+
+
         }
+
 
         // suche Patient
         private void sucheBtn_Click(object sender, EventArgs e)
         {
+            patAnzDGV.Rows.Add("Hallo", "Test");
             if (!versNrSucheTxt.Text.Equals(""))
             {
+                Patient selectedPatient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
+                if (selectedPatient != null)
+                {
+                    patAnzDGV.Text = "Hallo";
 
+                }
             }
         }
 
@@ -64,35 +80,22 @@ namespace SoftBed
          * reads Patient from GUI
          * creats Patient in DB
          * searches for Room in Hospital
-         * sets option in suggestion Label
+         * puts person if confirmed in DB
          */
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
-            Patient pPatient = getPatientFromGUI();
-            String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
-            editMeldungLdl.Text = roomSuggestion;
-        }
-
-
-        /**
-         * suggestion has been accepted
-         * opens confirm Dialog
-         * puts transfer into DB
-         * @return Patient from GUI
-         */
-        private void akzeptierenBtn_Click(object sender, EventArgs e)
-        {
-            // If the yes button was pressed ...
             if (showTransferConfirmingDialog() == DialogResult.Yes)
             {
-                // Transfer has been accepted, can write into DB
                 Patient pPatient = getPatientFromGUI();
+                String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+                editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
+                // can write into DB
                 pPatientenManagement.PatientAnlegen(pPatient);
                 pZimmerManagement.PatientenTransfer(currentPatientenVNr);
             }
         }
 
-
+        
 
 
         /**
