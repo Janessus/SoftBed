@@ -15,6 +15,8 @@ namespace SoftBed
         public HauptFenster()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 100);
         }
 
         private void patVerwBtn_Click(object sender, EventArgs e)

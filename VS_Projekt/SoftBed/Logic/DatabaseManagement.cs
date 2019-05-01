@@ -75,7 +75,7 @@ namespace Logic
             return false;
         }
 
-        public Patient GetPatient(int versicherungsNummer)
+        public Patient GetPatient(string versicherungsNummer)
         {
 
             return null;

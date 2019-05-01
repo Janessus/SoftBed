@@ -23,7 +23,7 @@ namespace Logic
             return _instance;
         }
 
-        public Patient GetPatient(int versNr)
+        public Patient GetPatient(string versNr)
         {
             Patient patient = DatabaseManagement.GetInstance().GetPatient(versNr);
 
