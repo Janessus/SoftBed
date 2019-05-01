@@ -52,13 +52,12 @@ namespace SoftBed
         // suche Patient
         private void sucheBtn_Click(object sender, EventArgs e)
         {
-            patAnzDGV.Rows.Add("Hallo", "Test");
             if (!versNrSucheTxt.Text.Equals(""))
             {
                 Patient selectedPatient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
                 if (selectedPatient != null)
                 {
-                    patAnzDGV.Text = "Hallo";
+                    patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, "Bettnr Implement. fehlt noch");
 
                 }
             }
