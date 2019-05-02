@@ -75,7 +75,7 @@ namespace SoftBed
             User pUser = new User();
             pUser.Benutzername = userTxt.Text;
             pUser.Passwort = pwTxt.Text;
-            pUser.Passwort = getRadioBtnValue();
+            pUser.Rechte = getRadioBtnValue();
             return pUser;
         }
     }
