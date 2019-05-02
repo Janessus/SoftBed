@@ -44,7 +44,11 @@ namespace SoftBed
          */
         private void usrAnlBtn_Click(object sender, EventArgs e)
         {
-            userManage.UserAnlegen(readUserFromGUI());
+            bool done = userManage.UserAnlegen(readUserFromGUI());
+            if (done == false)
+            {
+                MessageBox.Show("ungültige Eingabe!");
+            }
         }
 
 
