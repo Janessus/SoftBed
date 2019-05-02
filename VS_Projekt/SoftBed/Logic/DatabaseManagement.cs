@@ -34,18 +34,17 @@ namespace Logic
         }
 
 
-        private bool ExecuteQuery()
+        
+        private bool ExecuteQuery(String query, SqlCommand cmd)
         {
             SqlConnection connection = Connect();
-            SqlCommand command = null;
-            String query = null;
 
             try
             {
                 connection.Open();
-                command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                command.Dispose();
+                cmd = new SqlCommand(query, connection);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
                 connection.Close();
             }
             catch (Exception e)
@@ -75,7 +74,7 @@ namespace Logic
             return false;
         }
 
-        public Patient GetPatient(string versicherungsNummer)
+        public Patient GetPatient(int versicherungsNummer)
         {
 
             return null;
