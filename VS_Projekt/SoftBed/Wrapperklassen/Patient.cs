@@ -7,14 +7,14 @@ namespace Wrapperklassen
     public class Patient : Person
     {
         private int _versicherungsnr;
-        private string _gebdat;
+        private DateTime _gebdat;
         private string _station;
         private string _beschwerde;
         private DateTime _aufnahmedatum;
         private string _geschlecht;
 
         public int Versicherungsnr { get => _versicherungsnr; set => _versicherungsnr = value; }
-        public string Gebdat { get => _gebdat; set => _gebdat = value; }
+        public DateTime Gebdat { get => _gebdat; set => _gebdat = value; }
         public string Station { get => _station; set => _station = value; }
         public string Beschwerde { get => _beschwerde; set => _beschwerde = value; }
         public DateTime Aufnahmedatum { get => _aufnahmedatum; set => _aufnahmedatum = value; }
@@ -25,7 +25,7 @@ namespace Wrapperklassen
 
         }
 
-        public Patient(string vorname, string nachname, int versnr, string gebdat, string station, string beschwerde, DateTime aufnahmedatum, string geschlecht)
+        public Patient(string vorname, string nachname, int versnr, DateTime gebdat, string station, string beschwerde, DateTime aufnahmedatum, string geschlecht)
         {
             Vorname = vorname;
             Nachname = nachname;
