@@ -43,7 +43,7 @@ namespace Logic
          * um den dazugehoerigen Patienten zu loeschen
          * @return true, wenn Patient erfolgreich geloescht und false, wenn nicht erfolgreich
          */
-        public bool PatientLoeschen(int versNr)
+        public bool PatientLoeschen(string versNr)
         {
             bool request = DatabaseManagement.GetInstance().PatientLoeschen(versNr);
 

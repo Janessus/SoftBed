@@ -11,7 +11,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientenTransferTest()
         {
-            int versicherungsNummer = 0;
+            string versicherungsNummer = null;
             ZimmerManagement zimmerManagement = ZimmerManagement.GetInstance();
 
             bool test1 = zimmerManagement.PatientenTransfer(versicherungsNummer);

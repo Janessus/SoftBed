@@ -18,7 +18,7 @@ namespace SoftBed
         private PatientenManagement pPatientenManagement = PatientenManagement.GetInstance();
         private ZimmerManagement pZimmerManagement = ZimmerManagement.GetInstance();
         private UpdateManagement pUpdateManagement = UpdateManagement.GetInstance();
-        private int currentPatientenVNr = 0;
+        private string currentPatientenVNr = null;
 
         public PatientenVerwaltung()
         {
@@ -40,7 +40,7 @@ namespace SoftBed
                 // If the yes button was pressed ...
                 if (showDeleteConfirmingDialog() == DialogResult.Yes)
                 {
-                    pPatientenManagement.PatientLoeschen(Int32.Parse(versNrSucheTxt.Text));
+                    pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
                 }
             }
 
@@ -113,9 +113,9 @@ namespace SoftBed
         private Patient getPatientFromGUI()
         {
             Patient guiPatient = new Patient();
-            guiPatient.Versicherungsnr = int.Parse(versNrSucheTxt.Text);
+            guiPatient.Versicherungsnr = versNrSucheTxt.Text;
             currentPatientenVNr = guiPatient.Versicherungsnr;
-            guiPatient.Gebdat = gebDatTxt.Text;
+            guiPatient.Gebdat = dTPGebDat.Value;
             guiPatient.Beschwerde = null;
             DateTime localDate = DateTime.Now;
             guiPatient.Aufnahmedatum = localDate;

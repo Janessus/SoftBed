@@ -32,7 +32,6 @@
             this.nameTxt = new System.Windows.Forms.TextBox();
             this.vornameTxt = new System.Windows.Forms.TextBox();
             this.vornameLbl = new System.Windows.Forms.Label();
-            this.gebDatTxt = new System.Windows.Forms.TextBox();
             this.gebDatLbl = new System.Windows.Forms.Label();
             this.geschlLbl = new System.Windows.Forms.Label();
             this.wRadBtn = new System.Windows.Forms.RadioButton();
@@ -56,6 +55,7 @@
             this.bettNrClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entlassenBtn = new System.Windows.Forms.Button();
             this.zimmerSuchenBtn = new System.Windows.Forms.Button();
+            this.dTPGebDat = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.patAnzDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             this.nameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameTxt.Location = new System.Drawing.Point(156, 168);
             this.nameTxt.Name = "nameTxt";
-            this.nameTxt.Size = new System.Drawing.Size(190, 26);
+            this.nameTxt.Size = new System.Drawing.Size(282, 26);
             this.nameTxt.TabIndex = 7;
             // 
             // vornameTxt
@@ -82,7 +82,7 @@
             this.vornameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vornameTxt.Location = new System.Drawing.Point(156, 202);
             this.vornameTxt.Name = "vornameTxt";
-            this.vornameTxt.Size = new System.Drawing.Size(190, 26);
+            this.vornameTxt.Size = new System.Drawing.Size(282, 26);
             this.vornameTxt.TabIndex = 9;
             // 
             // vornameLbl
@@ -94,14 +94,6 @@
             this.vornameLbl.Size = new System.Drawing.Size(74, 20);
             this.vornameLbl.TabIndex = 8;
             this.vornameLbl.Text = "Vorname";
-            // 
-            // gebDatTxt
-            // 
-            this.gebDatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gebDatTxt.Location = new System.Drawing.Point(156, 238);
-            this.gebDatTxt.Name = "gebDatTxt";
-            this.gebDatTxt.Size = new System.Drawing.Size(190, 26);
-            this.gebDatTxt.TabIndex = 11;
             // 
             // gebDatLbl
             // 
@@ -152,7 +144,7 @@
             this.versNrAufnTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrAufnTxt.Location = new System.Drawing.Point(156, 308);
             this.versNrAufnTxt.Name = "versNrAufnTxt";
-            this.versNrAufnTxt.Size = new System.Drawing.Size(190, 26);
+            this.versNrAufnTxt.Size = new System.Drawing.Size(282, 26);
             this.versNrAufnTxt.TabIndex = 16;
             // 
             // versNrAufnLbl
@@ -188,7 +180,7 @@
             "Intensivstation"});
             this.abteilungDropDown.Location = new System.Drawing.Point(156, 344);
             this.abteilungDropDown.Name = "abteilungDropDown";
-            this.abteilungDropDown.Size = new System.Drawing.Size(190, 28);
+            this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
             this.abteilungDropDown.TabIndex = 18;
             this.abteilungDropDown.TabStop = false;
             // 
@@ -327,11 +319,18 @@
             this.zimmerSuchenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zimmerSuchenBtn.Location = new System.Drawing.Point(156, 397);
             this.zimmerSuchenBtn.Name = "zimmerSuchenBtn";
-            this.zimmerSuchenBtn.Size = new System.Drawing.Size(190, 29);
+            this.zimmerSuchenBtn.Size = new System.Drawing.Size(282, 29);
             this.zimmerSuchenBtn.TabIndex = 31;
             this.zimmerSuchenBtn.Text = "Zimmer suchen";
             this.zimmerSuchenBtn.UseVisualStyleBackColor = true;
             this.zimmerSuchenBtn.Click += new System.EventHandler(this.zimmerSuchenBtn_Click);
+            // 
+            // dTPGebDat
+            // 
+            this.dTPGebDat.Location = new System.Drawing.Point(156, 238);
+            this.dTPGebDat.Name = "dTPGebDat";
+            this.dTPGebDat.Size = new System.Drawing.Size(282, 26);
+            this.dTPGebDat.TabIndex = 32;
             // 
             // PatientenVerwaltung
             // 
@@ -339,6 +338,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.Controls.Add(this.dTPGebDat);
             this.Controls.Add(this.zimmerSuchenBtn);
             this.Controls.Add(this.entlassenBtn);
             this.Controls.Add(this.patAnzDGV);
@@ -357,7 +357,6 @@
             this.Controls.Add(this.mRadBtn);
             this.Controls.Add(this.wRadBtn);
             this.Controls.Add(this.geschlLbl);
-            this.Controls.Add(this.gebDatTxt);
             this.Controls.Add(this.gebDatLbl);
             this.Controls.Add(this.vornameTxt);
             this.Controls.Add(this.vornameLbl);
@@ -378,7 +377,6 @@
         private System.Windows.Forms.TextBox nameTxt;
         private System.Windows.Forms.TextBox vornameTxt;
         private System.Windows.Forms.Label vornameLbl;
-        private System.Windows.Forms.TextBox gebDatTxt;
         private System.Windows.Forms.Label gebDatLbl;
         private System.Windows.Forms.Label geschlLbl;
         private System.Windows.Forms.RadioButton wRadBtn;
@@ -402,5 +400,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn bettNrClmn;
         private System.Windows.Forms.Button entlassenBtn;
         private System.Windows.Forms.Button zimmerSuchenBtn;
+        private System.Windows.Forms.DateTimePicker dTPGebDat;
     }
 }

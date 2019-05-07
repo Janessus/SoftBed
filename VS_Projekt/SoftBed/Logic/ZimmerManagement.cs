@@ -30,7 +30,7 @@ namespace Logic
             return _instance;
         }
 
-        public bool PatientenTransfer(int versNr)
+        public bool PatientenTransfer(string versNr)
         {
             //TODO
             return false;
