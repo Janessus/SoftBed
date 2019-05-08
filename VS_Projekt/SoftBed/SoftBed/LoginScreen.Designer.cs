@@ -1,4 +1,4 @@
-﻿namespace SoftBed
+namespace SoftBed
 {
     partial class LoginScreen
     {
