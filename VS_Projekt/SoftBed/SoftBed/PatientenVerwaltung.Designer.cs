@@ -180,11 +180,7 @@ namespace SoftBed
             "Intensivstation"});
             this.abteilungDropDown.Location = new System.Drawing.Point(156, 344);
             this.abteilungDropDown.Name = "abteilungDropDown";
-<<<<<<< Updated upstream
-            this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
-=======
             this.abteilungDropDown.Size = new System.Drawing.Size(190, 45);
->>>>>>> Stashed changes
             this.abteilungDropDown.TabIndex = 18;
             this.abteilungDropDown.TabStop = false;
             // 
