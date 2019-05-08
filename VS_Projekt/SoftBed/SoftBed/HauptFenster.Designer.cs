@@ -58,10 +58,11 @@
             // 
             this.gesKHProgBar.Enabled = false;
             this.gesKHProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.gesKHProgBar.Location = new System.Drawing.Point(12, 606);
+            this.gesKHProgBar.Location = new System.Drawing.Point(16, 746);
+            this.gesKHProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gesKHProgBar.Maximum = 260;
             this.gesKHProgBar.Name = "gesKHProgBar";
-            this.gesKHProgBar.Size = new System.Drawing.Size(1138, 32);
+            this.gesKHProgBar.Size = new System.Drawing.Size(1517, 39);
             this.gesKHProgBar.TabIndex = 0;
             // 
             // transferListeDGV
@@ -84,19 +85,21 @@
             // 
             this.progBarGesLbl.AutoSize = true;
             this.progBarGesLbl.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.progBarGesLbl.Location = new System.Drawing.Point(12, 583);
+            this.progBarGesLbl.Location = new System.Drawing.Point(16, 718);
+            this.progBarGesLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.progBarGesLbl.Name = "progBarGesLbl";
-            this.progBarGesLbl.Size = new System.Drawing.Size(206, 20);
+            this.progBarGesLbl.Size = new System.Drawing.Size(250, 25);
             this.progBarGesLbl.TabIndex = 2;
             this.progBarGesLbl.Text = "Auslastung Betten gesamt";
             // 
             // itsProgBar
             // 
             this.itsProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.itsProgBar.Location = new System.Drawing.Point(12, 554);
+            this.itsProgBar.Location = new System.Drawing.Point(16, 682);
+            this.itsProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.itsProgBar.Maximum = 10;
             this.itsProgBar.Name = "itsProgBar";
-            this.itsProgBar.Size = new System.Drawing.Size(374, 26);
+            this.itsProgBar.Size = new System.Drawing.Size(499, 32);
             this.itsProgBar.TabIndex = 3;
             // 
             // auslastungITSLbl
@@ -104,18 +107,20 @@
             this.auslastungITSLbl.AutoSize = true;
             this.auslastungITSLbl.BackColor = System.Drawing.Color.Transparent;
             this.auslastungITSLbl.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.auslastungITSLbl.Location = new System.Drawing.Point(8, 531);
+            this.auslastungITSLbl.Location = new System.Drawing.Point(11, 654);
+            this.auslastungITSLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.auslastungITSLbl.Name = "auslastungITSLbl";
-            this.auslastungITSLbl.Size = new System.Drawing.Size(206, 20);
+            this.auslastungITSLbl.Size = new System.Drawing.Size(254, 25);
             this.auslastungITSLbl.TabIndex = 4;
             this.auslastungITSLbl.Text = "Auslastung Intensivstation";
             // 
             // patVerwBtn
             // 
             this.patVerwBtn.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.patVerwBtn.Location = new System.Drawing.Point(147, 36);
+            this.patVerwBtn.Location = new System.Drawing.Point(196, 44);
+            this.patVerwBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.patVerwBtn.Name = "patVerwBtn";
-            this.patVerwBtn.Size = new System.Drawing.Size(263, 167);
+            this.patVerwBtn.Size = new System.Drawing.Size(351, 206);
             this.patVerwBtn.TabIndex = 5;
             this.patVerwBtn.Text = "Patientenverwaltung...";
             this.patVerwBtn.UseVisualStyleBackColor = true;
@@ -123,9 +128,10 @@
             // 
             // abmeldenBtn
             // 
-            this.abmeldenBtn.Location = new System.Drawing.Point(1014, 12);
+            this.abmeldenBtn.Location = new System.Drawing.Point(1352, 15);
+            this.abmeldenBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.abmeldenBtn.Name = "abmeldenBtn";
-            this.abmeldenBtn.Size = new System.Drawing.Size(136, 32);
+            this.abmeldenBtn.Size = new System.Drawing.Size(181, 39);
             this.abmeldenBtn.TabIndex = 6;
             this.abmeldenBtn.Text = "Abmelden";
             this.abmeldenBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -134,9 +140,10 @@
             // 
             // verlAugefBtn
             // 
-            this.verlAugefBtn.Location = new System.Drawing.Point(1014, 504);
+            this.verlAugefBtn.Location = new System.Drawing.Point(1352, 620);
+            this.verlAugefBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.verlAugefBtn.Name = "verlAugefBtn";
-            this.verlAugefBtn.Size = new System.Drawing.Size(136, 32);
+            this.verlAugefBtn.Size = new System.Drawing.Size(181, 39);
             this.verlAugefBtn.TabIndex = 7;
             this.verlAugefBtn.Text = "Verlegung ausgeführt";
             this.verlAugefBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -148,9 +155,10 @@
             this.gynLbl.AutoSize = true;
             this.gynLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gynLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.gynLbl.Location = new System.Drawing.Point(27, 306);
+            this.gynLbl.Location = new System.Drawing.Point(36, 377);
+            this.gynLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gynLbl.Name = "gynLbl";
-            this.gynLbl.Size = new System.Drawing.Size(97, 20);
+            this.gynLbl.Size = new System.Drawing.Size(121, 25);
             this.gynLbl.TabIndex = 8;
             this.gynLbl.Text = "Gynäkologie";
             // 
@@ -159,9 +167,10 @@
             this.iMLbl.AutoSize = true;
             this.iMLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.iMLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iMLbl.Location = new System.Drawing.Point(13, 344);
+            this.iMLbl.Location = new System.Drawing.Point(17, 423);
+            this.iMLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.iMLbl.Name = "iMLbl";
-            this.iMLbl.Size = new System.Drawing.Size(111, 20);
+            this.iMLbl.Size = new System.Drawing.Size(139, 25);
             this.iMLbl.TabIndex = 9;
             this.iMLbl.Text = "innere Medizin";
             // 
@@ -170,9 +179,10 @@
             this.onkLbl.AutoSize = true;
             this.onkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.onkLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.onkLbl.Location = new System.Drawing.Point(44, 386);
+            this.onkLbl.Location = new System.Drawing.Point(59, 475);
+            this.onkLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.onkLbl.Name = "onkLbl";
-            this.onkLbl.Size = new System.Drawing.Size(80, 20);
+            this.onkLbl.Size = new System.Drawing.Size(101, 25);
             this.onkLbl.TabIndex = 10;
             this.onkLbl.Text = "Onkologie";
             // 
@@ -181,9 +191,10 @@
             this.OrthLbl.AutoSize = true;
             this.OrthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrthLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.OrthLbl.Location = new System.Drawing.Point(36, 426);
+            this.OrthLbl.Location = new System.Drawing.Point(48, 524);
+            this.OrthLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.OrthLbl.Name = "OrthLbl";
-            this.OrthLbl.Size = new System.Drawing.Size(88, 20);
+            this.OrthLbl.Size = new System.Drawing.Size(109, 25);
             this.OrthLbl.TabIndex = 11;
             this.OrthLbl.Text = "Orthopädie";
             // 
@@ -192,9 +203,10 @@
             this.pädLbl.AutoSize = true;
             this.pädLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pädLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.pädLbl.Location = new System.Drawing.Point(53, 467);
+            this.pädLbl.Location = new System.Drawing.Point(71, 575);
+            this.pädLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pädLbl.Name = "pädLbl";
-            this.pädLbl.Size = new System.Drawing.Size(71, 20);
+            this.pädLbl.Size = new System.Drawing.Size(88, 25);
             this.pädLbl.TabIndex = 12;
             this.pädLbl.Text = "Pädiatrie";
             // 
@@ -280,7 +292,7 @@
             // 
             // HauptFenster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
@@ -303,6 +315,7 @@
             this.Controls.Add(this.progBarGesLbl);
             this.Controls.Add(this.transferListeDGV);
             this.Controls.Add(this.gesKHProgBar);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();
