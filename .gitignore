@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+Design/Aktivitätsdiagramme/\.Stattion_Patienten_Verteilung\.vpp\.lck
+
+Design/Aktivitätsdiagramme/Stattion_Patienten_Verteilung\.vpp\.bak_000f
