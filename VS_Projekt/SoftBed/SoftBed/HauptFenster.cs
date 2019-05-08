@@ -23,7 +23,7 @@ namespace SoftBed
             Task refreshTask = new Task(()=>{
                 while (true)
                 {
-                    RefreshHauptfenster();
+                    //RefreshHauptfenster();
                     Thread.Sleep(30000);
                 }
             });
@@ -37,6 +37,11 @@ namespace SoftBed
 
         private void verlAugefBtn_Click(object sender, EventArgs e)
         {
+            DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
+            for(int i = 0; i < selectedRows.Count; i++)
+            {
+                ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[i].Cells[0].Value.ToString(),selectedRows[i].Cells[1].Value.ToString());  //klappt vielleicht
+            }
 
         }
 
@@ -80,7 +85,7 @@ namespace SoftBed
             Verlegungsliste currentVerlegungsliste = UpdateManagement.GetInstance().GetCurrentVerlegungsliste();
             for(int i = 0; i < currentVerlegungsliste.Transferliste.Count; i++)
             {
-                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste[i]);
+                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste[i]);     //klappt vielleicht
             }
         }
     }

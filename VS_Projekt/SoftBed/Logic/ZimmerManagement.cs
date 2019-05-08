@@ -42,6 +42,11 @@ namespace Logic
             return null;
         }
 
+        public void DeleteMemberTransferliste(string vorname, string nachname)
+        {
+            //TODO
+        }
+
         /**
          * errechnet die Gesamtauslastung des Krankenhauses
          * @return Anazahl der belegten Betten im gesamten KH
