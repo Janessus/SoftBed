@@ -66,7 +66,8 @@ create table IF NOT EXISTS TransferListe
     PRIMARY KEY (PersonID, Stempel)
 );
 
-/* -------------------------------------------------------------Test Daten --------------------------------------------------------------------*/
+/* ------------------------------------------------------------- Test Daten -------------------------------------------------------------------- */
+/* ------------------------------------------------ Reihenfolge bei den Inserts einhalten! ----------------------------------------------------- */
 
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
