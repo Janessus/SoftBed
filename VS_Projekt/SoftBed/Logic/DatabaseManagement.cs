@@ -111,7 +111,7 @@ namespace Logic
             return null;
         }
 
-        public String GetPassendesBett()
+        public string GetPassendesBett()
         {
 
             return null;

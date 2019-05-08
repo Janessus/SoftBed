@@ -19,11 +19,5 @@ namespace Wrapperklassen
         public int Orthopaedie { get => _orthopaedie; set => _orthopaedie = value; }
         public int Paediatrie { get => _paediatrie; set => _paediatrie = value; }
         public int Intensiv { get => _intensiv; set => _intensiv = value; }
-
-        public int Gesamt()
-        {
-            int ges = Gynaekologie + Innere + Onkologie + Orthopaedie + Paediatrie + Intensiv;
-            return ges;
-        }
     }
 }
