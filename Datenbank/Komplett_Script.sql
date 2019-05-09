@@ -1,16 +1,17 @@
+drop database softbeddb;
 create database IF NOT EXISTS SoftBedDB;
 use SoftBedDB;
 
 create table IF NOT EXISTS Person
 (
-	PersonID int AUTO_INCREMENT,
+	PersonID int UNIQUE AUTO_INCREMENT,
     Vorname varchar(40),
     Nachname varchar(40),
     Adresse varchar(255),
     Geschlecht varchar(40),
     Geburtsdatum Date,
 
-    PRIMARY KEY (PersonID, Vorname, Nachname)
+    PRIMARY KEY (Vorname, Nachname)
 );
 
 create table IF NOT EXISTS Mitarbeiter
@@ -55,12 +56,28 @@ create table IF NOT EXISTS Patient
     FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
 );
 
+create table IF NOT EXISTS TransferListe
+(
+	PersonID int AUTO_INCREMENT,
+	Von Varchar(10),
+    Nach varchar(10),
+    Stempel Timestamp DEFAULT current_timestamp,
+
+    PRIMARY KEY (PersonID, Stempel)
+);
+
+/* -------------------------------------------------------------Test Daten --------------------------------------------------------------------*/
+
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Onkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Orthopädie");
 INSERT INTO Station(Bezeichnung) VALUES("Pädiatrie");
 
-select * from station;
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(2, "Innere Medizin");
+INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum) VALUES("Janes", "Heuberger", "Schutterwald", "M", DATE("1994-09-01"));
+INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(12345, (Select Person.PersonID From Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), 2, "Innere Medizin", "F", "Gebrochenes Bein");
+INSERT INTO Mitarbeiter(PersonID, Rechte) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Admin of Admins");
+INSERT INTO Transferliste(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
 
 commit;
