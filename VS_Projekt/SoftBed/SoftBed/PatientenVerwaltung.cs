@@ -83,7 +83,7 @@ namespace SoftBed
          */
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
-            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)
+            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
             {
                 messageManInGyn();
             }
