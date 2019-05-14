@@ -84,6 +84,15 @@ namespace Logic
             return true;
         }
 
+        // prints the results of eg. select * from Test
+        // usage -> PrintResults(ExecuteQuery("select * from Test"));
+        public void PrintResults(bool flag)
+        {
+            while (flag && reader.Read())
+            {
+                string row = "";
+                for (int i = 0; i < reader.FieldCount; i++)
+                    row += reader.GetValue(i).ToString() + ", ";
 
         public Patient GetPatient(string versicherungsNummer)
         {
