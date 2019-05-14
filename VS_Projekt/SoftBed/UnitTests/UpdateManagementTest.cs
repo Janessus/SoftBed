@@ -9,6 +9,7 @@ using Wrapperklassen;
 
 namespace UnitTests
 {
+    /*
     class UpdateManagementTest
     {
 
@@ -72,7 +73,7 @@ namespace UnitTests
 
             Bettenbelegung bettenbelegung2 = upM.GetCurrentBettenbelegung();
 
-            Assert.IsTrue(bettenbelegung1.Equals(bettenbelegung2);
+            Assert.IsTrue(bettenbelegung1.Equals(bettenbelegung2));
         }
 
         /**
