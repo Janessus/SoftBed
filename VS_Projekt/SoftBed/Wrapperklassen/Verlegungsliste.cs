@@ -9,5 +9,10 @@ namespace Wrapperklassen
         private List<VerlegungslistenItem> _transferliste;
 
         public List<VerlegungslistenItem> Transferliste { get => _transferliste; set => _transferliste = value; }
+
+        public Verlegungsliste()
+        {
+            Transferliste = new List<VerlegungslistenItem>();
+        }
     }
 }

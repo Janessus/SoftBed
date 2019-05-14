@@ -7,24 +7,30 @@ namespace Logic
     public class DatabaseManagement : LogicController
     {
         private static DatabaseManagement _instance = null;
-        private MySqlDataReader reader;
-        private MySqlConnection connection;
+        private MySqlDataReader _reader;
+        private MySqlConnection _connection;
+        private MySqlCommand _cmd;
 
-        private DatabaseManagement()
-        {
+        public MySqlDataReader Reader { get => _reader; set => _reader = value; }
+        public MySqlConnection Connection { get => _connection; set => _connection = value; }
+        public MySqlCommand Cmd { get => _cmd; set => _cmd = value; }
+        public static DatabaseManagement Instance { get => _instance; set => _instance = value; }
 
-        }
+
+        private DatabaseManagement(){}
+        
 
         public static DatabaseManagement GetInstance()
         {
-            if (_instance == null)
+            if (Instance == null)
             {
-                _instance = new DatabaseManagement();
+                Instance = new DatabaseManagement();
             }
-            return _instance;
+            return Instance;
         }
 
-        //returns the connection string (address, credentials etc)
+
+        //returns the Connection string (address, credentials etc)
         static private string GetConnectionString()
         {
             return "SERVER=192.168.178.88;" +
@@ -33,12 +39,21 @@ namespace Logic
                    "PASSWORD=softbed;";
         }
 
+
         //connects to the server specified in the connectionString
         public void Connect()
         {
-            String connectionString = GetConnectionString();
-            connection = new MySqlConnection(connectionString);
+            try
+            {
+                Connection = new MySqlConnection(GetConnectionString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
+
 
         //executes the query that was passed as an argument, returns true if successful
         private bool ExecuteQuery(String query)
@@ -46,10 +61,10 @@ namespace Logic
             try
             {
                 Connect();
-                connection.Open();
+                Connection.Open();
 
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                reader = cmd.ExecuteReader();
+                MySqlCommand cmd = new MySqlCommand(query, Connection);
+                Reader = cmd.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -61,56 +76,67 @@ namespace Logic
         }
 
 
-        public User GetUser(string userName)
-        {
-
-            return null;
-        }
-
-        public bool UserAnlegen(User user)
-        {
-
-            return false;
-        }
-
-        public bool UserLoeschen(string userName)
-        {
-
-            return false;
-        }
-
         public Patient GetPatient(string versicherungsNummer)
         {
             Patient p = null;
 
-            ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=" + versicherungsNummer + ";");
-
-            if (reader.Read())
+            try
             {
-                string vorname = reader.GetString(1);
-                string nachname = reader.GetString(2);
-                DateTime gebdat = DateTime.Parse(reader.GetString(3));
-                string station = reader.GetString(4);
-                string beschwerde = reader.GetString(5);
-                DateTime aufnahmedatum = DateTime.Parse(reader.GetString(6));
-                string geschlecht = reader.GetString(7);
+                ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=" + versicherungsNummer + ";");
 
-                p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
+                if (Reader.Read())
+                {
+                    string vorname = Reader.GetString(1);
+                    string nachname = Reader.GetString(2);
+                    DateTime gebdat = DateTime.Parse(Reader.GetString(3));
+                    string station = Reader.GetString(4);
+                    string beschwerde = Reader.GetString(5);
+                    DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
+                    string geschlecht = Reader.GetString(7);
+
+                    p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
             return p;
         }
 
+
         public bool PatientAendern(Patient patient)
         {
-
-            return false;
+            try
+            {
+                ExecuteQuery("UPDATE Patient SET StationsBezeichnung = " + patient.Station + ", " + "Beschwerde = " +
+                             patient.Beschwerde + "WHERE VersicherungsNr = " + patient.Versicherungsnr + ";");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
+
 
         public bool PatientLoeschen(string versicherungsNummer)
         {
-
-            return false;
+            try
+            {
+                ExecuteQuery("DELETE FROM Patient WHERE VersicherungsNr = " + versicherungsNummer + ";");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
+
 
         public bool PatientAnlegen(Patient patient)
         {
@@ -137,13 +163,50 @@ namespace Logic
         }
 
 
-        public Bettenbelegung GetBettenbelegung()
+        public Person GetPerson(string vorname, string nachname)
         {
+            Person p = new Person();
+            p.Vorname = vorname;
+            p.Nachname = nachname;
 
-            return null;
+            return p;
         }
 
+
         public Verlegungsliste GetVerlegungsliste()
+        {
+            Verlegungsliste verlegungsliste = null;
+
+            try
+            {
+                Connect();
+                Cmd = Connection.CreateCommand();
+                Cmd.CommandText = "SELECT p.PersonID, Vorname, Nachname, Von, Nach, Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
+                Reader = Cmd.ExecuteReader();
+
+                verlegungsliste = new Verlegungsliste();
+
+                while (Reader.Read())
+                {
+                    VerlegungslistenItem item = new VerlegungslistenItem();
+                    item.Person = GetPerson(Reader.GetString(1), Reader.GetString(2));
+                    item.Von = Reader.GetString(3);
+                    item.Nach = Reader.GetString(4);
+                    item.Stempel = DateTime.Parse(Reader.GetString(5));
+
+                    verlegungsliste.Transferliste.Add(item);
+                }
+
+                return verlegungsliste;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public Bettenbelegung GetBettenbelegung()
         {
 
             return null;
@@ -156,6 +219,23 @@ namespace Logic
         }
 
 
+        public User GetUser(string userName)
+        {
+
+            return null;
+        }
+
+        public bool UserAnlegen(User user)
+        {
+
+            return false;
+        }
+
+        public bool UserLoeschen(string userName)
+        {
+
+            return false;
+        }
 
         // ################################################## DEV FUNCTIONS ##################################################
 
@@ -174,8 +254,8 @@ namespace Logic
 
             PrintPatient(GetPatient("21350"));
 
-            reader.Close();
-            connection.Close();
+            Reader.Close();
+            Connection.Close();
         }
 
 
@@ -203,11 +283,11 @@ namespace Logic
         // usage -> PrintResults(ExecuteQuery("select * from Test"));
         public void PrintResults(bool flag)
         {
-            while (flag && reader.Read())
+            while (flag && Reader.Read())
             {
                 string row = "";
-                for (int i = 0; i < reader.FieldCount; i++)
-                    row += reader.GetValue(i).ToString() + ", ";
+                for (int i = 0; i < Reader.FieldCount; i++)
+                    row += Reader.GetValue(i).ToString() + ", ";
 
                 Console.WriteLine(row);
             }
