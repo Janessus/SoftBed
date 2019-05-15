@@ -99,7 +99,7 @@ namespace Logic
         }
 
 
-        public Bettenbelegung GetBettenbelegung()
+        public Bettenbelegung GetBetten()
         {
 
             return null;
