@@ -38,6 +38,8 @@
             this.userTxt = new System.Windows.Forms.TextBox();
             this.usrAnlBtn = new System.Windows.Forms.Button();
             this.btnLoeschen = new System.Windows.Forms.Button();
+            this.editMeldungLdl = new System.Windows.Forms.Label();
+            this.meldungLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // zurueckBtn
@@ -96,6 +98,7 @@
             // standardRadBtn
             // 
             this.standardRadBtn.AutoSize = true;
+            this.standardRadBtn.Checked = true;
             this.standardRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.standardRadBtn.Location = new System.Drawing.Point(389, 228);
             this.standardRadBtn.Name = "standardRadBtn";
@@ -143,12 +146,34 @@
             this.btnLoeschen.UseVisualStyleBackColor = true;
             this.btnLoeschen.Click += new System.EventHandler(this.btnLoeschen_Click);
             // 
+            // editMeldungLdl
+            // 
+            this.editMeldungLdl.AutoSize = true;
+            this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
+            this.editMeldungLdl.Location = new System.Drawing.Point(248, 380);
+            this.editMeldungLdl.Name = "editMeldungLdl";
+            this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);
+            this.editMeldungLdl.TabIndex = 34;
+            // 
+            // meldungLbl
+            // 
+            this.meldungLbl.AutoSize = true;
+            this.meldungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.meldungLbl.Location = new System.Drawing.Point(248, 340);
+            this.meldungLbl.Name = "meldungLbl";
+            this.meldungLbl.Size = new System.Drawing.Size(77, 20);
+            this.meldungLbl.TabIndex = 33;
+            this.meldungLbl.Text = "Meldung";
+            // 
             // Adminbereich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.editMeldungLdl);
+            this.Controls.Add(this.meldungLbl);
             this.Controls.Add(this.btnLoeschen);
             this.Controls.Add(this.usrAnlBtn);
             this.Controls.Add(this.userTxt);
@@ -178,5 +203,7 @@
         private System.Windows.Forms.TextBox userTxt;
         private System.Windows.Forms.Button usrAnlBtn;
         private System.Windows.Forms.Button btnLoeschen;
+        private System.Windows.Forms.Label editMeldungLdl;
+        private System.Windows.Forms.Label meldungLbl;
     }
 }
