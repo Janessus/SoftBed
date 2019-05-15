@@ -47,6 +47,14 @@ namespace SoftBed
 
                 }
             }
+            else
+            {
+                string messageBoxText = "Benötigte Rechte nicht vorhanden!";
+                string caption = "Fehlschlag";
+                MessageBoxButtons button = MessageBoxButtons.OK;
+
+                DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+            }
         }
 
         private void abmeldenBtn_Click(object sender, EventArgs e)

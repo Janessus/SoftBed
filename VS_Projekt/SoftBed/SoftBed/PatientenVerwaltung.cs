@@ -34,14 +34,25 @@ namespace SoftBed
          */
         private void entlassenBtn_Click(object sender, EventArgs e)
         {
-            // If the yes button was pressed ...
-            if (showDeleteConfirmingDialog() == DialogResult.Yes)
+            if(UserManagement.CurrentUser.Rechte == "Standard")
             {
                 // If the yes button was pressed ...
                 if (showDeleteConfirmingDialog() == DialogResult.Yes)
                 {
-                    pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
+                    // If the yes button was pressed ...
+                    if (showDeleteConfirmingDialog() == DialogResult.Yes)
+                    {
+                        pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
+                    }
                 }
+            }
+            else
+            {
+                string messageBoxText = "Benötigte Rechte nicht vorhanden!";
+                string caption = "Fehlschlag";
+                MessageBoxButtons button = MessageBoxButtons.OK;
+
+                DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             }
 
 
@@ -65,7 +76,18 @@ namespace SoftBed
 
         private void aufnahmeBtn_Click(object sender, EventArgs e)
         {
-            
+            if (UserManagement.CurrentUser.Rechte == "Standard")
+            {
+                //TODO
+            }
+            else
+            {
+                string messageBoxText = "Benötigte Rechte nicht vorhanden!";
+                string caption = "Fehlschlag";
+                MessageBoxButtons button = MessageBoxButtons.OK;
+
+                DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+            }
         }
 
         private void zurueckBtn_Click(object sender, EventArgs e)
