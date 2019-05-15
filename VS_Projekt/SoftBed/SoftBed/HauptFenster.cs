@@ -40,10 +40,9 @@ namespace SoftBed
             if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)
             {
                 DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
-                for (int i = 0; i < selectedRows.Count; i++)
-                {
-                    ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[i].Cells[0].Value.ToString(), selectedRows[i].Cells[1].Value.ToString());  //klappt vielleicht
-                }
+
+                ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[0].Value.ToString(), selectedRows[0].Cells[1].Value.ToString());  //klappt vielleicht
+                
 
             }
 
