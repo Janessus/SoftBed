@@ -85,7 +85,30 @@ namespace SoftBed
 
         private void btnLoeschen_Click(object sender, EventArgs e)
         {
+            if (!userTxt.Equals(""))
+            {
+                if (showUserDeleteConfirmingDialog() == DialogResult.Yes)
+                {
+                    userManage.UserLöschen(userTxt.Text);
 
+                }
+            }
+            
+        }
+
+        /**
+         * shows dialog for Admin to confirm deleting User
+         * @return which button has been clicked
+         */
+        private DialogResult showUserDeleteConfirmingDialog()
+        {
+            string messageBoxText = "Wollen Sie den User wirklich aus dem System löschen?";
+            string caption = "Bestätigung";
+            MessageBoxButtons button = MessageBoxButtons.YesNo;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+
+            return result;
         }
     }
 }
