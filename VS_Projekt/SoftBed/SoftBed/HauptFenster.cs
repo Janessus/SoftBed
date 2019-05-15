@@ -37,10 +37,14 @@ namespace SoftBed
 
         private void verlAugefBtn_Click(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
-            for(int i = 0; i < selectedRows.Count; i++)
+            if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)
             {
-                ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[i].Cells[0].Value.ToString(),selectedRows[i].Cells[1].Value.ToString());  //klappt vielleicht
+                DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
+                for (int i = 0; i < selectedRows.Count; i++)
+                {
+                    ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[i].Cells[0].Value.ToString(), selectedRows[i].Cells[1].Value.ToString());  //klappt vielleicht
+                }
+
             }
 
         }
@@ -88,5 +92,23 @@ namespace SoftBed
                 transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste[i]);     //klappt vielleicht
             }
         }
+
+
+        /**
+         * shows dialog for User to confirm transfering
+         * @return which button has been clicked
+         */
+        private DialogResult showTransferConfirmingDialog()
+        {
+            string messageBoxText = "Wurde die Verlegung ausgeführt? Wollen Sie den ausgewählten Patienten wirklich aus der Transferliste löschen?";
+            string caption = "Bestätigung";
+            MessageBoxButtons button = MessageBoxButtons.YesNo;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+
+            return result;
+        }
+
+
     }
 }
