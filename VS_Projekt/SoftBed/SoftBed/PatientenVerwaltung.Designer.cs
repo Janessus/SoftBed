@@ -126,6 +126,7 @@ namespace SoftBed
             this.wRadBtn.TabStop = true;
             this.wRadBtn.Text = "weiblich";
             this.wRadBtn.UseVisualStyleBackColor = true;
+            this.wRadBtn.CheckedChanged += new System.EventHandler(this.wRadBtn_CheckedChanged);
             // 
             // mRadBtn
             // 
@@ -138,6 +139,7 @@ namespace SoftBed
             this.mRadBtn.TabStop = true;
             this.mRadBtn.Text = "männlich";
             this.mRadBtn.UseVisualStyleBackColor = true;
+            this.mRadBtn.CheckedChanged += new System.EventHandler(this.mRadBtn_CheckedChanged);
             // 
             // versNrAufnTxt
             // 
@@ -183,6 +185,7 @@ namespace SoftBed
             this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
             this.abteilungDropDown.TabIndex = 18;
             this.abteilungDropDown.TabStop = false;
+            this.abteilungDropDown.SelectedIndexChanged += new System.EventHandler(this.abteilungDropDown_SelectedIndexChanged);
             // 
             // sucheBtn
             // 
@@ -230,6 +233,7 @@ namespace SoftBed
             // 
             this.editMeldungLdl.AutoSize = true;
             this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
             this.editMeldungLdl.Location = new System.Drawing.Point(32, 537);
             this.editMeldungLdl.Name = "editMeldungLdl";
             this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);

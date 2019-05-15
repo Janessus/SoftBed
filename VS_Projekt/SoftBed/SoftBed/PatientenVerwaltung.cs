@@ -83,24 +83,32 @@ namespace SoftBed
          */
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
-            if (showTransferConfirmingDialog() == DialogResult.Yes)
+            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)
             {
-                Patient pPatient = getPatientFromGUI();
-                String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
-                
-                // can write into DB
-                bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
-                if (doneRight)
-                {
-                    editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
-                    pZimmerManagement.PatientenTransfer(currentPatientenVNr);
-                }
-                else
-                {
-                    MessageBox.Show("Patient konnte nicht angelegt werden!");
-                }
-                
+                messageManInGyn();
             }
+            else
+            {
+                if (showTransferConfirmingDialog() == DialogResult.Yes)
+                {
+                    Patient pPatient = getPatientFromGUI();
+                    String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+
+                    // can write into DB
+                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
+                    if (doneRight)
+                    {
+                        editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
+                        pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Patient konnte nicht angelegt werden!");
+                    }
+
+                }
+            }
+            
         }
 
         
@@ -166,5 +174,57 @@ namespace SoftBed
             return result;
         }
 
+
+
+        /**
+         * Sets message if, User wants to put man into Gynäkolgie
+         */
+        private void mRadBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)
+            {
+            Console.WriteLine("here");
+                editMeldungLdl.Text = "Sie haben ausgewählt, dass Sie einen Mann auf die Gynäkologie legen wollen! Dies ist nicht möglich!";
+            }
+        }
+
+
+
+        /**
+         * Sets message if, User wants to put man into Gynäkolgie
+         * or clears message, if not
+         */
+        private void abteilungDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)
+            {
+                editMeldungLdl.Text = "Sie haben ausgewählt, dass Sie einen Mann auf die Gynäkologie legen wollen! Dies ist nicht möglich!";
+            }
+            else
+            {
+                editMeldungLdl.Text = "";
+            }
+        }
+
+
+        /**
+         * warns User, that he wanted to put man in gyn
+         */
+        private void messageManInGyn()
+        {
+            string messageBoxText = "Diese Verlegung kann NICHT ausgeführt werden! Ein Mann kann nicht auf die Gynäkologie verlegt werden!";
+            string caption = "Warnung";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+        }
+
+        /**
+         * clears warning text
+         */
+        private void wRadBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            editMeldungLdl.Text = "";
+        }
     }
 }
