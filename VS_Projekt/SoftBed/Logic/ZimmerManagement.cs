@@ -38,8 +38,52 @@ namespace Logic
 
         public string suchePassendesBett(Patient patient)
         {
-            //TODO
-            return null;
+
+
+            if ((patient.Gebdat.Year == DateTime.Today.Year - 13) &&
+                (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Paediatrie < 50))
+            {
+                //suche passendes bett
+            }
+            else
+            {
+                if (patient.Station.Equals("Gynäkologie") &&
+                    (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50) && patient.Geschlecht.Equals("w"))
+                {
+                    //suche bett in Gynäkologie
+                }
+                else if(patient.Station.Equals("innere Medizin") &&
+                        (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50))
+                {
+                    //suche bett in gynäkologie
+                }
+                else if(patient.Station.Equals("Onkologie") &&
+                        (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Onkologie < 50))
+                { 
+                    //suche bett in Onkologie
+                }
+                else if(patient.Station.Equals("Orthopädie") &&
+                        (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Orthopaedie < 50))
+                {
+                    //suche bett in Orthopädie
+                }
+                else if(patient.Station.Equals("Intensiv") &&
+                        (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Intensiv < 10))
+                {
+                    // suche bett in Intensivstation
+                }
+                else if (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50)
+                {
+                    //suche bett in innere, wenn patient nicht in eigene station kann
+                }
+                else
+                {
+                    // patient auf station mit größter freier kapaziät unterbringen
+
+
+                }
+            }
+                return null;
         }
 
         public void DeleteMemberTransferliste(string vorname, string nachname)
@@ -51,12 +95,11 @@ namespace Logic
          * errechnet die Gesamtauslastung des Krankenhauses
          * @return Anazahl der belegten Betten im gesamten KH
          */
-        public int KHFülle()
+        private int KHFülle()
         {
             Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
 
-            int gesAuslast = belegung.Gynaekologie + belegung.Innere + belegung.Intensiv + belegung.Onkologie +
-                             belegung.Orthopaedie + belegung.Paediatrie;
+            int gesAuslast = belegung.Gesamt();
 
             return gesAuslast;
         }
