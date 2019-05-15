@@ -42,7 +42,6 @@ namespace SoftBed
                 DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
 
                 ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[0].Value.ToString(), selectedRows[0].Cells[1].Value.ToString());  //klappt vielleicht
-                
 
             }
 
