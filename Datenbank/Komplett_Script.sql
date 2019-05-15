@@ -1,4 +1,4 @@
-drop database softbeddb;
+drop database IF EXISTS SoftBedDB;
 create database IF NOT EXISTS SoftBedDB;
 use SoftBedDB;
 
@@ -26,8 +26,7 @@ create table IF NOT EXISTS Mitarbeiter
 
 create table IF NOT EXISTS Station
 (
-	/*StationsID int AUTO_INCREMENT,*/
-    Bezeichnung varchar(255),
+    Bezeichnung varchar(40),
 	
     PRIMARY KEY(Bezeichnung)
 );
@@ -35,7 +34,7 @@ create table IF NOT EXISTS Station
 create table IF NOT EXISTS Zimmer
 (
 	ZimmerNr int,
-    StationsBezeichnung varchar(255),
+    StationsBezeichnung varchar(40),
     
     PRIMARY KEY(ZimmerNr),
     FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
@@ -46,9 +45,11 @@ create table IF NOT EXISTS Patient
 	VersicherungsNr int,
 	PersonID int,
     ZimmerNr int,
-    StationsBezeichnung varchar(255),
+    StationsBezeichnung varchar(40),
     Bett varchar(1),
     Beschwerde varchar(255),
+    Aufnahmedatum Timestamp DEFAULT current_timestamp,
+    
     
     PRIMARY KEY(VersicherungsNr),
     FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade,
@@ -79,6 +80,6 @@ INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(2, "Innere Medizin");
 INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum) VALUES("Janes", "Heuberger", "Schutterwald", "M", DATE("1994-09-01"));
 INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(12345, (Select Person.PersonID From Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), 2, "Innere Medizin", "F", "Gebrochenes Bein");
 INSERT INTO Mitarbeiter(PersonID, Rechte) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Admin of Admins");
-INSERT INTO Transferliste(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
+INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
 
 commit;
