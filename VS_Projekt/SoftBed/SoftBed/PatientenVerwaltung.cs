@@ -83,32 +83,54 @@ namespace SoftBed
          */
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
-            if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
+            // tests, if all fields are filled
+            if (!AllFieldsFilled())
             {
-                messageManInGyn();
+                editMeldungLdl.Text = "Füllen Sie zuerst alle Felder aus, bevor sie einen Patient aufnehmen!";
             }
             else
             {
-                if (showTransferConfirmingDialog() == DialogResult.Yes)
+                editMeldungLdl.Text = "";
+                if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)                            // is Gyn and male??
                 {
-                    Patient pPatient = getPatientFromGUI();
-                    String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
-
-                    // can write into DB
-                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
-                    if (doneRight)
+                    messageManInGyn();
+                }
+                else
+                {
+                    if (TestChildPäd() == -1)
                     {
-                        editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
-                        pZimmerManagement.PatientenTransfer(currentPatientenVNr);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Patient konnte nicht angelegt werden!");
+                        // if user cancelled transaction
+                        if (MessageChildInPädiatrie() == DialogResult.Cancel)
+                        {
+                            // ends transaction sets message
+                            editMeldungLdl.Text = "Sie haben die Aufnahme abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                            return;
+                        }
+                        else
+                        {
+                            abteilungDropDown.SelectedIndex = 4;
+                        }
                     }
 
+                    if (showTransferConfirmingDialog() == DialogResult.Yes)
+                    {
+                        Patient pPatient = getPatientFromGUI();
+                        String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+
+                        // can write into DB
+                        bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
+                        if (doneRight)
+                        {
+                            editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
+                            pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Patient konnte nicht angelegt werden!");
+                        }
+                    }
                 }
             }
-            
         }
 
         
@@ -165,7 +187,19 @@ namespace SoftBed
          */
         private DialogResult showTransferConfirmingDialog()
         {
-            string messageBoxText = "Wollen Sie den Patienten wirklich in das vorgeschlagene Zimmer legen?";
+            string messageBoxText;
+            // if female, message for female
+            if (wRadBtn.Checked)
+            {
+                messageBoxText = "Wollen Sie die Patientin " + vornameTxt.Text + " " + nameTxt.Text
+                                 + " mit der Versicherungsnummer " + versNrAufnTxt.Text + " wirklich aufnehmen?";
+            }
+            // if male, message for male
+            else
+            {
+                messageBoxText = "Wollen Sie den Patienten " + vornameTxt.Text + " " + nameTxt.Text
+                                 + " mit der Versicherungsnummer " + versNrAufnTxt.Text + " wirklich aufnehmen?";
+            }
             string caption = "Bestätigung";
             MessageBoxButtons button = MessageBoxButtons.YesNo;
 
@@ -225,6 +259,60 @@ namespace SoftBed
         private void wRadBtn_CheckedChanged(object sender, EventArgs e)
         {
             editMeldungLdl.Text = "";
+        }
+
+        /**
+         * tests if all patient fields are filled
+         * @return all filled or not?
+         */
+        private bool AllFieldsFilled()
+        {
+            if ((nameTxt.Text == String.Empty) || (vornameTxt.Text == String.Empty) ||
+                (versNrAufnTxt.Text == String.Empty) || (abteilungDropDown.Text == String.Empty))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * tests if patient is a child and should be put in päd or not
+         * @return 1 if is child and put into Päd or ITS, -1 if it's child but not put into Päd, 0 if no child
+         */
+        private int TestChildPäd()
+        {
+            // returns 1, if first date is bigger, than second, 0, if equal, -1, if second is bigger
+            // TimeSpan.Compare(TimeSpan.FromDays(5106), DateTime.Today.Subtract(dTPGebDat.Value) returns 1, if child is less than 14 years old
+            if (TimeSpan.Compare(TimeSpan.FromDays(5106), DateTime.Today.Subtract(dTPGebDat.Value)) == 1)
+            {
+                if (abteilungDropDown.SelectedIndex == 4 || abteilungDropDown.SelectedIndex == 5)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /**
+         * warns User, that he wanted to put child in other station
+         */
+        private DialogResult MessageChildInPädiatrie()
+        {
+            string messageBoxText = 
+                "Sie wollten ein Kind in eine andere Station als die Pädiatrie oder ITS legen!\r\n Das Kind wird automatisch in die Pädiatrie verlegt werden! \r\n Bei Abbrechen wird der Vorgang abgebrochen!!";
+            string caption = "Warnung";
+            MessageBoxButtons button = MessageBoxButtons.OKCancel;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+            return result;
         }
     }
 }
