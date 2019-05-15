@@ -85,7 +85,7 @@ namespace SoftBed
 
         private void btnLoeschen_Click(object sender, EventArgs e)
         {
-            if (!userTxt.Equals(""))
+            if (userTxt.Text != String.Empty)
             {
                 if (showUserDeleteConfirmingDialog() == DialogResult.Yes)
                 {
