@@ -82,5 +82,10 @@ namespace SoftBed
             pUser.Rechte = getRadioBtnValue();
             return pUser;
         }
+
+        private void btnLoeschen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
