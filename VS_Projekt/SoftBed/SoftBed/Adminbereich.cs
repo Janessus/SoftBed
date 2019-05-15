@@ -44,11 +44,20 @@ namespace SoftBed
          */
         private void usrAnlBtn_Click(object sender, EventArgs e)
         {
-            bool done = userManage.UserAnlegen(readUserFromGUI());
-            if (done == false)
+            if (userTxt.Text != String.Empty && pwTxt.Text != String.Empty)
             {
-                MessageBox.Show("ungültige Eingabe!");
+                editMeldungLdl.Text = "";
+                bool done = userManage.UserAnlegen(readUserFromGUI());
+                if (done == false)
+                {
+                    MessageBox.Show("Ungültige Eingabe!");
+                }
             }
+            else
+            {
+                editMeldungLdl.Text = "Füllen Sie alle Felder aus, bevor Sie einen User anlegen!";
+            }
+            
         }
 
 
@@ -94,7 +103,14 @@ namespace SoftBed
             {
                 if (showUserDeleteConfirmingDialog() == DialogResult.Yes)
                 {
-                    userManage.UserLöschen(userTxt.Text);
+                    if (userManage.UserLöschen(userTxt.Text))
+                    {
+                        editMeldungLdl.Text = "User wurde erfolgreich gelöscht";
+                    }
+                    else
+                    {
+                        editMeldungLdl.Text = "User konnte NICHT gelöscht werden";
+                    }
 
                 }
             }
