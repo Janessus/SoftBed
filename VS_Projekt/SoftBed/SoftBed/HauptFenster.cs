@@ -23,7 +23,7 @@ namespace SoftBed
             Task refreshTask = new Task(()=>{
                 while (true)
                 {
-                    //RefreshHauptfenster();
+                    RefreshHauptfenster();
                     Thread.Sleep(30000);
                 }
             });
@@ -67,8 +67,8 @@ namespace SoftBed
 
         private void RefreshHauptfenster()
         {
-            RefreshBettenbelegung();
-            RefreshVerlegungsliste();
+            //RefreshBettenbelegung();
+            //RefreshVerlegungsliste();
         }
 
         private void RefreshBettenbelegung()

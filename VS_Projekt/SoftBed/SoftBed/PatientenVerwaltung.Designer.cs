@@ -184,7 +184,11 @@ namespace SoftBed
             "Intensivstation"});
             this.abteilungDropDown.Location = new System.Drawing.Point(156, 344);
             this.abteilungDropDown.Name = "abteilungDropDown";
+<<<<<<< Updated upstream
             this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
+=======
+            this.abteilungDropDown.Size = new System.Drawing.Size(190, 45);
+>>>>>>> Stashed changes
             this.abteilungDropDown.TabIndex = 18;
             this.abteilungDropDown.TabStop = false;
             this.abteilungDropDown.SelectedIndexChanged += new System.EventHandler(this.abteilungDropDown_SelectedIndexChanged);
@@ -206,7 +210,7 @@ namespace SoftBed
             this.patAufnLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patAufnLbl.Location = new System.Drawing.Point(32, 118);
             this.patAufnLbl.Name = "patAufnLbl";
-            this.patAufnLbl.Size = new System.Drawing.Size(166, 20);
+            this.patAufnLbl.Size = new System.Drawing.Size(311, 37);
             this.patAufnLbl.TabIndex = 21;
             this.patAufnLbl.Text = "Patientenaufnahme";
             // 
@@ -227,7 +231,7 @@ namespace SoftBed
             this.meldungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.meldungLbl.Location = new System.Drawing.Point(32, 497);
             this.meldungLbl.Name = "meldungLbl";
-            this.meldungLbl.Size = new System.Drawing.Size(77, 20);
+            this.meldungLbl.Size = new System.Drawing.Size(146, 37);
             this.meldungLbl.TabIndex = 23;
             this.meldungLbl.Text = "Meldung";
             // 
@@ -238,7 +242,7 @@ namespace SoftBed
             this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
             this.editMeldungLdl.Location = new System.Drawing.Point(32, 537);
             this.editMeldungLdl.Name = "editMeldungLdl";
-            this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);
+            this.editMeldungLdl.Size = new System.Drawing.Size(0, 37);
             this.editMeldungLdl.TabIndex = 24;
             // 
             // patSucheLbl
@@ -247,7 +251,7 @@ namespace SoftBed
             this.patSucheLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patSucheLbl.Location = new System.Drawing.Point(564, 127);
             this.patSucheLbl.Name = "patSucheLbl";
-            this.patSucheLbl.Size = new System.Drawing.Size(134, 20);
+            this.patSucheLbl.Size = new System.Drawing.Size(250, 37);
             this.patSucheLbl.TabIndex = 25;
             this.patSucheLbl.Text = "Patientensuche";
             // 
@@ -256,7 +260,7 @@ namespace SoftBed
             this.versNrSucheTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrSucheTxt.Location = new System.Drawing.Point(688, 168);
             this.versNrSucheTxt.Name = "versNrSucheTxt";
-            this.versNrSucheTxt.Size = new System.Drawing.Size(238, 26);
+            this.versNrSucheTxt.Size = new System.Drawing.Size(238, 44);
             this.versNrSucheTxt.TabIndex = 27;
             // 
             // versNrSucheLbl
@@ -265,7 +269,7 @@ namespace SoftBed
             this.versNrSucheLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrSucheLbl.Location = new System.Drawing.Point(564, 168);
             this.versNrSucheLbl.Name = "versNrSucheLbl";
-            this.versNrSucheLbl.Size = new System.Drawing.Size(117, 20);
+            this.versNrSucheLbl.Size = new System.Drawing.Size(234, 37);
             this.versNrSucheLbl.TabIndex = 26;
             this.versNrSucheLbl.Text = "Versichertennr.";
             // 
@@ -340,7 +344,7 @@ namespace SoftBed
             // 
             // PatientenVerwaltung
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
