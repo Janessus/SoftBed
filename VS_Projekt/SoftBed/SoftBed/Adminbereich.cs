@@ -83,6 +83,11 @@ namespace SoftBed
             return pUser;
         }
 
+
+        /**
+         * Action Listener for Löschen Btn
+         * Calls Dialog and deletes User on Condition
+         */
         private void btnLoeschen_Click(object sender, EventArgs e)
         {
             if (userTxt.Text != String.Empty)
