@@ -48,5 +48,45 @@ namespace Logic
             Verlegungsliste verlegungsliste = DatabaseManagement.GetInstance().GetVerlegungsliste();
             return verlegungsliste;
         }
+
+        public List<string> GetBettenbelegungSortiert(Bettenbelegung bettenbelegung)
+        {
+            List<SortBelegung> sortBelegung = new List<SortBelegung>();
+            sortBelegung[0] = new SortBelegung("Pädiatrie", bettenbelegung.Paediatrie);
+            sortBelegung[1] = new SortBelegung("Gynäkologie", bettenbelegung.Gynaekologie);
+            sortBelegung[2] = new SortBelegung("Innere Medizin", bettenbelegung.Innere);
+            sortBelegung[3] = new SortBelegung("Onkologie", bettenbelegung.Onkologie);
+            sortBelegung[4] = new SortBelegung("Orthopädie", bettenbelegung.Orthopaedie);
+            sortBelegung.Sort();
+            List<string> sorted = new List<string>();
+            for(int i=0;i<5;i++)
+                sorted[i] = sortBelegung[i].station;
+
+            return sorted;
+        }
+        
+        private class SortBelegung : IComparable<SortBelegung>
+        {
+            public string station;
+            public int belegung;
+
+            public SortBelegung(string station, int belegung)
+            {
+                this.station = station;
+                this.belegung = belegung;
+            }
+
+            public int CompareTo(SortBelegung other)
+            {
+                if(this.belegung < other.belegung)
+                    return 1;
+             
+                if (this.belegung > other.belegung)
+                    return -1;
+
+                return 0;
+            }
+        }
+
     }
 }

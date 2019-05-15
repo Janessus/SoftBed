@@ -37,14 +37,16 @@ namespace SoftBed
 
         private void verlAugefBtn_Click(object sender, EventArgs e)
         {
-            if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)
+            if (UserManagement.CurrentUser.Rechte == "Standard")
             {
-                DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
+                if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)
+                {
+                    DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
 
-                ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[0].Value.ToString(), selectedRows[0].Cells[1].Value.ToString());  //klappt vielleicht
+                    ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[0].Value.ToString(), selectedRows[0].Cells[1].Value.ToString());  //klappt vielleicht
 
+                }
             }
-
         }
 
         private void abmeldenBtn_Click(object sender, EventArgs e)
