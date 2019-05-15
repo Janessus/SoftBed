@@ -37,6 +37,7 @@
             this.pwTxt = new System.Windows.Forms.TextBox();
             this.userTxt = new System.Windows.Forms.TextBox();
             this.usrAnlBtn = new System.Windows.Forms.Button();
+            this.btnLoeschen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // zurueckBtn
@@ -123,13 +124,24 @@
             // usrAnlBtn
             // 
             this.usrAnlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usrAnlBtn.Location = new System.Drawing.Point(311, 283);
+            this.usrAnlBtn.Location = new System.Drawing.Point(389, 270);
             this.usrAnlBtn.Name = "usrAnlBtn";
-            this.usrAnlBtn.Size = new System.Drawing.Size(163, 29);
+            this.usrAnlBtn.Size = new System.Drawing.Size(190, 29);
             this.usrAnlBtn.TabIndex = 31;
             this.usrAnlBtn.Text = "Benutzer anlegen";
             this.usrAnlBtn.UseVisualStyleBackColor = true;
             this.usrAnlBtn.Click += new System.EventHandler(this.usrAnlBtn_Click);
+            // 
+            // btnLoeschen
+            // 
+            this.btnLoeschen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoeschen.Location = new System.Drawing.Point(600, 126);
+            this.btnLoeschen.Name = "btnLoeschen";
+            this.btnLoeschen.Size = new System.Drawing.Size(142, 29);
+            this.btnLoeschen.TabIndex = 32;
+            this.btnLoeschen.Text = "Benutzer löschen";
+            this.btnLoeschen.UseVisualStyleBackColor = true;
+            this.btnLoeschen.Click += new System.EventHandler(this.btnLoeschen_Click);
             // 
             // Adminbereich
             // 
@@ -137,6 +149,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnLoeschen);
             this.Controls.Add(this.usrAnlBtn);
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.pwTxt);
@@ -164,5 +177,6 @@
         private System.Windows.Forms.TextBox pwTxt;
         private System.Windows.Forms.TextBox userTxt;
         private System.Windows.Forms.Button usrAnlBtn;
+        private System.Windows.Forms.Button btnLoeschen;
     }
 }
