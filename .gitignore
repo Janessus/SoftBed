@@ -262,3 +262,9 @@ __pycache__/
 Design/Aktivitätsdiagramme/\.Stattion_Patienten_Verteilung\.vpp\.lck
 
 Design/Aktivitätsdiagramme/Stattion_Patienten_Verteilung\.vpp\.bak_000f
+
+*.bak_000f
+
+*.bak_001d
+
+*.bak_002d
