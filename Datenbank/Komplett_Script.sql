@@ -67,6 +67,17 @@ create table IF NOT EXISTS TransferListe
     PRIMARY KEY (PersonID, Stempel)
 );
 
+create table IF NOT EXISTS Users
+(
+	Benutzername Varchar(40) PRIMARY KEY,
+    PersonID int,
+    Rechte Varchar(40),
+    Passwort Varchar(40),
+    
+    FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade
+);
+
+
 /* ------------------------------------------------------------- Test Daten -------------------------------------------------------------------- */
 /* ------------------------------------------------ Reihenfolge bei den Inserts einhalten! ----------------------------------------------------- */
 
@@ -81,5 +92,5 @@ INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum) VALUES(
 INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(12345, (Select Person.PersonID From Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), 2, "Innere Medizin", "F", "Gebrochenes Bein");
 INSERT INTO Mitarbeiter(PersonID, Rechte) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Admin of Admins");
 INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
-
+INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort) VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Admin", "password");
 commit;

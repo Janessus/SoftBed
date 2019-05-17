@@ -7,15 +7,10 @@ namespace Logic
     public class DatabaseManagement : LogicController
     {
         private static DatabaseManagement _instance = null;
-        private MySqlDataReader _reader;
-        private MySqlConnection _connection;
-        private MySqlCommand _cmd;
+        private static MySqlConnection _connection = null;
 
-        public MySqlDataReader Reader { get => _reader; set => _reader = value; }
-        public MySqlConnection Connection { get => _connection; set => _connection = value; }
-        public MySqlCommand Cmd { get => _cmd; set => _cmd = value; }
         public static DatabaseManagement Instance { get => _instance; set => _instance = value; }
-
+        public static MySqlConnection Connection { get => _connection; set => _connection = value; }
 
         private DatabaseManagement(){}
         
@@ -30,46 +25,38 @@ namespace Logic
         }
 
 
-        //returns the Connection string (address, credentials etc)
-        static private string GetConnectionString()
-        {
-            return "SERVER=192.168.178.88;" +
-                   "DATABASE=SoftBedDB;" +
-                   "UID=softbed;" +
-                   "PASSWORD=softbed;";
-        }
-
-
         //connects to the server specified in the connectionString
-        public void Connect()
+        private MySqlConnection Connect()
         {
+            string connectionString = "SERVER=192.168.178.88;" +
+                                      "DATABASE=SoftBedDB;" +
+                                      "UID=softbed;" +
+                                      "PASSWORD=softbed;";
+
             try
             {
-                Connection = new MySqlConnection(GetConnectionString());
+                Connection = new MySqlConnection(connectionString);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
+
+            return Connection;
         }
 
-        // prints the results of eg. select * from Test
-        // usage -> PrintResults(ExecuteQuery("select * from Test"));
-        public void PrintResults(bool flag)
-        {
-            while (flag && reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < reader.FieldCount; i++)
-                    row += reader.GetValue(i).ToString() + ", ";
+        //"INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(\"21350\",(SELECT Person.PersonID From Person WHERE Vorname = \"Pablo\" AND Nachname = \"Escobar\"),0,\"Innere Medizin\",'F',\"Überdosis + Stichwunden\");"
 
-        //executes the query that was passed as an argument, returns true if successful
-        private bool ExecuteQuery(String query)
+        //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
+        //Connection has to be closed after this function returns
+        private MySqlDataReader ExecuteQuery(String query)
         {
+            MySqlDataReader Reader = null;
+            
             try
             {
-                Connect();
+                Connection = Connect();
                 Connection.Open();
 
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
@@ -78,29 +65,20 @@ namespace Logic
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
+                throw;
             }
             
-            return true;
+            return Reader;
         }
-
-        // prints the results of eg. select * from Test
-        // usage -> PrintResults(ExecuteQuery("select * from Test"));
-        public void PrintResults(bool flag)
-        {
-            while (flag && reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < reader.FieldCount; i++)
-                    row += reader.GetValue(i).ToString() + ", ";
 
         public Patient GetPatient(string versicherungsNummer)
         {
             Patient p = null;
+            MySqlDataReader Reader = null;
 
             try
             {
-                ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=" + versicherungsNummer + ";");
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=\"" + versicherungsNummer + "\";");
 
                 if (Reader.Read())
                 {
@@ -114,10 +92,13 @@ namespace Logic
 
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
                 }
+
+                Connection.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Connection.Close();
                 throw;
             }
             
@@ -129,13 +110,16 @@ namespace Logic
         {
             try
             {
-                ExecuteQuery("UPDATE Patient SET StationsBezeichnung = " + patient.Station + ", " + "Beschwerde = " +
-                             patient.Beschwerde + "WHERE VersicherungsNr = " + patient.Versicherungsnr + ";");
+                ExecuteQuery("UPDATE Patient SET StationsBezeichnung = \"" + patient.Station + "\", " + "Beschwerde = \"" +
+                             patient.Beschwerde + "\" WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";");
+
+                Connection.Close();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Connection.Close();
                 throw;
             }
         }
@@ -145,11 +129,13 @@ namespace Logic
         {
             try
             {
-                ExecuteQuery("DELETE FROM Patient WHERE VersicherungsNr = " + versicherungsNummer + ";");
+                ExecuteQuery("DELETE FROM Patient WHERE VersicherungsNr = \"" + versicherungsNummer + "\";");
+                Connection.Close();
                 return true;
             }
             catch (Exception e)
             {
+                Connection.Close();
                 Console.WriteLine(e);
                 throw;
             }
@@ -162,26 +148,39 @@ namespace Logic
             {
                 string query =
                     "INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) " +
-                    "VALUES(" +
-                    patient.Versicherungsnr + "," +            // VersicherungsNr
-                    "(Select Person.PersonID From Person " +   // PersonID
-                    "WHERE " +                                 // *
-                    "Vorname = " + patient.Vorname +           // *
-                    " AND " +                                  // *
-                    "Nachname = " + patient.Nachname + ")," +  // *
-                    "null" + "," +                             // ZimmerNr
-                    patient.Station + "," +                    // Station
-                    "null" + "," +                             // Bett
-                    patient.Beschwerde + ");";                 // Beschwerde
+                    "VALUES(\"" + 
+                    patient.Versicherungsnr + "\"," +                 // VersicherungsNr
+                    "(SELECT Person.PersonID From Person " +          // PersonID
+                    "WHERE " +                                        // *
+                    "Vorname = \"" + patient.Vorname +                // *
+                    "\" AND " +                                       // *
+                    "Nachname = \"" + patient.Nachname + "\")," +     // *
+                    "0" + ",\"" +                                     // ZimmerNr
+                    patient.Station + "\"," +                         // Station
+                    "\'F\'" + ",\"" +                                 // Bett
+                    patient.Beschwerde + "\");";                      // Beschwerde
 
-                return ExecuteQuery(query);
+                if(PersonAnlegen(patient.Vorname, patient.Nachname))
+                { 
+
+                    if (ExecuteQuery(query) != null)
+                    {
+                        Connection.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        Connection.Close();
+                        return false;
+                    }
+                }
             }
 
             return false;
         }
 
 
-        public Person GetPerson(string vorname, string nachname)
+        public Person GeneratePerson(string vorname, string nachname)
         {
             Person p = new Person();
             p.Vorname = vorname;
@@ -194,10 +193,12 @@ namespace Logic
         public Verlegungsliste GetVerlegungsliste()
         {
             Verlegungsliste verlegungsliste = null;
-
+            MySqlDataReader Reader = null;
+            MySqlCommand Cmd = null;
+            
             try
             {
-                Connect();
+                Connection = Connect();
                 Cmd = Connection.CreateCommand();
                 Cmd.CommandText = "SELECT p.PersonID, Vorname, Nachname, Von, Nach, Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
                 Reader = Cmd.ExecuteReader();
@@ -207,7 +208,7 @@ namespace Logic
                 while (Reader.Read())
                 {
                     VerlegungslistenItem item = new VerlegungslistenItem();
-                    item.Person = GetPerson(Reader.GetString(1), Reader.GetString(2));
+                    item.Person = GeneratePerson(Reader.GetString(1), Reader.GetString(2));
                     item.Von = Reader.GetString(3);
                     item.Nach = Reader.GetString(4);
                     item.Stempel = DateTime.Parse(Reader.GetString(5));
@@ -215,7 +216,37 @@ namespace Logic
                     verlegungsliste.Transferliste.Add(item);
                 }
 
+                Cmd.Dispose();
+                Connection.Close();
+
                 return verlegungsliste;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Cmd.Dispose();
+                Connection.Close();
+                throw;
+            }
+        }
+
+        public bool PersonAnlegen(string vorname, string nachname)
+        {
+            string query = "INSERT INTO Person(Vorname, Nachname) " +
+                           "VALUES(\"" + vorname + "\", \"" + nachname + "\");";
+
+            try
+            {
+                if (ExecuteQuery(query) != null)
+                {
+                    Connection.Close();
+                    return true;
+                }
+                else
+                {
+                    Connection.Close();
+                    return false;
+                }
             }
             catch (Exception e)
             {
@@ -239,20 +270,68 @@ namespace Logic
 
         public User GetUser(string userName)
         {
+            MySqlDataReader Reader = null;
 
-            return null;
+            try
+            {
+                Reader = ExecuteQuery("SELECT u.Benutzername, u.Rechte, u.Passwort, p.Vorname, p.Nachname FROM Users u, Person p WHERE u.PersonID = p.PersonID AND u.Benutzername = \"" + userName + "\";");
+
+                if (Reader.Read())
+                {
+                    string rechte = Reader.GetString(1);
+                    string passwort = Reader.GetString(2);
+                    string vorname = Reader.GetString(3);
+                    string nachname = Reader.GetString(4);
+
+                    return new User(vorname, nachname, rechte, userName, passwort);
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public bool UserAnlegen(User user)
         {
+            string query = "INSERT INTO Users(Benutzername, PersonID, Rechte, Passwort) Values(\"" + user.Benutzername + 
+                           "\", (SELECT PersonID FROM Person WHERE Vorname = \"" + user.Vorname + "\" AND Nachname = \"" + user.Nachname + "\"), \"" +
+                           user.Rechte + "\", \"" +
+                           user.Passwort + "\"" +
+                           ")";
+
+            try
+            {
+                if (ExecuteQuery(query) != null)
+                    return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             return false;
         }
 
         public bool UserLoeschen(string userName)
         {
-
-            return false;
+            try
+            {
+                ExecuteQuery("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";");
+                Connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Connection.Close();
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         // ################################################## DEV FUNCTIONS ##################################################
@@ -260,19 +339,19 @@ namespace Logic
 
         public void TestDB()
         {
-            //PrintResults(ExecuteQuery("insert into Test Values(\"testdatentestdatenTestDaten\");"));
-            Patient p1 = GetPatient("12345");
-            PrintPatient(p1);
 
-            Patient p2 = GetPatient("12335");
-            PrintPatient(p2);
+            //Patient p1 = GetPatient("12345");
+            //PrintPatient(p1);
 
-            PatientAnlegen(new Patient("Pablo", "Escobar", "21350", DateTime.Parse("1937-10-04"), "Innere Medizin",
-                "Überdosis + Stichwunden", DateTime.Now, "M"));
+            //PatientAnlegen(new Patient("Pablo", "Escobar", "21350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
+            //User u = GetUser("Janessus");
+            //Console.WriteLine(u.Rechte);
 
-            PrintPatient(GetPatient("21350"));
+            //User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
+            //UserAnlegen(u);
+            UserLoeschen("Janessus");
+            
 
-            Reader.Close();
             Connection.Close();
         }
 
@@ -294,21 +373,6 @@ namespace Logic
             }
             else
                 Console.WriteLine("NULL");
-        }
-
-
-        // prints the results of eg. select * from Test
-        // usage -> PrintResults(ExecuteQuery("select * from Test"));
-        public void PrintResults(bool flag)
-        {
-            while (flag && Reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < Reader.FieldCount; i++)
-                    row += Reader.GetValue(i).ToString() + ", ";
-
-                Console.WriteLine(row);
-            }
         }
     }
 }
