@@ -65,7 +65,7 @@ namespace Logic
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                //throw;
             }
             
             return Reader;
@@ -180,7 +180,7 @@ namespace Logic
         }
 
 
-        public Person GeneratePerson(string vorname, string nachname)
+        private Person GeneratePerson(string vorname, string nachname)
         {
             Person p = new Person();
             p.Vorname = vorname;
@@ -208,7 +208,11 @@ namespace Logic
                 while (Reader.Read())
                 {
                     VerlegungslistenItem item = new VerlegungslistenItem();
-                    item.Person = GeneratePerson(Reader.GetString(1), Reader.GetString(2));
+                    Person p = new Person();
+                    p.Vorname = Reader.GetString(1);
+                    p.Nachname = Reader.GetString(2);
+
+                    item.Person = p;
                     item.Von = Reader.GetString(3);
                     item.Nach = Reader.GetString(4);
                     item.Stempel = DateTime.Parse(Reader.GetString(5));
@@ -251,20 +255,10 @@ namespace Logic
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                //throw;
             }
-        }
 
-        public Bettenbelegung GetBettenbelegung()
-        {
-
-            return null;
-        }
-
-        public string GetPassendesBett()
-        {
-
-            return null;
+            return false;
         }
 
 
@@ -334,6 +328,20 @@ namespace Logic
             }
         }
 
+
+        public Bettenbelegung GetBettenbelegung()
+        {
+
+            return null;
+        }
+
+        public string GetPassendesBett()
+        {
+
+            return null;
+        }
+
+
         // ################################################## DEV FUNCTIONS ##################################################
 
 
@@ -343,16 +351,17 @@ namespace Logic
             //Patient p1 = GetPatient("12345");
             //PrintPatient(p1);
 
-            //PatientAnlegen(new Patient("Pablo", "Escobar", "21350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
+            PatientAnlegen(new Patient("Pablo", "Escobar", "21350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
+            PatientAnlegen(new Patient("Max", "Mustermann", "42", DateTime.Parse("1937-10-04"), "Orthopädie", "Überdosis + Stichwunden", DateTime.Now, "M"));
             //User u = GetUser("Janessus");
             //Console.WriteLine(u.Rechte);
 
             //User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
             //UserAnlegen(u);
-            UserLoeschen("Janessus");
-            
+            //UserLoeschen("Janessus");
 
-            Connection.Close();
+
+            //Connection.Close();
         }
 
 

@@ -36,7 +36,7 @@ create table IF NOT EXISTS Zimmer
 	ZimmerNr int,
     StationsBezeichnung varchar(40),
     
-    PRIMARY KEY(ZimmerNr),
+    PRIMARY KEY(ZimmerNr, StationsBezeichnung),
     FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
 );
 
@@ -87,10 +87,20 @@ INSERT INTO Station(Bezeichnung) VALUES("Onkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Orthopädie");
 INSERT INTO Station(Bezeichnung) VALUES("Pädiatrie");
 
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(0, "Innere Medizin");
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(0, "Gynäkologie");
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(0, "Onkologie");
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(0, "Orthopädie");
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(0, "Pädiatrie");
+INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(1, "Innere Medizin");
 INSERT INTO Zimmer(ZimmerNr, StationsBezeichnung) VALUES(2, "Innere Medizin");
+
 INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum) VALUES("Janes", "Heuberger", "Schutterwald", "M", DATE("1994-09-01"));
 INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(12345, (Select Person.PersonID From Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), 2, "Innere Medizin", "F", "Gebrochenes Bein");
 INSERT INTO Mitarbeiter(PersonID, Rechte) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Admin of Admins");
 INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
 INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort) VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Admin", "password");
+
+
+
 commit;
