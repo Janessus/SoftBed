@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Wrapperklassen;
 using MySql.Data.MySqlClient;
 
@@ -7,10 +8,8 @@ namespace Logic
     public class DatabaseManagement : LogicController
     {
         private static DatabaseManagement _instance = null;
-        private static MySqlConnection _connection = null;
 
         public static DatabaseManagement Instance { get => _instance; set => _instance = value; }
-        public static MySqlConnection Connection { get => _connection; set => _connection = value; }
 
         private DatabaseManagement(){}
         
@@ -32,6 +31,7 @@ namespace Logic
                                       "DATABASE=SoftBedDB;" +
                                       "UID=softbed;" +
                                       "PASSWORD=softbed;";
+            MySqlConnection Connection = null;
 
             try
             {
@@ -39,37 +39,78 @@ namespace Logic
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("Connect ERROR HResult: " + e.HResult);
                 throw;
             }
 
             return Connection;
         }
 
-        //"INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) VALUES(\"21350\",(SELECT Person.PersonID From Person WHERE Vorname = \"Pablo\" AND Nachname = \"Escobar\"),0,\"Innere Medizin\",'F',\"Überdosis + Stichwunden\");"
 
         //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
-        //Connection has to be closed after this function returns
-        private MySqlDataReader ExecuteQuery(String query)
+        private MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
         {
             MySqlDataReader Reader = null;
-            
+
             try
             {
-                Connection = Connect();
                 Connection.Open();
 
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
                 Reader = cmd.ExecuteReader();
             }
-            catch (Exception e)
+
+            catch (MySqlException e)
             {
-                Console.WriteLine(e);
+                if (e.HResult == -2147467259)
+                    Console.WriteLine("Duplicate");
+                else if (e.HResult == -2146232015)
+                    Console.WriteLine("Not Existing");
+                else
+                {
+                    Console.WriteLine("ExecuteInsert: " + e.HResult);
+                    Console.WriteLine(e.Message);
+                }
                 //throw;
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine("EXECUTE_QUERY ERROR HResult: " + e.Message);
+                throw;
+            }
+
             return Reader;
         }
+
+        private bool ExecuteInsert(String query, MySqlConnection Connection)
+        {
+            try
+            {
+                Connection.Open();
+
+                MySqlCommand cmd = new MySqlCommand(query, Connection);
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+            }
+            catch (MySqlException e)
+            {
+                if (e.HResult == -2147467259)
+                    Console.WriteLine("ExecuteInsert: Duplicate");
+                else
+                    Console.WriteLine("ExecuteInsert: " + e.HResult);
+
+                Console.WriteLine("ExecuteInsert: " + e.Message);
+                //throw
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ExecuteUpdate: " + e.Message);
+                throw;
+            }
+
+            return false;
+        }
+
 
         public Patient GetPatient(string versicherungsNummer)
         {
@@ -78,7 +119,8 @@ namespace Logic
 
             try
             {
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=\"" + versicherungsNummer + "\";");
+                MySqlConnection Connection = Connect();
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=\"" + versicherungsNummer + "\";", Connection);
 
                 if (Reader.Read())
                 {
@@ -95,11 +137,22 @@ namespace Logic
 
                 Connection.Close();
             }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("GetPatient: " + e.HResult);
+                Console.WriteLine("GetPatient: " + e.Message);
+                //throw
+            }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Connection.Close();
-                throw;
+                if(e.HResult == -2146232015)
+                    Console.WriteLine("Patient existiert nicht");
+                else
+                {
+                    Console.WriteLine("GetPatient ERROR: " + e.Message + " Error Code:" + e.HResult);
+                    throw;
+                }
+
             }
             
             return p;
@@ -108,20 +161,22 @@ namespace Logic
 
         public bool PatientAendern(Patient patient)
         {
-            try
-            {
-                ExecuteQuery("UPDATE Patient SET StationsBezeichnung = \"" + patient.Station + "\", " + "Beschwerde = \"" +
-                             patient.Beschwerde + "\" WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";");
+            if(patient != null)
+                try
+                {
+                    MySqlConnection Connection = Connect();
+                    bool response = ExecuteInsert("UPDATE Patient SET StationsBezeichnung = \"" + patient.Station + "\", " + "Beschwerde = \"" +
+                                 patient.Beschwerde + "\" WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";", Connection);
+                    Connection.Close();
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("PatientAendern ERROR HResult: " + e.HResult);
+                    throw;
+                }
 
-                Connection.Close();
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Connection.Close();
-                throw;
-            }
+            return false;
         }
 
 
@@ -129,14 +184,14 @@ namespace Logic
         {
             try
             {
-                ExecuteQuery("DELETE FROM Patient WHERE VersicherungsNr = \"" + versicherungsNummer + "\";");
+                MySqlConnection Connection = Connect();
+                bool response = ExecuteInsert("DELETE FROM Patient WHERE VersicherungsNr = \"" + versicherungsNummer + "\";", Connection);
                 Connection.Close();
-                return true;
+                return response;
             }
             catch (Exception e)
             {
-                Connection.Close();
-                Console.WriteLine(e);
+                Console.WriteLine("PatientLoeschen ERROR HResult: " + e.HResult);
                 throw;
             }
         }
@@ -160,22 +215,21 @@ namespace Logic
                     "\'F\'" + ",\"" +                                 // Bett
                     patient.Beschwerde + "\");";                      // Beschwerde
 
-                if(PersonAnlegen(patient.Vorname, patient.Nachname))
-                { 
+                try
+                {
+                    PersonAnlegen(patient.Vorname, patient.Nachname);
 
-                    if (ExecuteQuery(query) != null)
-                    {
-                        Connection.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        Connection.Close();
-                        return false;
-                    }
+                    MySqlConnection Connection = Connect();
+                    bool response = ExecuteInsert(query, Connection);
+                    Connection.Close();
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("PatientAnlegen ERROR HResult: " + e.HResult);
+                    throw;
                 }
             }
-
             return false;
         }
 
@@ -195,7 +249,8 @@ namespace Logic
             Verlegungsliste verlegungsliste = null;
             MySqlDataReader Reader = null;
             MySqlCommand Cmd = null;
-            
+            MySqlConnection Connection = null;
+
             try
             {
                 Connection = Connect();
@@ -220,19 +275,21 @@ namespace Logic
                     verlegungsliste.Transferliste.Add(item);
                 }
 
-                Cmd.Dispose();
-                Connection.Close();
+                //Cmd.Dispose();
+                //Connection.Close();
 
                 return verlegungsliste;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                Cmd.Dispose();
-                Connection.Close();
+                Console.WriteLine("GetVerlegungsliste ERROR HResult: " + e.HResult);
+                //Console.WriteLine(e);
+                //Cmd.Dispose();
+                //Connection.Close();
                 throw;
             }
         }
+
 
         public bool PersonAnlegen(string vorname, string nachname)
         {
@@ -241,24 +298,16 @@ namespace Logic
 
             try
             {
-                if (ExecuteQuery(query) != null)
-                {
-                    Connection.Close();
-                    return true;
-                }
-                else
-                {
-                    Connection.Close();
-                    return false;
-                }
+                MySqlConnection Connection = Connect();
+                bool response = ExecuteInsert(query, Connection);
+                Connection.Close();
+                return response;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                //throw;
+                Console.WriteLine("PersonAnlegen ERROR HResult: " + e.HResult);
+                throw;
             }
-
-            return false;
         }
 
 
@@ -268,7 +317,8 @@ namespace Logic
 
             try
             {
-                Reader = ExecuteQuery("SELECT u.Benutzername, u.Rechte, u.Passwort, p.Vorname, p.Nachname FROM Users u, Person p WHERE u.PersonID = p.PersonID AND u.Benutzername = \"" + userName + "\";");
+                MySqlConnection Connection = Connect();
+                Reader = ExecuteQuery("SELECT u.Benutzername, u.Rechte, u.Passwort, p.Vorname, p.Nachname FROM Users u, Person p WHERE u.PersonID = p.PersonID AND u.Benutzername = \"" + userName + "\";", Connection);
 
                 if (Reader.Read())
                 {
@@ -277,18 +327,21 @@ namespace Logic
                     string vorname = Reader.GetString(3);
                     string nachname = Reader.GetString(4);
 
+                    Connection.Close();
                     return new User(vorname, nachname, rechte, userName, passwort);
                 }
 
+                Connection.Close();
                 return null;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("GetUser ERROR HResult: " + e.HResult);
                 throw;
             }
             
         }
+
 
         public bool UserAnlegen(User user)
         {
@@ -300,30 +353,31 @@ namespace Logic
 
             try
             {
-                if (ExecuteQuery(query) != null)
-                    return true;
+                MySqlConnection Connection = Connect();
+                bool response = ExecuteInsert(query, Connection);
+                Connection.Close();
+                return response;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("UserAnlegen ERROR HResult: " + e.HResult);
                 throw;
             }
-
-            return false;
         }
+
 
         public bool UserLoeschen(string userName)
         {
             try
             {
-                ExecuteQuery("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";");
+                MySqlConnection Connection = Connect();
+                bool response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";", Connection);
                 Connection.Close();
-                return true;
+                return response;
             }
             catch (Exception e)
             {
-                Connection.Close();
-                Console.WriteLine(e);
+                Console.WriteLine("UserLoeschen ERROR HResult: " + e.HResult);
                 throw;
             }
         }
@@ -331,8 +385,48 @@ namespace Logic
 
         public Bettenbelegung GetBettenbelegung()
         {
+            Bettenbelegung belegung = null;
+            try
+            {
+                belegung = new Bettenbelegung();
 
-            return null;
+                MySqlConnection Connection = Connect();
+
+                MySqlDataReader reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Gynäkologie\";", Connection);
+                if(reader.Read())
+                    belegung.Gynaekologie = reader.GetInt32(0);
+
+                reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Innere Medizin\";", Connection);
+                if (reader.Read())
+                    belegung.Innere = reader.GetInt32(0);
+
+                reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Onkologie\";", Connection);
+                if (reader.Read())
+                    belegung.Onkologie = reader.GetInt32(0);
+
+                reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Orthopädie\";", Connection);
+                if (reader.Read())
+                    belegung.Orthopaedie = reader.GetInt32(0);
+
+                reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Pädiatrie\";", Connection);
+                if (reader.Read())
+                    belegung.Paediatrie = reader.GetInt32(0);
+
+                reader.Close();
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("GetBettenbelegung ERROR HResult: " + e.HResult);
+                throw;
+            }
+            
+            return belegung;
         }
 
         public string GetPassendesBett()
@@ -342,26 +436,53 @@ namespace Logic
         }
 
 
-        // ################################################## DEV FUNCTIONS ##################################################
+        // ################################################## DEV FUNCTIONS ################################################## //
 
 
         public void TestDB()
         {
-
-            //Patient p1 = GetPatient("12345");
-            //PrintPatient(p1);
-
-            PatientAnlegen(new Patient("Pablo", "Escobar", "21350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
-            PatientAnlegen(new Patient("Max", "Mustermann", "42", DateTime.Parse("1937-10-04"), "Orthopädie", "Überdosis + Stichwunden", DateTime.Now, "M"));
-            //User u = GetUser("Janessus");
-            //Console.WriteLine(u.Rechte);
-
-            //User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
-            //UserAnlegen(u);
-            //UserLoeschen("Janessus");
+            try
+            {
 
 
-            //Connection.Close();
+                //User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
+                //UserAnlegen(u);
+
+
+                PersonAnlegen("Albert", "Einstein");
+                PatientAnlegen(new Patient("Pa2lo", "Esscoabar", "213350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
+                PatientAnlegen(new Patient("Maadx", "Musatedrmann", "442", DateTime.Parse("1937-10-04"), "Orthopädie", "Überdosis + Stichwunden", DateTime.Now, "M"));
+                GetPatient("12345");
+                PatientAendern(GetPatient("12345"));
+                Console.WriteLine("Betten Belegt: " + GetBettenbelegung().Gesamt());
+
+                //Patient p1 = GetPatient("12345");
+                //PrintPatient(p1);
+
+                
+                //Connection.Close();
+                //Connection.Dispose();
+
+                //User u = GetUser("Janessus");
+                //Console.WriteLine(u.Rechte);
+
+
+                //UserLoeschen("Janessus");
+
+                ///Connection.Close();
+            }
+            catch (Exception e)
+            {
+                if (e.HResult == -2147467259)
+                    Console.WriteLine("TESTDB: DUPLICATE");
+                else if (e.HResult == -2146232015)
+                    Console.WriteLine("TESTDB: Not Existing");
+                else
+                    Console.WriteLine("TESTDB_EXCEPTION: " + e.HResult);
+                    
+                Console.WriteLine(e.Message);
+                //throw;
+            }
         }
 
 
