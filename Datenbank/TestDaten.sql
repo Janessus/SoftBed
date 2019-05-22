@@ -1,6 +1,6 @@
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum) 
-	VALUES("Janes", "Heuberger", "Schutterwald", "m", DATE("1994-09-01")),
+	VALUES("Janes", "Heuberger", "Schutterwald", "m", DATE("1994-09-01")),	//ab hier Mitarbeiter
 	VALUES("Klaus", "Arendt", "Ohlsbach", "m", DATE("1991-05-03")),
 	VALUES("Joachim", "Adam", "Offenburg", "m", DATE("1992-04-03")),
 	VALUES("Thomas", "Adolf", "Freiburg", "m", DATE("1997-02-04")),
@@ -27,12 +27,12 @@ INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum)
 	VALUES("Oleg", "Hofer", "Offenburg", "m", DATE("1973-06-01")),
 	VALUES("Layla", "Hefler", "Waldkirch", "w", DATE("1942-01-27")),
 	VALUES("Rico", "Hemmer", "Lahr", "m", DATE("1935-01-08")),
-	VALUES("Leonard", "Haubeil", "Emmendingen", "m", DATE("1948-02-09")),
+	VALUES("Leonard", "Haubeil", "Emmendingen", "m", DATE("1948-02-09")),	//ab hier Patienten 
 	VALUES("Larissa", "Inntal", "Offenburg", "w", DATE("1949-03-11")),
 	VALUES("Ludwig", "Jäger", "Waldkirch", "m", DATE("1951-04-21")),
 	VALUES("Patricia", "Jobel", "Schutterwald", "w", DATE("1968-09-22")),
 	VALUES("Janette", "Josephus", "Freiburg", "w", DATE("1997-02-28")),
-	VALUES("Mirco", "Kammerdiener", "Offenburg", "m", DATE("1999-09-26")),
+	VALUES("Mirco", "Kammerdiener", "Offenburg", "m", DATE("1999-09-26")),	//bis hier Mitarbeiter	
 	VALUES("Günther", "Kross", "Lahr", "m", DATE("1951-02-08")),
 	VALUES("Efraim", "Klein", "Lahr", "m", DATE("1966-01-29")),
 	VALUES("Can", "Kind", "Achern", "m", DATE("1977-03-31")),
