@@ -40,7 +40,19 @@ namespace Logic
         {
             string bett;
 
-            if (patient.Station.Equals("Gynäkologie") &&
+
+
+            if (patient.Station.Equals("Pädiatrie") &&
+                (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
+            {
+                //suche bett in Gynäkologie
+                bett = DatabaseManagement.GetInstance().GetPassendesBett("Pädiatrie", patient);
+                if (bett.Equals(null))
+                {
+                    bett = SucheBettAufAndererStation(patient);
+                }
+            }
+            else if (patient.Station.Equals("Gynäkologie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
             {
                 //suche bett in Gynäkologie
