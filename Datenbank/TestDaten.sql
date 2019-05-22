@@ -43,7 +43,7 @@ INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum)
 	VALUES("Theodora", "Leber", "Emmendingen", "w", DATE("1962-12-17")),
 	VALUES("Inge", "Lachmann", "Freiburg", "w", DATE("1983-04-18")),
 	VALUES("Julia", "Merettig", "Offenburg", "w", DATE("1997-05-23")),
-	VALUES("Hannes", "Huber", "Lahr", "m", DATE("1998-01-05")),
+	VALUES("Hannes", "Huber", "Ohlsbach", "m", DATE("1998-01-02")),
 	VALUES("Dora", "Mann", "Freiburg", "w", DATE("1996-08-06")),
 	VALUES("Sarah", "Mogler", "Freiburg", "w", DATE("1974-08-09")),
 	VALUES("Anna", "Michels", "Freiburg", "w", DATE("1954-07-13")),
@@ -98,3 +98,49 @@ INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum)
 	VALUES("Anna", "Wagner", "Offenburg", "w", DATE("1955-03-14")),
 	VALUES("Alena", "Yang", "Offenburg", "w", DATE("1958-03-14")),
 	VALUES("Maria", "Zimmermann", "Emmendingen", "w", DATE("1967-03-14"));
+INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort) 
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Admin", "password"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Hannes" AND Nachname = "Huber"), "Buma11", "Admin", "123456"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Julia" AND Nachname = "Merettig"), "Schokokeks", "Admin", "schokolade"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Friedrich" AND Nachname = "Schmidt"), "Zett94", "Admin", "keineahnung"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Klaus" AND Nachname = "Arendt"), "Klausimausi", "Standard", "bestespw"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Joachim" AND Nachname = "Adam"), "TheLegend27", "Standard", "TheLegend27"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Thomas" AND Nachname = "Adolf"), "ForeverAfd", "Standard", "kriegisbest"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Liliane" AND Nachname = "Bauer"), "LandlebenFTW", "Standard", "Traktor6"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Lukas" AND Nachname = "Brau"), "BierLover66", "Standard", "Urquell"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Samuel" AND Nachname = "Burg"), "Lancelot", "Standard", "Arthurftw"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Matthias" AND Nachname = "Bruggmoser"), "TheBeast", "Standard", "sicherespw"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Arianna" AND Nachname = "Adari"), "PingPongShowMaster", "Standard", "Atariftw"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Arion" AND Nachname = "Cern"), "TeilchenMaster", "Standard", "LHCisthebest"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Brigitte" AND Nachname = "Dahlmann"), "Kittielover", "Standard", "Nicenstein"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Bruno" AND Nachname = "Danner"), "BlackDragon", "Standard", "DannerSwag"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Doreen" AND Nachname = "Dannecker"), "RefrendaryLive", "Standard", "badGrades"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Dan" AND Nachname = "Erdmann"), "Maulwurf72", "Standard", "DerWühler"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Elena" AND Nachname = "Emmenecker"), "Leichtathletikfreak", "Standard", "Hürdenmaster"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Irina" AND Nachname = "Freud"), "Psychomaster", "Standard", "PenisNeid"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Siena" AND Nachname = "Fuhrmann"), "PastaFetisch", "Standard", "PizzaLove"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Julia" AND Nachname = "Fink"), "Vogelbaby", "Standard", "Eierleger"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Joseph" AND Nachname = "Fischer"), "JavaHater", "Standard", "CMasterrace"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Alina" AND Nachname = "Gans"), "Federkleid", "Standard", "Schnabel21"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Gerhard" AND Nachname = "Göppert"), "GrowThatShit", "Standard", "420"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Philipp" AND Nachname = "Groß"), "ThormundGiantsbane", "Standard", "MilkIsLove"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Katharina" AND Nachname = "Gabriel"), "Archangel", "Standard", "DadIsGod"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Selina" AND Nachname = "Dabanli"), "Hottie47", "Standard", "LoveMe"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Oleg" AND Nachname = "Hofer"), "Viking1", "Standard", "OdinIsBest"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Layla" AND Nachname = "Hefler"), "BunnyFreak", "Standard", "Playboymaster"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Rico" AND Nachname = "Hemmer"), "NailsBow", "Standard", "IPunch"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Leonard" AND Nachname = "Haubeil"), "AxesUnite", "Standard", "ChopTheTrees"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Larissa" AND Nachname = "Inntal"), "BadGirl26", "Standard", "IWreckYou"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Ludwig" AND Nachname = "Jäger"), "GunsAreLife", "Standard", "Intervention"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Patricia" AND Nachname = "Jobel"), "FreiburgBest", "Standard", "StuttgartWorst"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Janette" AND Nachname = "Josephus"), "Jesus2873", "Standard", "BowBeforeHim"),
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Mirco" AND Nachname = "Kammerdiener"), "TheSlave", "Standard", "Shackles"),
+	
+	
+	
+	
+	
+	
+	
+	
+	
