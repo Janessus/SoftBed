@@ -15,12 +15,12 @@ namespace SoftBed
         [STAThread]
         static void Main()
         {
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HauptFenster());
             //Application.Run(new Adminbereich());
-            */
+            
 
             DatabaseManagement db = DatabaseManagement.GetInstance();
             db.TestDB();
