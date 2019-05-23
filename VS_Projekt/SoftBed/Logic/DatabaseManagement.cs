@@ -24,7 +24,8 @@ namespace Logic
 
 
         //connects to the server specified in the connectionString
-        private MySqlConnection Connect()
+        //TODO set to private
+        public MySqlConnection Connect()
         {
             /* Local
             string connectionString = "SERVER=192.168.178.88;" +
@@ -55,7 +56,8 @@ namespace Logic
 
 
         //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
-        private MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
+        //TODO set to private
+        public MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
         {
             MySqlDataReader Reader = null;
 
@@ -84,8 +86,8 @@ namespace Logic
             return Reader;
         }
 
-
-        private bool ExecuteInsert(String query, MySqlConnection Connection)
+        //TODO set to private
+        public bool ExecuteInsert(String query, MySqlConnection Connection)
         {
             try
             {
@@ -253,6 +255,7 @@ namespace Logic
             try
             {
                 Connection = Connect();
+                Connection.Open();
                 Cmd = Connection.CreateCommand();
                 Cmd.CommandText = "SELECT p.PersonID, Vorname, Nachname, Von, Nach, Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
                 Reader = Cmd.ExecuteReader();
@@ -452,6 +455,7 @@ namespace Logic
             catch (Exception e)
             {
                 UncaughtExeption("GET BETTENBELEGUNG", e);
+                return null;
             }
             
             return belegung;
