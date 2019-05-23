@@ -26,10 +26,19 @@ namespace Logic
         //connects to the server specified in the connectionString
         private MySqlConnection Connect()
         {
+            /* Local
             string connectionString = "SERVER=192.168.178.88;" +
+             
                                       "DATABASE=SoftBedDB;" +
                                       "UID=softbed;" +
                                       "PASSWORD=softbed;";
+            */
+            // Public
+            string connectionString = "SERVER=sql7.freemysqlhosting.net;" +
+                                      "DATABASE=sql7292983;" +
+                                      "UID=sql7292983;" +
+                                      "PASSWORD=qjsStyWinF;";
+
             MySqlConnection Connection = null;
 
             try
