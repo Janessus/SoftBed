@@ -94,6 +94,7 @@ namespace Logic
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
                 cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
+                return true;
             }
             catch (MySqlException e)
             {
@@ -216,7 +217,7 @@ namespace Logic
 
                 try
                 {
-                    PersonAnlegen(patient.Vorname, patient.Nachname);
+                    PersonAnlegen(patient);
 
                     MySqlConnection Connection = Connect();
                     bool response = ExecuteInsert(query, Connection);
@@ -289,11 +290,33 @@ namespace Logic
             }
         }
 
+        public bool PersonAnlegen(Patient p)
+        {
+            string query = "INSERT INTO Person(Vorname, Nachname, Geschlecht, Geburtsdatum) " +
+                           "VALUES(\"" + p.Vorname + "\", \"" + p.Nachname + "\", \"" + p.Geschlecht + "\", Date(\"" + p.Gebdat.Year + "-" + p.Gebdat.Month + "-" + p.Gebdat.Day + "\"));";
 
-        public bool PersonAnlegen(string vorname, string nachname)
+            Console.WriteLine("DEBUG " + query);
+            Console.WriteLine("Patient.Gebdat = " + p.Gebdat.ToString());
+
+            try
+            {
+                MySqlConnection Connection = Connect();
+                bool response = ExecuteInsert(query, Connection);
+                Connection.Close();
+                return response;
+            }
+            catch (Exception e)
+            {
+                UncaughtExeption("PERSON ANLEGEN", e);
+                return false;
+            }
+            return true;
+        }
+
+        public bool PersonAnlegen(string Vorname, string Nachname)
         {
             string query = "INSERT INTO Person(Vorname, Nachname) " +
-                           "VALUES(\"" + vorname + "\", \"" + nachname + "\");";
+                           "VALUES(\"" + Vorname + "\", \"" + Nachname + "\");";
 
             try
             {
@@ -450,15 +473,15 @@ namespace Logic
             {
 
 
-                //User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
-                //UserAnlegen(u);
-
+                User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
+                UserAnlegen(u);
+                /*
 
                 PersonAnlegen("Albert", "Einstein");
                 PatientAnlegen(new Patient("Pa2lo", "Esscoabar", "213350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
-                PatientAnlegen(new Patient("Maadx", "Musatedrmann", "442", DateTime.Parse("1937-10-04"), "Orthopädie", "Überdosis + Stichwunden", DateTime.Now, "M"));
+                PatientAnlegen(new Patient("Maadx", "Musatedrmann", "442", DateTime.Parse("1937-10-04"), "Orthopädie", "Ihm tut irgendwas weh", DateTime.Now, "M"));
                 GetPatient("12345");
-                PatientLoeschen("442");
+                //PatientLoeschen("442");
 
                 User u = GetUser("Janessus");
                 Console.WriteLine(u.Rechte);
@@ -481,6 +504,7 @@ namespace Logic
                 //UserLoeschen("Janessus");
 
                 //Connection.Close();
+                */
             }
             catch (Exception e)
             {
@@ -510,6 +534,7 @@ namespace Logic
 
             if (p != null)
             {
+                Console.WriteLine("VersicherungsNr = " + p.Versicherungsnr);
                 Console.WriteLine("Vorname = " + p.Vorname);
                 Console.WriteLine("Nachname = " + p.Nachname);
                 Console.WriteLine("GebDat = " + p.Gebdat.ToString());

@@ -172,12 +172,16 @@ namespace SoftBed
         private Patient getPatientFromGUI()
         {
             Patient guiPatient = new Patient();
-            guiPatient.Versicherungsnr = versNrSucheTxt.Text;
+            guiPatient.Versicherungsnr = versNrAufnTxt.Text;
             currentPatientenVNr = guiPatient.Versicherungsnr;
+            guiPatient.Vorname = vornameTxt.Text;
+            guiPatient.Nachname = nameTxt.Text;
+            guiPatient.Station = abteilungDropDown.SelectedItem.ToString();
             guiPatient.Gebdat = dTPGebDat.Value;
-            guiPatient.Beschwerde = null;
+            guiPatient.Beschwerde = "";
             DateTime localDate = DateTime.Now;
             guiPatient.Aufnahmedatum = localDate;
+
             if (wRadBtn.Checked)
             {
                 guiPatient.Geschlecht = "w";
@@ -186,9 +190,8 @@ namespace SoftBed
             {
                 guiPatient.Geschlecht = "m";
             }
-
-            guiPatient.Station = abteilungDropDown.SelectedText;
             
+            DatabaseManagement.PrintPatient(guiPatient);
             return guiPatient;
         }
 

@@ -67,8 +67,8 @@ create table IF NOT EXISTS Patient
     
     PRIMARY KEY(VersicherungsNr),
     FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade,
-    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr) on delete cascade,
-    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
+    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr) on delete set null,
+    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete set null
 );
 
 
