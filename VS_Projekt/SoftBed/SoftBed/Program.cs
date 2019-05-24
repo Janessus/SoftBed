@@ -18,7 +18,8 @@ namespace SoftBed
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HauptFenster());
+            //Application.Run(new HauptFenster());
+            Application.Run(new LoginScreen());
             //Application.Run(new Adminbereich());
             /*
             
