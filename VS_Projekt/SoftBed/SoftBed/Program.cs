@@ -22,7 +22,7 @@ namespace SoftBed
             //Application.Run(new HauptFenster());
             Application.Run(new LoginScreen());
             //Application.Run(new Adminbereich());
-            Application.Run(new LoginScreen());
+            //Application.Run(new LoginScreen());
 
             /*
             DatabaseManagement db = DatabaseManagement.GetInstance();
