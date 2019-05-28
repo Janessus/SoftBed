@@ -212,7 +212,7 @@ namespace Logic
                     "Vorname = \"" + patient.Vorname +                // *
                     "\" AND " +                                       // *
                     "Nachname = \"" + patient.Nachname + "\")," +     // *
-                    "0" + ",\"" +                                     // ZimmerNr
+                    "NULL" + ",\"" +                                  // ZimmerNr
                     patient.Station + "\"," +                         // Station
                     "\'F\'" + ",\"" +                                 // Bett
                     patient.Beschwerde + "\");";                      // Beschwerde
@@ -313,7 +313,6 @@ namespace Logic
                 UncaughtExeption("PERSON ANLEGEN", e);
                 return false;
             }
-            return true;
         }
 
         public bool PersonAnlegen(string Vorname, string Nachname)
@@ -512,15 +511,7 @@ namespace Logic
             }
             catch (Exception e)
             {
-                if (e.HResult == -2147467259)
-                    Console.WriteLine("TESTDB: DUPLICATE");
-                else if (e.HResult == -2146232015)
-                    Console.WriteLine("TESTDB: Not Existing");
-                else
-                    Console.WriteLine("TESTDB_EXCEPTION: " + e.HResult);
-                    
-                Console.WriteLine(e.Message);
-                //UncaughtExeption("", e);
+                UncaughtExeption("TESTDB_EXCEPTION", e);
             }
         }
 

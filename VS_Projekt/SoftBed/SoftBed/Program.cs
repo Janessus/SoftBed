@@ -16,13 +16,15 @@ namespace SoftBed
         static void Main()
         {
             
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new HauptFenster());
             Application.Run(new LoginScreen());
             //Application.Run(new Adminbereich());
+            Application.Run(new LoginScreen());
+
             /*
-            
             DatabaseManagement db = DatabaseManagement.GetInstance();
             db.TestDB();
             */

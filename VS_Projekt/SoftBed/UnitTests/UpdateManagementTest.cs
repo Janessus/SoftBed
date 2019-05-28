@@ -9,7 +9,7 @@ using Wrapperklassen;
 
 namespace UnitTests
 {
-    /*
+
     class UpdateManagementTest
     {
 

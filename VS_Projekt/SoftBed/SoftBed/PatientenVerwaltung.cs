@@ -34,7 +34,7 @@ namespace SoftBed
          */
         private void entlassenBtn_Click(object sender, EventArgs e)
         {
-            if(UserManagement.CurrentUser.Rechte == "Standard")
+            if(UserManagement.CurrentUser.Rechte == "Standard") //nullptr
             {
                 // If the yes button was pressed ...
                 if (showDeleteConfirmingDialog() == DialogResult.Yes)
