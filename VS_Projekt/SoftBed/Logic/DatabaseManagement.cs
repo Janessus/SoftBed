@@ -7,8 +7,6 @@ namespace Logic
     public class DatabaseManagement : LogicController
     {
         private static DatabaseManagement _instance = null;
-        private MySqlDataReader reader;
-        private MySqlConnection connection;
 
         public static DatabaseManagement Instance { get => _instance; set => _instance = value; }
 
@@ -56,15 +54,6 @@ namespace Logic
             return Connection;
         }
 
-        // prints the results of eg. select * from Test
-        // usage -> PrintResults(ExecuteQuery("select * from Test"));
-        public void PrintResults(bool flag)
-        {
-            while (flag && reader.Read())
-            {
-                string row = "";
-                for (int i = 0; i < reader.FieldCount; i++)
-                    row += reader.GetValue(i).ToString() + ", ";
 
         //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
         //TODO set to private
