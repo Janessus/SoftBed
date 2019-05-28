@@ -28,6 +28,8 @@ namespace SoftBed
                 }
             });
             refreshTask.Start();
+            label1.Text = UserManagement.CurrentUser.Benutzername;
+            label2.Text = UserManagement.CurrentUser.Rechte;
         }
 
         private void patVerwBtn_Click(object sender, EventArgs e)

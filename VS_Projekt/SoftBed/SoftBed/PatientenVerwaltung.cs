@@ -42,7 +42,8 @@ namespace SoftBed
                     // If the yes button was pressed ...
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
-                        pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
+                        bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
+                        meldungLbl.Text = result.ToString();
                     }
                 }
             }

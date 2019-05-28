@@ -61,6 +61,7 @@ namespace Logic
             {
                 if(requestedUser.Passwort == password)
                 {
+                    CurrentUser = new User(requestedUser.Vorname, requestedUser.Nachname, requestedUser.Rechte, requestedUser.Benutzername, requestedUser.Passwort);
                     return true;
                 }
             }

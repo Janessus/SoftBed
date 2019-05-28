@@ -41,12 +41,14 @@ namespace SoftBed
             if (sUser.Equals(sAdmin)  && sPW.Equals(sAdminPW))
             {
                 openAdminbereich();
+                UserManagement.GetInstance().UserLogin(sUser, sPW);
             }
             else
             {
                 if (userManage.UserLogin(sUser, sPW) == true)
                 {
                     openHauptFenster();
+                    UserManagement.GetInstance().UserLogin(sUser, sPW);
                 }
                 else
                 {
