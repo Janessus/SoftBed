@@ -1,4 +1,4 @@
-﻿using Logic;
+using Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -97,7 +97,7 @@ namespace SoftBed
             Verlegungsliste currentVerlegungsliste = UpdateManagement.GetInstance().GetCurrentVerlegungsliste();
             for(int i = 0; i < currentVerlegungsliste.Transferliste.Count; i++)
             {
-                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste[i]);     //klappt vielleicht
+                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste.ToArray()[i]);     //klappt vielleicht
             }
         }
 

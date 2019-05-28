@@ -119,7 +119,8 @@ namespace SoftBed
                 }
                 else
                 {
-                    if (TestChildPäd() == -1)
+                    int childPäd = TestChildPäd();
+                    if (childPäd == -1)
                     {
                         // if user cancelled transaction
                         if (MessageChildInPädiatrie() == DialogResult.Cancel)
@@ -132,6 +133,12 @@ namespace SoftBed
                         {
                             abteilungDropDown.SelectedIndex = 4;
                         }
+                    }
+                    else if(childPäd == 0)
+                    {
+                        MessageAdultInPäd();
+                        editMeldungLdl.Text = "Die Aufnahme wurde abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                        return;
                     }
 
                     if (showTransferConfirmingDialog() == DialogResult.Yes)
@@ -165,12 +172,16 @@ namespace SoftBed
         private Patient getPatientFromGUI()
         {
             Patient guiPatient = new Patient();
-            guiPatient.Versicherungsnr = versNrSucheTxt.Text;
+            guiPatient.Versicherungsnr = versNrAufnTxt.Text;
             currentPatientenVNr = guiPatient.Versicherungsnr;
+            guiPatient.Vorname = vornameTxt.Text;
+            guiPatient.Nachname = nameTxt.Text;
+            guiPatient.Station = abteilungDropDown.SelectedItem.ToString();
             guiPatient.Gebdat = dTPGebDat.Value;
-            guiPatient.Beschwerde = null;
+            guiPatient.Beschwerde = "";
             DateTime localDate = DateTime.Now;
             guiPatient.Aufnahmedatum = localDate;
+
             if (wRadBtn.Checked)
             {
                 guiPatient.Geschlecht = "w";
@@ -179,9 +190,8 @@ namespace SoftBed
             {
                 guiPatient.Geschlecht = "m";
             }
-
-            guiPatient.Station = abteilungDropDown.SelectedText;
             
+            DatabaseManagement.PrintPatient(guiPatient);
             return guiPatient;
         }
 
@@ -319,7 +329,11 @@ namespace SoftBed
             }
             else
             {
-                return 0;
+                if (abteilungDropDown.SelectedIndex == 4)
+                {
+                    return 0;
+                }
+                return 1;
             }
         }
 
@@ -332,6 +346,17 @@ namespace SoftBed
                 "Sie wollten ein Kind in eine andere Station als die Pädiatrie oder ITS legen!\r\n Das Kind wird automatisch in die Pädiatrie verlegt werden! \r\n Bei Abbrechen wird der Vorgang abgebrochen!!";
             string caption = "Warnung";
             MessageBoxButtons button = MessageBoxButtons.OKCancel;
+
+            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+            return result;
+        }
+
+        private DialogResult MessageAdultInPäd()
+        {
+            string messageBoxText =
+                "Sie wollten einen Erwachsenen in die Pädiatrie legen!\r\n Dies ist nicht möglich! \r\n Der Patient wird NICHT aufgenommen!!";
+            string caption = "Warnung";
+            MessageBoxButtons button = MessageBoxButtons.OK;
 
             DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             return result;

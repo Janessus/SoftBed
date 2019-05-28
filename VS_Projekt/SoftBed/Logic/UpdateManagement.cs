@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Wrapperklassen;
 
@@ -52,15 +53,16 @@ namespace Logic
         public List<string> GetBettenbelegungSortiert(Bettenbelegung bettenbelegung)
         {
             List<SortBelegung> sortBelegung = new List<SortBelegung>();
-            sortBelegung[0] = new SortBelegung("Pädiatrie", bettenbelegung.Paediatrie);
-            sortBelegung[1] = new SortBelegung("Gynäkologie", bettenbelegung.Gynaekologie);
-            sortBelegung[2] = new SortBelegung("Innere Medizin", bettenbelegung.Innere);
-            sortBelegung[3] = new SortBelegung("Onkologie", bettenbelegung.Onkologie);
-            sortBelegung[4] = new SortBelegung("Orthopädie", bettenbelegung.Orthopaedie);
+            sortBelegung.Add(new SortBelegung("Pädiatrie", bettenbelegung.Paediatrie));
+            sortBelegung.Add(new SortBelegung("Gynäkologie", bettenbelegung.Gynaekologie));
+            sortBelegung.Add(new SortBelegung("Innere Medizin", bettenbelegung.Innere));
+            sortBelegung.Add(new SortBelegung("Onkologie", bettenbelegung.Onkologie));
+            sortBelegung.Add(new SortBelegung("Orthopädie", bettenbelegung.Orthopaedie));
             sortBelegung.Sort();
+
             List<string> sorted = new List<string>();
             for(int i=0;i<5;i++)
-                sorted[i] = sortBelegung[i].station;
+                sorted.Insert(i, sortBelegung.ElementAt(i).station);
 
             return sorted;
         }

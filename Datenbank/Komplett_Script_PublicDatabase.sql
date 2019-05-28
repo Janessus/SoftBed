@@ -1,6 +1,16 @@
+/*
 drop database IF EXISTS SoftBedDB;
 create database IF NOT EXISTS SoftBedDB;
 use SoftBedDB;
+*/
+drop table if exists Users;
+drop table if exists TransferListe;
+drop table if exists Patient;
+drop table if exists Zimmer;
+drop table if exists Station;
+drop table if exists Mitarbeiter;
+drop table if exists Person;
+
 
 create table IF NOT EXISTS Person
 (
@@ -14,6 +24,7 @@ create table IF NOT EXISTS Person
     PRIMARY KEY (Vorname, Nachname)
 );
 
+
 create table IF NOT EXISTS Mitarbeiter
 (
 	MitarbeiterID int AUTO_INCREMENT,
@@ -24,12 +35,14 @@ create table IF NOT EXISTS Mitarbeiter
     FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade
 );
 
+
 create table IF NOT EXISTS Station
 (
     Bezeichnung varchar(40),
 	
     PRIMARY KEY(Bezeichnung)
 );
+
 
 create table IF NOT EXISTS Zimmer
 (
@@ -39,6 +52,7 @@ create table IF NOT EXISTS Zimmer
     PRIMARY KEY(ZimmerNr, StationsBezeichnung),
     FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
 );
+
 
 create table IF NOT EXISTS Patient
 (
@@ -53,9 +67,10 @@ create table IF NOT EXISTS Patient
     
     PRIMARY KEY(VersicherungsNr),
     FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade,
-    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr) on delete cascade,
-    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete cascade
+    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr) on delete set null,
+    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete set null
 );
+
 
 create table IF NOT EXISTS TransferListe
 (
@@ -66,6 +81,7 @@ create table IF NOT EXISTS TransferListe
 
     PRIMARY KEY (PersonID, Stempel)
 );
+
 
 create table IF NOT EXISTS Users
 (

@@ -57,17 +57,17 @@ namespace Logic
             {
                 //suche bett in Gynäkologie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Gynäkologie", patient);
-                if(bett.Equals(null))
+                if(bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
                 }
             }
-            else if(patient.Station.Equals("innere Medizin") &&
+            else if(patient.Station.Equals("Innere Medizin") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50))
             {
-                //suche bett in innere Medizin
-                bett = DatabaseManagement.GetInstance().GetPassendesBett("innere Medizin", patient);
-                if (bett.Equals(null))
+                //suche bett in Innere Medizin
+                bett = DatabaseManagement.GetInstance().GetPassendesBett("Innere Medizin", patient);
+                if (bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
                 }
@@ -77,7 +77,7 @@ namespace Logic
             {
                 //suche bett in Onkologie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Onkologie", patient);
-                if (bett.Equals(null))
+                if (bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
                 }
@@ -87,7 +87,7 @@ namespace Logic
             {
                 //suche bett in Orthopädie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Orthopädie", patient);
-                if (bett.Equals(null))
+                if (bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
                 }
@@ -97,7 +97,7 @@ namespace Logic
             {
                 // suche bett in Intensivstation
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Intensiv", patient);
-                if (bett.Equals(null))
+                if (bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
                 }
@@ -173,9 +173,9 @@ namespace Logic
         {
             if (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50)
             {
-                string bett = DatabaseManagement.GetInstance().GetPassendesBett("innere Medizin", patient);
+                string bett = DatabaseManagement.GetInstance().GetPassendesBett("Innere Medizin", patient);
                 //suche bett in innere, wenn patient nicht in eigene station kann
-                if (bett.Equals(null))
+                if (bett == null)
                 {
                     // patient auf station mit größter freier kapaziät unterbringen
                     return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[0], patient);
