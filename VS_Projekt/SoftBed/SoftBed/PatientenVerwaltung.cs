@@ -144,19 +144,22 @@ namespace SoftBed
 
                     if (showTransferConfirmingDialog() == DialogResult.Yes)
                     {
-                        Patient pPatient = getPatientFromGUI();
-                        String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+                        if (showTransferConfirmingDialog() == DialogResult.Yes)
+                        {
+                            Patient pPatient = getPatientFromGUI();
+                            String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
 
-                        // can write into DB
-                        bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
-                        if (doneRight)
-                        {
-                            editMeldungLdl.Text = "Patient wird in Raum" + roomSuggestion + "gelegt";
-                            pZimmerManagement.PatientenTransfer(currentPatientenVNr);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Patient konnte nicht angelegt werden!");
+                            // can write into DB
+                            bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
+                            if (doneRight)
+                            {
+                                editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
+                                pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Patient konnte nicht angelegt werden!");
+                            }
                         }
                     }
                 }
