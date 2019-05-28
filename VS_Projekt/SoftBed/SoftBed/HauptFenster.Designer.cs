@@ -143,7 +143,7 @@
             this.patVerwBtn.Location = new System.Drawing.Point(147, 36);
             this.patVerwBtn.Name = "patVerwBtn";
             this.patVerwBtn.Size = new System.Drawing.Size(263, 167);
-            this.patVerwBtn.TabIndex = 5;
+            this.patVerwBtn.TabIndex = 1;
             this.patVerwBtn.Text = "Patientenverwaltung...";
             this.patVerwBtn.UseVisualStyleBackColor = true;
             this.patVerwBtn.Click += new System.EventHandler(this.patVerwBtn_Click);
@@ -153,7 +153,7 @@
             this.abmeldenBtn.Location = new System.Drawing.Point(1014, 12);
             this.abmeldenBtn.Name = "abmeldenBtn";
             this.abmeldenBtn.Size = new System.Drawing.Size(136, 32);
-            this.abmeldenBtn.TabIndex = 6;
+            this.abmeldenBtn.TabIndex = 2;
             this.abmeldenBtn.Text = "Abmelden";
             this.abmeldenBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.abmeldenBtn.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@
             this.verlAugefBtn.Location = new System.Drawing.Point(1014, 504);
             this.verlAugefBtn.Name = "verlAugefBtn";
             this.verlAugefBtn.Size = new System.Drawing.Size(136, 32);
-            this.verlAugefBtn.TabIndex = 7;
+            this.verlAugefBtn.TabIndex = 3;
             this.verlAugefBtn.Text = "Verlegung ausgeführt";
             this.verlAugefBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.verlAugefBtn.UseVisualStyleBackColor = true;

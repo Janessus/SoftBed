@@ -88,7 +88,7 @@ namespace SoftBed
             this.loginBtn.Location = new System.Drawing.Point(328, 364);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(138, 36);
-            this.loginBtn.TabIndex = 4;
+            this.loginBtn.TabIndex = 3;
             this.loginBtn.Text = "anmelden";
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
@@ -104,6 +104,7 @@ namespace SoftBed
             // 
             // LoginScreen
             // 
+            this.AcceptButton = this.loginBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
