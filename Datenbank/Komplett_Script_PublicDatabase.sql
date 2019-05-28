@@ -56,7 +56,7 @@ create table IF NOT EXISTS Zimmer
 
 create table IF NOT EXISTS Patient
 (
-	VersicherungsNr int unique,
+	VersicherungsNr varchar(40) unique,
 	PersonID int,
     ZimmerNr int,
     StationsBezeichnung varchar(40),
@@ -97,7 +97,7 @@ create table IF NOT EXISTS Users
 /* ------------------------------------------------------------- Test Daten -------------------------------------------------------------------- */
 /* ------------------------------------------------ Reihenfolge bei den Inserts einhalten! ----------------------------------------------------- */
 
-
+/*
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Onkologie");
@@ -387,5 +387,5 @@ INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Be
 INSERT INTO Mitarbeiter(PersonID, Rechte) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Admin of Admins");
 INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "IM-2-F", "IM-2-T");
 INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort) VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Admin", "password");
-
+*/
 commit;
