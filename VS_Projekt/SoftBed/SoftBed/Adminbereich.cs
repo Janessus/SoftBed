@@ -52,6 +52,10 @@ namespace SoftBed
                 {
                     MessageBox.Show("Ungültige Eingabe!");
                 }
+                else
+                {
+                    editMeldungLdl.Text = "User wurde erfolgreich angelegt!";
+                }
             }
             else
             {
