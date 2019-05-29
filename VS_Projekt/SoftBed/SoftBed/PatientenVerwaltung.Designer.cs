@@ -75,7 +75,7 @@ namespace SoftBed
             this.nameTxt.Location = new System.Drawing.Point(156, 168);
             this.nameTxt.Name = "nameTxt";
             this.nameTxt.Size = new System.Drawing.Size(282, 26);
-            this.nameTxt.TabIndex = 7;
+            this.nameTxt.TabIndex = 1;
             // 
             // vornameTxt
             // 
@@ -83,7 +83,7 @@ namespace SoftBed
             this.vornameTxt.Location = new System.Drawing.Point(156, 202);
             this.vornameTxt.Name = "vornameTxt";
             this.vornameTxt.Size = new System.Drawing.Size(282, 26);
-            this.vornameTxt.TabIndex = 9;
+            this.vornameTxt.TabIndex = 2;
             // 
             // vornameLbl
             // 
@@ -124,7 +124,7 @@ namespace SoftBed
             this.wRadBtn.Location = new System.Drawing.Point(156, 275);
             this.wRadBtn.Name = "wRadBtn";
             this.wRadBtn.Size = new System.Drawing.Size(82, 24);
-            this.wRadBtn.TabIndex = 13;
+            this.wRadBtn.TabIndex = 4;
             this.wRadBtn.TabStop = true;
             this.wRadBtn.Text = "weiblich";
             this.wRadBtn.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@ namespace SoftBed
             this.mRadBtn.Location = new System.Drawing.Point(251, 275);
             this.mRadBtn.Name = "mRadBtn";
             this.mRadBtn.Size = new System.Drawing.Size(90, 24);
-            this.mRadBtn.TabIndex = 14;
+            this.mRadBtn.TabIndex = 5;
             this.mRadBtn.TabStop = true;
             this.mRadBtn.Text = "männlich";
             this.mRadBtn.UseVisualStyleBackColor = true;
@@ -149,7 +149,7 @@ namespace SoftBed
             this.versNrAufnTxt.Location = new System.Drawing.Point(156, 308);
             this.versNrAufnTxt.Name = "versNrAufnTxt";
             this.versNrAufnTxt.Size = new System.Drawing.Size(282, 26);
-            this.versNrAufnTxt.TabIndex = 16;
+            this.versNrAufnTxt.TabIndex = 6;
             // 
             // versNrAufnLbl
             // 
@@ -186,7 +186,7 @@ namespace SoftBed
             this.abteilungDropDown.Location = new System.Drawing.Point(156, 344);
             this.abteilungDropDown.Name = "abteilungDropDown";
             this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
-            this.abteilungDropDown.TabIndex = 18;
+            this.abteilungDropDown.TabIndex = 7;
             this.abteilungDropDown.TabStop = false;
             this.abteilungDropDown.SelectedIndexChanged += new System.EventHandler(this.abteilungDropDown_SelectedIndexChanged);
             // 
@@ -196,7 +196,7 @@ namespace SoftBed
             this.sucheBtn.Location = new System.Drawing.Point(954, 167);
             this.sucheBtn.Name = "sucheBtn";
             this.sucheBtn.Size = new System.Drawing.Size(196, 29);
-            this.sucheBtn.TabIndex = 20;
+            this.sucheBtn.TabIndex = 10;
             this.sucheBtn.Text = "Patient suchen";
             this.sucheBtn.UseVisualStyleBackColor = true;
             this.sucheBtn.Click += new System.EventHandler(this.sucheBtn_Click);
@@ -217,7 +217,7 @@ namespace SoftBed
             this.zurueckBtn.Location = new System.Drawing.Point(14, 15);
             this.zurueckBtn.Name = "zurueckBtn";
             this.zurueckBtn.Size = new System.Drawing.Size(84, 29);
-            this.zurueckBtn.TabIndex = 22;
+            this.zurueckBtn.TabIndex = 12;
             this.zurueckBtn.Text = "< Zurück";
             this.zurueckBtn.UseVisualStyleBackColor = true;
             this.zurueckBtn.Click += new System.EventHandler(this.zurueckBtn_Click);
@@ -258,7 +258,7 @@ namespace SoftBed
             this.versNrSucheTxt.Location = new System.Drawing.Point(688, 168);
             this.versNrSucheTxt.Name = "versNrSucheTxt";
             this.versNrSucheTxt.Size = new System.Drawing.Size(238, 26);
-            this.versNrSucheTxt.TabIndex = 27;
+            this.versNrSucheTxt.TabIndex = 9;
             // 
             // versNrSucheLbl
             // 
@@ -316,7 +316,7 @@ namespace SoftBed
             this.entlassenBtn.Location = new System.Drawing.Point(788, 339);
             this.entlassenBtn.Name = "entlassenBtn";
             this.entlassenBtn.Size = new System.Drawing.Size(141, 29);
-            this.entlassenBtn.TabIndex = 29;
+            this.entlassenBtn.TabIndex = 11;
             this.entlassenBtn.Text = "Patient entlassen";
             this.entlassenBtn.UseVisualStyleBackColor = true;
             this.entlassenBtn.Click += new System.EventHandler(this.entlassenBtn_Click);
@@ -327,7 +327,7 @@ namespace SoftBed
             this.zimmerSuchenBtn.Location = new System.Drawing.Point(156, 397);
             this.zimmerSuchenBtn.Name = "zimmerSuchenBtn";
             this.zimmerSuchenBtn.Size = new System.Drawing.Size(282, 29);
-            this.zimmerSuchenBtn.TabIndex = 31;
+            this.zimmerSuchenBtn.TabIndex = 8;
             this.zimmerSuchenBtn.Text = "Zimmer suchen";
             this.zimmerSuchenBtn.UseVisualStyleBackColor = true;
             this.zimmerSuchenBtn.Click += new System.EventHandler(this.zimmerSuchenBtn_Click);
@@ -337,7 +337,7 @@ namespace SoftBed
             this.dTPGebDat.Location = new System.Drawing.Point(156, 238);
             this.dTPGebDat.Name = "dTPGebDat";
             this.dTPGebDat.Size = new System.Drawing.Size(282, 26);
-            this.dTPGebDat.TabIndex = 32;
+            this.dTPGebDat.TabIndex = 3;
             // 
             // PatientenVerwaltung
             // 

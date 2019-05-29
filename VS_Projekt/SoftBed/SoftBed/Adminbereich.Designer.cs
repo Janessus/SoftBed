@@ -48,7 +48,7 @@
             this.zurueckBtn.Location = new System.Drawing.Point(12, 12);
             this.zurueckBtn.Name = "zurueckBtn";
             this.zurueckBtn.Size = new System.Drawing.Size(84, 29);
-            this.zurueckBtn.TabIndex = 23;
+            this.zurueckBtn.TabIndex = 7;
             this.zurueckBtn.Text = "< Zurück";
             this.zurueckBtn.UseVisualStyleBackColor = true;
             this.zurueckBtn.Click += new System.EventHandler(this.zurueckBtn_Click);
@@ -90,7 +90,7 @@
             this.praktRadBtn.Location = new System.Drawing.Point(487, 230);
             this.praktRadBtn.Name = "praktRadBtn";
             this.praktRadBtn.Size = new System.Drawing.Size(92, 22);
-            this.praktRadBtn.TabIndex = 28;
+            this.praktRadBtn.TabIndex = 5;
             this.praktRadBtn.TabStop = true;
             this.praktRadBtn.Text = "Praktikant";
             this.praktRadBtn.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             this.standardRadBtn.Location = new System.Drawing.Point(389, 228);
             this.standardRadBtn.Name = "standardRadBtn";
             this.standardRadBtn.Size = new System.Drawing.Size(85, 22);
-            this.standardRadBtn.TabIndex = 27;
+            this.standardRadBtn.TabIndex = 4;
             this.standardRadBtn.TabStop = true;
             this.standardRadBtn.Text = "Standard";
             this.standardRadBtn.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@
             this.pwTxt.Location = new System.Drawing.Point(389, 159);
             this.pwTxt.Name = "pwTxt";
             this.pwTxt.Size = new System.Drawing.Size(190, 26);
-            this.pwTxt.TabIndex = 29;
+            this.pwTxt.TabIndex = 2;
             // 
             // userTxt
             // 
@@ -122,7 +122,7 @@
             this.userTxt.Location = new System.Drawing.Point(389, 126);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(190, 26);
-            this.userTxt.TabIndex = 30;
+            this.userTxt.TabIndex = 1;
             // 
             // usrAnlBtn
             // 
@@ -130,7 +130,7 @@
             this.usrAnlBtn.Location = new System.Drawing.Point(389, 270);
             this.usrAnlBtn.Name = "usrAnlBtn";
             this.usrAnlBtn.Size = new System.Drawing.Size(190, 29);
-            this.usrAnlBtn.TabIndex = 31;
+            this.usrAnlBtn.TabIndex = 6;
             this.usrAnlBtn.Text = "Benutzer anlegen";
             this.usrAnlBtn.UseVisualStyleBackColor = true;
             this.usrAnlBtn.Click += new System.EventHandler(this.usrAnlBtn_Click);
@@ -141,7 +141,7 @@
             this.btnLoeschen.Location = new System.Drawing.Point(600, 126);
             this.btnLoeschen.Name = "btnLoeschen";
             this.btnLoeschen.Size = new System.Drawing.Size(142, 29);
-            this.btnLoeschen.TabIndex = 32;
+            this.btnLoeschen.TabIndex = 3;
             this.btnLoeschen.Text = "Benutzer löschen";
             this.btnLoeschen.UseVisualStyleBackColor = true;
             this.btnLoeschen.Click += new System.EventHandler(this.btnLoeschen_Click);

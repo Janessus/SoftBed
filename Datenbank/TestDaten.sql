@@ -5,7 +5,7 @@ INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Onkologie");
 INSERT INTO Station(Bezeichnung) VALUES("Orthopädie");
 INSERT INTO Station(Bezeichnung) VALUES("Pädiatrie");
-INSERT INTO Station(Bezeichnung) VALUES("Intensiv");
+INSERT INTO Station(Bezeichnung) VALUES("Intensivstation");
 
 INSERT INTO Zimmer(StationsBezeichnung, ZimmerNr)
 	VALUES("Gynäkologie", 1),
@@ -305,10 +305,10 @@ INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Be
    ("M226863567", (Select Person.PersonID From Person WHERE Vorname = "Dora" AND Nachname = "Mann"), 3, "Innere Medizin", "T", "Magengeschwür"),
    ("K968961191", (Select Person.PersonID From Person WHERE Vorname = "Sarah" AND Nachname = "Mogler"), 3, "Gynäkologie", "F", ""),
    ("S845598351", (Select Person.PersonID From Person WHERE Vorname = "Anna" AND Nachname = "Michels"), 3, "Gynäkologie", "T", ""),
-   ("G306555498", (Select Person.PersonID From Person WHERE Vorname = "Friedrich" AND Nachname = "Schmidt"), 1, "Intensiv", "", ""),
-   ("Q979203556", (Select Person.PersonID From Person WHERE Vorname = "Lisa" AND Nachname = "Neubert"), 2, "Intensiv", "", ""),
-   ("D631286511", (Select Person.PersonID From Person WHERE Vorname = "Lena" AND Nachname = "Nugen"), 3, "Intensiv", "", ""),
-   ("W309097299", (Select Person.PersonID From Person WHERE Vorname = "John" AND Nachname = "Opel"), 4, "Intensiv", "", ""),
+   ("G306555498", (Select Person.PersonID From Person WHERE Vorname = "Friedrich" AND Nachname = "Schmidt"), 1, "Intensivstation", "", ""),
+   ("Q979203556", (Select Person.PersonID From Person WHERE Vorname = "Lisa" AND Nachname = "Neubert"), 2, "Intensivstation", "", ""),
+   ("D631286511", (Select Person.PersonID From Person WHERE Vorname = "Lena" AND Nachname = "Nugen"), 3, "Intensivstation", "", ""),
+   ("W309097299", (Select Person.PersonID From Person WHERE Vorname = "John" AND Nachname = "Opel"), 4, "Intensivstation", "", ""),
    ("U759333035", (Select Person.PersonID From Person WHERE Vorname = "Sophie" AND Nachname = "Oragne"), 3, "Onkologie", "F", ""),
    ("F569918774", (Select Person.PersonID From Person WHERE Vorname = "Richard" AND Nachname = "Ober"), 3, "Orthopädie", "F", ""),
    ("J553022772", (Select Person.PersonID From Person WHERE Vorname = "Dania" AND Nachname = "Polsko"), 3, "Onkologie", "T", ""),
@@ -329,8 +329,8 @@ INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Be
    ("C177216257", (Select Person.PersonID From Person WHERE Vorname = "Josef" AND Nachname = "Sillmann"), 5, "Innere Medizin", "F", "Magen-Darm-Grippe"),
    ("A260460251", (Select Person.PersonID From Person WHERE Vorname = "Maria" AND Nachname = "Schmidt"), 5, "Onkologie", "T", ""),
    ("W471603762", (Select Person.PersonID From Person WHERE Vorname = "Tom" AND Nachname = "Schmidt"), 5, "Innere Medizin", "T", "Magen-Darm-Grippe"),
-   ("J876511436", (Select Person.PersonID From Person WHERE Vorname = "Lina" AND Nachname = "Schmitt"), 5, "Intensiv", "F", ""),
-   ("P244016621", (Select Person.PersonID From Person WHERE Vorname = "Luke" AND Nachname = "Schmieder"), 6, "Intensiv", "F", ""),
+   ("J876511436", (Select Person.PersonID From Person WHERE Vorname = "Lina" AND Nachname = "Schmitt"), 5, "Intensivstation", "F", ""),
+   ("P244016621", (Select Person.PersonID From Person WHERE Vorname = "Luke" AND Nachname = "Schmieder"), 6, "Intensivstation", "F", ""),
    ("U102567296", (Select Person.PersonID From Person WHERE Vorname = "Simon" AND Nachname = "Schmuggler"), 6, "Innere Medizin", "F", "Schilddrüsenunterfunktion"),
    ("K243546379", (Select Person.PersonID From Person WHERE Vorname = "Olivia" AND Nachname = "Stiefel"), 6, "Gynäkologie", "F", ""),
    ("S803953398", (Select Person.PersonID From Person WHERE Vorname = "Tabea" AND Nachname = "Singer"), 6, "Gynäkologie", "T", ""),
