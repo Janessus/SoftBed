@@ -92,11 +92,11 @@ namespace Logic
                     bett = SucheBettAufAndererStation(patient);
                 }
             }
-            else if(patient.Station.Equals("Intensiv") &&
+            else if(patient.Station.Equals("Intensivstation") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Intensiv < 10))
             {
                 // suche bett in Intensivstation
-                bett = DatabaseManagement.GetInstance().GetPassendesBett("Intensiv", patient);
+                bett = DatabaseManagement.GetInstance().GetPassendesBett("Intensivstation", patient);
                 if (bett == null)
                 {
                     bett = SucheBettAufAndererStation(patient);
