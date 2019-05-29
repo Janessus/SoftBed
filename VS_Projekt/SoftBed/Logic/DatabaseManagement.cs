@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Wrapperklassen;
 using MySql.Data.MySqlClient;
 
