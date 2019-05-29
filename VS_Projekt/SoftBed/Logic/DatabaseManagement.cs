@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Wrapperklassen;
 using MySql.Data.MySqlClient;
 
@@ -474,11 +474,10 @@ namespace Logic
         {
             try
             {
-
+                /*
 
                 User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
                 UserAnlegen(u);
-                /*
 
                 PersonAnlegen("Albert", "Einstein");
                 PatientAnlegen(new Patient("Pa2lo", "Esscoabar", "213350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
