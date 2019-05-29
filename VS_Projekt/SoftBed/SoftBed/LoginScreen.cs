@@ -78,7 +78,7 @@ namespace SoftBed
         {
             this.SetVisibleCore(false);
             Form mainWindow = new HauptFenster();
-            mainWindow.Show();
+            mainWindow.ShowDialog();
             this.SetVisibleCore(true);
         }
     }
