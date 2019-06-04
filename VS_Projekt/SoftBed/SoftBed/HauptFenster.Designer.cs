@@ -68,7 +68,7 @@
             this.gesKHProgBar.Enabled = false;
             this.gesKHProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.gesKHProgBar.Location = new System.Drawing.Point(16, 746);
-            this.gesKHProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gesKHProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.gesKHProgBar.Maximum = 260;
             this.gesKHProgBar.Name = "gesKHProgBar";
             this.gesKHProgBar.Size = new System.Drawing.Size(1517, 39);
@@ -85,7 +85,7 @@
             this.nachClmn});
             this.transferListeDGV.Enabled = false;
             this.transferListeDGV.Location = new System.Drawing.Point(943, 108);
-            this.transferListeDGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.transferListeDGV.Margin = new System.Windows.Forms.Padding(4);
             this.transferListeDGV.MultiSelect = false;
             this.transferListeDGV.Name = "transferListeDGV";
             this.transferListeDGV.RowHeadersVisible = false;
@@ -131,7 +131,7 @@
             // 
             this.itsProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.itsProgBar.Location = new System.Drawing.Point(16, 682);
-            this.itsProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itsProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.itsProgBar.Maximum = 10;
             this.itsProgBar.Name = "itsProgBar";
             this.itsProgBar.Size = new System.Drawing.Size(499, 32);
@@ -154,7 +154,7 @@
             // 
             this.patVerwBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.patVerwBtn.Location = new System.Drawing.Point(196, 44);
-            this.patVerwBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.patVerwBtn.Margin = new System.Windows.Forms.Padding(4);
             this.patVerwBtn.Name = "patVerwBtn";
             this.patVerwBtn.Size = new System.Drawing.Size(351, 206);
             this.patVerwBtn.TabIndex = 1;
@@ -165,7 +165,7 @@
             // abmeldenBtn
             // 
             this.abmeldenBtn.Location = new System.Drawing.Point(1352, 15);
-            this.abmeldenBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.abmeldenBtn.Margin = new System.Windows.Forms.Padding(4);
             this.abmeldenBtn.Name = "abmeldenBtn";
             this.abmeldenBtn.Size = new System.Drawing.Size(181, 39);
             this.abmeldenBtn.TabIndex = 2;
@@ -177,7 +177,7 @@
             // verlAugefBtn
             // 
             this.verlAugefBtn.Location = new System.Drawing.Point(1352, 620);
-            this.verlAugefBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.verlAugefBtn.Margin = new System.Windows.Forms.Padding(4);
             this.verlAugefBtn.Name = "verlAugefBtn";
             this.verlAugefBtn.Size = new System.Drawing.Size(181, 39);
             this.verlAugefBtn.TabIndex = 3;
@@ -250,7 +250,7 @@
             // 
             this.gynProgBar.ForeColor = System.Drawing.Color.Black;
             this.gynProgBar.Location = new System.Drawing.Point(200, 369);
-            this.gynProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gynProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.gynProgBar.Maximum = 50;
             this.gynProgBar.Name = "gynProgBar";
             this.gynProgBar.Size = new System.Drawing.Size(499, 32);
@@ -260,7 +260,7 @@
             // 
             this.iMProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.iMProgBar.Location = new System.Drawing.Point(200, 416);
-            this.iMProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iMProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.iMProgBar.Maximum = 50;
             this.iMProgBar.Name = "iMProgBar";
             this.iMProgBar.Size = new System.Drawing.Size(499, 32);
@@ -270,7 +270,7 @@
             // 
             this.onkProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.onkProgBar.Location = new System.Drawing.Point(200, 468);
-            this.onkProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.onkProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.onkProgBar.Maximum = 50;
             this.onkProgBar.Name = "onkProgBar";
             this.onkProgBar.Size = new System.Drawing.Size(499, 32);
@@ -280,7 +280,7 @@
             // 
             this.orthProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.orthProgBar.Location = new System.Drawing.Point(200, 517);
-            this.orthProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.orthProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.orthProgBar.Maximum = 50;
             this.orthProgBar.Name = "orthProgBar";
             this.orthProgBar.Size = new System.Drawing.Size(499, 32);
@@ -290,7 +290,7 @@
             // 
             this.paedProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
             this.paedProgBar.Location = new System.Drawing.Point(200, 567);
-            this.paedProgBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.paedProgBar.Margin = new System.Windows.Forms.Padding(4);
             this.paedProgBar.Maximum = 50;
             this.paedProgBar.Name = "paedProgBar";
             this.paedProgBar.Size = new System.Drawing.Size(499, 32);
@@ -423,9 +423,10 @@
             this.Controls.Add(this.progBarGesLbl);
             this.Controls.Add(this.transferListeDGV);
             this.Controls.Add(this.gesKHProgBar);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
+            this.MouseEnter += new System.EventHandler(this.HauptFenster_MouseEnter);
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

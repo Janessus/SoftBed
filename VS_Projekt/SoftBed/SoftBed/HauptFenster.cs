@@ -125,5 +125,10 @@ namespace SoftBed
         {
 
         }
+
+        private void HauptFenster_MouseEnter(object sender, EventArgs e)
+        {
+            RefreshHauptfenster();
+        }
     }
 }
