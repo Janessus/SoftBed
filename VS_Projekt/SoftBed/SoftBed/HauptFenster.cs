@@ -20,16 +20,11 @@ namespace SoftBed
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(100, 100);
-            Task refreshTask = new Task(()=>{
-                while (true)
-                {
-                    RefreshHauptfenster();
-                    Thread.Sleep(30000);
-                }
-            });
-            refreshTask.Start();
-            label1.Text = UserManagement.CurrentUser.Benutzername;
-            label2.Text = UserManagement.CurrentUser.Rechte;
+
+            RefreshHauptfenster();  //refresh everything
+
+            label1.Text = "User: " + UserManagement.CurrentUser.Benutzername;
+            label2.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
         }
 
         private void patVerwBtn_Click(object sender, EventArgs e)
@@ -78,20 +73,27 @@ namespace SoftBed
 
         private void RefreshHauptfenster()
         {
-            //RefreshBettenbelegung();
-            //RefreshVerlegungsliste();
+            RefreshBettenbelegung();
+            RefreshVerlegungsliste();
         }
 
         private void RefreshBettenbelegung()
         {
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             gynProgBar.Value = currentBelegung.Gynaekologie;
+            labelGyn.Text = currentBelegung.Gynaekologie.ToString();
             iMProgBar.Value = currentBelegung.Innere;
+            labelIm.Text = currentBelegung.Innere.ToString();
             onkProgBar.Value = currentBelegung.Onkologie;
+            labelOnk.Text = currentBelegung.Onkologie.ToString();
             orthProgBar.Value = currentBelegung.Orthopaedie;
+            labelOrth.Text = currentBelegung.Orthopaedie.ToString();
             paedProgBar.Value = currentBelegung.Paediatrie;
+            labelPaed.Text = currentBelegung.Paediatrie.ToString();
             itsProgBar.Value = currentBelegung.Intensiv;
+            labelIts.Text = currentBelegung.Intensiv.ToString();
             gesKHProgBar.Value = currentBelegung.Gesamt();
+            labelGes.Text = currentBelegung.Gesamt().ToString();
         }
 
         private void RefreshVerlegungsliste()
@@ -119,6 +121,9 @@ namespace SoftBed
             return result;
         }
 
+        private void itsProgBar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
