@@ -460,10 +460,101 @@ namespace Logic
             return belegung;
         }
 
+        //Potential Bugs!
         public string GetPassendesBett(string Station, Patient patient)
         {
-            
-            return null;
+            string Bett = "NULL";
+            string stationKurz = "NULL";
+            int zimmerNr = 0;
+            bool found = false;
+
+            switch (Station)
+            {
+                case "Gynäkologie":
+                    stationKurz = "G";
+                    break;
+
+                case "Innere Medizin":
+                    stationKurz = "IM";
+                    break;
+
+                case "Onkologie":
+                    stationKurz = "On";
+                    break;
+
+                case "Orthopädie":
+                    stationKurz = "Or";
+                    break;
+
+                case "Pädiatrie":
+                    stationKurz = "P";
+                    break;
+
+                case "Intensivstation":
+                    stationKurz = "Is";
+                    break;
+                default:
+                    throw new Exception("Station ungültig");
+            }
+
+            //Select all rooms with exactly 1 person in it
+            string query = "select z.ZimmerNr, z.StationsBezeichnung, p.VersicherungsNr, pe.Geschlecht, p.Bett, pe.Geburtsdatum " +
+                           "from Zimmer z, Patient p, Person pe " +
+                           "where z.ZimmerNr = p.ZimmerNr " +
+                           "and z.StationsBezeichnung = p.StationsBezeichnung " +
+                           "and z.StationsBezeichnung = \"" + Station + "\" " +
+                           "and pe.PersonID = p.PersonID " +
+                           "group by z.ZimmerNr having count(z.ZimmerNr) < 2; ";
+
+            MySqlConnection connection = Connect();
+            connection.Open();
+            MySqlDataReader reader = ExecuteQuery(query, connection);
+
+            while (reader.Read())
+            {
+                if (reader.GetChar(3).ToString().ToLower().Equals(patient.Geschlecht.ToLower()))
+                {
+                    zimmerNr = reader.GetInt32(0);
+
+                    if (reader.GetString(4).Equals("T"))
+                        Bett = "F";
+                    else
+                        Bett = "T";
+
+                    found = true;
+                    break;
+                }
+            }
+
+            connection.Close();
+
+            //Select all empty rooms from the given station
+            if (!found)
+            {
+                query = "select z.ZimmerNr, z.StationsBezeichnung " +
+                        "from Zimmer z " +
+                        "where not exists " +
+                        "(" +
+                            "select * " +
+                            "from Patient, Zimmer " +
+                            "where Patient.ZimmerNr = z.ZimmerNr " +
+                            "and Patient.StationsBezeichnung = z.StationsBezeichnung" +
+                        ") " +
+                        "and z.StationsBezeichnung = \"" + Station + "\";";
+
+                connection = Connect();
+                connection.Open();
+                reader = ExecuteQuery(query, connection);
+                if (reader.Read())
+                {
+                    zimmerNr = reader.GetInt32(0);
+                    Bett = "F";
+                }
+            }
+
+            string result = stationKurz + "-" + zimmerNr + "-" + Bett;
+            connection.Close();
+            return result;
         }
 
 
@@ -474,6 +565,12 @@ namespace Logic
         {
             try
             {
+                Patient p = new Patient();
+                p.Geschlecht = "w";
+
+                Console.WriteLine(GetPassendesBett("Gynäkologie", p));
+
+
                 /*
 
                 User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
@@ -513,6 +610,7 @@ namespace Logic
                 UncaughtExeption("TESTDB_EXCEPTION", e);
             }
         }
+
 
         public void UncaughtExeption(string callerName, Exception e)
         {

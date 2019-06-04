@@ -351,7 +351,6 @@ INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Be
    ("B797576463", (Select Person.PersonID From Person WHERE Vorname = "Lars" AND Nachname = "Weber"), 7, "Orthopädie", "T", ""),
    ("O369230490", (Select Person.PersonID From Person WHERE Vorname = "Johann" AND Nachname = "Wöhner"), 7, "Onkologie", "F", ""),
    ("E186797945", (Select Person.PersonID From Person WHERE Vorname = "Stephan" AND Nachname = "Wegner"), 7, "Onkologie", "T", ""),
-   ("Z182822033", (Select Person.PersonID From Person WHERE Vorname = "Stefanie" AND Nachname = "Waber"), 1, "Innere Medizin", "F", "Endokarditis"),
    ("X553703850", (Select Person.PersonID From Person WHERE Vorname = "Sabrina" AND Nachname = "Wagner"), 7, "Gynäkologie", "F", ""),
    ("I926583802", (Select Person.PersonID From Person WHERE Vorname = "Anna" AND Nachname = "Wagner"), 7, "Gynäkologie", "T", ""),
    ("R273710525", (Select Person.PersonID From Person WHERE Vorname = "Alena" AND Nachname = "Yang"), 8, "Gynäkologie", "F", ""),
