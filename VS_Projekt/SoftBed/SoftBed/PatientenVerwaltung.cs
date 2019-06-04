@@ -43,7 +43,20 @@ namespace SoftBed
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
                         bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
-                        meldungLbl.Text = result.ToString();
+                        if (result)
+                        {
+                            editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
+                            patAnzDGV.Rows.Clear();
+                        }
+                        else
+                        {
+                            string messageBoxText = "Fehler aufgetreten! Patient konnte nicht gelöscht werden!!";
+                            string caption = "Fehlschlag";
+                            editMeldungLdl.Text = "Patient konnte nicht aus dem System gelöscht werden!";
+                            MessageBoxButtons button = MessageBoxButtons.OK;
+
+                            MessageBox.Show(messageBoxText, caption, button);
+                        }
                     }
                 }
             }
@@ -70,7 +83,11 @@ namespace SoftBed
                 if (selectedPatient != null)
                 {
                     patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, "Bettnr Implement. fehlt noch");
-
+                    patientensucheMeldungTxt.Text = "";
+                }
+                else
+                {
+                    patientensucheMeldungTxt.Text = "Die angegebene Versicherungsnummer existiert nicht";
                 }
             }
         }
@@ -106,63 +123,85 @@ namespace SoftBed
          */
         private void zimmerSuchenBtn_Click(object sender, EventArgs e)
         {
-            // tests, if all fields are filled
-            if (!AllFieldsFilled())
+            if (UserManagement.CurrentUser.Rechte == "Standard") //nullptr
             {
-                editMeldungLdl.Text = "Füllen Sie zuerst alle Felder aus, bevor sie einen Patient aufnehmen!";
-            }
-            else
-            {
-                editMeldungLdl.Text = "";
-                if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked)                            // is Gyn and male??
+                // tests, if all fields are filled
+                if (!AllFieldsFilled())
                 {
-                    messageManInGyn();
+                    editMeldungLdl.Text = "Füllen Sie zuerst alle Felder aus, bevor sie einen Patient aufnehmen!";
                 }
                 else
                 {
-                    int childPäd = TestChildPäd();
-                    if (childPäd == -1)
+                    editMeldungLdl.Text = "";
+                    if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
                     {
-                        // if user cancelled transaction
-                        if (MessageChildInPädiatrie() == DialogResult.Cancel)
-                        {
-                            // ends transaction sets message
-                            editMeldungLdl.Text = "Sie haben die Aufnahme abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
-                            return;
-                        }
-                        else
-                        {
-                            abteilungDropDown.SelectedIndex = 4;
-                        }
+                        messageManInGyn();
                     }
-                    else if(childPäd == 0)
+                    else
                     {
-                        MessageAdultInPäd();
-                        editMeldungLdl.Text = "Die Aufnahme wurde abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
-                        return;
-                    }
-
-                    if (showTransferConfirmingDialog() == DialogResult.Yes)
-                    {
-                        if (showTransferConfirmingDialog() == DialogResult.Yes)
+                        int childPäd = TestChildPäd();
+                        if (childPäd == -1)
                         {
-                            Patient pPatient = getPatientFromGUI();
-                            String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
-
-                            // can write into DB
-                            bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
-                            if (doneRight)
+                            // if user cancelled transaction
+                            if (MessageChildInPädiatrie() == DialogResult.Cancel)
                             {
-                                editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
-                                pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                                // ends transaction sets message
+                                editMeldungLdl.Text =
+                                    "Sie haben die Aufnahme abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                                return;
                             }
                             else
                             {
-                                MessageBox.Show("Patient konnte nicht angelegt werden!");
+                                abteilungDropDown.SelectedIndex = 4;
+                            }
+                        }
+                        else if (childPäd == 0)
+                        {
+                            MessageAdultInPäd();
+                            editMeldungLdl.Text =
+                                "Die Aufnahme wurde abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                            return;
+                        }
+
+                        if (showTransferConfirmingDialog() == DialogResult.Yes)
+                        {
+                            if (showTransferConfirmingDialog() == DialogResult.Yes)
+                            {
+                                Patient pPatient = getPatientFromGUI();
+                                String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+
+                                // if no room was found, warning will be fired, otherwise tries to put patient in database
+                                if (roomSuggestion != null)
+                                {
+                                    // can write into DB
+                                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
+                                    if (doneRight)
+                                    {
+                                        editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
+                                        pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient konnte nicht angelegt werden!");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show(
+                                        "Achtung!! Es konnte kein passendes Bett gefunden werden! Der Patient wird nicht aufgenommen!!");
+                                }
                             }
                         }
                     }
                 }
+            }
+            else
+            {
+                string messageBoxText = "Benötigte Rechte nicht vorhanden!";
+                string caption = "Fehlschlag";
+                MessageBoxButtons button = MessageBoxButtons.OK;
+
+                DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             }
         }
 
@@ -365,5 +404,6 @@ namespace SoftBed
             DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             return result;
         }
+        
     }
 }

@@ -16,6 +16,7 @@ namespace Logic
 
         }
 
+
         /**
          * legt ein Singleton-Objekt an und gibt eins zurueck, wenn bereits vorhanden
          * @return ein Singleton-Objekt
@@ -30,18 +31,23 @@ namespace Logic
             return _instance;
         }
 
+
         public bool PatientenTransfer(string versNr)
         {
             //TODO
             return false;
         }
 
+
+        /**
+         * searches bed for patient
+         * @return string of bed
+         */
         public string suchePassendesBett(Patient patient)
         {
             string bett;
 
-
-
+            
             if (patient.Station.Equals("Pädiatrie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
             {
@@ -115,6 +121,7 @@ namespace Logic
         {
             //TODO
         }
+
 
         /**
          * errechnet die Gesamtauslastung des Krankenhauses

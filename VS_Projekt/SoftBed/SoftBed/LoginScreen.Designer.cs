@@ -65,7 +65,7 @@ namespace SoftBed
             this.pwTxt.PasswordChar = '*';
             this.pwTxt.Size = new System.Drawing.Size(138, 26);
             this.pwTxt.TabIndex = 2;
-            this.pwTxt.Text = "abcdefghijk";
+            this.pwTxt.Text = "schokolade";
             // 
             // logoBox
             // 
