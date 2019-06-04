@@ -56,6 +56,7 @@ namespace SoftBed
             this.entlassenBtn = new System.Windows.Forms.Button();
             this.zimmerSuchenBtn = new System.Windows.Forms.Button();
             this.dTPGebDat = new System.Windows.Forms.DateTimePicker();
+            this.patientensucheMeldungTxt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.patAnzDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -339,12 +340,23 @@ namespace SoftBed
             this.dTPGebDat.Size = new System.Drawing.Size(282, 26);
             this.dTPGebDat.TabIndex = 3;
             // 
+            // patientensucheMeldungTxt
+            // 
+            this.patientensucheMeldungTxt.AutoSize = true;
+            this.patientensucheMeldungTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.patientensucheMeldungTxt.ForeColor = System.Drawing.Color.Black;
+            this.patientensucheMeldungTxt.Location = new System.Drawing.Point(564, 219);
+            this.patientensucheMeldungTxt.Name = "patientensucheMeldungTxt";
+            this.patientensucheMeldungTxt.Size = new System.Drawing.Size(0, 20);
+            this.patientensucheMeldungTxt.TabIndex = 29;
+            // 
             // PatientenVerwaltung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.Controls.Add(this.patientensucheMeldungTxt);
             this.Controls.Add(this.dTPGebDat);
             this.Controls.Add(this.zimmerSuchenBtn);
             this.Controls.Add(this.entlassenBtn);
@@ -408,5 +420,6 @@ namespace SoftBed
         private System.Windows.Forms.Button entlassenBtn;
         private System.Windows.Forms.Button zimmerSuchenBtn;
         private System.Windows.Forms.DateTimePicker dTPGebDat;
+        private System.Windows.Forms.Label patientensucheMeldungTxt;
     }
 }
