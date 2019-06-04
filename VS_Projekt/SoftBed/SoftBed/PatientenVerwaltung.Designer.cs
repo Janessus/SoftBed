@@ -345,7 +345,7 @@ namespace SoftBed
             this.patientensucheMeldungTxt.AutoSize = true;
             this.patientensucheMeldungTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientensucheMeldungTxt.ForeColor = System.Drawing.Color.Black;
-            this.patientensucheMeldungTxt.Location = new System.Drawing.Point(564, 229);
+            this.patientensucheMeldungTxt.Location = new System.Drawing.Point(564, 219);
             this.patientensucheMeldungTxt.Name = "patientensucheMeldungTxt";
             this.patientensucheMeldungTxt.Size = new System.Drawing.Size(0, 20);
             this.patientensucheMeldungTxt.TabIndex = 29;
