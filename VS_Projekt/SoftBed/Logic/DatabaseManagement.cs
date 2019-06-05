@@ -226,7 +226,9 @@ namespace Logic
 
                     query =
                         "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
-                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "NULL" + ", " + zimmerDst + ");";
+                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "NULL" + ", \"" + zimmerDst + "\");";
+
+                    var tmp = ExecuteInsert(query, Connection);
 
                     Connection.Close();
                     return response;
