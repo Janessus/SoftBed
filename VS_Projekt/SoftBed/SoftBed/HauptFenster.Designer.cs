@@ -136,7 +136,6 @@
             this.itsProgBar.Name = "itsProgBar";
             this.itsProgBar.Size = new System.Drawing.Size(499, 32);
             this.itsProgBar.TabIndex = 3;
-            this.itsProgBar.Click += new System.EventHandler(this.itsProgBar_Click);
             // 
             // auslastungITSLbl
             // 
