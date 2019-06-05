@@ -199,7 +199,7 @@ namespace Logic
         }
 
 
-        public bool PatientAnlegen(Patient patient)
+        public bool PatientAnlegen(Patient patient, string zimmerDst)
         {
             if (patient != null)
             {
@@ -223,6 +223,11 @@ namespace Logic
 
                     MySqlConnection Connection = Connect();
                     bool response = ExecuteInsert(query, Connection);
+
+                    query =
+                        "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
+                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "NULL" + ", " + zimmerDst + ");";
+
                     Connection.Close();
                     return response;
                 }
