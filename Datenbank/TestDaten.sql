@@ -1,4 +1,4 @@
-/*INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");*/
+﻿/*INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");*/
 
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
@@ -246,10 +246,10 @@ INSERT INTO Person(Vorname, Nachname, Adresse, Geschlecht, Geburtsdatum)
 	("Maria", "Zimmermann", "Emmendingen", "w", DATE("1967-03-14"));
     
 INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort) 
-	/*VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Admin", "password"),*/
-	VALUES((Select PersonID FROM Person WHERE Vorname = "Hannes" AND Nachname = "Huber"), "Buma11", "Admin", "123456"),
-	((Select PersonID FROM Person WHERE Vorname = "Julia" AND Nachname = "Merettig"), "Schokokeks", "Admin", "schokolade"),
-	((Select PersonID FROM Person WHERE Vorname = "Friedrich" AND Nachname = "Schmidt"), "Zett94", "Admin", "keineahnung"),
+	/*VALUES((Select PersonID FROM Person WHERE Vorname = "Janes" AND Nachname = "Heuberger"), "Janessus", "Standard", "password"),*/
+	VALUES((Select PersonID FROM Person WHERE Vorname = "Hannes" AND Nachname = "Huber"), "Buma11", "Standard", "123456"),
+	((Select PersonID FROM Person WHERE Vorname = "Julia" AND Nachname = "Merettig"), "Schokokeks", "Standard", "schokolade"),
+	((Select PersonID FROM Person WHERE Vorname = "Friedrich" AND Nachname = "Schmidt"), "Zett94", "Standard", "keineahnung"),
 	((Select PersonID FROM Person WHERE Vorname = "Klaus" AND Nachname = "Arendt"), "Klausimausi", "Standard", "bestespw"),
 	((Select PersonID FROM Person WHERE Vorname = "Joachim" AND Nachname = "Adam"), "TheLegend27", "Standard", "TheLegend27"),
 	((Select PersonID FROM Person WHERE Vorname = "Thomas" AND Nachname = "Adolf"), "ForeverAfd", "Standard", "kriegisbest"),
