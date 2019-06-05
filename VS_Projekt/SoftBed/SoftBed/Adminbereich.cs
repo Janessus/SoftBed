@@ -93,6 +93,8 @@ namespace SoftBed
             pUser.Benutzername = userTxt.Text;
             pUser.Passwort = pwTxt.Text;
             pUser.Rechte = getRadioBtnValue();
+            pUser.Vorname = firstNameTxt.Text;
+            pUser.Nachname = lastNameTxt.Text;
             return pUser;
         }
 

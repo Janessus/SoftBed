@@ -40,6 +40,11 @@
             this.btnLoeschen = new System.Windows.Forms.Button();
             this.editMeldungLdl = new System.Windows.Forms.Label();
             this.meldungLbl = new System.Windows.Forms.Label();
+            this.lastNameTxt = new System.Windows.Forms.TextBox();
+            this.firstNameTxt = new System.Windows.Forms.TextBox();
+            this.firstNameLbl = new System.Windows.Forms.Label();
+            this.lastNameLbl = new System.Windows.Forms.Label();
+            this.headlineLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // zurueckBtn
@@ -57,7 +62,7 @@
             // 
             this.userLbl.AutoSize = true;
             this.userLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLbl.Location = new System.Drawing.Point(248, 126);
+            this.userLbl.Location = new System.Drawing.Point(183, 191);
             this.userLbl.Name = "userLbl";
             this.userLbl.Size = new System.Drawing.Size(126, 20);
             this.userLbl.TabIndex = 24;
@@ -67,7 +72,7 @@
             // 
             this.pwLbl.AutoSize = true;
             this.pwLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwLbl.Location = new System.Drawing.Point(288, 159);
+            this.pwLbl.Location = new System.Drawing.Point(227, 224);
             this.pwLbl.Name = "pwLbl";
             this.pwLbl.Size = new System.Drawing.Size(82, 20);
             this.pwLbl.TabIndex = 25;
@@ -77,7 +82,7 @@
             // 
             this.rechteLbl.AutoSize = true;
             this.rechteLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rechteLbl.Location = new System.Drawing.Point(248, 230);
+            this.rechteLbl.Location = new System.Drawing.Point(188, 282);
             this.rechteLbl.Name = "rechteLbl";
             this.rechteLbl.Size = new System.Drawing.Size(136, 20);
             this.rechteLbl.TabIndex = 26;
@@ -87,7 +92,7 @@
             // 
             this.praktRadBtn.AutoSize = true;
             this.praktRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.praktRadBtn.Location = new System.Drawing.Point(487, 230);
+            this.praktRadBtn.Location = new System.Drawing.Point(427, 282);
             this.praktRadBtn.Name = "praktRadBtn";
             this.praktRadBtn.Size = new System.Drawing.Size(92, 22);
             this.praktRadBtn.TabIndex = 5;
@@ -100,7 +105,7 @@
             this.standardRadBtn.AutoSize = true;
             this.standardRadBtn.Checked = true;
             this.standardRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.standardRadBtn.Location = new System.Drawing.Point(389, 228);
+            this.standardRadBtn.Location = new System.Drawing.Point(329, 280);
             this.standardRadBtn.Name = "standardRadBtn";
             this.standardRadBtn.Size = new System.Drawing.Size(85, 22);
             this.standardRadBtn.TabIndex = 4;
@@ -111,7 +116,7 @@
             // pwTxt
             // 
             this.pwTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwTxt.Location = new System.Drawing.Point(389, 159);
+            this.pwTxt.Location = new System.Drawing.Point(329, 224);
             this.pwTxt.Name = "pwTxt";
             this.pwTxt.Size = new System.Drawing.Size(190, 26);
             this.pwTxt.TabIndex = 2;
@@ -119,7 +124,7 @@
             // userTxt
             // 
             this.userTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTxt.Location = new System.Drawing.Point(389, 126);
+            this.userTxt.Location = new System.Drawing.Point(329, 191);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(190, 26);
             this.userTxt.TabIndex = 1;
@@ -127,7 +132,7 @@
             // usrAnlBtn
             // 
             this.usrAnlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usrAnlBtn.Location = new System.Drawing.Point(389, 270);
+            this.usrAnlBtn.Location = new System.Drawing.Point(329, 322);
             this.usrAnlBtn.Name = "usrAnlBtn";
             this.usrAnlBtn.Size = new System.Drawing.Size(190, 29);
             this.usrAnlBtn.TabIndex = 6;
@@ -138,7 +143,7 @@
             // btnLoeschen
             // 
             this.btnLoeschen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoeschen.Location = new System.Drawing.Point(600, 126);
+            this.btnLoeschen.Location = new System.Drawing.Point(540, 191);
             this.btnLoeschen.Name = "btnLoeschen";
             this.btnLoeschen.Size = new System.Drawing.Size(142, 29);
             this.btnLoeschen.TabIndex = 3;
@@ -151,7 +156,7 @@
             this.editMeldungLdl.AutoSize = true;
             this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
-            this.editMeldungLdl.Location = new System.Drawing.Point(248, 380);
+            this.editMeldungLdl.Location = new System.Drawing.Point(190, 416);
             this.editMeldungLdl.Name = "editMeldungLdl";
             this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);
             this.editMeldungLdl.TabIndex = 34;
@@ -160,11 +165,57 @@
             // 
             this.meldungLbl.AutoSize = true;
             this.meldungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.meldungLbl.Location = new System.Drawing.Point(248, 340);
+            this.meldungLbl.Location = new System.Drawing.Point(190, 376);
             this.meldungLbl.Name = "meldungLbl";
             this.meldungLbl.Size = new System.Drawing.Size(77, 20);
             this.meldungLbl.TabIndex = 33;
             this.meldungLbl.Text = "Meldung";
+            // 
+            // lastNameTxt
+            // 
+            this.lastNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastNameTxt.Location = new System.Drawing.Point(329, 134);
+            this.lastNameTxt.Name = "lastNameTxt";
+            this.lastNameTxt.Size = new System.Drawing.Size(190, 26);
+            this.lastNameTxt.TabIndex = 35;
+            // 
+            // firstNameTxt
+            // 
+            this.firstNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstNameTxt.Location = new System.Drawing.Point(329, 102);
+            this.firstNameTxt.Name = "firstNameTxt";
+            this.firstNameTxt.Size = new System.Drawing.Size(190, 26);
+            this.firstNameTxt.TabIndex = 36;
+            // 
+            // firstNameLbl
+            // 
+            this.firstNameLbl.AutoSize = true;
+            this.firstNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.firstNameLbl.Location = new System.Drawing.Point(228, 105);
+            this.firstNameLbl.Name = "firstNameLbl";
+            this.firstNameLbl.Size = new System.Drawing.Size(81, 20);
+            this.firstNameLbl.TabIndex = 37;
+            this.firstNameLbl.Text = "Vorname";
+            // 
+            // lastNameLbl
+            // 
+            this.lastNameLbl.AutoSize = true;
+            this.lastNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastNameLbl.Location = new System.Drawing.Point(215, 140);
+            this.lastNameLbl.Name = "lastNameLbl";
+            this.lastNameLbl.Size = new System.Drawing.Size(94, 20);
+            this.lastNameLbl.TabIndex = 38;
+            this.lastNameLbl.Text = "Nachname";
+            // 
+            // headlineLbl
+            // 
+            this.headlineLbl.AutoSize = true;
+            this.headlineLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headlineLbl.Location = new System.Drawing.Point(290, 29);
+            this.headlineLbl.Name = "headlineLbl";
+            this.headlineLbl.Size = new System.Drawing.Size(258, 33);
+            this.headlineLbl.TabIndex = 39;
+            this.headlineLbl.Text = "Benutzer anlegen";
             // 
             // Adminbereich
             // 
@@ -172,6 +223,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.headlineLbl);
+            this.Controls.Add(this.lastNameLbl);
+            this.Controls.Add(this.firstNameLbl);
+            this.Controls.Add(this.firstNameTxt);
+            this.Controls.Add(this.lastNameTxt);
             this.Controls.Add(this.editMeldungLdl);
             this.Controls.Add(this.meldungLbl);
             this.Controls.Add(this.btnLoeschen);
@@ -205,5 +261,10 @@
         private System.Windows.Forms.Button btnLoeschen;
         private System.Windows.Forms.Label editMeldungLdl;
         private System.Windows.Forms.Label meldungLbl;
+        private System.Windows.Forms.TextBox lastNameTxt;
+        private System.Windows.Forms.TextBox firstNameTxt;
+        private System.Windows.Forms.Label firstNameLbl;
+        private System.Windows.Forms.Label lastNameLbl;
+        private System.Windows.Forms.Label headlineLbl;
     }
 }
