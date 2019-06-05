@@ -192,6 +192,7 @@ namespace Logic
                     return bett;
                 }
             }
+
             
             // patient auf station mit größter freier kapaziät unterbringen
             return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[0], patient);
