@@ -38,14 +38,14 @@ namespace SoftBed
             String sUser = userTxt.Text;
             String sPW = pwTxt.Text;
 
-            if (sUser.Equals(sAdmin)  && sPW.Equals(sAdminPW))
+            if (sUser.Equals(sAdmin)  && sPW.Equals(sAdminPW)) //if admin, open adminbereich
             {
                 openAdminbereich();
                 UserManagement.GetInstance().UserLogin(sUser, sPW);
             }
             else
             {
-                if (userManage.UserLogin(sUser, sPW) == true)
+                if (userManage.UserLogin(sUser, sPW) == true)   //if right username and password, open hauptfenster
                 {
                     openHauptFenster();
                     UserManagement.GetInstance().UserLogin(sUser, sPW);
