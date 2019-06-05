@@ -278,7 +278,7 @@ namespace Logic
                 }
 
                 //Cmd.Dispose();
-                //Connection.Close();
+                Connection.Close();
 
                 return verlegungsliste;
             }
