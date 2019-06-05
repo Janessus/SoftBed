@@ -365,7 +365,6 @@ namespace Logic
                 UncaughtExeption("GET USER", e);
                 return null;
             }
-            
         }
 
 
@@ -449,6 +448,12 @@ namespace Logic
                     belegung.Paediatrie = reader.GetInt32(0);
                 reader.Close();
 
+                reader = ExecuteQuery(
+                    "SELECT Count(StationsBezeichnung) FROM Patient WHERE StationsBezeichnung = \"Intensivstation\";", Connection);
+                if (reader.Read())
+                    belegung.Intensiv = reader.GetInt32(0);
+                reader.Close();
+
                 Connection.Close();
             }
             catch (Exception e)
@@ -512,6 +517,7 @@ namespace Logic
 
             while (reader.Read())
             {
+                //Match Geschlecht
                 if (reader.GetChar(3).ToString().ToLower().Equals(patient.Geschlecht.ToLower()))
                 {
                     zimmerNr = reader.GetInt32(0);
