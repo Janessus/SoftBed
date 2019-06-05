@@ -15,6 +15,10 @@ namespace Logic
 
         }
 
+        /**
+         * gets Instance from singleton UpdateManagement
+         * @return singleton UpdateManagement
+         */
         public static UpdateManagement GetInstance()
         {
             if (_instance == null)
@@ -24,6 +28,10 @@ namespace Logic
             return _instance;
         }
 
+        /**
+         * calls GetPatient(versNr) from DatabaseManagement
+         * @return Patient
+         */
         public Patient GetPatient(string versNr)
         {
             Patient patient = DatabaseManagement.GetInstance().GetPatient(versNr);
@@ -31,6 +39,10 @@ namespace Logic
             return patient;
         }
 
+        /**
+         * calls GetUser(userName) from DatabaseManagement
+         * @return User
+         */
         public User GetUser(string userName)
         {
             User user = DatabaseManagement.GetInstance().GetUser(userName);
@@ -38,18 +50,29 @@ namespace Logic
             return user;
         }
 
+        /**
+         * calls GetBettenbelegung() from DatabaseManagement
+         * @return current Bettenbelegung
+         */
         public Bettenbelegung GetCurrentBettenbelegung()
         {
             Bettenbelegung bettenbelegung = DatabaseManagement.GetInstance().GetBettenbelegung();
             return bettenbelegung;
         }
 
+
+        /**
+         * calls GetVerlegungsliste() from DatabaseManagement
+         * @return current Verlegungsliste
+         */
         public Verlegungsliste GetCurrentVerlegungsliste()
         {
             Verlegungsliste verlegungsliste = DatabaseManagement.GetInstance().GetVerlegungsliste();
             return verlegungsliste;
         }
 
+
+        
         public List<string> GetBettenbelegungSortiert(Bettenbelegung bettenbelegung)
         {
             List<SortBelegung> sortBelegung = new List<SortBelegung>();
