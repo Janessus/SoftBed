@@ -53,7 +53,7 @@
             this.zurueckBtn.Location = new System.Drawing.Point(12, 12);
             this.zurueckBtn.Name = "zurueckBtn";
             this.zurueckBtn.Size = new System.Drawing.Size(84, 29);
-            this.zurueckBtn.TabIndex = 7;
+            this.zurueckBtn.TabIndex = 8;
             this.zurueckBtn.Text = "< Zurück";
             this.zurueckBtn.UseVisualStyleBackColor = true;
             this.zurueckBtn.Click += new System.EventHandler(this.zurueckBtn_Click);
@@ -62,7 +62,7 @@
             // 
             this.userLbl.AutoSize = true;
             this.userLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLbl.Location = new System.Drawing.Point(183, 191);
+            this.userLbl.Location = new System.Drawing.Point(179, 181);
             this.userLbl.Name = "userLbl";
             this.userLbl.Size = new System.Drawing.Size(126, 20);
             this.userLbl.TabIndex = 24;
@@ -72,7 +72,7 @@
             // 
             this.pwLbl.AutoSize = true;
             this.pwLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwLbl.Location = new System.Drawing.Point(227, 224);
+            this.pwLbl.Location = new System.Drawing.Point(223, 214);
             this.pwLbl.Name = "pwLbl";
             this.pwLbl.Size = new System.Drawing.Size(82, 20);
             this.pwLbl.TabIndex = 25;
@@ -82,7 +82,7 @@
             // 
             this.rechteLbl.AutoSize = true;
             this.rechteLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rechteLbl.Location = new System.Drawing.Point(188, 282);
+            this.rechteLbl.Location = new System.Drawing.Point(184, 272);
             this.rechteLbl.Name = "rechteLbl";
             this.rechteLbl.Size = new System.Drawing.Size(136, 20);
             this.rechteLbl.TabIndex = 26;
@@ -92,10 +92,10 @@
             // 
             this.praktRadBtn.AutoSize = true;
             this.praktRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.praktRadBtn.Location = new System.Drawing.Point(427, 282);
+            this.praktRadBtn.Location = new System.Drawing.Point(423, 272);
             this.praktRadBtn.Name = "praktRadBtn";
             this.praktRadBtn.Size = new System.Drawing.Size(92, 22);
-            this.praktRadBtn.TabIndex = 5;
+            this.praktRadBtn.TabIndex = 6;
             this.praktRadBtn.TabStop = true;
             this.praktRadBtn.Text = "Praktikant";
             this.praktRadBtn.UseVisualStyleBackColor = true;
@@ -105,10 +105,10 @@
             this.standardRadBtn.AutoSize = true;
             this.standardRadBtn.Checked = true;
             this.standardRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.standardRadBtn.Location = new System.Drawing.Point(329, 280);
+            this.standardRadBtn.Location = new System.Drawing.Point(325, 270);
             this.standardRadBtn.Name = "standardRadBtn";
             this.standardRadBtn.Size = new System.Drawing.Size(85, 22);
-            this.standardRadBtn.TabIndex = 4;
+            this.standardRadBtn.TabIndex = 5;
             this.standardRadBtn.TabStop = true;
             this.standardRadBtn.Text = "Standard";
             this.standardRadBtn.UseVisualStyleBackColor = true;
@@ -116,26 +116,26 @@
             // pwTxt
             // 
             this.pwTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwTxt.Location = new System.Drawing.Point(329, 224);
+            this.pwTxt.Location = new System.Drawing.Point(325, 214);
             this.pwTxt.Name = "pwTxt";
             this.pwTxt.Size = new System.Drawing.Size(190, 26);
-            this.pwTxt.TabIndex = 2;
+            this.pwTxt.TabIndex = 4;
             // 
             // userTxt
             // 
             this.userTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTxt.Location = new System.Drawing.Point(329, 191);
+            this.userTxt.Location = new System.Drawing.Point(325, 181);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(190, 26);
-            this.userTxt.TabIndex = 1;
+            this.userTxt.TabIndex = 3;
             // 
             // usrAnlBtn
             // 
             this.usrAnlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usrAnlBtn.Location = new System.Drawing.Point(329, 322);
+            this.usrAnlBtn.Location = new System.Drawing.Point(325, 312);
             this.usrAnlBtn.Name = "usrAnlBtn";
             this.usrAnlBtn.Size = new System.Drawing.Size(190, 29);
-            this.usrAnlBtn.TabIndex = 6;
+            this.usrAnlBtn.TabIndex = 7;
             this.usrAnlBtn.Text = "Benutzer anlegen";
             this.usrAnlBtn.UseVisualStyleBackColor = true;
             this.usrAnlBtn.Click += new System.EventHandler(this.usrAnlBtn_Click);
@@ -143,10 +143,10 @@
             // btnLoeschen
             // 
             this.btnLoeschen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoeschen.Location = new System.Drawing.Point(540, 191);
+            this.btnLoeschen.Location = new System.Drawing.Point(536, 181);
             this.btnLoeschen.Name = "btnLoeschen";
             this.btnLoeschen.Size = new System.Drawing.Size(142, 29);
-            this.btnLoeschen.TabIndex = 3;
+            this.btnLoeschen.TabIndex = 9;
             this.btnLoeschen.Text = "Benutzer löschen";
             this.btnLoeschen.UseVisualStyleBackColor = true;
             this.btnLoeschen.Click += new System.EventHandler(this.btnLoeschen_Click);
@@ -156,7 +156,7 @@
             this.editMeldungLdl.AutoSize = true;
             this.editMeldungLdl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
-            this.editMeldungLdl.Location = new System.Drawing.Point(190, 416);
+            this.editMeldungLdl.Location = new System.Drawing.Point(184, 397);
             this.editMeldungLdl.Name = "editMeldungLdl";
             this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);
             this.editMeldungLdl.TabIndex = 34;
@@ -165,7 +165,7 @@
             // 
             this.meldungLbl.AutoSize = true;
             this.meldungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.meldungLbl.Location = new System.Drawing.Point(190, 376);
+            this.meldungLbl.Location = new System.Drawing.Point(184, 357);
             this.meldungLbl.Name = "meldungLbl";
             this.meldungLbl.Size = new System.Drawing.Size(77, 20);
             this.meldungLbl.TabIndex = 33;
@@ -174,24 +174,24 @@
             // lastNameTxt
             // 
             this.lastNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastNameTxt.Location = new System.Drawing.Point(329, 134);
+            this.lastNameTxt.Location = new System.Drawing.Point(325, 124);
             this.lastNameTxt.Name = "lastNameTxt";
             this.lastNameTxt.Size = new System.Drawing.Size(190, 26);
-            this.lastNameTxt.TabIndex = 35;
+            this.lastNameTxt.TabIndex = 2;
             // 
             // firstNameTxt
             // 
             this.firstNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstNameTxt.Location = new System.Drawing.Point(329, 102);
+            this.firstNameTxt.Location = new System.Drawing.Point(325, 92);
             this.firstNameTxt.Name = "firstNameTxt";
             this.firstNameTxt.Size = new System.Drawing.Size(190, 26);
-            this.firstNameTxt.TabIndex = 36;
+            this.firstNameTxt.TabIndex = 1;
             // 
             // firstNameLbl
             // 
             this.firstNameLbl.AutoSize = true;
             this.firstNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.firstNameLbl.Location = new System.Drawing.Point(228, 105);
+            this.firstNameLbl.Location = new System.Drawing.Point(224, 95);
             this.firstNameLbl.Name = "firstNameLbl";
             this.firstNameLbl.Size = new System.Drawing.Size(81, 20);
             this.firstNameLbl.TabIndex = 37;
@@ -201,7 +201,7 @@
             // 
             this.lastNameLbl.AutoSize = true;
             this.lastNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastNameLbl.Location = new System.Drawing.Point(215, 140);
+            this.lastNameLbl.Location = new System.Drawing.Point(211, 130);
             this.lastNameLbl.Name = "lastNameLbl";
             this.lastNameLbl.Size = new System.Drawing.Size(94, 20);
             this.lastNameLbl.TabIndex = 38;
@@ -211,7 +211,7 @@
             // 
             this.headlineLbl.AutoSize = true;
             this.headlineLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headlineLbl.Location = new System.Drawing.Point(290, 29);
+            this.headlineLbl.Location = new System.Drawing.Point(282, 28);
             this.headlineLbl.Name = "headlineLbl";
             this.headlineLbl.Size = new System.Drawing.Size(258, 33);
             this.headlineLbl.TabIndex = 39;
