@@ -82,6 +82,7 @@ namespace SoftBed
                 Patient selectedPatient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
                 if (selectedPatient != null)
                 {
+                    patAnzDGV.Rows.Clear();
                     patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, "Bettnr Implement. fehlt noch");
                     patientensucheMeldungTxt.Text = "";
                 }
