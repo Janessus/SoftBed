@@ -395,6 +395,11 @@ namespace SoftBed
             return result;
         }
 
+
+
+        /**
+         * warns User, that he wanted to put adult in Pädiatrie
+         */
         private DialogResult MessageAdultInPäd()
         {
             string messageBoxText =
