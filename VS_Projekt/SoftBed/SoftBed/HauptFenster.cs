@@ -22,34 +22,6 @@ namespace SoftBed
             this.Location = new Point(100, 100);
 
             RefreshHauptfenster();  //refresh everything
-            gynProgBar.Maximum = 51;
-            gynProgBar.Value = 51;
-            gynProgBar.Maximum = 50;
-            gynProgBar.Value = 0;
-            iMProgBar.Maximum = 51;
-            iMProgBar.Value = 51;
-            iMProgBar.Maximum = 50;
-            iMProgBar.Value = 0;
-            onkProgBar.Maximum = 51;
-            onkProgBar.Value = 51;
-            onkProgBar.Maximum = 50;
-            onkProgBar.Value = 0;
-            orthProgBar.Maximum = 51;
-            orthProgBar.Value = 51;
-            orthProgBar.Maximum = 50;
-            orthProgBar.Value = 0;
-            paedProgBar.Maximum = 51;
-            paedProgBar.Value = 51;
-            paedProgBar.Maximum = 50;
-            paedProgBar.Value = 0;
-            itsProgBar.Maximum = 11;
-            itsProgBar.Value = 11;
-            itsProgBar.Maximum = 10;
-            itsProgBar.Value = 0;
-            gesKHProgBar.Maximum = 261;
-            gesKHProgBar.Value = 261;
-            gesKHProgBar.Maximum = 260;
-            gesKHProgBar.Value = 0;
 
             label1.Text = "User: " + UserManagement.CurrentUser.Benutzername;
             label2.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
