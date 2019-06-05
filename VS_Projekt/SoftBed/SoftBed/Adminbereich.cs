@@ -73,11 +73,11 @@ namespace SoftBed
         {
             if (standardRadBtn.Checked == true)
             {
-                Console.WriteLine("bin in Standard");
+                return "Standard";
             }
             else
             {
-                Console.WriteLine("bin in Praktikant");
+                return "Praktikant";
             }
         }
 
