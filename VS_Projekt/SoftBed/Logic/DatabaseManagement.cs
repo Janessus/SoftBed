@@ -109,7 +109,7 @@ namespace Logic
             }
             catch (Exception e)
             {
-                UncaughtExeption("EXECUTE UPDATE", e);
+                UncaughtExeption("EXECUTE INSERT", e);
             }
 
             return false;
@@ -226,7 +226,7 @@ namespace Logic
 
                     query =
                         "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
-                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "NULL" + ", \"" + zimmerDst + "\");";
+                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"NULL\"" + ", \"" + zimmerDst + "\");";
 
                     var tmp = ExecuteInsert(query, Connection);
 
@@ -254,20 +254,16 @@ namespace Logic
 
         public Verlegungsliste GetVerlegungsliste()
         {
-            Verlegungsliste verlegungsliste = null;
+            Verlegungsliste verlegungsliste = new Verlegungsliste();
             MySqlDataReader Reader = null;
-            MySqlCommand Cmd = null;
             MySqlConnection Connection = null;
+            string query = "SELECT p.PersonID, p.Vorname, p.Nachname, t.Von, t.Nach, t.Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
 
             try
             {
                 Connection = Connect();
                 Connection.Open();
-                Cmd = Connection.CreateCommand();
-                Cmd.CommandText = "SELECT p.PersonID, Vorname, Nachname, Von, Nach, Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
-                Reader = Cmd.ExecuteReader();
-
-                verlegungsliste = new Verlegungsliste();
+                Reader = ExecuteQuery(query, Connection);
 
                 while (Reader.Read())
                 {
@@ -283,21 +279,18 @@ namespace Logic
 
                     verlegungsliste.Transferliste.Add(item);
                 }
-
-                //Cmd.Dispose();
-                Connection.Close();
-
-                return verlegungsliste;
+                Connection.Close();   
             }
             catch (Exception e)
             {
-                Console.WriteLine("GetVerlegungsliste ERROR HResult: " + e.HResult);
+                //Console.WriteLine("GetVerlegungsliste ERROR HResult: " + e.HResult);
                 //Console.WriteLine(e);
                 //Cmd.Dispose();
                 //Connection.Close();
                 UncaughtExeption("GET VERLEGUNGSLISTE", e);
-                return null;
             }
+
+            return verlegungsliste;
         }
 
         public bool PersonAnlegen(Patient p)
@@ -377,16 +370,36 @@ namespace Logic
 
         public bool UserAnlegen(User user)
         {
-            string query = "INSERT INTO Users(Benutzername, PersonID, Rechte, Passwort) Values(\"" + user.Benutzername + 
+            string InsertQuery = "INSERT INTO Users(Benutzername, PersonID, Rechte, Passwort) Values(\"" + user.Benutzername + 
                            "\", (SELECT PersonID FROM Person WHERE Vorname = \"" + user.Vorname + "\" AND Nachname = \"" + user.Nachname + "\"), \"" +
                            user.Rechte + "\", \"" +
                            user.Passwort + "\"" +
                            ")";
+            string CheckPersonQuery = "select count(*) " +
+                                      "from Person p " +
+                                      "where p.Vorname = \"" + user.Vorname + "\" " +
+                                      "and p.Nachname = \"" + user.Nachname + "\";";
 
             try
             {
                 MySqlConnection Connection = Connect();
-                bool response = ExecuteInsert(query, Connection);
+                Connection.Open();
+
+                MySqlDataReader reader = ExecuteQuery(CheckPersonQuery, Connection);
+
+                if (reader.Read())
+                {
+                    short count = reader.GetInt16(0);
+                    Connection.Close();
+
+                    if (count == 0)
+                    {
+                        PersonAnlegen(user.Vorname, user.Nachname);
+                    }
+                }
+
+                Connection = Connect();
+                bool response = ExecuteInsert(InsertQuery, Connection);
                 Connection.Close();
                 return response;
             }
@@ -473,6 +486,7 @@ namespace Logic
         }
 
         //Potential Bugs!
+        //looks for a room with 1 person in it and matches the gender, if no room with 1 person is available search for empty rooms
         public string GetPassendesBett(string Station, Patient patient)
         {
             string Bett = "NULL";
