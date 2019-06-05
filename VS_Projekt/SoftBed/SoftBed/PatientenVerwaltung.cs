@@ -175,7 +175,7 @@ namespace SoftBed
                                 if (roomSuggestion != null)
                                 {
                                     // can write into DB
-                                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient);
+                                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient, roomSuggestion);
                                     if (doneRight)
                                     {
                                         editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";

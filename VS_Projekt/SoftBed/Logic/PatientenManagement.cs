@@ -31,9 +31,9 @@ namespace Logic
          * uebergibt dem Databasemanagement einen neuen Patienten zum Anlegen
          * @return true, wenn Patient erfolgreich angelegt und false, wenn nicht erfolgreich
          */
-        public bool PatientAnlegen(Patient newPatient)
+        public bool PatientAnlegen(Patient newPatient, String roomSuggestion)
         {
-            bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient);
+            bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient, roomSuggestion);
 
             return request;
         }
