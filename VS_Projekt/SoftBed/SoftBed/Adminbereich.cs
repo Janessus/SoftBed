@@ -47,7 +47,7 @@ namespace SoftBed
             if (userTxt.Text != String.Empty && pwTxt.Text != String.Empty && firstNameTxt.Text != String.Empty && lastNameTxt.Text != String.Empty)
             {
                 editMeldungLdl.Text = "";
-                bool done = userManage.UserAnlegen(readUserFromGUI());
+                bool done = userManage.UserAnlegen(readUserFromGUI());  //create user
                 if (done == false)
                 {
                     MessageBox.Show("Ungültige Eingabe!");
@@ -105,11 +105,11 @@ namespace SoftBed
          */
         private void btnLoeschen_Click(object sender, EventArgs e)
         {
-            if (userTxt.Text != String.Empty)
+            if (userTxt.Text != String.Empty)   //if textbox isnt empty
             {
-                if (showUserDeleteConfirmingDialog() == DialogResult.Yes)
+                if (showUserDeleteConfirmingDialog() == DialogResult.Yes)   //if user confirmed
                 {
-                    if (userManage.UserLöschen(userTxt.Text))
+                    if (userManage.UserLöschen(userTxt.Text))   //if deleting worked
                     {
                         editMeldungLdl.Text = "User wurde erfolgreich gelöscht";
                     }

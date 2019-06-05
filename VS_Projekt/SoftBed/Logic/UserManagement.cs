@@ -59,9 +59,9 @@ namespace Logic
             User requestedUser = DatabaseManagement.GetInstance().GetUser(userName);
             if(requestedUser != null)
             {
-                if(requestedUser.Passwort == password)
+                if(requestedUser.Passwort == password)  //if right password
                 {
-                    CurrentUser = new User(requestedUser.Vorname, requestedUser.Nachname, requestedUser.Rechte, requestedUser.Benutzername, requestedUser.Passwort);
+                    CurrentUser = new User(requestedUser.Vorname, requestedUser.Nachname, requestedUser.Rechte, requestedUser.Benutzername, requestedUser.Passwort);    //set current user
                     return true;
                 }
             }
@@ -74,7 +74,7 @@ namespace Logic
          */
          public void UserLogout()
          {
-            CurrentUser = new User("Dummy", "Dummy", "Dummy", "Dummy", "Dummy");
+            CurrentUser = new User("Dummy", "Dummy", "Dummy", "Dummy", "Dummy");    //set dummy user
          }
 
     }

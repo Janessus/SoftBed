@@ -27,16 +27,22 @@ namespace SoftBed
             label2.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
         }
 
+        /**
+         * button that opens Patientenverwaltung
+         */
         private void patVerwBtn_Click(object sender, EventArgs e)
         {
             openPatientenVerwaltung();
         }
 
+        /**
+         * button that validates, that transfer is complete
+         */
         private void verlAugefBtn_Click(object sender, EventArgs e)
         {
-            if (UserManagement.CurrentUser.Rechte == "Standard")
+            if (UserManagement.CurrentUser.Rechte == "Standard")    //if user has standard rights
             {
-                if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)
+                if (showTransferConfirmingDialog() == DialogResult.Yes && showTransferConfirmingDialog() == DialogResult.Yes)   //if user confirmed
                 {
                     DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
 
@@ -54,6 +60,9 @@ namespace SoftBed
             }
         }
 
+        /**
+         * button for logout
+         */
         private void abmeldenBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -71,17 +80,20 @@ namespace SoftBed
             this.SetVisibleCore(true);
         }
 
+        /**
+         * refreshes Transferlist and progressbars
+         */
         private void RefreshHauptfenster()
         {
             RefreshBettenbelegung();
             RefreshVerlegungsliste();
         }
 
+        /**
+         * refreshes progressbars
+         */
         private void RefreshBettenbelegung()
         {
-            
-
-
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             gynProgBar.Value = currentBelegung.Gynaekologie;
             labelGyn.Text = currentBelegung.Gynaekologie.ToString();
@@ -98,7 +110,10 @@ namespace SoftBed
             gesKHProgBar.Value = currentBelegung.Gesamt();
             labelGes.Text = currentBelegung.Gesamt().ToString();
         }
-
+        
+        /**
+         * refreshes Transferlist
+         */
         private void RefreshVerlegungsliste()
         {
             Verlegungsliste currentVerlegungsliste = UpdateManagement.GetInstance().GetCurrentVerlegungsliste();
@@ -124,11 +139,9 @@ namespace SoftBed
             return result;
         }
 
-        private void itsProgBar_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /**
+         * mouse enter event for refreshes
+         */
         private void HauptFenster_MouseEnter(object sender, EventArgs e)
         {
             RefreshHauptfenster();

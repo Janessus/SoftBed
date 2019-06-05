@@ -34,7 +34,7 @@ namespace SoftBed
          */
         private void entlassenBtn_Click(object sender, EventArgs e)
         {
-            if(UserManagement.CurrentUser.Rechte == "Standard") //nullptr
+            if(UserManagement.CurrentUser.Rechte == "Standard")
             {
                 // If the yes button was pressed ...
                 if (showDeleteConfirmingDialog() == DialogResult.Yes)
@@ -42,13 +42,13 @@ namespace SoftBed
                     // If the yes button was pressed ...
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
-                        bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);
-                        if (result)
+                        bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);    //delete Patient
+                        if (result) //if worked
                         {
                             editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
                             patAnzDGV.Rows.Clear();
                         }
-                        else
+                        else //if not worked
                         {
                             string messageBoxText = "Fehler aufgetreten! Patient konnte nicht gelöscht werden!!";
                             string caption = "Fehlschlag";
@@ -77,10 +77,10 @@ namespace SoftBed
         // suche Patient
         private void sucheBtn_Click(object sender, EventArgs e)
         {
-            if (!versNrSucheTxt.Text.Equals(""))
+            if (!versNrSucheTxt.Text.Equals(""))    //if textbox not empty
             {
                 Patient selectedPatient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
-                if (selectedPatient != null)
+                if (selectedPatient != null)    //if patient exists
                 {
                     patAnzDGV.Rows.Clear();
                     patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, "Bettnr Implement. fehlt noch");
