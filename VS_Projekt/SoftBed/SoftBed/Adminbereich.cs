@@ -44,7 +44,7 @@ namespace SoftBed
          */
         private void usrAnlBtn_Click(object sender, EventArgs e)
         {
-            if (userTxt.Text != String.Empty && pwTxt.Text != String.Empty)
+            if (userTxt.Text != String.Empty && pwTxt.Text != String.Empty && firstNameTxt.Text != String.Empty && lastNameTxt.Text != String.Empty)
             {
                 editMeldungLdl.Text = "";
                 bool done = userManage.UserAnlegen(readUserFromGUI());
@@ -71,13 +71,13 @@ namespace SoftBed
          */
         private String getRadioBtnValue()
         {
-            if (standardRadBtn.AutoCheck == true)
+            if (standardRadBtn.Checked == true)
             {
-                return "Standard";
+                Console.WriteLine("bin in Standard");
             }
             else
             {
-                return "Praktikant";
+                Console.WriteLine("bin in Praktikant");
             }
         }
 
