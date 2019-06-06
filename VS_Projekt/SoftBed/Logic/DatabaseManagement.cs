@@ -36,9 +36,9 @@ namespace Logic
             */
             // Public
             string connectionString = "SERVER=sql7.freemysqlhosting.net;" +
-                                      "DATABASE=sql7292983;" +
-                                      "UID=sql7292983;" +
-                                      "PASSWORD=qjsStyWinF;";
+                                      "DATABASE=sql7294766;" +
+                                      "UID=sql7294766;" +
+                                      "PASSWORD=jy3wzdVUHg;";
 
             MySqlConnection Connection = null;
 
@@ -69,10 +69,8 @@ namespace Logic
 
             catch (MySqlException e)
             {
-                if (e.HResult == -2147467259)
-                    Console.WriteLine("Duplicate");
-                else if (e.HResult == -2146232015)
-                    Console.WriteLine("Not Existing");
+                if (e.HResult == -2146232015)
+                    Console.WriteLine("EXECUTE_QUERY Not Existing");
                 else
                 {
                     UncaughtExeption("EXECUTE_QUERY", e);
@@ -97,15 +95,6 @@ namespace Logic
                 cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
                 return true;
-            }
-            catch (MySqlException e)
-            {
-                if (e.HResult == -2147467259)
-                    Console.WriteLine("ExecuteInsert: Duplicate " + query);
-                else
-                    Console.WriteLine("ExecuteInsert: " + e.HResult);
-
-                Console.WriteLine("ExecuteInsert: " + e.Message);
             }
             catch (Exception e)
             {
@@ -142,20 +131,9 @@ namespace Logic
 
                 Connection.Close();
             }
-            catch (MySqlException e)
-            {
-                Console.WriteLine("GetPatient: " + e.HResult);
-                Console.WriteLine("GetPatient: " + e.Message);
-                //UncaughtExeption("", e)
-            }
             catch (Exception e)
             {
-                if(e.HResult == -2146232015)
-                    Console.WriteLine("Patient " + versicherungsNummer + " existiert nicht");
-                else
-                {
-                    UncaughtExeption("GET PATIENT", e);
-                }
+                UncaughtExeption("GET PATIENT", e);
             }
             
             return p;
@@ -283,10 +261,6 @@ namespace Logic
             }
             catch (Exception e)
             {
-                //Console.WriteLine("GetVerlegungsliste ERROR HResult: " + e.HResult);
-                //Console.WriteLine(e);
-                //Cmd.Dispose();
-                //Connection.Close();
                 UncaughtExeption("GET VERLEGUNGSLISTE", e);
             }
 
@@ -361,7 +335,6 @@ namespace Logic
             }
             catch (Exception e)
             {
-                Console.WriteLine("GetUser ERROR HResult: " + e.HResult);
                 UncaughtExeption("GET USER", e);
                 return null;
             }
@@ -375,6 +348,7 @@ namespace Logic
                            user.Rechte + "\", \"" +
                            user.Passwort + "\"" +
                            ")";
+
             string CheckPersonQuery = "select count(*) " +
                                       "from Person p " +
                                       "where p.Vorname = \"" + user.Vorname + "\" " +
@@ -520,7 +494,8 @@ namespace Logic
                     stationKurz = "Is";
                     break;
                 default:
-                    throw new Exception("Station ungültig");
+                    Console.WriteLine("Ungültige Station");
+                    break;
             }
 
             //Select all rooms with exactly 1 person in it

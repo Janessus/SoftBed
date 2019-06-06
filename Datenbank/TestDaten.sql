@@ -1,4 +1,3 @@
-﻿/*INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");*/
 
 INSERT INTO Station(Bezeichnung) VALUES("Innere Medizin");
 INSERT INTO Station(Bezeichnung) VALUES("Gynäkologie");
