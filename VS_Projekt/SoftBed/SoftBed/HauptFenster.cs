@@ -46,7 +46,8 @@ namespace SoftBed
                 {
                     DataGridViewSelectedRowCollection selectedRows = transferListeDGV.SelectedRows;
 
-                    ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[0].Value.ToString(), selectedRows[0].Cells[1].Value.ToString());  //klappt vielleicht
+                    ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[1].Value.ToString(), selectedRows[0].Cells[0].Value.ToString());  //klappt vielleicht
+
 
                 }
             }
@@ -123,7 +124,7 @@ namespace SoftBed
             for (int i = 0; i < currentVerlegungsliste.Transferliste.Count; i++)
             {
                 
-                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste.ToArray()[i].Person.Nachname, currentVerlegungsliste.Transferliste.ToArray()[i].Person.Vorname, currentVerlegungsliste.Transferliste.ToArray()[i].Von, currentVerlegungsliste.Transferliste.ToArray()[i].Nach);     //klappt vielleicht
+                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste.ToArray()[i].Person.Nachname, currentVerlegungsliste.Transferliste.ToArray()[i].Person.Vorname, currentVerlegungsliste.Transferliste.ToArray()[i].Von, currentVerlegungsliste.Transferliste.ToArray()[i].Nach);
             }
         }
 
@@ -149,6 +150,11 @@ namespace SoftBed
         private void HauptFenster_MouseEnter(object sender, EventArgs e)
         {
             RefreshHauptfenster();
+        }
+
+        private void TransferListeDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

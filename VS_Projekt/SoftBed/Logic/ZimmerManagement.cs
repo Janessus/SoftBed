@@ -119,7 +119,7 @@ namespace Logic
 
         public void DeleteMemberTransferliste(string vorname, string nachname)
         {
-            //TODO
+            DatabaseManagement.GetInstance().DeleteMemberTransferliste(vorname, nachname);
         }
 
 

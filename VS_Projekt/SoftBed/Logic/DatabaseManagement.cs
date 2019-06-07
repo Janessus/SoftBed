@@ -267,6 +267,12 @@ namespace Logic
             return verlegungsliste;
         }
 
+        public bool DeleteMemberTransferliste(string vorname, string nachname)
+        {
+            //TODO
+            return false;
+        }
+
         public bool PersonAnlegen(Patient p)
         {
             string query = "INSERT INTO Person(Vorname, Nachname, Geschlecht, Geburtsdatum) " +
