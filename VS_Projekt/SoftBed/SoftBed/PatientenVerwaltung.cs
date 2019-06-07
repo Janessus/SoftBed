@@ -25,6 +25,7 @@ namespace SoftBed
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(100, 100);
+            ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
         }
 
         /**
@@ -47,6 +48,7 @@ namespace SoftBed
                         {
                             editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
                             patAnzDGV.Rows.Clear();
+                            ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
                         }
                         else //if not worked
                         {
@@ -181,6 +183,7 @@ namespace SoftBed
                                     {
                                         editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
                                         pZimmerManagement.PatientenTransfer(currentPatientenVNr, roomSuggestion);
+                                        ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
                                     }
                                     else
                                     {
@@ -417,6 +420,16 @@ namespace SoftBed
             if (e.KeyCode == Keys.Enter)
             {
                 sucheBtn_Click(sender,e);
+            }
+        }
+
+        private void ShowAllPatients(List<Patient> patients)
+        {
+            patAnzDGV.Rows.Clear();
+            for (int i = 0; i < patients.Count; i++)
+            {
+                patAnzDGV.Rows.Add(patients[i].Versicherungsnr, patients[i].Nachname, patients[i].Vorname,
+                    patients[i].ZimmerNr);
             }
         }
     }

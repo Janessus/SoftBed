@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Wrapperklassen;
 using MySql.Data.MySqlClient;
 
@@ -129,6 +130,14 @@ namespace Logic
             return p;
         }
 
+        public List<Patient> GetAllPatients()
+        {
+            List<Patient> patients = new List<Patient>();
+
+            //TODO
+
+            return patients;
+        }
 
         public bool PatientAendern(Patient patient)
         {
