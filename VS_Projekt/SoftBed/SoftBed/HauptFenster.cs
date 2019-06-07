@@ -122,7 +122,8 @@ namespace SoftBed
 
             for (int i = 0; i < currentVerlegungsliste.Transferliste.Count; i++)
             {
-                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste.ToArray()[i]);     //klappt vielleicht
+                
+                transferListeDGV.Rows.Add(currentVerlegungsliste.Transferliste.ToArray()[i].Person.Nachname, currentVerlegungsliste.Transferliste.ToArray()[i].Person.Vorname, currentVerlegungsliste.Transferliste.ToArray()[i].Von, currentVerlegungsliste.Transferliste.ToArray()[i].Nach);     //klappt vielleicht
             }
         }
 
