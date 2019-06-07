@@ -53,7 +53,7 @@ namespace SoftBed
             // 
             this.userTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userTxt.Location = new System.Drawing.Point(658, 556);
-            this.userTxt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.userTxt.Margin = new System.Windows.Forms.Padding(6);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(270, 44);
             this.userTxt.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace SoftBed
             // 
             this.pwTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pwTxt.Location = new System.Drawing.Point(656, 623);
-            this.pwTxt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pwTxt.Margin = new System.Windows.Forms.Padding(6);
             this.pwTxt.Name = "pwTxt";
             this.pwTxt.PasswordChar = '*';
             this.pwTxt.Size = new System.Drawing.Size(272, 44);
@@ -74,7 +74,7 @@ namespace SoftBed
             // 
             this.logoBox.Image = ((System.Drawing.Image)(resources.GetObject("logoBox.Image")));
             this.logoBox.Location = new System.Drawing.Point(506, 67);
-            this.logoBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.logoBox.Margin = new System.Windows.Forms.Padding(6);
             this.logoBox.Name = "logoBox";
             this.logoBox.Size = new System.Drawing.Size(554, 356);
             this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -90,7 +90,7 @@ namespace SoftBed
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.Location = new System.Drawing.Point(656, 700);
-            this.loginBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.loginBtn.Margin = new System.Windows.Forms.Padding(6);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(276, 69);
             this.loginBtn.TabIndex = 3;
@@ -121,7 +121,7 @@ namespace SoftBed
             this.Controls.Add(this.pwTxt);
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.loginLbl);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "LoginScreen";
             this.Text = "LoginScreen";
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();

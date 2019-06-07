@@ -88,6 +88,7 @@ namespace SoftBed
                 }
                 else
                 {
+                    patientensucheMeldungTxt.ForeColor = Color.Red;
                     patientensucheMeldungTxt.Text = "Die angegebene Versicherungsnummer existiert nicht";
                 }
             }

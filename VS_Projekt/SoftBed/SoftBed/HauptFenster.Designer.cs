@@ -51,8 +51,8 @@
             this.orthProgBar = new System.Windows.Forms.ProgressBar();
             this.paedProgBar = new System.Windows.Forms.ProgressBar();
             this.bettbelegLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.labelRechte = new System.Windows.Forms.Label();
             this.labelGyn = new System.Windows.Forms.Label();
             this.labelIm = new System.Windows.Forms.Label();
             this.labelOnk = new System.Windows.Forms.Label();
@@ -176,7 +176,7 @@
             // 
             // verlAugefBtn
             // 
-            this.verlAugefBtn.Location = new System.Drawing.Point(2028, 938);
+            this.verlAugefBtn.Location = new System.Drawing.Point(2028, 941);
             this.verlAugefBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.verlAugefBtn.Name = "verlAugefBtn";
             this.verlAugefBtn.Size = new System.Drawing.Size(272, 61);
@@ -308,25 +308,25 @@
             this.bettbelegLbl.TabIndex = 18;
             this.bettbelegLbl.Text = "Bettenbelegung";
             // 
-            // label1
+            // labelUser
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1520, 59);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 25);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "label1";
+            this.labelUser.AutoSize = true;
+            this.labelUser.Location = new System.Drawing.Point(1409, 59);
+            this.labelUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(103, 25);
+            this.labelUser.TabIndex = 19;
+            this.labelUser.Text = "labelUser";
             // 
-            // label2
+            // labelRechte
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1726, 59);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 25);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "label2";
+            this.labelRechte.AutoSize = true;
+            this.labelRechte.Location = new System.Drawing.Point(1637, 59);
+            this.labelRechte.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelRechte.Name = "labelRechte";
+            this.labelRechte.Size = new System.Drawing.Size(126, 25);
+            this.labelRechte.TabIndex = 20;
+            this.labelRechte.Text = "labelRechte";
             // 
             // labelGyn
             // 
@@ -411,8 +411,8 @@
             this.Controls.Add(this.labelOnk);
             this.Controls.Add(this.labelIm);
             this.Controls.Add(this.labelGyn);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelRechte);
+            this.Controls.Add(this.labelUser);
             this.Controls.Add(this.bettbelegLbl);
             this.Controls.Add(this.paedProgBar);
             this.Controls.Add(this.orthProgBar);
@@ -467,8 +467,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn vonClmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nachClmn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelUser;
+        private System.Windows.Forms.Label labelRechte;
         private System.Windows.Forms.Label labelGyn;
         private System.Windows.Forms.Label labelIm;
         private System.Windows.Forms.Label labelOnk;

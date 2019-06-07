@@ -66,7 +66,7 @@ namespace SoftBed
             this.nameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLbl.Location = new System.Drawing.Point(98, 168);
             this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(51, 20);
+            this.nameLbl.Size = new System.Drawing.Size(103, 37);
             this.nameLbl.TabIndex = 0;
             this.nameLbl.Text = "Name";
             // 
@@ -75,7 +75,7 @@ namespace SoftBed
             this.nameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameTxt.Location = new System.Drawing.Point(156, 168);
             this.nameTxt.Name = "nameTxt";
-            this.nameTxt.Size = new System.Drawing.Size(282, 26);
+            this.nameTxt.Size = new System.Drawing.Size(282, 44);
             this.nameTxt.TabIndex = 1;
             // 
             // vornameTxt
@@ -83,7 +83,7 @@ namespace SoftBed
             this.vornameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vornameTxt.Location = new System.Drawing.Point(156, 202);
             this.vornameTxt.Name = "vornameTxt";
-            this.vornameTxt.Size = new System.Drawing.Size(282, 26);
+            this.vornameTxt.Size = new System.Drawing.Size(282, 44);
             this.vornameTxt.TabIndex = 2;
             // 
             // vornameLbl
@@ -92,7 +92,7 @@ namespace SoftBed
             this.vornameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vornameLbl.Location = new System.Drawing.Point(77, 202);
             this.vornameLbl.Name = "vornameLbl";
-            this.vornameLbl.Size = new System.Drawing.Size(74, 20);
+            this.vornameLbl.Size = new System.Drawing.Size(148, 37);
             this.vornameLbl.TabIndex = 8;
             this.vornameLbl.Text = "Vorname";
             // 
@@ -102,7 +102,7 @@ namespace SoftBed
             this.gebDatLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gebDatLbl.Location = new System.Drawing.Point(41, 238);
             this.gebDatLbl.Name = "gebDatLbl";
-            this.gebDatLbl.Size = new System.Drawing.Size(112, 20);
+            this.gebDatLbl.Size = new System.Drawing.Size(221, 37);
             this.gebDatLbl.TabIndex = 10;
             this.gebDatLbl.Text = "Geburtsdatum";
             // 
@@ -112,7 +112,7 @@ namespace SoftBed
             this.geschlLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.geschlLbl.Location = new System.Drawing.Point(60, 273);
             this.geschlLbl.Name = "geschlLbl";
-            this.geschlLbl.Size = new System.Drawing.Size(90, 20);
+            this.geschlLbl.Size = new System.Drawing.Size(176, 37);
             this.geschlLbl.TabIndex = 12;
             this.geschlLbl.Text = "Geschlecht";
             // 
@@ -124,7 +124,7 @@ namespace SoftBed
             this.wRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wRadBtn.Location = new System.Drawing.Point(156, 275);
             this.wRadBtn.Name = "wRadBtn";
-            this.wRadBtn.Size = new System.Drawing.Size(82, 24);
+            this.wRadBtn.Size = new System.Drawing.Size(161, 41);
             this.wRadBtn.TabIndex = 4;
             this.wRadBtn.TabStop = true;
             this.wRadBtn.Text = "weiblich";
@@ -137,7 +137,7 @@ namespace SoftBed
             this.mRadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mRadBtn.Location = new System.Drawing.Point(251, 275);
             this.mRadBtn.Name = "mRadBtn";
-            this.mRadBtn.Size = new System.Drawing.Size(90, 24);
+            this.mRadBtn.Size = new System.Drawing.Size(177, 41);
             this.mRadBtn.TabIndex = 5;
             this.mRadBtn.TabStop = true;
             this.mRadBtn.Text = "männlich";
@@ -149,7 +149,7 @@ namespace SoftBed
             this.versNrAufnTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrAufnTxt.Location = new System.Drawing.Point(156, 308);
             this.versNrAufnTxt.Name = "versNrAufnTxt";
-            this.versNrAufnTxt.Size = new System.Drawing.Size(282, 26);
+            this.versNrAufnTxt.Size = new System.Drawing.Size(282, 44);
             this.versNrAufnTxt.TabIndex = 6;
             // 
             // versNrAufnLbl
@@ -158,7 +158,7 @@ namespace SoftBed
             this.versNrAufnLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrAufnLbl.Location = new System.Drawing.Point(32, 308);
             this.versNrAufnLbl.Name = "versNrAufnLbl";
-            this.versNrAufnLbl.Size = new System.Drawing.Size(117, 20);
+            this.versNrAufnLbl.Size = new System.Drawing.Size(234, 37);
             this.versNrAufnLbl.TabIndex = 15;
             this.versNrAufnLbl.Text = "Versichertennr.";
             // 
@@ -168,7 +168,7 @@ namespace SoftBed
             this.abteilungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.abteilungLbl.Location = new System.Drawing.Point(77, 344);
             this.abteilungLbl.Name = "abteilungLbl";
-            this.abteilungLbl.Size = new System.Drawing.Size(76, 20);
+            this.abteilungLbl.Size = new System.Drawing.Size(151, 37);
             this.abteilungLbl.TabIndex = 17;
             this.abteilungLbl.Text = "Abteilung";
             // 
@@ -186,7 +186,7 @@ namespace SoftBed
             "Intensivstation"});
             this.abteilungDropDown.Location = new System.Drawing.Point(156, 344);
             this.abteilungDropDown.Name = "abteilungDropDown";
-            this.abteilungDropDown.Size = new System.Drawing.Size(282, 28);
+            this.abteilungDropDown.Size = new System.Drawing.Size(282, 45);
             this.abteilungDropDown.TabIndex = 7;
             this.abteilungDropDown.TabStop = false;
             this.abteilungDropDown.SelectedIndexChanged += new System.EventHandler(this.abteilungDropDown_SelectedIndexChanged);
@@ -208,7 +208,7 @@ namespace SoftBed
             this.patAufnLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patAufnLbl.Location = new System.Drawing.Point(32, 118);
             this.patAufnLbl.Name = "patAufnLbl";
-            this.patAufnLbl.Size = new System.Drawing.Size(166, 20);
+            this.patAufnLbl.Size = new System.Drawing.Size(311, 37);
             this.patAufnLbl.TabIndex = 21;
             this.patAufnLbl.Text = "Patientenaufnahme";
             // 
@@ -229,7 +229,7 @@ namespace SoftBed
             this.meldungLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.meldungLbl.Location = new System.Drawing.Point(32, 497);
             this.meldungLbl.Name = "meldungLbl";
-            this.meldungLbl.Size = new System.Drawing.Size(77, 20);
+            this.meldungLbl.Size = new System.Drawing.Size(146, 37);
             this.meldungLbl.TabIndex = 23;
             this.meldungLbl.Text = "Meldung";
             // 
@@ -240,7 +240,7 @@ namespace SoftBed
             this.editMeldungLdl.ForeColor = System.Drawing.Color.Salmon;
             this.editMeldungLdl.Location = new System.Drawing.Point(32, 537);
             this.editMeldungLdl.Name = "editMeldungLdl";
-            this.editMeldungLdl.Size = new System.Drawing.Size(0, 20);
+            this.editMeldungLdl.Size = new System.Drawing.Size(0, 37);
             this.editMeldungLdl.TabIndex = 24;
             // 
             // patSucheLbl
@@ -249,7 +249,7 @@ namespace SoftBed
             this.patSucheLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patSucheLbl.Location = new System.Drawing.Point(564, 127);
             this.patSucheLbl.Name = "patSucheLbl";
-            this.patSucheLbl.Size = new System.Drawing.Size(134, 20);
+            this.patSucheLbl.Size = new System.Drawing.Size(250, 37);
             this.patSucheLbl.TabIndex = 25;
             this.patSucheLbl.Text = "Patientensuche";
             // 
@@ -258,7 +258,7 @@ namespace SoftBed
             this.versNrSucheTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrSucheTxt.Location = new System.Drawing.Point(688, 168);
             this.versNrSucheTxt.Name = "versNrSucheTxt";
-            this.versNrSucheTxt.Size = new System.Drawing.Size(238, 26);
+            this.versNrSucheTxt.Size = new System.Drawing.Size(238, 44);
             this.versNrSucheTxt.TabIndex = 9;
             // 
             // versNrSucheLbl
@@ -267,7 +267,7 @@ namespace SoftBed
             this.versNrSucheLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versNrSucheLbl.Location = new System.Drawing.Point(564, 168);
             this.versNrSucheLbl.Name = "versNrSucheLbl";
-            this.versNrSucheLbl.Size = new System.Drawing.Size(117, 20);
+            this.versNrSucheLbl.Size = new System.Drawing.Size(234, 37);
             this.versNrSucheLbl.TabIndex = 26;
             this.versNrSucheLbl.Text = "Versichertennr.";
             // 
@@ -337,7 +337,7 @@ namespace SoftBed
             // 
             this.dTPGebDat.Location = new System.Drawing.Point(156, 238);
             this.dTPGebDat.Name = "dTPGebDat";
-            this.dTPGebDat.Size = new System.Drawing.Size(282, 26);
+            this.dTPGebDat.Size = new System.Drawing.Size(282, 44);
             this.dTPGebDat.TabIndex = 3;
             // 
             // patientensucheMeldungTxt
@@ -347,12 +347,12 @@ namespace SoftBed
             this.patientensucheMeldungTxt.ForeColor = System.Drawing.Color.Black;
             this.patientensucheMeldungTxt.Location = new System.Drawing.Point(564, 219);
             this.patientensucheMeldungTxt.Name = "patientensucheMeldungTxt";
-            this.patientensucheMeldungTxt.Size = new System.Drawing.Size(0, 20);
+            this.patientensucheMeldungTxt.Size = new System.Drawing.Size(0, 37);
             this.patientensucheMeldungTxt.TabIndex = 29;
             // 
             // PatientenVerwaltung
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);

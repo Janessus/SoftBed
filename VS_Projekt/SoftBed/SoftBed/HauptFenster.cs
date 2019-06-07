@@ -23,8 +23,8 @@ namespace SoftBed
 
             RefreshHauptfenster();  //refresh everything
 
-            label1.Text = "User: " + UserManagement.CurrentUser.Benutzername;
-            label2.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
+            labelUser.Text = "User: " + UserManagement.CurrentUser.Benutzername;
+            labelRechte.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
         }
 
         /**
