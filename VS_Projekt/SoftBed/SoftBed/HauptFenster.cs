@@ -48,7 +48,7 @@ namespace SoftBed
 
                     ZimmerManagement.GetInstance().DeleteMemberTransferliste(selectedRows[0].Cells[1].Value.ToString(), selectedRows[0].Cells[0].Value.ToString());  //klappt vielleicht
 
-
+                    RefreshHauptfenster();
                 }
             }
             else

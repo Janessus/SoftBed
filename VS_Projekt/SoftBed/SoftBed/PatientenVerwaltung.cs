@@ -83,7 +83,7 @@ namespace SoftBed
                 if (selectedPatient != null)    //if patient exists
                 {
                     patAnzDGV.Rows.Clear();
-                    patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, "Bettnr Implement. fehlt noch");
+                    patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, selectedPatient.ZimmerNr);
                     patientensucheMeldungTxt.Text = "";
                 }
                 else
@@ -411,6 +411,6 @@ namespace SoftBed
             DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             return result;
         }
-        
+
     }
 }
