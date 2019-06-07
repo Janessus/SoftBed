@@ -412,5 +412,12 @@ namespace SoftBed
             return result;
         }
 
+        private void versNrSucheTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sucheBtn_Click(sender,e);
+            }
+        }
     }
 }
