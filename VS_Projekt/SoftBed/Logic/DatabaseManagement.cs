@@ -64,16 +64,6 @@ namespace Logic
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
                 Reader = cmd.ExecuteReader();
             }
-
-            catch (MySqlException e)
-            {
-                if (e.HResult == -2146232015)
-                    Console.WriteLine("EXECUTE_QUERY Not Existing");
-                else
-                {
-                    UncaughtExeption("EXECUTE_QUERY", e);
-                }
-            }
             catch (Exception e)
             {
                 UncaughtExeption("EXECUTE_QUERY", e);
