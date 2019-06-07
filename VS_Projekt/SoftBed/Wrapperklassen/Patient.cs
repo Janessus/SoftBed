@@ -12,6 +12,8 @@ namespace Wrapperklassen
         private string _beschwerde;
         private DateTime _aufnahmedatum;
         private string _geschlecht;
+        private string _zimmernr;
+        private string _bett;
 
         public string Versicherungsnr { get => _versicherungsnr; set => _versicherungsnr = value; }
         public DateTime Gebdat { get => _gebdat; set => _gebdat = value; }
@@ -19,6 +21,8 @@ namespace Wrapperklassen
         public string Beschwerde { get => _beschwerde; set => _beschwerde = value; }
         public DateTime Aufnahmedatum { get => _aufnahmedatum; set => _aufnahmedatum = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
+        public string Bett { get => _bett; set => _bett = value; }
+        public string ZimmerNr { get => _zimmernr; set => _zimmernr = value; }
 
         public Patient()
         {

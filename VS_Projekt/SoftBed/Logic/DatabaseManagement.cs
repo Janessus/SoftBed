@@ -24,8 +24,7 @@ namespace Logic
 
 
         //connects to the server specified in the connectionString
-        //TODO set to private
-        public MySqlConnection Connect()
+        private MySqlConnection Connect()
         {
             /* Local
             string connectionString = "SERVER=192.168.178.88;" +
@@ -56,8 +55,7 @@ namespace Logic
 
 
         //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
-        //TODO set to private
-        public MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
+        private MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
         {
             MySqlDataReader Reader = null;
 
@@ -84,8 +82,7 @@ namespace Logic
             return Reader;
         }
 
-        //TODO set to private
-        public bool ExecuteInsert(String query, MySqlConnection Connection)
+        private bool ExecuteInsert(String query, MySqlConnection Connection)
         {
             try
             {
@@ -114,7 +111,10 @@ namespace Logic
             {
                 MySqlConnection Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht FROM Patient, Person WHERE VersicherungsNr=\"" + versicherungsNummer + "\" AND Patient.PersonID = Person.PersonID;", Connection);
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht " +
+                                      "FROM Patient, Person " +
+                                      "WHERE VersicherungsNr=\"" + versicherungsNummer + "\" " +
+                                      "AND Patient.PersonID = Person.PersonID;", Connection);
 
                 if (Reader.Read())
                 {
@@ -146,8 +146,12 @@ namespace Logic
                 try
                 {
                     MySqlConnection Connection = Connect();
-                    bool response = ExecuteInsert("UPDATE Patient SET StationsBezeichnung = \"" + patient.Station + "\", " + "Beschwerde = \"" +
-                                 patient.Beschwerde + "\" WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";", Connection);
+                    bool response = ExecuteInsert("UPDATE Patient " +
+                                                  "SET StationsBezeichnung = \"" + patient.Station + "\", " + 
+                                                  "ZimmerNr = \"" + patient.ZimmerNr + "\", " +
+                                                  "Bett = \"" + patient.Bett + "\", " +
+                                                  "Beschwerde = \"" + patient.Beschwerde + "\" " +
+                                                  "WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";", Connection);
                     Connection.Close();
                     return response;
                 }
@@ -267,11 +271,36 @@ namespace Logic
             return verlegungsliste;
         }
 
+
+
+
         public bool DeleteMemberTransferliste(string vorname, string nachname)
         {
-            //TODO
-            return false;
+            string query = "DELETE FROM TransferListe " +
+                           "WHERE PersonID IN" +
+                           "(" +
+                               "SELECT p.PersonID " +
+                               "FROM Person p " +
+                               "WHERE p.Vorname = \"" + vorname + "\" " +
+                               "AND p.Nachname = \"" + nachname + "\" " +
+                           ");";
+            bool response = false;
+
+            try
+            {
+                MySqlConnection Connection = Connect();
+                response = ExecuteInsert(query, Connection);
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                UncaughtExeption("DELETEMEMBERTRANSFERLISTE", e);
+            }
+
+            return response;
         }
+
+
 
         public bool PersonAnlegen(Patient p)
         {
@@ -562,6 +591,12 @@ namespace Logic
 
             string result = stationKurz + "-" + zimmerNr + "-" + Bett;
             connection.Close();
+
+            patient.Bett = Bett;
+            patient.ZimmerNr = zimmerNr.ToString();
+            patient.Station = Station;
+            //result &= PatientAendern(patient);
+
             return result;
         }
 

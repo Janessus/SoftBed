@@ -180,7 +180,7 @@ namespace SoftBed
                                     if (doneRight)
                                     {
                                         editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
-                                        pZimmerManagement.PatientenTransfer(currentPatientenVNr);
+                                        pZimmerManagement.PatientenTransfer(currentPatientenVNr, roomSuggestion);
                                     }
                                     else
                                     {
