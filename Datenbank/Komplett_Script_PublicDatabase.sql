@@ -74,12 +74,13 @@ create table IF NOT EXISTS Patient
 
 create table IF NOT EXISTS TransferListe
 (
-	PersonID int AUTO_INCREMENT,
+	PersonID int,
 	Von Varchar(10),
     Nach varchar(10),
     Stempel Timestamp DEFAULT current_timestamp,
-
-    PRIMARY KEY (PersonID, Stempel)
+	
+    FOREIGN KEY(PersonID) REFERENCES Patient(PersonID) on delete cascade,
+    PRIMARY KEY (PersonID)
 );
 
 
