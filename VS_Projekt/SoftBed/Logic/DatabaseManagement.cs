@@ -130,14 +130,48 @@ namespace Logic
             return p;
         }
 
+
+
         public List<Patient> GetAllPatients()
         {
-            List<Patient> patients = new List<Patient>();
+            List<Patient> patients = null;
+            string query = "select pe.Vorname, pe.Nachname, pa.VersicherungsNr, pe.Geburtsdatum, pa.StationsBezeichnung, pa.Aufnahmedatum, pe.Geschlecht, pa.Bett, pa.ZimmerNr " +
+                           "from Patient pa, Person pe " +
+                           "where pa.PersonID = pe.PersonID; ";
 
-            //TODO
+            try
+            {
+                MySqlConnection connection = Connect();
+                connection.Open();
+                MySqlDataReader reader = ExecuteQuery(query, connection);
+
+                patients = new List<Patient>();
+
+                while (reader.Read())
+                {
+                    patients.Add(new Patient(
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetDateTime(3),
+                        reader.GetString(4),
+                        "",
+                        reader.GetDateTime(5),
+                        reader.GetString(6)
+                        ));
+                }
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                UncaughtExeption("GET ALL PATIENTS", e);
+            }
 
             return patients;
         }
+
+
+
 
         public bool PatientAendern(Patient patient)
         {
@@ -607,11 +641,7 @@ namespace Logic
         {
             try
             {
-                Patient p = new Patient();
-                p.Geschlecht = "w";
-
-                Console.WriteLine(GetPassendesBett("Gynäkologie", p));
-
+                Console.WriteLine(GetAllPatients().ToArray()[0].Vorname);
 
                 /*
 
