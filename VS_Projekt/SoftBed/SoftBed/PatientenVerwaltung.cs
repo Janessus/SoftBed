@@ -43,7 +43,7 @@ namespace SoftBed
                     // If the yes button was pressed ...
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
-                        bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);    //delete Patient
+                        bool result = pPatientenManagement.PatientLoeschen(patAnzDGV.SelectedRows[0].Cells[0].Value.ToString());    //delete Patient
                         if (result) //if worked
                         {
                             editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
