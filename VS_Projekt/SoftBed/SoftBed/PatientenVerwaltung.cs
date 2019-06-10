@@ -415,14 +415,6 @@ namespace SoftBed
             return result;
         }
 
-        private void versNrSucheTxt_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                sucheBtn_Click(sender,e);
-            }
-        }
-
         private void ShowAllPatients(List<Patient> patients)
         {
             patAnzDGV.Rows.Clear();
@@ -430,6 +422,18 @@ namespace SoftBed
             {
                 patAnzDGV.Rows.Add(patients[i].Versicherungsnr, patients[i].Nachname, patients[i].Vorname,
                     patients[i].ZimmerNr);
+            }
+        }
+
+        private void VersNrSucheTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sucheBtn_Click(sender, e);
+            }
+            if (e.KeyCode == Keys.Back && versNrSucheTxt.Text == "")
+            {
+                ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
             }
         }
     }

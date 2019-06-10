@@ -260,7 +260,7 @@ namespace SoftBed
             this.versNrSucheTxt.Name = "versNrSucheTxt";
             this.versNrSucheTxt.Size = new System.Drawing.Size(238, 44);
             this.versNrSucheTxt.TabIndex = 9;
-            this.versNrSucheTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.versNrSucheTxt_KeyDown);
+            this.versNrSucheTxt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VersNrSucheTxt_KeyUp);
             // 
             // versNrSucheLbl
             // 
