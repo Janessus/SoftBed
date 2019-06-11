@@ -11,22 +11,23 @@ namespace UnitTests
         [TestMethod]
         public void PatientenTransferTest()
         {
-            string versicherungsNummer = null;
+            Patient dummy = new Patient("Max", "Mustermann", "E987656789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
+
+            PatientenManagement.GetInstance().PatientAnlegen(dummy, "IM-10-F");
+
             ZimmerManagement zimmerManagement = ZimmerManagement.GetInstance();
 
-            bool test1 = zimmerManagement.PatientenTransfer(versicherungsNummer);
+            bool test1 = zimmerManagement.PatientenTransfer(dummy.Versicherungsnr, "On-20-T");
+
+            Assert.IsTrue(test1);
         }
 
         [TestMethod]
         public void SuchePassendesBettTest()
         {
             ZimmerManagement zimmerManagement = ZimmerManagement.GetInstance();
-            
-        }
+            //Patient dummy = DatabaseManagement.GetInstance().GetPatient("E987656789");
 
-        [TestMethod]
-        public void KHFülleTest()
-        {
 
         }
 

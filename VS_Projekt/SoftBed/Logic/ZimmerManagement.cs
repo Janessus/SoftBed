@@ -222,5 +222,42 @@ namespace Logic
             // patient auf station mit größter freier kapaziät unterbringen
             return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[0], patient);
         }
+
+        public bool ITSVoll()
+        {
+            Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
+
+            if (belegung.Intensiv == 10)
+            {
+                try
+                {
+                    MailMessage mail = new MailMessage();
+                    mail.From = new MailAddress("krankenhausverteiler@gmail.com"); //Absender 
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("krankenhausverteiler@gmail.com", "SoftBedProject"); //Adresse und Passwort
+                    smtp.Host = "smtp.gmail.com";
+                    mail.To.Add("krankenhausverteiler@gmail.com"); //Empfänger 
+
+                    mail.Subject = "Die Kapazizäten unserer Intensivstation sind erschöpft!";
+                    mail.Body = "Sehr geehrte Kolleginnen und Kollegen,\n" +
+                                "die Betten auf unserer Intensivstationen sind vollständig belegt.\n" +
+                                "Dies ist eine Anfrage, Patienten an sie zu transferieren, da keine Kapaziäten mehr auf unserer Intensivstation vorhanden sind.\n" +
+                                "Mit freundlichen Grüßen";
+                    smtp.Send(mail);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Fehler beim Senden der E-Mail\n\n{0}", ex.Message);
+                }
+            }
+
+            return false;
+        }
     }
 }

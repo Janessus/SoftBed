@@ -9,12 +9,13 @@ using Wrapperklassen;
 
 namespace UnitTests
 {
-
+    [TestClass]
     class UpdateManagementTest
     {
 
         /**
          * Test zum Patient getten
+         * schlägt fehl wenn anderer Patient zurückkommt als gewollt
          * schlägt fehl wenn anderer Patient zurückkommt als gewollt
          */
         [TestMethod]
@@ -22,11 +23,11 @@ namespace UnitTests
         {
             UpdateManagement uM = UpdateManagement.GetInstance();
             PatientenManagement pM = PatientenManagement.GetInstance();
-            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy = new Patient("Max", "Mustermann", "X123456789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
 
-            pM.PatientAnlegen(dummy);
+            pM.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
-            Patient dummy2 = uM.GetPatient(123);
+            Patient dummy2 = uM.GetPatient("X123456789");
 
             Assert.IsTrue(dummy.Equals(dummy2));    
         }
@@ -59,21 +60,19 @@ namespace UnitTests
         {
             UpdateManagement upM = UpdateManagement.GetInstance();
             PatientenManagement pM = PatientenManagement.GetInstance();
-            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
-            Patient dummy2 = new Patient("Sven", "Knabe", 456, "02.02.2010", "P", "", new DateTime(2019, 05, 01), "maennlich");
-            Patient dummy3 = new Patient("Christina", "Meier", 899, "05.04.1997", "On", "", new DateTime(2019, 09, 01), "weiblich");
+            Bettenbelegung bettenbelegung1 = upM.GetCurrentBettenbelegung();
+            Patient dummy = new Patient("Max", "Mustermann", "F111222333", new DateTime(1985, 01, 01) , "Onkologie", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy2 = new Patient("Sven", "Knabe", "G456789012", new DateTime(2010,02, 02), "Pädiatrie", "", new DateTime(2019, 05, 01), "m");
+            Patient dummy3 = new Patient("Christina", "Meier", "H899001233", new DateTime(1997, 04, 05), "Onkologie", "", new DateTime(2019, 09, 01), "w");
 
-            pM.PatientAnlegen(dummy);
-            pM.PatientAnlegen(dummy2);
-            pM.PatientAnlegen(dummy3);
 
-            Bettenbelegung bettenbelegung1 = new Bettenbelegung();
-            bettenbelegung1.Onkologie = 2;
-            bettenbelegung1.Paediatrie = 1;
+            pM.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
+            pM.PatientAnlegen(dummy2, ZimmerManagement.GetInstance().suchePassendesBett(dummy2));
+            pM.PatientAnlegen(dummy3, ZimmerManagement.GetInstance().suchePassendesBett(dummy3));
 
             Bettenbelegung bettenbelegung2 = upM.GetCurrentBettenbelegung();
 
-            Assert.IsTrue(bettenbelegung1.Equals(bettenbelegung2));
+            Assert.IsTrue(bettenbelegung1.Gesamt()+3 == bettenbelegung2.Gesamt());
         }
 
         /**
@@ -86,25 +85,25 @@ namespace UnitTests
             UpdateManagement upM = UpdateManagement.GetInstance();
             ZimmerManagement zM = ZimmerManagement.GetInstance();
             PatientenManagement pM = PatientenManagement.GetInstance();
-            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
-            Patient dummy2 = new Patient("Sven", "Knabe", 456, "02.02.2010", "P", "", new DateTime(2019, 05, 01), "maennlich");
-            Patient dummy3 = new Patient("Christina", "Meier", 899, "05.04.1997", "On", "", new DateTime(2019, 09, 01), "weiblich");
+            Patient dummy = new Patient("Max", "Mustermann", "I123654789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy2 = new Patient("Sven", "Knabe", "J987456123", new DateTime(2010, 02, 02), "Pädiatrie", "", new DateTime(2019, 05, 01), "m");
+            Patient dummy3 = new Patient("Christina", "Meier", "K899112445", new DateTime(1997, 04, 05), "Onkologie", "", new DateTime(2019, 09, 01), "w");
 
-            pM.PatientAnlegen(dummy);
-            pM.PatientAnlegen(dummy2);
-            pM.PatientAnlegen(dummy3);
+            pM.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
+            pM.PatientAnlegen(dummy2, ZimmerManagement.GetInstance().suchePassendesBett(dummy2));
+            pM.PatientAnlegen(dummy3, ZimmerManagement.GetInstance().suchePassendesBett(dummy3));
 
             Verlegungsliste verlegungsliste1 = upM.GetCurrentVerlegungsliste();
 
             Verlegungsliste verlegungsliste2 = new Verlegungsliste();
 
-            VerlegungslistenItem vLI = new VerlegungslistenItem(dummy, "", "On");
+            VerlegungslistenItem vLI = new VerlegungslistenItem(dummy, "Onkologie", "Innere Medizin", DateTime.Now);
             verlegungsliste2.Transferliste.Add(vLI);
 
-            vLI = new VerlegungslistenItem(dummy2, "", "P");
+            vLI = new VerlegungslistenItem(dummy2, "Pädiatrie", "Innere Medizin", DateTime.Now);
             verlegungsliste2.Transferliste.Add(vLI);
 
-            vLI = new VerlegungslistenItem(dummy3, "", "On");
+            vLI = new VerlegungslistenItem(dummy3, "Onkologie", "Gynäkologie", DateTime.Now);
             verlegungsliste2.Transferliste.Add(vLI);
 
             Assert.IsTrue(verlegungsliste1.Equals(verlegungsliste2));
