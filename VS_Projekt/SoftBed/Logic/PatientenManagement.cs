@@ -34,6 +34,8 @@ namespace Logic
         public bool PatientAnlegen(Patient newPatient, String roomSuggestion)
         {
             bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient, roomSuggestion);
+            ZimmerManagement.GetInstance().KHFastVoll();
+            ZimmerManagement.GetInstance().ITSVoll();
 
             return request;
         }
