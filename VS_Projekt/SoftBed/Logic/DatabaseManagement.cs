@@ -149,7 +149,7 @@ namespace Logic
 
                 while (reader.Read())
                 {
-                    patients.Add(new Patient(
+                    Patient tmPatient = new Patient(
                         reader.GetString(0),
                         reader.GetString(1),
                         reader.GetString(2),
@@ -158,7 +158,14 @@ namespace Logic
                         "",
                         reader.GetDateTime(5),
                         reader.GetString(6)
-                        ));
+                    );
+
+                    tmPatient.Bett = reader.GetString(7);
+                    tmPatient.ZimmerNr = reader.GetString(8);
+
+                    patients.Add(tmPatient);
+                    
+
                 }
                 connection.Close();
             }
