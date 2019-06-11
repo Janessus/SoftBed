@@ -137,7 +137,8 @@ namespace Logic
             List<Patient> patients = null;
             string query = "select pe.Vorname, pe.Nachname, pa.VersicherungsNr, pe.Geburtsdatum, pa.StationsBezeichnung, pa.Aufnahmedatum, pe.Geschlecht, pa.Bett, pa.ZimmerNr " +
                            "from Patient pa, Person pe " +
-                           "where pa.PersonID = pe.PersonID; ";
+                           "where pa.PersonID = pe.PersonID " +
+                           "order by pe.Nachname; ";
 
             try
             {
@@ -149,7 +150,7 @@ namespace Logic
 
                 while (reader.Read())
                 {
-                    patients.Add(new Patient(
+                    Patient tmPatient = new Patient(
                         reader.GetString(0),
                         reader.GetString(1),
                         reader.GetString(2),
@@ -158,7 +159,12 @@ namespace Logic
                         "",
                         reader.GetDateTime(5),
                         reader.GetString(6)
-                        ));
+                    );
+
+                    tmPatient.Bett = reader.GetString(7);
+                    tmPatient.ZimmerNr = reader.GetString(8);
+
+                    patients.Add(tmPatient);
                 }
                 connection.Close();
             }

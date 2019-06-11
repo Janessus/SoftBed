@@ -414,16 +414,33 @@ namespace SoftBed
             DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             return result;
         }
-
         private void ShowAllPatients(List<Patient> patients)
         {
             patAnzDGV.Rows.Clear();
-            for (int i = 0; i < patients.Count; i++)
+            foreach (var patient in patients)
             {
-                patAnzDGV.Rows.Add(patients[i].Versicherungsnr, patients[i].Nachname, patients[i].Vorname,
-                    patients[i].ZimmerNr);
+
+                if (patient.Station == "Onkologie")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "On-" + patient.ZimmerNr + "-" + patient.Bett);
+                else if (patient.Station == "Orthopädie")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "Or-" + patient.ZimmerNr + "-" + patient.Bett);
+                else if (patient.Station == "Pädiatrie")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "P-" + patient.ZimmerNr + "-" + patient.Bett);
+                else if (patient.Station == "Innere Medizin")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "IM-" + patient.ZimmerNr + "-" + patient.Bett);
+                else if (patient.Station == "Intensivstation")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "Is-" + patient.ZimmerNr + "-" + patient.Bett);
+                else if (patient.Station == "Gynäkologie")
+                    patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                        "G-" + patient.ZimmerNr + "-" + patient.Bett);
             }
         }
+        
 
         private void VersNrSucheTxt_KeyUp(object sender, KeyEventArgs e)
         {
