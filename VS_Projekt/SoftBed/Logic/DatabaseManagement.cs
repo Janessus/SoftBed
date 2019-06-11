@@ -543,6 +543,9 @@ namespace Logic
             bool found = false;
             string result = "NULL";
 
+            if ((Station.Equals("Pädiatrie")) && (DateTime.Now.Subtract(patient.Gebdat).Days > 365 * 13))
+                return "NULL";
+
             switch (Station)
             {
                 case "Gynäkologie":
@@ -631,25 +634,35 @@ namespace Logic
                 connection.Close();
             }
 
+
+
             //if a room was found return it, if not search at an other station
             if (found)
                 result = stationKurz + "-" + zimmerNr + "-" + Bett;
             else
             {
-                query = "select * from Station;";
-                connection = Connect();
-                connection.Open();
-                reader = ExecuteQuery(query, connection);
+                List<string> prioritiyList = new List<string>();
+                prioritiyList.Add("Innere Medizin");
+                prioritiyList.Add("Onkologie");
+                prioritiyList.Add("Orthopädie");
+                prioritiyList.Add("Gynäkologie");
+                prioritiyList.Add("Pädiatrie");
 
-                while (reader.Read())
+                var enumerator = prioritiyList.GetEnumerator();
+
+                while (enumerator.MoveNext())
                 {
-                    string station = reader.GetString(0);
-                    if (station.Equals(Station) || station.Equals("Intensivstation"))
-                        continue;
-
-                    if (!(result = GetPassendesBett(station, patient)).Equals("NULL"))
-                        break;
+                    if (enumerator.Current != Station)
+                    {
+                        if ((result = GetPassendesBett(enumerator.Current, patient)).Equals("NULL"))
+                            continue;
+                        else
+                        {
+                            break;
+                        }
+                    }
                 }
+
                 connection.Close();
             }
 
@@ -670,7 +683,11 @@ namespace Logic
         {
             try
             {
-                Console.WriteLine(GetAllPatients().ToArray()[0].Vorname);
+                var tmp = GetAllPatients();
+                foreach (var patient in tmp)
+                {
+                    Console.WriteLine(patient.Nachname);
+                }
 
                 /*
 
