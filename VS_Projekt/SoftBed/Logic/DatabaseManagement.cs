@@ -542,6 +542,7 @@ namespace Logic
             int zimmerNr = 0;
             bool found = false;
             string result = "NULL";
+            int alter = DateTime.Now.Subtract(patient.Gebdat).Days / 365;
 
             if ((Station.Equals("Pädiatrie")) && (DateTime.Now.Subtract(patient.Gebdat).Days > 365 * 13))
                 return "NULL";
@@ -591,20 +592,13 @@ namespace Logic
 
             while (reader.Read())
             {
+                string tmpGeschlecht = patient.Geschlecht;
                 //Match Geschlecht
-                if (Station.Equals("Pädiatrie") && reader.GetChar(3).ToString().ToLower().Equals("w"))
+                if (!Station.Equals("Pädiatrie") && CheckIfAgeLt14(patient.Gebdat))
                 {
-                    zimmerNr = reader.GetInt32(0);
-
-                    if (reader.GetString(4).Equals("T"))
-                        Bett = "F";
-                    else
-                        Bett = "T";
-
-                    found = true;
-                    break;
+                    tmpGeschlecht = "w";
                 }
-                else if (reader.GetChar(3).ToString().ToLower().Equals(patient.Geschlecht.ToLower()))
+                if (reader.GetChar(3).ToString().ToLower().Equals(tmpGeschlecht))
                 {
                     zimmerNr = reader.GetInt32(0);
 
@@ -687,7 +681,18 @@ namespace Logic
             return result;
         }
 
-
+        public static bool CheckIfAgeLt14(DateTime bDay)
+        {
+            //returns true, if child is less than 14 years old
+            if (TimeSpan.Compare(TimeSpan.FromDays(5106), DateTime.Today.Subtract(bDay)) == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         // ################################################## DEV FUNCTIONS ################################################## //
 
 
