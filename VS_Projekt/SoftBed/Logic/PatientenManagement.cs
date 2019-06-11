@@ -9,6 +9,8 @@ namespace Logic
     {
 
         private static PatientenManagement _instance = null;
+        private static int islast = 0;
+        private static int geslast = 0;
 
         private PatientenManagement()
         {
@@ -34,8 +36,15 @@ namespace Logic
         public bool PatientAnlegen(Patient newPatient, String roomSuggestion)
         {
             bool request = DatabaseManagement.GetInstance().PatientAnlegen(newPatient, roomSuggestion);
-            ZimmerManagement.GetInstance().KHFastVoll();
-            ZimmerManagement.GetInstance().ITSVoll();
+
+            Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
+            if(belegung.Intensiv == 10 && islast == 9)
+                ZimmerManagement.GetInstance().ITSVoll();
+            if(belegung.Gesamt() == 225 && geslast == 224)
+                ZimmerManagement.GetInstance().KHFastVoll();
+
+            islast = belegung.Intensiv;
+            geslast = belegung.Gesamt();
 
             return request;
         }
@@ -48,6 +57,11 @@ namespace Logic
         public bool PatientLoeschen(string versNr)
         {
             bool request = DatabaseManagement.GetInstance().PatientLoeschen(versNr);
+
+            Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
+
+            islast = belegung.Intensiv;
+            geslast = belegung.Gesamt();
 
             return request;
         }
