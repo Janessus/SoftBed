@@ -161,26 +161,14 @@ namespace Logic
 
 
         /**
-         * errechnet die Gesamtauslastung des Krankenhauses
-         * @return Anazahl der belegten Betten im gesamten KH
-         */
-        private int KHFülle()
-        {
-            Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
-
-            int gesAuslast = belegung.Gesamt();
-
-            return gesAuslast;
-        }
-
-
-        /**
          * sendet eine E-Mail an umliegende Krankenhaeuser
          * @return true, wenn E-Mail erfolgreich gesendet wurde und false, wenn das Senden nicht erfolgreich war
          */
         public bool KHFastVoll()
         {
-            if (KHFülle() >= 225)
+            Bettenbelegung belegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
+
+            if (belegung.Gesamt() >= 225)
             {   
                 try
                 {
