@@ -18,9 +18,9 @@ namespace UnitTests
         [TestMethod]
         public void PatientAnlegenTest()
         {
-            Patient dummy = new Patient("Max", "Mustermann", 123, "01.01.1985", "On", "", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy = new Patient("Max", "Mustermann", "X123456789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
 
-            Assert.IsTrue(patientenManagement.PatientAnlegen(dummy));
+            Assert.IsTrue(patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy)));
         }
 
         /**
@@ -30,10 +30,10 @@ namespace UnitTests
         [TestMethod]
         public void PatientZweimalAnlegenTest()
         {
-            Patient dummy = new Patient("Maxim","Muster", 124, "01.01.1990", "IM","", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy = new Patient("Maxim","Muster", "Y987654321!", new DateTime(1990, 01, 01), "Innere Medizin","", new DateTime(2019, 04, 01), "m");
 
-            bool result1 = patientenManagement.PatientAnlegen(dummy);
-            bool result2 = patientenManagement.PatientAnlegen(dummy);
+            bool result1 = patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
+            bool result2 = patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
             Assert.IsTrue(result1 && !result2);
         }
@@ -45,11 +45,11 @@ namespace UnitTests
         [TestMethod]
         public void ZweiUngleichePatientenAnlegenTest()
         {
-            Patient dummy1 = new Patient("Max", "Mustermann", 321, "07.01.1994", "IM", "", new DateTime(2019,04,01), "maennlich");
-            Patient dummy2 = new Patient("Helga", "Hase", 322, "07.01.1989", "Gy", "", new DateTime(2019, 04, 01), "weiblich");
+            Patient dummy1 = new Patient("Max", "Mustermann", "Z321321321", new DateTime(1994, 01, 07), "Innere Medizin", "", new DateTime(2019,04,01), "m");
+            Patient dummy2 = new Patient("Helga", "Hase", "A322114456", new DateTime(1989, 01, 07), "Gynäkologie", "", new DateTime(2019, 04, 01), "w");
 
-            bool result1 = patientenManagement.PatientAnlegen(dummy1);
-            bool result2 = patientenManagement.PatientAnlegen(dummy2);
+            bool result1 = patientenManagement.PatientAnlegen(dummy1, ZimmerManagement.GetInstance().suchePassendesBett(dummy1));
+            bool result2 = patientenManagement.PatientAnlegen(dummy2, ZimmerManagement.GetInstance().suchePassendesBett(dummy2));
 
             Assert.IsTrue(result1 && result2);
         }
@@ -61,11 +61,11 @@ namespace UnitTests
         [TestMethod]
         public void PatientLoeschenTest()
         {
-            Patient dummy = new Patient("Horst", "Salz", 121, "05.07.1950", "On", "", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy = new Patient("Horst", "Salz", "B121343565", new DateTime(1950, 07, 05), "Onkologie", "", new DateTime(2019, 04, 01), "m");
 
-            patientenManagement.PatientAnlegen(dummy);
+            patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
-            Assert.IsTrue(patientenManagement.PatientLoeschen(121)); 
+            Assert.IsTrue(patientenManagement.PatientLoeschen("B121343565")); 
         }
 
         /**
@@ -75,12 +75,12 @@ namespace UnitTests
         [TestMethod]
         public void PatientZweimalLoeschen()
         {
-            Patient dummy = new Patient("Emma", "Erdbeer", 120, "´20.06.2008", "P", "", new DateTime(2019, 04, 01), "weiblich");
+            Patient dummy = new Patient("Emma", "Erdbeer", "C120234687", new DateTime(2008, 06, 20), "Pädiatrie", "", new DateTime(2019, 04, 01), "w");
 
-            patientenManagement.PatientAnlegen(dummy);
+            patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
-            bool result1 = patientenManagement.PatientLoeschen(120);
-            bool result2 = patientenManagement.PatientLoeschen(120);
+            bool result1 = patientenManagement.PatientLoeschen("C120234687");
+            bool result2 = patientenManagement.PatientLoeschen("C120234687");
 
 
             Assert.IsTrue(result1 && !result2);
@@ -93,10 +93,10 @@ namespace UnitTests
         [TestMethod]
         public void PatientAendernTest()
         {
-            Patient dummy1 = new Patient("Felix", "Fuß", 232, "01.04.2010", "IM", "", new DateTime(2019, 04, 01), "maennlich");
-            Patient dummy2 = new Patient("Felix", "Fuß", 232, "01.04.2010", "P", "", new DateTime(2019, 04, 01), "maennlich");
+            Patient dummy1 = new Patient("Felix", "Fuß", "D232908723", new DateTime(2010, 04, 01), "Innere Medizin", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy2 = new Patient("Felix", "Fuß", "D232908723", new DateTime(2010, 04, 01), "Pädiatrie", "", new DateTime(2019, 04, 01), "m");
 
-            patientenManagement.PatientAnlegen(dummy1);
+            patientenManagement.PatientAnlegen(dummy1, ZimmerManagement.GetInstance().suchePassendesBett(dummy1));
 
             bool result = patientenManagement.PatientAendern(dummy2); //Station soll geaendert werden
             Assert.IsTrue(result);

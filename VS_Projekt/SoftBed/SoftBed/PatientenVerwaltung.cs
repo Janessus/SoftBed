@@ -43,7 +43,7 @@ namespace SoftBed
                     // If the yes button was pressed ...
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
-                        bool result = pPatientenManagement.PatientLoeschen(versNrSucheTxt.Text);    //delete Patient
+                        bool result = pPatientenManagement.PatientLoeschen(patAnzDGV.SelectedRows[0].Cells[0].Value.ToString());    //delete Patient
                         if (result) //if worked
                         {
                             editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
@@ -415,14 +415,6 @@ namespace SoftBed
             return result;
         }
 
-        private void versNrSucheTxt_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                sucheBtn_Click(sender,e);
-            }
-        }
-
         private void ShowAllPatients(List<Patient> patients)
         {
             patAnzDGV.Rows.Clear();
@@ -430,6 +422,18 @@ namespace SoftBed
             {
                 patAnzDGV.Rows.Add(patients[i].Versicherungsnr, patients[i].Nachname, patients[i].Vorname,
                     patients[i].ZimmerNr);
+            }
+        }
+
+        private void VersNrSucheTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sucheBtn_Click(sender, e);
+            }
+            if (e.KeyCode == Keys.Back && versNrSucheTxt.Text == "")
+            {
+                ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
             }
         }
     }
