@@ -219,7 +219,7 @@ namespace Logic
             }
         }
 
-
+        //zimmerDst im format - Station-ZimmerNr-Bett
         public bool PatientAnlegen(Patient patient, string zimmerDst)
         {
             if (patient != null)
@@ -541,6 +541,7 @@ namespace Logic
             string stationKurz = "NULL";
             int zimmerNr = 0;
             bool found = false;
+            string result = "NULL";
 
             switch (Station)
             {
@@ -625,17 +626,39 @@ namespace Logic
                 {
                     zimmerNr = reader.GetInt32(0);
                     Bett = "F";
+                    found = true;
                 }
+                connection.Close();
             }
 
-            string result = stationKurz + "-" + zimmerNr + "-" + Bett;
-            connection.Close();
+            //if a room was found return it, if not search at an other station
+            if (found)
+                result = stationKurz + "-" + zimmerNr + "-" + Bett;
+            else
+            {
+                query = "select * from Station;";
+                connection = Connect();
+                connection.Open();
+                reader = ExecuteQuery(query, connection);
 
+                while (reader.Read())
+                {
+                    string station = reader.GetString(0);
+                    if (station.Equals(Station) || station.Equals("Intensivstation"))
+                        continue;
+
+                    if (!(result = GetPassendesBett(station, patient)).Equals("NULL"))
+                        break;
+                }
+                connection.Close();
+            }
+
+            /*
             patient.Bett = Bett;
             patient.ZimmerNr = zimmerNr.ToString();
             patient.Station = Station;
             //result &= PatientAendern(patient);
-
+            */
             return result;
         }
 
