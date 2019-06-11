@@ -592,7 +592,19 @@ namespace Logic
             while (reader.Read())
             {
                 //Match Geschlecht
-                if (reader.GetChar(3).ToString().ToLower().Equals(patient.Geschlecht.ToLower()))
+                if (Station.Equals("Pädiatrie") && reader.GetChar(3).ToString().ToLower().Equals("w"))
+                {
+                    zimmerNr = reader.GetInt32(0);
+
+                    if (reader.GetString(4).Equals("T"))
+                        Bett = "F";
+                    else
+                        Bett = "T";
+
+                    found = true;
+                    break;
+                }
+                else if (reader.GetChar(3).ToString().ToLower().Equals(patient.Geschlecht.ToLower()))
                 {
                     zimmerNr = reader.GetInt32(0);
 
