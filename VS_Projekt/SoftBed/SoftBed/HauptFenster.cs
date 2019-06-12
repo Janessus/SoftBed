@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using Wrapperklassen;
 
 namespace SoftBed
@@ -25,6 +26,7 @@ namespace SoftBed
 
             labelUser.Text = "User: " + UserManagement.CurrentUser.Benutzername;
             labelRechte.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
+
         }
 
         /**
@@ -101,18 +103,36 @@ namespace SoftBed
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             gynProgBar.Value = currentBelegung.Gynaekologie;
             labelGyn.Text = currentBelegung.Gynaekologie.ToString();
+            RefreshBettenbelegungColor(gynProgBar);
             iMProgBar.Value = currentBelegung.Innere;
             labelIm.Text = currentBelegung.Innere.ToString();
+            RefreshBettenbelegungColor(iMProgBar);
             onkProgBar.Value = currentBelegung.Onkologie;
             labelOnk.Text = currentBelegung.Onkologie.ToString();
+            RefreshBettenbelegungColor(onkProgBar);
             orthProgBar.Value = currentBelegung.Orthopaedie;
             labelOrth.Text = currentBelegung.Orthopaedie.ToString();
+            RefreshBettenbelegungColor(orthProgBar);
             paedProgBar.Value = currentBelegung.Paediatrie;
             labelPaed.Text = currentBelegung.Paediatrie.ToString();
+            RefreshBettenbelegungColor(paedProgBar);
             itsProgBar.Value = currentBelegung.Intensiv;
             labelIts.Text = currentBelegung.Intensiv.ToString();
+            RefreshBettenbelegungColor(itsProgBar);
             gesKHProgBar.Value = currentBelegung.Gesamt();
             labelGes.Text = currentBelegung.Gesamt().ToString();
+            RefreshBettenbelegungColor(gesKHProgBar);
+        }
+
+        private void RefreshBettenbelegungColor(ProgressBar pb)
+        {
+            int max = pb.Maximum;
+            if (pb.Value < (max * 0.8))
+                ModifyProgressBarColor.SetState(pb, 1);
+            else if (pb.Value < (max * 0.9))
+                ModifyProgressBarColor.SetState(pb, 3);
+            else
+                ModifyProgressBarColor.SetState(pb, 2);
         }
         
         /**
@@ -158,6 +178,16 @@ namespace SoftBed
         private void TransferListeDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+    }
+
+    public static class ModifyProgressBarColor
+    {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+        public static void SetState(this ProgressBar pBar, int state)
+        {
+            SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
         }
     }
 }
