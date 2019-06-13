@@ -9,6 +9,7 @@ namespace Wrapperklassen
         private string _versicherungsnr;
         private DateTime _gebdat;
         private string _station;
+        private string _sollstation;
         private string _beschwerde;
         private DateTime _aufnahmedatum;
         private string _geschlecht;
@@ -18,6 +19,7 @@ namespace Wrapperklassen
         public string Versicherungsnr { get => _versicherungsnr; set => _versicherungsnr = value; }
         public DateTime Gebdat { get => _gebdat; set => _gebdat = value; }
         public string Station { get => _station; set => _station = value; }
+        public string SollStation { get => _station; set => _station = value; }
         public string Beschwerde { get => _beschwerde; set => _beschwerde = value; }
         public DateTime Aufnahmedatum { get => _aufnahmedatum; set => _aufnahmedatum = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }

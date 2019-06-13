@@ -225,6 +225,7 @@ namespace SoftBed
             guiPatient.Vorname = vornameTxt.Text;
             guiPatient.Nachname = nameTxt.Text;
             guiPatient.Station = abteilungDropDown.SelectedItem.ToString();
+            guiPatient.SollStation = abteilungDropDown.SelectedItem.ToString();
             guiPatient.Gebdat = dTPGebDat.Value;
             guiPatient.Beschwerde = "";
             DateTime localDate = DateTime.Now;
