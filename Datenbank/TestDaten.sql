@@ -283,7 +283,7 @@ INSERT INTO Users(PersonID, Benutzername, Rechte, Passwort)
 	((Select PersonID FROM Person WHERE Vorname = "Mirco" AND Nachname = "Kammerdiener"), "TheSlave", "Standard", "Shackles");
 	
 
-INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde)
+INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Sollstation)
    VALUES("O410118968", (Select Person.PersonID From Person WHERE Vorname = "Leonard" AND Nachname = "Haubeil"), 1, "Innere Medizin", "F", "Reizdarm"),
    ("I803109599", (Select Person.PersonID From Person WHERE Vorname = "Larissa" AND Nachname = "Inntal"), 2, "Innere Medizin", "T", "Schlafstörung"),
    ("Y567953011", (Select Person.PersonID From Person WHERE Vorname = "Ludwig" AND Nachname = "Jäger"), 1, "Innere Medizin", "T", "Refluxerkrankung"),

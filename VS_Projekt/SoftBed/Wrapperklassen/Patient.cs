@@ -10,7 +10,6 @@ namespace Wrapperklassen
         private DateTime _gebdat;
         private string _station;
         private string _sollstation;
-        private string _beschwerde;
         private DateTime _aufnahmedatum;
         private string _geschlecht;
         private string _zimmernr;
@@ -19,8 +18,7 @@ namespace Wrapperklassen
         public string Versicherungsnr { get => _versicherungsnr; set => _versicherungsnr = value; }
         public DateTime Gebdat { get => _gebdat; set => _gebdat = value; }
         public string Station { get => _station; set => _station = value; }
-        public string SollStation { get => _station; set => _station = value; }
-        public string Beschwerde { get => _beschwerde; set => _beschwerde = value; }
+        public string SollStation { get => _sollstation; set => _sollstation = value; }
         public DateTime Aufnahmedatum { get => _aufnahmedatum; set => _aufnahmedatum = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
         public string Bett { get => _bett; set => _bett = value; }
@@ -31,14 +29,14 @@ namespace Wrapperklassen
 
         }
 
-        public Patient(string vorname, string nachname, string versnr, DateTime gebdat, string station, string beschwerde, DateTime aufnahmedatum, string geschlecht)
+        public Patient(string vorname, string nachname, string versnr, DateTime gebdat, string station, string sollstation = "", DateTime aufnahmedatum, string geschlecht)
         {
             Vorname = vorname;
             Nachname = nachname;
             Versicherungsnr = versnr;
             Gebdat = gebdat;
             Station = station;
-            Beschwerde = beschwerde;
+            SollStation = sollstation;
             Aufnahmedatum = aufnahmedatum;
             Geschlecht = geschlecht;
         }

@@ -56,6 +56,7 @@ namespace Logic
 
 
         //executes the query that was passed as an argument, returns a MySqlDataReader Object if successful and null if not
+        //"select" statements only
         private MySqlDataReader ExecuteQuery(String query, MySqlConnection Connection)
         {
             MySqlDataReader Reader = null;
@@ -73,6 +74,8 @@ namespace Logic
             return Reader;
         }
 
+        //Execute a query that does not return a table but modifies one
+        //Insert, Update, Delete ...
         private bool ExecuteInsert(String query, MySqlConnection Connection)
         {
             try
@@ -102,7 +105,7 @@ namespace Logic
             {
                 MySqlConnection Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht " +
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht " +
                                       "FROM Patient, Person " +
                                       "WHERE VersicherungsNr=\"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
@@ -113,11 +116,11 @@ namespace Logic
                     string nachname = Reader.GetString(2);
                     DateTime gebdat = DateTime.Parse(Reader.GetString(3));
                     string station = Reader.GetString(4);
-                    string beschwerde = Reader.GetString(5);
+                    string sollstation = Reader.GetString(5);
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
 
-                    p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
+                    p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
                 }
 
                 Connection.Close();
@@ -178,7 +181,7 @@ namespace Logic
 
 
 
-
+        //Versicherungsnummer kann nicht geändert werden
         public bool PatientAendern(Patient patient)
         {
             if(patient != null)
@@ -189,7 +192,7 @@ namespace Logic
                                                   "SET StationsBezeichnung = \"" + patient.Station + "\", " + 
                                                   "ZimmerNr = \"" + patient.ZimmerNr + "\", " +
                                                   "Bett = \"" + patient.Bett + "\", " +
-                                                  "Beschwerde = \"" + patient.Beschwerde + "\" " +
+                                                  "Sollstation = \"" + patient.SollStation + "\" " +
                                                   "WHERE VersicherungsNr = \"" + patient.Versicherungsnr + "\";", Connection);
                     Connection.Close();
                     return response;
@@ -208,8 +211,12 @@ namespace Logic
             try
             {
                 MySqlConnection Connection = Connect();
+                Patient p = GetPatient(versicherungsNummer);
                 bool response = ExecuteInsert("DELETE FROM Patient WHERE VersicherungsNr = \"" + versicherungsNummer + "\";", Connection);
                 Connection.Close();
+
+                RoomGotFree(p);
+
                 return response;
             }
             catch (Exception e)
@@ -219,13 +226,41 @@ namespace Logic
             }
         }
 
+        private void RoomGotFree(Patient p)
+        {
+            string query = "SELECT pa.VersicherungsNr, pa.Sollstation, pa.Aufnahmedatum FROM Patient pa WHERE NOT (pa.Sollstation = \"\") ORDER BY pa.Aufnahmedatum ASC;";
+            MySqlConnection connection;
+            MySqlDataReader reader;
+
+            connection = Connect();
+            reader = ExecuteQuery(query, connection);
+
+            if (reader != null)
+            {
+                while (reader.Read())
+                {
+                    if (reader.GetString(1).Equals(p.Station))
+                    {
+                        string bett = GetPassendesBett(p.Station, p);
+
+                        if (!bett.Equals("NULL"))
+                        {
+
+                        }
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+
         //zimmerDst im format - Station-ZimmerNr-Bett
         public bool PatientAnlegen(Patient patient, string zimmerDst)
         {
             if (patient != null)
             {
                 string query =
-                    "INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Beschwerde) " +
+                    "INSERT INTO Patient(VersicherungsNr, PersonID, ZimmerNr, StationsBezeichnung, Bett, Sollstation) " +
                     "VALUES(\"" + 
                     patient.Versicherungsnr + "\"," +                 // VersicherungsNr
                     "(SELECT Person.PersonID From Person " +          // PersonID
@@ -236,7 +271,7 @@ namespace Logic
                     "NULL" + ",\"" +                                  // ZimmerNr
                     patient.Station + "\"," +                         // Station
                     "\'F\'" + ",\"" +                                 // Bett
-                    patient.Beschwerde + "\");";                      // Beschwerde
+                    patient.SollStation + "\");";                     // Sollstation
 
                 try
                 {
@@ -249,10 +284,10 @@ namespace Logic
                         "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
                         patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"NULL\"" + ", \"" + zimmerDst + "\");";
 
-                    var tmp = ExecuteInsert(query, Connection);
+                    bool tmp = ExecuteInsert(query, Connection);
 
                     Connection.Close();
-                    return response;
+                    return response & tmp;
                 }
                 catch (Exception e)
                 {
@@ -537,11 +572,16 @@ namespace Logic
         //looks for a room with 1 person in it and matches the gender, if no room with 1 person is available search for empty rooms
         public string GetPassendesBett(string Station, Patient patient)
         {
+            string query = "";
             string Bett = "NULL";
             string stationKurz = "NULL";
             int zimmerNr = 0;
             bool found = false;
             string result = "NULL";
+
+            MySqlConnection connection = null;
+            MySqlDataReader reader = null;
+
             int alter = DateTime.Now.Subtract(patient.Gebdat).Days / 365;
 
             if ((Station.Equals("Pädiatrie")) && (DateTime.Now.Subtract(patient.Gebdat).Days > 365 * 13))
@@ -577,42 +617,46 @@ namespace Logic
                     break;
             }
 
-            //Select all rooms with exactly 1 person in it
-            string query = "select z.ZimmerNr, z.StationsBezeichnung, p.VersicherungsNr, pe.Geschlecht, p.Bett, pe.Geburtsdatum " +
-                           "from Zimmer z, Patient p, Person pe " +
-                           "where z.ZimmerNr = p.ZimmerNr " +
-                           "and z.StationsBezeichnung = p.StationsBezeichnung " +
-                           "and z.StationsBezeichnung = \"" + Station + "\" " +
-                           "and pe.PersonID = p.PersonID " +
-                           "group by z.ZimmerNr having count(z.ZimmerNr) < 2; ";
-
-            MySqlConnection connection = Connect();
-            connection.Open();
-            MySqlDataReader reader = ExecuteQuery(query, connection);
-
-            while (reader.Read())
+            if (!Station.Equals("Intensivstation"))
             {
-                string tmpGeschlecht = patient.Geschlecht;
-                //Match Geschlecht
-                if (!Station.Equals("Pädiatrie") && CheckIfAgeLt14(patient.Gebdat))
-                {
-                    tmpGeschlecht = "w";
-                }
-                if (reader.GetChar(3).ToString().ToLower().Equals(tmpGeschlecht))
-                {
-                    zimmerNr = reader.GetInt32(0);
+                //Select all rooms with exactly 1 person in it
+                query = "select z.ZimmerNr, z.StationsBezeichnung, p.VersicherungsNr, pe.Geschlecht, p.Bett, pe.Geburtsdatum " +
+                               "from Zimmer z, Patient p, Person pe " +
+                               "where z.ZimmerNr = p.ZimmerNr " +
+                               "and z.StationsBezeichnung = p.StationsBezeichnung " +
+                               "and z.StationsBezeichnung = \"" + Station + "\" " +
+                               "and pe.PersonID = p.PersonID " +
+                               "group by z.ZimmerNr having count(z.ZimmerNr) < 2; ";
 
-                    if (reader.GetString(4).Equals("T"))
-                        Bett = "F";
-                    else
-                        Bett = "T";
+                connection = Connect();
+                connection.Open();
+                reader = ExecuteQuery(query, connection);
 
-                    found = true;
-                    break;
+                while (reader.Read())
+                {
+                    string tmpGeschlecht = patient.Geschlecht;
+                    //Match Geschlecht
+                    if (!Station.Equals("Pädiatrie") && CheckIfAgeLt14(patient.Gebdat))
+                    {
+                        tmpGeschlecht = "w";
+                    }
+                    if (reader.GetChar(3).ToString().ToLower().Equals(tmpGeschlecht))
+                    {
+                        zimmerNr = reader.GetInt32(0);
+
+                        if (reader.GetString(4).Equals("T"))
+                            Bett = "F";
+                        else
+                            Bett = "T";
+
+                        found = true;
+                        break;
+                    }
                 }
+
+                connection.Close();
             }
 
-            connection.Close();
 
             //Select all empty rooms from the given station
             if (!found)
@@ -641,12 +685,14 @@ namespace Logic
             }
 
 
-
             //if a room was found return it, if not search at an other station
             if (found)
                 result = stationKurz + "-" + zimmerNr + "-" + Bett;
-            else
+            else //TODO Test
             {
+                if(patient.SollStation.Equals(""))
+                    patient.SollStation = Station;
+
                 List<string> prioritiyList = new List<string>();
                 prioritiyList.Add("Innere Medizin");
                 prioritiyList.Add("Onkologie");
@@ -672,7 +718,7 @@ namespace Logic
                 connection.Close();
             }
 
-            /*
+            /* TODO 
             patient.Bett = Bett;
             patient.ZimmerNr = zimmerNr.ToString();
             patient.Station = Station;
@@ -705,40 +751,6 @@ namespace Logic
                 {
                     Console.WriteLine(patient.Nachname);
                 }
-
-                /*
-
-                User u = new User("Janes", "Heuberger", "Praktikant", "JanesPraktikant", "PW");
-                UserAnlegen(u);
-
-                PersonAnlegen("Albert", "Einstein");
-                PatientAnlegen(new Patient("Pa2lo", "Esscoabar", "213350", DateTime.Parse("1937-10-04"), "Innere Medizin", "Überdosis + Stichwunden", DateTime.Now, "M"));
-                PatientAnlegen(new Patient("Maadx", "Musatedrmann", "442", DateTime.Parse("1937-10-04"), "Orthopädie", "Ihm tut irgendwas weh", DateTime.Now, "M"));
-                GetPatient("12345");
-                //PatientLoeschen("442");
-
-                User u = GetUser("Janessus");
-                Console.WriteLine(u.Rechte);
-
-                //PatientAendern(GetPatient("12345"));
-                Console.WriteLine("Betten Belegt: " + GetBettenbelegung().Gesamt());
-
-                //UncaughtExeption("test", new Exception("test"));
-
-
-                //Patient p1 = GetPatient("12345");
-                //PrintPatient(p1);
-
-                //Connection.Close();
-                //Connection.Dispose();
-
-                //User u = GetUser("Janessus");
-                //Console.WriteLine(u.Rechte);
-
-                //UserLoeschen("Janessus");
-
-                //Connection.Close();
-                */
             }
             catch (Exception e)
             {
@@ -766,7 +778,7 @@ namespace Logic
                 Console.WriteLine("Nachname = " + p.Nachname);
                 Console.WriteLine("GebDat = " + p.Gebdat.ToString());
                 Console.WriteLine("Station = " + p.Station);
-                Console.WriteLine("Beschwerde = " + p.Beschwerde);
+                Console.WriteLine("Sollstation = " + p.SollStation);
                 Console.WriteLine("AufnahmeDatum = " + p.Aufnahmedatum.ToString());
                 Console.WriteLine("Geschlecht = " + p.Geschlecht);
             }
