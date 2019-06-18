@@ -119,8 +119,14 @@ namespace Logic
                     string sollstation = Reader.GetString(5);
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
+<<<<<<< Updated upstream
 
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
+=======
+
+
+                    p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
+>>>>>>> Stashed changes
                 }
 
                 Connection.Close();
