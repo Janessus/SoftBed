@@ -75,6 +75,8 @@
             // 
             // transferListeDGV
             // 
+            this.transferListeDGV.AllowUserToResizeColumns = false;
+            this.transferListeDGV.AllowUserToResizeRows = false;
             this.transferListeDGV.BackgroundColor = System.Drawing.SystemColors.Window;
             this.transferListeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.transferListeDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
