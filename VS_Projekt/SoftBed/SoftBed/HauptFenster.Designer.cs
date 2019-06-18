@@ -67,14 +67,17 @@
             // 
             this.gesKHProgBar.Enabled = false;
             this.gesKHProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.gesKHProgBar.Location = new System.Drawing.Point(12, 606);
+            this.gesKHProgBar.Location = new System.Drawing.Point(24, 1165);
+            this.gesKHProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gesKHProgBar.Maximum = 260;
             this.gesKHProgBar.Name = "gesKHProgBar";
-            this.gesKHProgBar.Size = new System.Drawing.Size(1138, 32);
+            this.gesKHProgBar.Size = new System.Drawing.Size(2276, 62);
             this.gesKHProgBar.TabIndex = 0;
             // 
             // transferListeDGV
             // 
+            this.transferListeDGV.AllowUserToResizeColumns = false;
+            this.transferListeDGV.AllowUserToResizeRows = false;
             this.transferListeDGV.BackgroundColor = System.Drawing.SystemColors.Window;
             this.transferListeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.transferListeDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -82,12 +85,13 @@
             this.firstNameClmn,
             this.vonClmn,
             this.nachClmn});
-            this.transferListeDGV.Location = new System.Drawing.Point(707, 88);
+            this.transferListeDGV.Location = new System.Drawing.Point(1414, 169);
+            this.transferListeDGV.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.transferListeDGV.MultiSelect = false;
             this.transferListeDGV.Name = "transferListeDGV";
             this.transferListeDGV.RowHeadersVisible = false;
             this.transferListeDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.transferListeDGV.Size = new System.Drawing.Size(443, 401);
+            this.transferListeDGV.Size = new System.Drawing.Size(886, 771);
             this.transferListeDGV.TabIndex = 1;
             this.transferListeDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TransferListeDGV_CellContentClick);
             // 
@@ -119,19 +123,21 @@
             // 
             this.progBarGesLbl.AutoSize = true;
             this.progBarGesLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.progBarGesLbl.Location = new System.Drawing.Point(12, 583);
+            this.progBarGesLbl.Location = new System.Drawing.Point(24, 1121);
+            this.progBarGesLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.progBarGesLbl.Name = "progBarGesLbl";
-            this.progBarGesLbl.Size = new System.Drawing.Size(222, 20);
+            this.progBarGesLbl.Size = new System.Drawing.Size(415, 37);
             this.progBarGesLbl.TabIndex = 2;
             this.progBarGesLbl.Text = "Auslastung Betten gesamt";
             // 
             // itsProgBar
             // 
             this.itsProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.itsProgBar.Location = new System.Drawing.Point(12, 554);
+            this.itsProgBar.Location = new System.Drawing.Point(24, 1065);
+            this.itsProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.itsProgBar.Maximum = 10;
             this.itsProgBar.Name = "itsProgBar";
-            this.itsProgBar.Size = new System.Drawing.Size(374, 26);
+            this.itsProgBar.Size = new System.Drawing.Size(748, 50);
             this.itsProgBar.TabIndex = 3;
             // 
             // auslastungITSLbl
@@ -139,18 +145,20 @@
             this.auslastungITSLbl.AutoSize = true;
             this.auslastungITSLbl.BackColor = System.Drawing.Color.Transparent;
             this.auslastungITSLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.auslastungITSLbl.Location = new System.Drawing.Point(8, 531);
+            this.auslastungITSLbl.Location = new System.Drawing.Point(16, 1021);
+            this.auslastungITSLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.auslastungITSLbl.Name = "auslastungITSLbl";
-            this.auslastungITSLbl.Size = new System.Drawing.Size(222, 20);
+            this.auslastungITSLbl.Size = new System.Drawing.Size(415, 37);
             this.auslastungITSLbl.TabIndex = 4;
             this.auslastungITSLbl.Text = "Auslastung Intensivstation";
             // 
             // patVerwBtn
             // 
             this.patVerwBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.patVerwBtn.Location = new System.Drawing.Point(147, 36);
+            this.patVerwBtn.Location = new System.Drawing.Point(294, 69);
+            this.patVerwBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.patVerwBtn.Name = "patVerwBtn";
-            this.patVerwBtn.Size = new System.Drawing.Size(263, 167);
+            this.patVerwBtn.Size = new System.Drawing.Size(526, 321);
             this.patVerwBtn.TabIndex = 1;
             this.patVerwBtn.Text = "Patientenverwaltung...";
             this.patVerwBtn.UseVisualStyleBackColor = true;
@@ -158,9 +166,10 @@
             // 
             // abmeldenBtn
             // 
-            this.abmeldenBtn.Location = new System.Drawing.Point(1014, 12);
+            this.abmeldenBtn.Location = new System.Drawing.Point(2028, 23);
+            this.abmeldenBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.abmeldenBtn.Name = "abmeldenBtn";
-            this.abmeldenBtn.Size = new System.Drawing.Size(136, 32);
+            this.abmeldenBtn.Size = new System.Drawing.Size(272, 62);
             this.abmeldenBtn.TabIndex = 2;
             this.abmeldenBtn.Text = "Abmelden";
             this.abmeldenBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -169,9 +178,10 @@
             // 
             // verlAugefBtn
             // 
-            this.verlAugefBtn.Location = new System.Drawing.Point(1014, 489);
+            this.verlAugefBtn.Location = new System.Drawing.Point(2028, 940);
+            this.verlAugefBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.verlAugefBtn.Name = "verlAugefBtn";
-            this.verlAugefBtn.Size = new System.Drawing.Size(136, 32);
+            this.verlAugefBtn.Size = new System.Drawing.Size(272, 62);
             this.verlAugefBtn.TabIndex = 3;
             this.verlAugefBtn.Text = "Verlegung ausgeführt";
             this.verlAugefBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -183,9 +193,10 @@
             this.gynLbl.AutoSize = true;
             this.gynLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gynLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.gynLbl.Location = new System.Drawing.Point(27, 306);
+            this.gynLbl.Location = new System.Drawing.Point(54, 588);
+            this.gynLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.gynLbl.Name = "gynLbl";
-            this.gynLbl.Size = new System.Drawing.Size(97, 20);
+            this.gynLbl.Size = new System.Drawing.Size(194, 37);
             this.gynLbl.TabIndex = 8;
             this.gynLbl.Text = "Gynäkologie";
             // 
@@ -194,9 +205,10 @@
             this.iMLbl.AutoSize = true;
             this.iMLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.iMLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iMLbl.Location = new System.Drawing.Point(13, 344);
+            this.iMLbl.Location = new System.Drawing.Point(26, 662);
+            this.iMLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.iMLbl.Name = "iMLbl";
-            this.iMLbl.Size = new System.Drawing.Size(111, 20);
+            this.iMLbl.Size = new System.Drawing.Size(223, 37);
             this.iMLbl.TabIndex = 9;
             this.iMLbl.Text = "innere Medizin";
             // 
@@ -205,9 +217,10 @@
             this.onkLbl.AutoSize = true;
             this.onkLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.onkLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.onkLbl.Location = new System.Drawing.Point(44, 386);
+            this.onkLbl.Location = new System.Drawing.Point(88, 742);
+            this.onkLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.onkLbl.Name = "onkLbl";
-            this.onkLbl.Size = new System.Drawing.Size(80, 20);
+            this.onkLbl.Size = new System.Drawing.Size(161, 37);
             this.onkLbl.TabIndex = 10;
             this.onkLbl.Text = "Onkologie";
             // 
@@ -216,9 +229,10 @@
             this.OrthLbl.AutoSize = true;
             this.OrthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrthLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.OrthLbl.Location = new System.Drawing.Point(36, 426);
+            this.OrthLbl.Location = new System.Drawing.Point(72, 819);
+            this.OrthLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.OrthLbl.Name = "OrthLbl";
-            this.OrthLbl.Size = new System.Drawing.Size(88, 20);
+            this.OrthLbl.Size = new System.Drawing.Size(176, 37);
             this.OrthLbl.TabIndex = 11;
             this.OrthLbl.Text = "Orthopädie";
             // 
@@ -227,55 +241,61 @@
             this.pädLbl.AutoSize = true;
             this.pädLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pädLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.pädLbl.Location = new System.Drawing.Point(53, 467);
+            this.pädLbl.Location = new System.Drawing.Point(106, 898);
+            this.pädLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.pädLbl.Name = "pädLbl";
-            this.pädLbl.Size = new System.Drawing.Size(71, 20);
+            this.pädLbl.Size = new System.Drawing.Size(143, 37);
             this.pädLbl.TabIndex = 12;
             this.pädLbl.Text = "Pädiatrie";
             // 
             // gynProgBar
             // 
             this.gynProgBar.ForeColor = System.Drawing.Color.Black;
-            this.gynProgBar.Location = new System.Drawing.Point(150, 300);
+            this.gynProgBar.Location = new System.Drawing.Point(300, 577);
+            this.gynProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gynProgBar.Maximum = 50;
             this.gynProgBar.Name = "gynProgBar";
-            this.gynProgBar.Size = new System.Drawing.Size(374, 26);
+            this.gynProgBar.Size = new System.Drawing.Size(748, 50);
             this.gynProgBar.TabIndex = 13;
             // 
             // iMProgBar
             // 
             this.iMProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.iMProgBar.Location = new System.Drawing.Point(150, 338);
+            this.iMProgBar.Location = new System.Drawing.Point(300, 650);
+            this.iMProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.iMProgBar.Maximum = 50;
             this.iMProgBar.Name = "iMProgBar";
-            this.iMProgBar.Size = new System.Drawing.Size(374, 26);
+            this.iMProgBar.Size = new System.Drawing.Size(748, 50);
             this.iMProgBar.TabIndex = 14;
             // 
             // onkProgBar
             // 
             this.onkProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.onkProgBar.Location = new System.Drawing.Point(150, 380);
+            this.onkProgBar.Location = new System.Drawing.Point(300, 731);
+            this.onkProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.onkProgBar.Maximum = 50;
             this.onkProgBar.Name = "onkProgBar";
-            this.onkProgBar.Size = new System.Drawing.Size(374, 26);
+            this.onkProgBar.Size = new System.Drawing.Size(748, 50);
             this.onkProgBar.TabIndex = 15;
             // 
             // orthProgBar
             // 
             this.orthProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.orthProgBar.Location = new System.Drawing.Point(150, 420);
+            this.orthProgBar.Location = new System.Drawing.Point(300, 808);
+            this.orthProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.orthProgBar.Maximum = 50;
             this.orthProgBar.Name = "orthProgBar";
-            this.orthProgBar.Size = new System.Drawing.Size(374, 26);
+            this.orthProgBar.Size = new System.Drawing.Size(748, 50);
             this.orthProgBar.TabIndex = 16;
             // 
             // paedProgBar
             // 
             this.paedProgBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(209)))), ((int)(((byte)(79)))));
-            this.paedProgBar.Location = new System.Drawing.Point(150, 461);
+            this.paedProgBar.Location = new System.Drawing.Point(300, 887);
+            this.paedProgBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.paedProgBar.Maximum = 50;
             this.paedProgBar.Name = "paedProgBar";
-            this.paedProgBar.Size = new System.Drawing.Size(374, 26);
+            this.paedProgBar.Size = new System.Drawing.Size(748, 50);
             this.paedProgBar.TabIndex = 17;
             // 
             // bettbelegLbl
@@ -283,108 +303,109 @@
             this.bettbelegLbl.AutoSize = true;
             this.bettbelegLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bettbelegLbl.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bettbelegLbl.Location = new System.Drawing.Point(146, 254);
+            this.bettbelegLbl.Location = new System.Drawing.Point(292, 488);
+            this.bettbelegLbl.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.bettbelegLbl.Name = "bettbelegLbl";
-            this.bettbelegLbl.Size = new System.Drawing.Size(158, 24);
+            this.bettbelegLbl.Size = new System.Drawing.Size(300, 44);
             this.bettbelegLbl.TabIndex = 18;
             this.bettbelegLbl.Text = "Bettenbelegung";
             // 
             // labelUser
             // 
             this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(704, 31);
-            this.labelUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelUser.Location = new System.Drawing.Point(1408, 60);
+            this.labelUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(51, 13);
+            this.labelUser.Size = new System.Drawing.Size(103, 25);
             this.labelUser.TabIndex = 19;
             this.labelUser.Text = "labelUser";
             // 
             // labelRechte
             // 
             this.labelRechte.AutoSize = true;
-            this.labelRechte.Location = new System.Drawing.Point(818, 31);
-            this.labelRechte.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelRechte.Location = new System.Drawing.Point(1636, 60);
+            this.labelRechte.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRechte.Name = "labelRechte";
-            this.labelRechte.Size = new System.Drawing.Size(64, 13);
+            this.labelRechte.Size = new System.Drawing.Size(126, 25);
             this.labelRechte.TabIndex = 20;
             this.labelRechte.Text = "labelRechte";
             // 
             // labelGyn
             // 
             this.labelGyn.AutoSize = true;
-            this.labelGyn.Location = new System.Drawing.Point(530, 306);
-            this.labelGyn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGyn.Location = new System.Drawing.Point(1060, 588);
+            this.labelGyn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelGyn.Name = "labelGyn";
-            this.labelGyn.Size = new System.Drawing.Size(48, 13);
+            this.labelGyn.Size = new System.Drawing.Size(97, 25);
             this.labelGyn.TabIndex = 21;
             this.labelGyn.Text = "labelGyn";
             // 
             // labelIm
             // 
             this.labelIm.AutoSize = true;
-            this.labelIm.Location = new System.Drawing.Point(530, 344);
-            this.labelIm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelIm.Location = new System.Drawing.Point(1060, 662);
+            this.labelIm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelIm.Name = "labelIm";
-            this.labelIm.Size = new System.Drawing.Size(40, 13);
+            this.labelIm.Size = new System.Drawing.Size(80, 25);
             this.labelIm.TabIndex = 22;
             this.labelIm.Text = "labelIm";
             // 
             // labelOnk
             // 
             this.labelOnk.AutoSize = true;
-            this.labelOnk.Location = new System.Drawing.Point(530, 386);
-            this.labelOnk.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelOnk.Location = new System.Drawing.Point(1060, 742);
+            this.labelOnk.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelOnk.Name = "labelOnk";
-            this.labelOnk.Size = new System.Drawing.Size(49, 13);
+            this.labelOnk.Size = new System.Drawing.Size(97, 25);
             this.labelOnk.TabIndex = 23;
             this.labelOnk.Text = "labelOnk";
             // 
             // labelOrth
             // 
             this.labelOrth.AutoSize = true;
-            this.labelOrth.Location = new System.Drawing.Point(530, 426);
-            this.labelOrth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelOrth.Location = new System.Drawing.Point(1060, 819);
+            this.labelOrth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelOrth.Name = "labelOrth";
-            this.labelOrth.Size = new System.Drawing.Size(49, 13);
+            this.labelOrth.Size = new System.Drawing.Size(99, 25);
             this.labelOrth.TabIndex = 24;
             this.labelOrth.Text = "labelOrth";
             // 
             // labelPaed
             // 
             this.labelPaed.AutoSize = true;
-            this.labelPaed.Location = new System.Drawing.Point(530, 467);
-            this.labelPaed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelPaed.Location = new System.Drawing.Point(1060, 898);
+            this.labelPaed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPaed.Name = "labelPaed";
-            this.labelPaed.Size = new System.Drawing.Size(54, 13);
+            this.labelPaed.Size = new System.Drawing.Size(108, 25);
             this.labelPaed.TabIndex = 25;
             this.labelPaed.Text = "labelPaed";
             // 
             // labelIts
             // 
             this.labelIts.AutoSize = true;
-            this.labelIts.Location = new System.Drawing.Point(231, 537);
-            this.labelIts.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelIts.Location = new System.Drawing.Point(462, 1033);
+            this.labelIts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelIts.Name = "labelIts";
-            this.labelIts.Size = new System.Drawing.Size(40, 13);
+            this.labelIts.Size = new System.Drawing.Size(80, 25);
             this.labelIts.TabIndex = 26;
             this.labelIts.Text = "labelIts";
             // 
             // labelGes
             // 
             this.labelGes.AutoSize = true;
-            this.labelGes.Location = new System.Drawing.Point(231, 589);
-            this.labelGes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGes.Location = new System.Drawing.Point(462, 1133);
+            this.labelGes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelGes.Name = "labelGes";
-            this.labelGes.Size = new System.Drawing.Size(48, 13);
+            this.labelGes.Size = new System.Drawing.Size(97, 25);
             this.labelGes.TabIndex = 27;
             this.labelGes.Text = "labelGes";
             // 
             // HauptFenster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.ClientSize = new System.Drawing.Size(2324, 1240);
             this.Controls.Add(this.labelGes);
             this.Controls.Add(this.labelIts);
             this.Controls.Add(this.labelPaed);
@@ -413,6 +434,7 @@
             this.Controls.Add(this.progBarGesLbl);
             this.Controls.Add(this.transferListeDGV);
             this.Controls.Add(this.gesKHProgBar);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
             this.MouseEnter += new System.EventHandler(this.HauptFenster_MouseEnter);
