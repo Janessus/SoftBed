@@ -40,36 +40,37 @@ namespace Logic
             var subs = room.Split('-');
             string station = subs[0];
 
-            switch (station)
-            {
-                case "IM":
-                    p.Station = "Innere Medizin";
-                    break;
-                case "G":
-                    p.Station = "Gynäkologie";
-                    break;
-                case "On":
-                    p.Station = "Onkologie";
-                    break;
-                case "Or":
-                    p.Station = "Orthopädie";
-                    break;
-                case "P":
-                    p.Station = "Pädiatrie";
-                    break;
-                case "Is":
-                    p.Station = "Intensivstation";
-                    break;
-                default:
-                    return false;
-            }
-
-            p.ZimmerNr = subs[1];
-            p.Bett = subs[2];
-
             bool result = false;
+
             if (p != null)
             {
+                switch (station)
+                {
+                    case "IM":
+                        p.Station = "Innere Medizin";
+                        break;
+                    case "G":
+                        p.Station = "Gynäkologie";
+                        break;
+                    case "On":
+                        p.Station = "Onkologie";
+                        break;
+                    case "Or":
+                        p.Station = "Orthopädie";
+                        break;
+                    case "P":
+                        p.Station = "Pädiatrie";
+                        break;
+                    case "Is":
+                        p.Station = "Intensivstation";
+                        break;
+                    default:
+                        return false;
+                }
+
+                p.ZimmerNr = subs[1];
+                p.Bett = subs[2];
+
                 result = dbm.PatientAendern(p);
             }
             return result;

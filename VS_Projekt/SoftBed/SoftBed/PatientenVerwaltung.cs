@@ -191,7 +191,7 @@ namespace SoftBed
                                 String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
 
                                 // if no room was found, warning will be fired, otherwise tries to put patient in database
-                                if (roomSuggestion != null)
+                                if (!roomSuggestion.Equals("NULL"))
                                 {
                                     // can write into DB
                                     bool doneRight = pPatientenManagement.PatientAnlegen(pPatient, roomSuggestion);
@@ -243,7 +243,7 @@ namespace SoftBed
             guiPatient.Station = abteilungDropDown.SelectedItem.ToString();
             guiPatient.SollStation = abteilungDropDown.SelectedItem.ToString();
             guiPatient.Gebdat = dTPGebDat.Value;
-            guiPatient.Beschwerde = "";
+            guiPatient.SollStation = "";
             DateTime localDate = DateTime.Now;
             guiPatient.Aufnahmedatum = localDate;
 

@@ -50,7 +50,7 @@ namespace SoftBed
                 bool done = userManage.UserAnlegen(readUserFromGUI());  //create user
                 if (done == false)
                 {
-                    MessageBox.Show("Ungültige Eingabe!");
+                    MessageBox.Show("Ungültige Eingabe!"); //Oder User existiert bereits
                 }
                 else
                 {

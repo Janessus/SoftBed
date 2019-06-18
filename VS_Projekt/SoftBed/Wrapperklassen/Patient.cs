@@ -29,7 +29,7 @@ namespace Wrapperklassen
 
         }
 
-        public Patient(string vorname, string nachname, string versnr, DateTime gebdat, string station, string sollstation = "", DateTime aufnahmedatum, string geschlecht)
+        public Patient(string vorname, string nachname, string versnr, DateTime gebdat, string station, string sollstation, DateTime aufnahmedatum, string geschlecht)
         {
             Vorname = vorname;
             Nachname = nachname;

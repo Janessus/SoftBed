@@ -27,13 +27,6 @@ namespace Logic
         //connects to the server specified in the connectionString
         private MySqlConnection Connect()
         {
-            /* Local
-            string connectionString = "SERVER=192.168.178.88;" +
-             
-                                      "DATABASE=SoftBedDB;" +
-                                      "UID=softbed;" +
-                                      "PASSWORD=softbed;";
-            */
             // Public
             string connectionString = "SERVER=sql7.freemysqlhosting.net;" +
                                       "DATABASE=sql7294766;" +
@@ -105,7 +98,7 @@ namespace Logic
             {
                 MySqlConnection Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht " + //, Bett, ZimmerNr " +
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht " + //, Bett, ZimmerNr " +
                                       "FROM Patient, Person " +
                                       "WHERE VersicherungsNr=\"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
@@ -135,8 +128,48 @@ namespace Logic
             return p;
         }
 
+        public Patient GetPatient(string vorname, string nachname)
+        {
+            Patient p = null;
+            MySqlDataReader Reader = null;
 
+            try
+            {
+                MySqlConnection Connection = Connect();
+                Connection.Open();
+                Reader = ExecuteQuery("SELECT pa.VersicherungsNr, pe.Vorname, pe.Nachname, pe.Geburtsdatum, pa.StationsBezeichnung, pa.Sollstation, pa.Aufnahmedatum, pe.Geschlecht, pa.ZimmerNr " +
+                                      "FROM Patient pa, Person pe " +
+                                      "WHERE pe.PersonID = pa.PersonID" +
+                                      "AND pe.Vorname = \"" + vorname + "\" " +
+                                      "AND pe.Nachname = \"" + nachname + "\";", Connection);
 
+                if (Reader.Read())
+                {
+                    string versicherungsNummer = Reader.GetString(0);
+                    DateTime gebdat = DateTime.Parse(Reader.GetString(3));
+                    string station = Reader.GetString(4);
+                    string sollstation = Reader.GetString(5);
+                    DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
+                    string geschlecht = Reader.GetString(7);
+                    //string bett = Reader.GetString(8);
+                    //string zimmerNr = Reader.GetString(9);
+
+                    p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
+                    p.ZimmerNr = Reader.GetString(9);
+                    p.Bett = Reader.GetString(8);
+                }
+
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                UncaughtExeption("GET PATIENT", e);
+            }
+
+            return p;
+        }
+
+        // !BUG! Patientenliste wird nicht mehr angezeigt wenn ein ZimmerNr in der DB NULL ist
         public List<Patient> GetAllPatients()
         {
             List<Patient> patients = null;
@@ -217,7 +250,7 @@ namespace Logic
                 bool response = ExecuteInsert("DELETE FROM Patient WHERE VersicherungsNr = \"" + versicherungsNummer + "\";", Connection);
                 Connection.Close();
 
-                RoomGotFree(p);
+                BedGotFree(p);
 
                 return response;
             }
@@ -228,13 +261,14 @@ namespace Logic
             }
         }
 
-        private void RoomGotFree(Patient p)
+        private void BedGotFree(Patient p)
         {
             string query = "SELECT pa.VersicherungsNr, pa.Sollstation, pa.Aufnahmedatum FROM Patient pa WHERE NOT (pa.Sollstation = \"\") ORDER BY pa.Aufnahmedatum ASC;";
             MySqlConnection connection;
             MySqlDataReader reader;
 
             connection = Connect();
+            connection.Open();
             reader = ExecuteQuery(query, connection);
 
             if (reader != null)
@@ -247,7 +281,7 @@ namespace Logic
 
                         if (!bett.Equals("NULL"))
                         {
-
+                            AddToTransferList(p, bett);
                         }
                     }
                 }
@@ -277,19 +311,16 @@ namespace Logic
 
                 try
                 {
-                    PersonAnlegen(patient);
+                    if (GetPatient(patient.Versicherungsnr) == null)
+                    {
+                        PersonAnlegen(patient);
+                        MySqlConnection Connection = Connect();
+                        bool response = ExecuteInsert(query, Connection);
+                        Connection.Close();
+                        return response & AddToTransferList(patient, zimmerDst);
+                    }
 
-                    MySqlConnection Connection = Connect();
-                    bool response = ExecuteInsert(query, Connection);
-
-                    query =
-                        "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
-                        patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"NULL\"" + ", \"" + zimmerDst + "\");";
-
-                    bool tmp = ExecuteInsert(query, Connection);
-
-                    Connection.Close();
-                    return response & tmp;
+                    return false;
                 }
                 catch (Exception e)
                 {
@@ -297,6 +328,22 @@ namespace Logic
                 }
             }
             return false;
+        }
+
+
+
+        private bool AddToTransferList(Patient patient, string zimmerDst)
+        {
+            MySqlConnection Connection = Connect();
+
+            string query =
+                "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
+                patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"NULL\"" + ", \"" + zimmerDst + "\");";
+
+            bool tmp = ExecuteInsert(query, Connection);
+
+            Connection.Close();
+            return tmp;
         }
 
 
@@ -352,6 +399,7 @@ namespace Logic
 
         public bool DeleteMemberTransferliste(string vorname, string nachname)
         {
+            
             string query = "DELETE FROM TransferListe " +
                            "WHERE PersonID IN" +
                            "(" +
@@ -364,13 +412,23 @@ namespace Logic
 
             try
             {
+                Patient p = GetPatient(vorname, nachname);
+                if (p.Station != null && !p.Station.Equals(""))
+                {
+                    p.SollStation = "";
+                    p.Station = p.SollStation;
+                }
+                    
+
+                PatientAendern(p);
+
                 MySqlConnection Connection = Connect();
                 response = ExecuteInsert(query, Connection);
                 Connection.Close();
             }
             catch (Exception e)
             {
-                UncaughtExeption("DELETEMEMBERTRANSFERLISTE", e);
+                UncaughtExeption("DELETE MEMBER TRANSFERLISTE", e);
             }
 
             return response;
@@ -467,26 +525,33 @@ namespace Logic
 
             try
             {
-                MySqlConnection Connection = Connect();
-                Connection.Open();
-
-                MySqlDataReader reader = ExecuteQuery(CheckPersonQuery, Connection);
-
-                if (reader.Read())
+                if (GetUser(user.Benutzername) == null)
                 {
-                    short count = reader.GetInt16(0);
-                    Connection.Close();
 
-                    if (count == 0)
+                
+                    MySqlConnection Connection = Connect();
+
+                    Connection.Open();
+                    MySqlDataReader reader = ExecuteQuery(CheckPersonQuery, Connection);
+
+                    if (reader.Read())
                     {
-                        PersonAnlegen(user.Vorname, user.Nachname);
+                        short count = reader.GetInt16(0);
+                        Connection.Close();
+
+                        if (count == 0)
+                        {
+                            PersonAnlegen(user.Vorname, user.Nachname);
+                        }
                     }
+
+                    Connection = Connect();
+                    bool response = ExecuteInsert(InsertQuery, Connection);
+                    Connection.Close();
+                    return response;
                 }
 
-                Connection = Connect();
-                bool response = ExecuteInsert(InsertQuery, Connection);
-                Connection.Close();
-                return response;
+                return false;
             }
             catch (Exception e)
             {
@@ -501,6 +566,7 @@ namespace Logic
             try
             {
                 MySqlConnection Connection = Connect();
+
                 bool response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";", Connection);
                 Connection.Close();
                 return response;
