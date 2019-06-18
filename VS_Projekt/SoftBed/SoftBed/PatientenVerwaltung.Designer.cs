@@ -275,6 +275,8 @@ namespace SoftBed
             // patAnzDGV
             // 
             this.patAnzDGV.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.patAnzDGV.AllowUserToResizeColumns = false;
+            this.patAnzDGV.AllowUserToResizeRows = false;
             this.patAnzDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.patAnzDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.versichtertenNrClmn,

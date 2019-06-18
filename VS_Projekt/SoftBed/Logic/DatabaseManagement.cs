@@ -102,7 +102,7 @@ namespace Logic
             {
                 MySqlConnection Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht " +
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Beschwerde, Aufnahmedatum, Geschlecht, Bett, ZimmerNr " +
                                       "FROM Patient, Person " +
                                       "WHERE VersicherungsNr=\"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
@@ -116,8 +116,12 @@ namespace Logic
                     string beschwerde = Reader.GetString(5);
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
+                    string bett = Reader.GetString(8);
+                    string zimmerNr = Reader.GetString(9);
 
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, beschwerde, aufnahmedatum, geschlecht);
+                    p.Bett = bett;
+                    p.ZimmerNr = zimmerNr;
                 }
 
                 Connection.Close();
