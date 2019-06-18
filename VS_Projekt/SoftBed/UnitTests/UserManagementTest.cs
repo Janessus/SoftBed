@@ -2,6 +2,7 @@
 using Logic;
 using Wrapperklassen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -44,7 +45,7 @@ namespace UnitTests
             userManagement.UserAnlegen(dummy);
 
             bool firstTime = userManagement.UserLöschen(dummy.Benutzername);    //sollte klappen da User existent
-
+            Thread.Sleep(5000);
             bool secondTime = userManagement.UserLöschen(dummy.Benutzername);   //sollte fehlschlagen da User nicht mehr existent
 
             Assert.IsTrue(firstTime && !secondTime);
