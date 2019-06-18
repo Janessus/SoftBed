@@ -81,12 +81,28 @@ namespace SoftBed
         {
             if (!versNrSucheTxt.Text.Equals(""))    //if textbox not empty
             {
-                Patient selectedPatient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
-                if (selectedPatient != null)    //if patient exists
+                Patient patient = pUpdateManagement.GetPatient(versNrSucheTxt.Text);
+                if (patient != null)    //if patient exists
                 {
                     patAnzDGV.Rows.Clear();
-                    patAnzDGV.Rows.Add(selectedPatient.Versicherungsnr, selectedPatient.Nachname, selectedPatient.Vorname, selectedPatient.ZimmerNr);
-                    patientensucheMeldungTxt.Text = "";
+                    if (patient.Station == "Onkologie")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "On-" + patient.ZimmerNr + "-" + patient.Bett);
+                    else if (patient.Station == "Orthopädie")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "Or-" + patient.ZimmerNr + "-" + patient.Bett);
+                    else if (patient.Station == "Pädiatrie")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "P-" + patient.ZimmerNr + "-" + patient.Bett);
+                    else if (patient.Station == "Innere Medizin")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "IM-" + patient.ZimmerNr + "-" + patient.Bett);
+                    else if (patient.Station == "Intensivstation")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "Is-" + patient.ZimmerNr + "-" + patient.Bett);
+                    else if (patient.Station == "Gynäkologie")
+                        patAnzDGV.Rows.Add(patient.Versicherungsnr, patient.Nachname, patient.Vorname,
+                            "G-" + patient.ZimmerNr + "-" + patient.Bett);
                 }
                 else
                 {

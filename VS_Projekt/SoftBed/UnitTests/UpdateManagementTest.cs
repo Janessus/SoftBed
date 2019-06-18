@@ -10,7 +10,7 @@ using Wrapperklassen;
 namespace UnitTests
 {
     [TestClass]
-    class UpdateManagementTest
+    public class UpdateManagementTest
     {
 
         /**
@@ -23,13 +23,15 @@ namespace UnitTests
         {
             UpdateManagement uM = UpdateManagement.GetInstance();
             PatientenManagement pM = PatientenManagement.GetInstance();
-            Patient dummy = new Patient("Max", "Mustermann", "X123456789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy = new Patient("Bilbo", "Beutlin", "X123457788", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
 
-            pM.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
+            bool result = pM.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
-            Patient dummy2 = uM.GetPatient("X123456789");
+            Patient dummy2 = uM.GetPatient("X123456788");
 
-            Assert.IsTrue(dummy.Equals(dummy2));    
+            Assert.IsTrue(dummy.Equals(dummy2));
+
+            pM.PatientLoeschen("X123457788");
         }
 
 
@@ -48,7 +50,8 @@ namespace UnitTests
 
             User dummy2 = upM.GetUser("JonnyBoy");
 
-            Assert.IsTrue(dummy.Equals(dummy2));
+            Assert.IsTrue(dummy.Benutzername.Equals(dummy2.Benutzername));
+            usM.UserLöschen("JonnyBoy");
         }
 
         /**
@@ -80,7 +83,7 @@ namespace UnitTests
          * schlägt fehl wenn andere Verlegungsliste zurückkommt als gewollt
          */
         [TestMethod]
-        public void GetCurrentVerlegungsliste()
+        public void GetCurrentVerlegungslisteTest()
         {
             UpdateManagement upM = UpdateManagement.GetInstance();
             ZimmerManagement zM = ZimmerManagement.GetInstance();
@@ -95,18 +98,16 @@ namespace UnitTests
 
             Verlegungsliste verlegungsliste1 = upM.GetCurrentVerlegungsliste();
 
-            Verlegungsliste verlegungsliste2 = new Verlegungsliste();
+            VerlegungslistenItem vLI = new VerlegungslistenItem(dummy, "NULL", "Onkologie", DateTime.Now);
 
-            VerlegungslistenItem vLI = new VerlegungslistenItem(dummy, "Onkologie", "Innere Medizin", DateTime.Now);
-            verlegungsliste2.Transferliste.Add(vLI);
+           
 
-            vLI = new VerlegungslistenItem(dummy2, "Pädiatrie", "Innere Medizin", DateTime.Now);
-            verlegungsliste2.Transferliste.Add(vLI);
+            Assert.IsTrue(verlegungsliste1.Transferliste.Contains(vLI));
 
-            vLI = new VerlegungslistenItem(dummy3, "Onkologie", "Gynäkologie", DateTime.Now);
-            verlegungsliste2.Transferliste.Add(vLI);
+            pM.PatientLoeschen("I123654789");
+            pM.PatientLoeschen("J987456123");
+            pM.PatientLoeschen("K899112445");
 
-            Assert.IsTrue(verlegungsliste1.Equals(verlegungsliste2));
         }
 
 

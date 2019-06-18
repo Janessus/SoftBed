@@ -41,5 +41,21 @@ namespace Wrapperklassen
             Geschlecht = geschlecht;
         }
 
+        public override bool Equals(Object o)
+        {
+            Patient p = (Patient)o;
+            bool bvorname = this.Vorname.Equals(p.Vorname);
+            bool bnachname = this.Nachname.Equals(p.Nachname);
+            bool bversnr = this.Versicherungsnr.Equals(p.Versicherungsnr);
+            if(bvorname && bnachname && bversnr)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using Logic;
 using Wrapperklassen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
 
 namespace UnitTests
 {
@@ -28,6 +29,8 @@ namespace UnitTests
             bool secondTime = userManagement.UserAnlegen(dummy2);    //sollte nicht klappen da gleicher Benutzername wie zuvor
 
             Assert.IsTrue(firstTime && !secondTime);    //erste mal muss geklappt haben, zweite mal darf nicht geklappt haben
+
+            userManagement.UserLöschen("JonnyBoy");
         }
 
         /**
@@ -42,10 +45,12 @@ namespace UnitTests
             userManagement.UserAnlegen(dummy);
 
             bool firstTime = userManagement.UserLöschen(dummy.Benutzername);    //sollte klappen da User existent
-
+            Thread.Sleep(5000);
             bool secondTime = userManagement.UserLöschen(dummy.Benutzername);   //sollte fehlschlagen da User nicht mehr existent
 
             Assert.IsTrue(firstTime && !secondTime);
+
+            userManagement.UserLöschen("JonnyBoy");
         }
 
         /**
@@ -65,6 +70,8 @@ namespace UnitTests
             bool firstTime = loggedin.Benutzername.Equals(dummy.Benutzername);  //klappt, da currentUser dem zuletzt eingeloggten user entspricht
 
             Assert.IsTrue(firstTime);
+
+            userManagement.UserLöschen("JonnyBoy");
         }
 
         /**
@@ -87,6 +94,8 @@ namespace UnitTests
             bool secondTime = UserManagement.CurrentUser.Benutzername.Equals(dummy.Benutzername);
 
             Assert.IsTrue(firstTime && secondTime);
+
+            userManagement.UserLöschen("JonnyBoy");
         }
 
     }
