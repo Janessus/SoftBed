@@ -26,11 +26,7 @@ namespace SoftBed
 
             labelUser.Text = "User: " + UserManagement.CurrentUser.Benutzername;
             labelRechte.Text = "Rechte: " + UserManagement.CurrentUser.Rechte;
-            
-            System.Timers.Timer refreshTimer = new System.Timers.Timer(2000);
-            refreshTimer.Elapsed += RefreshHauptfenster;
-            refreshTimer.Start();
-            
+
         }
 
         /**
@@ -97,14 +93,6 @@ namespace SoftBed
         {
             RefreshBettenbelegung();
             RefreshVerlegungsliste();
-        }
-
-        private void RefreshHauptfenster(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            this.Invoke(new Action(() =>
-            {
-                RefreshHauptfenster();
-            }));
         }
 
         /**
@@ -179,6 +167,18 @@ namespace SoftBed
             return result;
         }
 
+        /**
+         * mouse enter event for refreshes
+         */
+        private void HauptFenster_MouseEnter(object sender, EventArgs e)
+        {
+            RefreshHauptfenster();
+        }
+
+        private void TransferListeDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
     public static class ModifyProgressBarColor

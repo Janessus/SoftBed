@@ -89,6 +89,7 @@
             this.transferListeDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.transferListeDGV.Size = new System.Drawing.Size(443, 401);
             this.transferListeDGV.TabIndex = 1;
+            this.transferListeDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TransferListeDGV_CellContentClick);
             // 
             // nameColmn
             // 
@@ -414,6 +415,7 @@
             this.Controls.Add(this.gesKHProgBar);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
+            this.MouseEnter += new System.EventHandler(this.HauptFenster_MouseEnter);
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
