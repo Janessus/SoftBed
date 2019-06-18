@@ -96,13 +96,27 @@ namespace UnitTests
             pM.PatientAnlegen(dummy2, ZimmerManagement.GetInstance().suchePassendesBett(dummy2));
             pM.PatientAnlegen(dummy3, ZimmerManagement.GetInstance().suchePassendesBett(dummy3));
 
-            Verlegungsliste verlegungsliste1 = upM.GetCurrentVerlegungsliste();
+            Verlegungsliste verlegungsliste = upM.GetCurrentVerlegungsliste();
 
-            VerlegungslistenItem vLI = new VerlegungslistenItem(dummy, "NULL", "Onkologie", DateTime.Now);
+            bool max = false;
+            bool sven = false;
+            bool christina = false;
 
-           
+            foreach(var titem in verlegungsliste.Transferliste)
+            {
+                if(titem.Person.Nachname.Equals("Mustermann"))
+                {
+                    max = true;
+                }else if (titem.Person.Nachname.Equals("Knabe"))
+                {
+                    sven = true;
+                }else if (titem.Person.Nachname.Equals("Meier"))
+                {
+                    christina = true;
+                }
+            }
 
-            Assert.IsTrue(verlegungsliste1.Transferliste.Contains(vLI));
+            Assert.IsTrue(max && sven && christina);
 
             pM.PatientLoeschen("I123654789");
             pM.PatientLoeschen("J987456123");
