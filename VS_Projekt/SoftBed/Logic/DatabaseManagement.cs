@@ -378,13 +378,19 @@ namespace Logic
                 {
                     if (GetPatient(patient.Versicherungsnr) == null)
                     {
-                        PersonAnlegen(patient);
+                        try
+                        {
+                            PersonAnlegen(patient);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Person konnte nicht angelegt werden.\n" + e.Message);
+                        }
                         Connection = Connect();
                         bool response = ExecuteInsert(query, Connection);
                         Connection.Close();
                         return response & AddToTransferList(patient, zimmerDst);
                     }
-
                     return false;
                 }
                 catch (Exception e)
@@ -415,6 +421,7 @@ namespace Logic
                     patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"\"" + ", \"" +
                     zimmerDst + "\");";
 
+                Connection = Connect();
                 result = ExecuteInsert(query, Connection);
             }
             catch (Exception e)
