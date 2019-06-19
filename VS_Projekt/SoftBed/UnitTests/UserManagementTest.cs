@@ -32,26 +32,7 @@ namespace UnitTests
 
             userManagement.UserLöschen("JonnyBoy");
         }
-
-        /**
-         * Test zum User Löschen
-         * schlägt fehl wenn der selbe User nach dem löschen nochmal gelöscht werden kann (also nicht gelöscht wurde)
-         */
-        [TestMethod]
-        public void UserLoeschenTest()
-        {
-            UserManagement userManagement = UserManagement.GetInstance();
-            User dummy = new User("John", "Doe", "Standard", "JonnyBoy", "1234");
-            userManagement.UserAnlegen(dummy);
-
-            bool firstTime = userManagement.UserLöschen(dummy.Benutzername);    //sollte klappen da User existent
-            Thread.Sleep(5000);
-            bool secondTime = userManagement.UserLöschen(dummy.Benutzername);   //sollte fehlschlagen da User nicht mehr existent
-
-            Assert.IsTrue(firstTime && !secondTime);
-
-            userManagement.UserLöschen("JonnyBoy");
-        }
+        
 
         /**
          * Test zum Login
@@ -98,5 +79,24 @@ namespace UnitTests
             userManagement.UserLöschen("JonnyBoy");
         }
 
+        /**
+         * Test zum User Löschen
+         * schlägt fehl wenn der selbe User nach dem löschen nochmal gelöscht werden kann (also nicht gelöscht wurde)
+         */
+        [TestMethod]
+        public void UserLoeschenTest()
+        {
+            UserManagement userManagement = UserManagement.GetInstance();
+            User dummy = new User("John", "Doe", "Standard", "JonnyBoy", "1234");
+            userManagement.UserAnlegen(dummy);
+
+            bool firstTime = userManagement.UserLöschen(dummy.Benutzername);    //sollte klappen da User existent
+            Thread.Sleep(5000);
+            bool secondTime = userManagement.UserLöschen(dummy.Benutzername);   //sollte fehlschlagen da User nicht mehr existent
+
+            Assert.IsTrue(firstTime && !secondTime);
+
+            userManagement.UserLöschen("JonnyBoy");
+        }
     }
 }
