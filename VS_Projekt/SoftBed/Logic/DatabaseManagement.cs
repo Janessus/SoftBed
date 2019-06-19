@@ -331,6 +331,7 @@ namespace Logic
                         if (reader.GetString(1).Equals(p.Station))
                         {
                             Patient falscheStation = GetPatient(reader.GetString(0));
+
                             string longBed = GetPassendesBett(p.Station, falscheStation);
 
                             string[] subs = longBed.Split('-');
@@ -427,9 +428,19 @@ namespace Logic
 
             try
             {
+                string vonStation = patient.Station;
+                string vonZimmer = patient.ZimmerNr;
+                string vonBett = patient.Bett;
+
+                string longBed = "";
+
+                if ((vonStation != null) && (!vonStation.Equals("")) &&
+                    ((vonZimmer != null) && (!vonZimmer.Equals("")) && ((vonBett != null) && (!vonBett.Equals("")))))
+                    longBed = vonStation + "-" + vonZimmer + "-" + vonBett;
+
                 string query =
                     "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
-                    patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"\"" + ", \"" +
+                    patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"" + longBed + "\"" + ", \"" +
                     zimmerDst + "\");";
 
                 Connection = Connect();
