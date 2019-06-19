@@ -102,25 +102,25 @@ namespace SoftBed
         {
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             gynProgBar.Value = currentBelegung.Gynaekologie;
-            labelGyn.Text = currentBelegung.Gynaekologie.ToString();
+            labelGyn.Text = currentBelegung.Gynaekologie.ToString() + "/50";
             RefreshBettenbelegungColor(gynProgBar);
             iMProgBar.Value = currentBelegung.Innere;
-            labelIm.Text = currentBelegung.Innere.ToString();
+            labelIm.Text = currentBelegung.Innere.ToString() + "/50";
             RefreshBettenbelegungColor(iMProgBar);
             onkProgBar.Value = currentBelegung.Onkologie;
-            labelOnk.Text = currentBelegung.Onkologie.ToString();
+            labelOnk.Text = currentBelegung.Onkologie.ToString() + "/50";
             RefreshBettenbelegungColor(onkProgBar);
             orthProgBar.Value = currentBelegung.Orthopaedie;
-            labelOrth.Text = currentBelegung.Orthopaedie.ToString();
+            labelOrth.Text = currentBelegung.Orthopaedie.ToString() + "/50";
             RefreshBettenbelegungColor(orthProgBar);
             paedProgBar.Value = currentBelegung.Paediatrie;
-            labelPaed.Text = currentBelegung.Paediatrie.ToString();
+            labelPaed.Text = currentBelegung.Paediatrie.ToString() + "/50";
             RefreshBettenbelegungColor(paedProgBar);
             itsProgBar.Value = currentBelegung.Intensiv;
-            labelIts.Text = currentBelegung.Intensiv.ToString();
+            labelIts.Text = currentBelegung.Intensiv.ToString() + "/10";
             RefreshBettenbelegungColor(itsProgBar);
             gesKHProgBar.Value = currentBelegung.Gesamt();
-            labelGes.Text = currentBelegung.Gesamt().ToString();
+            labelGes.Text = currentBelegung.Gesamt().ToString() + "/260";
             RefreshBettenbelegungColor(gesKHProgBar);
         }
 
