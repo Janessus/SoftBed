@@ -43,12 +43,14 @@ namespace SoftBed
                     // If the yes button was pressed ...
                     if (showDeleteConfirmingDialog() == DialogResult.Yes)
                     {
-                        bool result = pPatientenManagement.PatientLoeschen(patAnzDGV.SelectedRows[0].Cells[0].Value.ToString());    //delete Patient
+                        Patient p = GetPatientAusSuche();
+                        bool result = pPatientenManagement.PatientLoeschen(p.Versicherungsnr);    //delete Patient
                         if (result) //if worked
                         {
                             editMeldungLdl.Text = "Patient wurde aus dem System gelöscht";
                             patAnzDGV.Rows.Clear();
                             ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
+                            DatabaseManagement.GetInstance().BedGotFree(p);
                         }
                         else //if not worked
                         {
@@ -469,6 +471,32 @@ namespace SoftBed
             {
                 ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
             }
+        }
+
+        public Patient GetPatientAusSuche()
+        {
+            Patient p = new Patient();
+            p.Versicherungsnr = patAnzDGV.SelectedRows[0].Cells[0].Value.ToString();
+            p.Nachname = patAnzDGV.SelectedRows[0].Cells[1].Value.ToString();
+            p.Vorname = patAnzDGV.SelectedRows[0].Cells[2].Value.ToString();
+            string station = patAnzDGV.SelectedRows[0].Cells[3].Value.ToString();
+            if (station.Contains("On"))
+            {
+                p.Station = "Onkologie";
+            }else if (station.Contains("Or"))
+            {
+                p.Station = "Orthopädie";
+            }else if (station.Contains("P"))
+            {
+                p.Station = "Pädiatrie";
+            }else if (station.Contains("IM"))
+            {
+                p.Station = "Innere Medizin";
+            }else if (station.Contains("G"))
+            {
+                p.Station = "Gynäkologie";
+            }
+            return p;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientAnlegenTest()
         {
-            Patient dummy = new Patient("Max", "Mustermann", "X123446789", new DateTime(1985, 01, 01), "Onkologie", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy = new Patient("Max", "Mustermann", "X123446789", new DateTime(1985, 01, 01), "Onkologie", "Onkologie", new DateTime(2019, 04, 01), "m");
 
             bool result = patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 
@@ -34,7 +34,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientZweimalAnlegenTest()
         {
-            Patient dummy = new Patient("Maxim","Muster", "Y987654321", new DateTime(1990, 01, 01), "Innere Medizin","", new DateTime(2019, 04, 01), "m");
+            Patient dummy = new Patient("Maxim","Muster", "Y987654321", new DateTime(1990, 01, 01), "Innere Medizin", "Innere Medizin", new DateTime(2019, 04, 01), "m");
 
             bool result1 = patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
             bool result2 = patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
@@ -51,8 +51,8 @@ namespace UnitTests
         [TestMethod]
         public void ZweiUngleichePatientenAnlegenTest()
         {
-            Patient dummy1 = new Patient("Max", "Mustermann", "Z321321321", new DateTime(1994, 01, 07), "Innere Medizin", "", new DateTime(2019,04,01), "m");
-            Patient dummy2 = new Patient("Helga", "Hase", "A322114456", new DateTime(1989, 01, 07), "Gynäkologie", "", new DateTime(2019, 04, 01), "w");
+            Patient dummy1 = new Patient("Max", "Mustermann", "Z321321321", new DateTime(1994, 01, 07), "Innere Medizin", "Innere Medizin", new DateTime(2019,04,01), "m");
+            Patient dummy2 = new Patient("Helga", "Hase", "A322114456", new DateTime(1989, 01, 07), "Gynäkologie", "Gynäkologie", new DateTime(2019, 04, 01), "w");
 
             bool result1 = patientenManagement.PatientAnlegen(dummy1, ZimmerManagement.GetInstance().suchePassendesBett(dummy1));
             bool result2 = patientenManagement.PatientAnlegen(dummy2, ZimmerManagement.GetInstance().suchePassendesBett(dummy2));
@@ -69,7 +69,7 @@ namespace UnitTests
         [TestMethod]
         public void PatientLoeschenTest()
         {
-            Patient dummy = new Patient("Horst", "Salz", "B121343565", new DateTime(1950, 07, 05), "Onkologie", "", new DateTime(2019, 04, 01), "m");
+            Patient dummy = new Patient("Horst", "Salz", "B121343565", new DateTime(1950, 07, 05), "Onkologie", "Onkologie", new DateTime(2019, 04, 01), "m");
 
             patientenManagement.PatientAnlegen(dummy, ZimmerManagement.GetInstance().suchePassendesBett(dummy));
 

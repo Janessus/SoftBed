@@ -298,8 +298,7 @@ namespace Logic
             return response;
         }
 
-
-        private void BedGotFree(Patient p)
+        public void BedGotFree(Patient p)
         {
             string query = "SELECT pa.VersicherungsNr, pa.Sollstation, pa.Aufnahmedatum " +
                            "FROM Patient pa " +
