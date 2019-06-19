@@ -100,7 +100,7 @@ namespace Logic
                 Connection.Open();
                 Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht " + //, Bett, ZimmerNr " +
                                       "FROM Patient, Person " +
-                                      "WHERE VersicherungsNr=\"" + versicherungsNummer + "\" " +
+                                      "WHERE VersicherungsNr= \"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
 
                 if (Reader.Read())
@@ -260,7 +260,10 @@ namespace Logic
 
         private void BedGotFree(Patient p)
         {
-            string query = "SELECT pa.VersicherungsNr, pa.Sollstation, pa.Aufnahmedatum FROM Patient pa WHERE NOT (pa.Sollstation = \"\") ORDER BY pa.Aufnahmedatum ASC;";
+            string query = "SELECT pa.VersicherungsNr, pa.Sollstation, pa.Aufnahmedatum " +
+                           "FROM Patient pa " +
+                           "WHERE NOT (pa.Sollstation = \"\") " +
+                           "ORDER BY pa.Aufnahmedatum ASC;";
             MySqlConnection connection;
             MySqlDataReader reader;
 
@@ -753,6 +756,7 @@ namespace Logic
             //if a room was found return it, if not search at an other station
             if (found)
                 result = stationKurz + "-" + zimmerNr + "-" + Bett;
+            /*
             else //TODO Test
             {
                 if(patient.SollStation.Equals(""))
@@ -782,6 +786,7 @@ namespace Logic
 
                 connection.Close();
             }
+            */
 
             /* TODO 
             patient.Bett = Bett;
