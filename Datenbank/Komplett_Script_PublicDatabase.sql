@@ -64,11 +64,10 @@ create table IF NOT EXISTS Patient
     Sollstation varchar(255),
     Aufnahmedatum Timestamp DEFAULT current_timestamp,
     
-    
     PRIMARY KEY(VersicherungsNr),
     FOREIGN KEY(PersonID) REFERENCES Person(PersonID) on delete cascade,
-    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr) on delete set null,
-    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung) on delete set null
+    FOREIGN KEY(ZimmerNr) REFERENCES Zimmer(ZimmerNr),
+    FOREIGN KEY(StationsBezeichnung) REFERENCES Station(Bezeichnung)
 );
 
 
