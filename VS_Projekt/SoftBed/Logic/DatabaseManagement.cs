@@ -54,6 +54,8 @@ namespace Logic
         {
             MySqlDataReader Reader = null;
 
+            Console.WriteLine("EXECUTE QUERY: " + query);
+
             try
             {
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
@@ -659,20 +661,20 @@ namespace Logic
                 if (GetUser(user.Benutzername) == null)
                 {
                     Connection = Connect();
-
                     Connection.Open();
                     MySqlDataReader reader = ExecuteQuery(CheckPersonQuery, Connection);
 
                     if (reader.Read())
                     {
                         short count = reader.GetInt16(0);
+                        
 
                         if (count == 0)
                         {
                             PersonAnlegen(user.Vorname, user.Nachname);
                         }
                     }
-
+                    Connection.Close();
                     response = ExecuteInsert(InsertQuery, Connection);
                 }
             }
@@ -701,8 +703,8 @@ namespace Logic
             {
                 Connection = Connect();
 
-                response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";",
-                    Connection);
+                if(GetUser(userName) != null)
+                    response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";", Connection);
             }
             catch (Exception e)
             {
@@ -878,6 +880,7 @@ namespace Logic
                             break;
                         }
                     }
+                    connection.Close();
                 }
 
 
@@ -888,13 +891,13 @@ namespace Logic
                             "from Zimmer z " +
                             "where not exists " +
                             "(" +
-                            "select * " +
-                            "from Patient, Zimmer " +
-                            "where Patient.ZimmerNr = z.ZimmerNr " +
-                            "and Patient.StationsBezeichnung = z.StationsBezeichnung" +
+                                "select * " +
+                                "from Patient, Zimmer " +
+                                "where Patient.ZimmerNr = z.ZimmerNr " +
+                                "and Patient.StationsBezeichnung = z.StationsBezeichnung" +
                             ") " +
                             "and z.StationsBezeichnung = \"" + Station + "\";";
-
+                    connection.Open();
                     reader = ExecuteQuery(query, connection);
                     if (reader.Read())
                     {
