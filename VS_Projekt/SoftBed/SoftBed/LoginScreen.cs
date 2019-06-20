@@ -43,7 +43,13 @@ namespace SoftBed
                 openAdminbereich();
                 UserManagement.GetInstance().UserLogin(sUser, sPW);
             }
-            else
+            else if(sUser.Equals("") && sUser.Equals(""))
+            {
+                Message("hä", "Sorry aber nix eingeben bringt nix");
+            }else if(sUser.Contains("Drop") || sPW.Contains("Drop") || sUser.Contains("DROP") || sPW.Contains("DROP"))
+            {
+                Message("Nice Try", "NENENE so nich");
+            }else 
             {
                 if (userManage.UserLogin(sUser, sPW) == true)   //if right username and password, open hauptfenster
                 {
@@ -80,6 +86,14 @@ namespace SoftBed
             Form mainWindow = new HauptFenster();
             mainWindow.ShowDialog();
             this.SetVisibleCore(true);
+        }
+
+
+        private void Message(string caption, string text)
+        {
+            MessageBoxButtons button = MessageBoxButtons.OK;
+
+            DialogResult result = MessageBox.Show(text, caption, button);
         }
     }
 }
