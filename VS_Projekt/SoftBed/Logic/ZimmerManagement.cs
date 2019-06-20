@@ -86,9 +86,9 @@ namespace Logic
             string bett = "NULL"; //DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
             
             if (patient.Station.Equals("Pädiatrie") &&
-                (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
+                (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Paediatrie < 50))
             {
-                //suche bett in Gynäkologie
+                //suche bett in Paediatrie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Pädiatrie", patient);
                 
             }
@@ -209,17 +209,10 @@ namespace Logic
                 // patient auf station mit größter freier kapaziät unterbringen
                 if (bett == "NULL")
                 {
-                    if (UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count].Equals("Gynäkologie"))
+                    bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
+                    if (bett != "NULL")
                     {
-                        bett = DatabaseManagement.GetInstance().GetPassendesBett("Gynäkologie", patient);
-                    }
-                    else
-                    {
-                        bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
-                        if (bett != "NULL")
-                        {
-                            found = true;
-                        }
+                        found = true;
                     }
                     
                 }
