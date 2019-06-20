@@ -431,12 +431,41 @@ namespace Logic
                 string vonStation = patient.Station;
                 string vonZimmer = patient.ZimmerNr;
                 string vonBett = patient.Bett;
-
+                string stationKurz = "";
                 string longBed = "";
 
-                if ((vonStation != null) && (!vonStation.Equals("")) &&
-                    ((vonZimmer != null) && (!vonZimmer.Equals("")) && ((vonBett != null) && (!vonBett.Equals("")))))
-                    longBed = vonStation + "-" + vonZimmer + "-" + vonBett;
+
+                switch (vonStation)
+                {
+                    case "Gynäkologie":
+                        stationKurz = "G";
+                        break;
+
+                    case "Innere Medizin":
+                        stationKurz = "IM";
+                        break;
+
+                    case "Onkologie":
+                        stationKurz = "On";
+                        break;
+
+                    case "Orthopädie":
+                        stationKurz = "Or";
+                        break;
+
+                    case "Pädiatrie":
+                        stationKurz = "P";
+                        break;
+
+                    case "Intensivstation":
+                        stationKurz = "Is";
+                        break;
+                }
+
+                
+                if ((stationKurz != null) && (!stationKurz.Equals("")) &&
+                    (vonZimmer != null) && (!vonZimmer.Equals("")) && (vonBett != null) && (!vonBett.Equals("")))
+                    longBed = stationKurz + "-" + vonZimmer + "-" + vonBett;
 
                 string query =
                     "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
@@ -937,7 +966,6 @@ namespace Logic
                     if (patient.SollStation.Equals(""))
                         patient.SollStation = Station;
                     PatientAendern(patient);
-                
 
                     //Andere Station auswählen
                     List<string> prioritiyList = new List<string>();
