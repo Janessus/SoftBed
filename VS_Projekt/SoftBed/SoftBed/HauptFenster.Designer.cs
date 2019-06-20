@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gesKHProgBar = new System.Windows.Forms.ProgressBar();
+            this.gesKHProgBar = new SoftBed.NewProgressBar();
             this.transferListeDGV = new System.Windows.Forms.DataGridView();
             this.nameColmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vonClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nachClmn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progBarGesLbl = new System.Windows.Forms.Label();
-            this.itsProgBar = new System.Windows.Forms.ProgressBar();
+            this.itsProgBar = new SoftBed.NewProgressBar();
             this.auslastungITSLbl = new System.Windows.Forms.Label();
             this.patVerwBtn = new System.Windows.Forms.Button();
             this.abmeldenBtn = new System.Windows.Forms.Button();
@@ -45,11 +45,11 @@
             this.onkLbl = new System.Windows.Forms.Label();
             this.OrthLbl = new System.Windows.Forms.Label();
             this.pädLbl = new System.Windows.Forms.Label();
-            this.gynProgBar = new System.Windows.Forms.ProgressBar();
-            this.iMProgBar = new System.Windows.Forms.ProgressBar();
-            this.onkProgBar = new System.Windows.Forms.ProgressBar();
-            this.orthProgBar = new System.Windows.Forms.ProgressBar();
-            this.paedProgBar = new System.Windows.Forms.ProgressBar();
+            this.gynProgBar = new SoftBed.NewProgressBar();
+            this.iMProgBar = new SoftBed.NewProgressBar();
+            this.onkProgBar = new SoftBed.NewProgressBar();
+            this.orthProgBar = new SoftBed.NewProgressBar();
+            this.paedProgBar = new SoftBed.NewProgressBar();
             this.bettbelegLbl = new System.Windows.Forms.Label();
             this.labelUser = new System.Windows.Forms.Label();
             this.labelRechte = new System.Windows.Forms.Label();
@@ -60,6 +60,7 @@
             this.labelPaed = new System.Windows.Forms.Label();
             this.labelIts = new System.Windows.Forms.Label();
             this.labelGes = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +92,6 @@
             this.transferListeDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.transferListeDGV.Size = new System.Drawing.Size(443, 401);
             this.transferListeDGV.TabIndex = 1;
-            this.transferListeDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TransferListeDGV_CellContentClick);
             // 
             // nameColmn
             // 
@@ -381,12 +381,24 @@
             this.labelGes.TabIndex = 27;
             this.labelGes.Text = "labelGes";
             // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(707, 489);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(136, 32);
+            this.refreshButton.TabIndex = 28;
+            this.refreshButton.Text = "Aktualisieren";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
             // HauptFenster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1162, 645);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.labelGes);
             this.Controls.Add(this.labelIts);
             this.Controls.Add(this.labelPaed);
@@ -417,7 +429,6 @@
             this.Controls.Add(this.gesKHProgBar);
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
-            this.MouseEnter += new System.EventHandler(this.HauptFenster_MouseEnter);
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -425,11 +436,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ProgressBar gesKHProgBar;
         private System.Windows.Forms.DataGridView transferListeDGV;
         private System.Windows.Forms.Label progBarGesLbl;
-        private System.Windows.Forms.ProgressBar itsProgBar;
         private System.Windows.Forms.Label auslastungITSLbl;
         private System.Windows.Forms.Button patVerwBtn;
         private System.Windows.Forms.Button abmeldenBtn;
@@ -439,11 +447,6 @@
         private System.Windows.Forms.Label onkLbl;
         private System.Windows.Forms.Label OrthLbl;
         private System.Windows.Forms.Label pädLbl;
-        private System.Windows.Forms.ProgressBar gynProgBar;
-        private System.Windows.Forms.ProgressBar iMProgBar;
-        private System.Windows.Forms.ProgressBar onkProgBar;
-        private System.Windows.Forms.ProgressBar orthProgBar;
-        private System.Windows.Forms.ProgressBar paedProgBar;
         private System.Windows.Forms.Label bettbelegLbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColmn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameClmn;
@@ -458,5 +461,13 @@
         private System.Windows.Forms.Label labelPaed;
         private System.Windows.Forms.Label labelIts;
         private System.Windows.Forms.Label labelGes;
+        private System.Windows.Forms.Button refreshButton;
+        private NewProgressBar gesKHProgBar;
+        private NewProgressBar itsProgBar;
+        private NewProgressBar gynProgBar;
+        private NewProgressBar iMProgBar;
+        private NewProgressBar onkProgBar;
+        private NewProgressBar orthProgBar;
+        private NewProgressBar paedProgBar;
     }
 }
