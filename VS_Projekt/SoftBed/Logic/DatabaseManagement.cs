@@ -932,7 +932,7 @@ namespace Logic
                 if (found)
                     result = stationKurz + "-" + zimmerNr + "-" + Bett;
 
-                else //TODO Test
+                /*else //TODO Test
                 {
                     if (patient.SollStation.Equals(""))
                         patient.SollStation = Station;
@@ -961,6 +961,7 @@ namespace Logic
                     }
                 }
                 connection.Close();
+                */
             }
             catch (Exception e)
             {

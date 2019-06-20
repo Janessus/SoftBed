@@ -85,7 +85,7 @@ namespace Logic
         {
             string bett = DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
 
-            /*
+            
             if (patient.Station.Equals("Pädiatrie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
             {
@@ -151,7 +151,7 @@ namespace Logic
                 // patient auf station mit größter freier kapaziät unterbringen
                 bett = SucheBettAufAndererStation(patient);
             }
-            */
+            
             return bett;
         }
 
