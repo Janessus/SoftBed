@@ -62,7 +62,11 @@ namespace SoftBed
                         }
                         catch (Exception)
                         {
-                            
+                            string messageBoxText = "Du hast niemanden ausgewählt du Dulli";
+                            string caption = "Du bist ein Dulli";
+                            MessageBoxButtons button = MessageBoxButtons.OK;
+
+                            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
                         }
                        
                     }
