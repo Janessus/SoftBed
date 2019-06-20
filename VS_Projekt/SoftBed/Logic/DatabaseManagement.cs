@@ -567,7 +567,7 @@ namespace Logic
             Verlegungsliste verlegungsliste = new Verlegungsliste();
             MySqlDataReader Reader = null;
             MySqlConnection Connection = null;
-            string query = "SELECT p.PersonID, p.Vorname, p.Nachname, t.Von, t.Nach, t.Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
+            string query = "SELECT p.PersonID, p.Vorname, p.Nachname, t.Von, t.Nach, t.Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID order by t.Stempel asc;";
 
             try
             {
