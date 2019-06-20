@@ -165,8 +165,22 @@ namespace Logic
                 {
                     string versicherungsNummer = Reader.GetString(0);
                     DateTime gebdat = DateTime.Parse(Reader.GetString(3));
+
                     string station = Reader.GetString(4);
-                    string sollstation = Reader.GetString(5);
+
+                    string sollstation = "";
+
+                    try
+                    {
+                        sollstation = Reader.GetString(5);
+                    }
+                    catch(Exception e)
+                    {
+                        if(DebugMode)
+                            Console.WriteLine("sollstation war Null");
+                    }
+
+
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
                     //string bett = Reader.GetString(8);
