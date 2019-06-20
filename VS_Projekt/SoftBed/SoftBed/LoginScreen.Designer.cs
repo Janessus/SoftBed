@@ -55,7 +55,7 @@ namespace SoftBed
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(137, 26);
             this.userTxt.TabIndex = 1;
-            this.userTxt.Text = "Schokokeks";
+            this.userTxt.Text = "User";
             // 
             // pwTxt
             // 
