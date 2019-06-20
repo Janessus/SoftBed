@@ -952,7 +952,7 @@ namespace Logic
                             tmpGeschlecht = "w";
                         }
 
-                        if (reader.GetChar(3).ToString().ToLower().Equals(tmpGeschlecht))
+                        if (reader.GetChar(3).ToString().ToLower().Equals(tmpGeschlecht) || Station.Equals("Pädiatrie"))
                         {
                             zimmerNr = reader.GetInt32(0);
 
