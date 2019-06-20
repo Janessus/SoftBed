@@ -130,6 +130,8 @@ namespace SoftBed
             }
         }
 
+
+
         private void zurueckBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -154,69 +156,91 @@ namespace SoftBed
                 }
                 else
                 {
+                    int isFull = IsKHFull();
                     editMeldungLdl.Text = "";
-                    if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
+                    int selectedIndex = abteilungDropDown.SelectedIndex;
+                    if (isFull == 1 && selectedIndex == 5) // If ITS full and patient should be put in ITS
                     {
-                        messageManInGyn();
+                        // Message kann niemanden in ITS aufnehemn
+                        showITSFullWarning();
+                    }
+                    else if (isFull == 2 && (selectedIndex == 0 || selectedIndex == 1 || selectedIndex == 2 ||
+                                             selectedIndex == 3 || selectedIndex == 4)) // If Stations except ITS full and patient should be put there
+                    {
+                        // Message kann niemanden in Station aufnehemn
+                        showStationsFullWarning();
+                    }
+                    else if (isFull == 3) // If KH full
+                    {
+                        // Message kann niemanden aufnehemn
+                        showKHFullWarning();
                     }
                     else
                     {
-                        int childPäd = TestChildPäd();
-                        if (childPäd == -1)
+                        if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
                         {
-                            // if user cancelled transaction
-                            if (MessageChildInPädiatrie() == DialogResult.Cancel)
-                            {
-                                // ends transaction sets message
-                                editMeldungLdl.Text =
-                                    "Sie haben die Aufnahme abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
-                                return;
-                            }
-                            else
-                            {
-                                abteilungDropDown.SelectedIndex = 4;
-                            }
+                            messageManInGyn();
                         }
-                        else if (childPäd == 0)
+                        else
                         {
-                            MessageAdultInPäd();
-                            editMeldungLdl.Text =
-                                "Die Aufnahme wurde abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
-                            return;
-                        }
-
-                        if (showTransferConfirmingDialog() == DialogResult.Yes)
-                        {
-                            if (showTransferConfirmingDialog() == DialogResult.Yes)
+                            int childPäd = TestChildPäd();
+                            if (childPäd == -1)
                             {
-                                Patient pPatient = getPatientFromGUI();
-                                String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
-
-                                // if no room was found, warning will be fired, otherwise tries to put patient in database
-                                if (!roomSuggestion.Equals("NULL"))
+                                // if user cancelled transaction
+                                if (MessageChildInPädiatrie() == DialogResult.Cancel)
                                 {
-                                    // can write into DB
-                                    bool doneRight = pPatientenManagement.PatientAnlegen(pPatient, roomSuggestion);
-                                    if (doneRight)
-                                    {
-                                        editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
-                                        pZimmerManagement.PatientenTransfer(currentPatientenVNr, roomSuggestion);
-                                        ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Patient konnte nicht angelegt werden!");
-                                    }
+                                    // ends transaction sets message
+                                    editMeldungLdl.Text =
+                                        "Sie haben die Aufnahme abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                                    return;
                                 }
                                 else
                                 {
-                                    MessageBox.Show(
-                                        "Achtung!! Es konnte kein passendes Bett gefunden werden! Der Patient wird nicht aufgenommen!!");
+                                    abteilungDropDown.SelectedIndex = 4;
+                                }
+                            }
+                            else if (childPäd == 0)
+                            {
+                                MessageAdultInPäd();
+                                editMeldungLdl.Text =
+                                    "Die Aufnahme wurde abgebrochen! Der Patient wurde noch nicht aufgenommen!!";
+                                return;
+                            }
+
+                            if (showTransferConfirmingDialog() == DialogResult.Yes)
+                            {
+                                if (showTransferConfirmingDialog() == DialogResult.Yes)
+                                {
+                                    Patient pPatient = getPatientFromGUI();
+                                    String roomSuggestion = pZimmerManagement.suchePassendesBett(pPatient);
+
+                                    // if no room was found, warning will be fired, otherwise tries to put patient in database
+                                    if (!roomSuggestion.Equals("NULL"))
+                                    {
+                                        // can write into DB
+                                        bool doneRight = pPatientenManagement.PatientAnlegen(pPatient, roomSuggestion);
+                                        if (doneRight)
+                                        {
+                                            editMeldungLdl.Text = "Patient wird in Raum " + roomSuggestion + " gelegt";
+                                            pZimmerManagement.PatientenTransfer(currentPatientenVNr, roomSuggestion);
+                                            ShowAllPatients(DatabaseManagement.GetInstance().GetAllPatients());
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Patient konnte nicht angelegt werden!");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(
+                                            "Achtung!! Es konnte kein passendes Bett gefunden werden! Der Patient wird nicht aufgenommen!!");
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                    
             }
             else
             {
@@ -433,6 +457,8 @@ namespace SoftBed
             DialogResult result = MessageBox.Show(messageBoxText, caption, button);
             return result;
         }
+
+
         private void ShowAllPatients(List<Patient> patients)
         {
             patAnzDGV.Rows.Clear();
@@ -498,5 +524,77 @@ namespace SoftBed
             }
             return p;
         }
+
+        /**
+         * tests if KH is full
+         * @return 0 if not full, 1 if ITS full, 2 if everything except ITS is full, 3 if everything is full
+         */
+        private int IsKHFull()
+        {
+            int full = 0;
+            int currentBelegungITS = UpdateManagement.GetInstance().GetCurrentBettenbelegung().Intensiv;
+            Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
+            if (currentBelegungITS >= 10)
+            {
+                editMeldungLdl.Text = "Die Intensivstation ist voll! Legen Sie keinen Patienten mehr in die Intensivstation!";
+                full = 1;
+            }
+            else if(currentBelegung.Gesamt()-currentBelegungITS >= 250)
+            {
+                editMeldungLdl.Text = "Alle Stationen außer die Intensivstation sind voll! Sie können Patienten nur noch in die Intensivstation legen!";
+                full = 2;
+            }
+            if (currentBelegung.Gesamt() >= 260)
+            {
+                editMeldungLdl.Text = "Das Krankenhaus ist voll! Es kann kein weiterer Patient mehr aufgenommen werden!";
+                full = 3;
+            }
+            return full;
+        }
+
+
+        /**
+         * shows warning for User if ITS ist full
+         */
+        private void showITSFullWarning()
+        {
+            string messageBoxText;
+            messageBoxText = "Die ITS ist voll! Es kann kein Patient mehr aufgenommen werden!";
+            
+            string caption = "Warnung!";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            MessageBox.Show(messageBoxText, caption, button);
+            editMeldungLdl.Text = "Die ITS ist voll! Der Patient wurde nicht aufgenommen!";
+        }
+
+
+        /**
+         * shows warning for User if stations are full
+         */
+        private void showStationsFullWarning()
+        {
+            string messageBoxText;
+            messageBoxText = "Alle Stationen außer die ITS sind voll! Es kann kein Patient mehr aufgenommen werden!";
+
+            string caption = "Warnung!";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            MessageBox.Show(messageBoxText, caption, button);
+            editMeldungLdl.Text = "Die Stationen sind voll! Der Patient wurde nicht aufgenommen!";
+        }
+
+
+        /**
+         * shows warning for User if KH ist full
+         */
+        private void showKHFullWarning()
+        {
+            string messageBoxText;
+            messageBoxText = "Das Krankenhaus ist voll! Es kann kein Patient mehr aufgenommen werden!";
+
+            string caption = "Warnung!";
+            MessageBoxButtons button = MessageBoxButtons.OK;MessageBox.Show(messageBoxText, caption, button);
+            editMeldungLdl.Text = "Die Krankenhaus ist voll! Der Patient wurde nicht aufgenommen!";
+        }
+
     }
 }
