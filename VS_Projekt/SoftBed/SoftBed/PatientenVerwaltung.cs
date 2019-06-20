@@ -434,7 +434,7 @@ namespace SoftBed
         private DialogResult MessageChildInPädiatrie()
         {
             string messageBoxText = 
-                "Sie wollten ein Kind in eine andere Station als die Pädiatrie oder ITS legen!\r\n Das Kind wird automatisch in die Pädiatrie verlegt werden! \r\n Bei Abbrechen wird der Vorgang abgebrochen!!";
+                "Sie wollten ein Kind in eine andere Station als die Pädiatrie oder ITS legen!\r\n Das Kind wird automatisch in die Pädiatrie verlegt! \r\n Bei Abbrechen wird der Vorgang abgebrochen!!";
             string caption = "Warnung";
             MessageBoxButtons button = MessageBoxButtons.OKCancel;
 
