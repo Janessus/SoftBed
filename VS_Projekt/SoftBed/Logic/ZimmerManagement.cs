@@ -214,7 +214,6 @@ namespace Logic
                     {
                         found = true;
                     }
-                    
                 }
 
                 count--;

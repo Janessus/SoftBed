@@ -334,12 +334,12 @@ namespace Logic
 
                             string longBed = GetPassendesBett(p.Station, falscheStation);
 
-                            string[] subs = longBed.Split('-');
-                            string zimmerNr = subs[1];
-                            string bett = subs[2];
-
                             if (!longBed.Equals("NULL"))
                             {
+                                string[] subs = longBed.Split('-');
+                                string zimmerNr = subs[1];
+                                string bett = subs[2];
+
                                 AddToTransferList(falscheStation, longBed);
 
                                 falscheStation.SollStation = "";
