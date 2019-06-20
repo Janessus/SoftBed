@@ -123,11 +123,24 @@ namespace Logic
                     DateTime gebdat = DateTime.Parse(Reader.GetString(3));
                     string station = Reader.GetString(4);
                     string sollstation = Reader.GetString(5);
+
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
+
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
                     p.Bett = Reader.GetString(8);
-                    p.ZimmerNr = Reader.GetString(9);
+
+                    try
+                    {
+                        p.ZimmerNr = Reader.GetString(9);
+                    }
+                    catch (Exception)
+                    {
+                        if (DebugMode)
+                        {
+                            Console.WriteLine("ZimmerNr war NULL");
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -165,15 +178,38 @@ namespace Logic
                 {
                     string versicherungsNummer = Reader.GetString(0);
                     DateTime gebdat = DateTime.Parse(Reader.GetString(3));
+
                     string station = Reader.GetString(4);
-                    string sollstation = Reader.GetString(5);
+
+                    string sollstation = "";
+
+                    try
+                    {
+                        sollstation = Reader.GetString(5);
+                    }
+                    catch(Exception e)
+                    {
+                        if(DebugMode)
+                            Console.WriteLine("sollstation war Null");
+                    }
+
+
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
                     //string bett = Reader.GetString(8);
                     //string zimmerNr = Reader.GetString(9);
 
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
-                    p.ZimmerNr = Reader.GetString(8);
+
+                    try
+                    {
+                        p.ZimmerNr = Reader.GetString(8);
+                    }
+                    catch (Exception)
+                    {
+                        if(DebugMode)
+                            Console.WriteLine("ZimmerNr war NULL");
+                    }
                     //p.Bett = Reader.GetString(8);
                 }
             }

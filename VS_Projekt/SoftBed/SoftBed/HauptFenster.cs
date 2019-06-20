@@ -51,12 +51,24 @@ namespace SoftBed
 
                     if(selectedRows.Count != 0) //if a row is selected
                     {
-                        Patient p = new Patient();
-                        p.Nachname = selectedRows[0].Cells[0].Value.ToString();
-                        p.Vorname = selectedRows[0].Cells[1].Value.ToString();
-                        p.Station = selectedRows[0].Cells[2].Value.ToString();  //von
-                        ZimmerManagement.GetInstance().DeleteMemberTransferliste(p.Vorname, p.Nachname);
-                        DatabaseManagement.GetInstance().BedGotFree(p);
+                        try
+                        {
+                            Patient p = new Patient();
+                            p.Nachname = selectedRows[0].Cells[0].Value.ToString();
+                            p.Vorname = selectedRows[0].Cells[1].Value.ToString();
+                            p.Station = selectedRows[0].Cells[2].Value.ToString();  //von
+                            ZimmerManagement.GetInstance().DeleteMemberTransferliste(p.Vorname, p.Nachname);
+                            DatabaseManagement.GetInstance().BedGotFree(p);
+                        }
+                        catch (Exception)
+                        {
+                            string messageBoxText = "Du hast niemanden ausgewählt du Dulli";
+                            string caption = "Du bist ein Dulli";
+                            MessageBoxButtons button = MessageBoxButtons.OK;
+
+                            DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+                        }
+                       
                     }
                     
                     RefreshHauptfenster();
