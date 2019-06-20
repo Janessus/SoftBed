@@ -134,16 +134,16 @@ namespace SoftBed
         {
             if (pb.Value > (pb.Maximum * 0.9))
             {
-                pb.BackColor = Color.Red;
-                pb.ForeColor = Color.Red;
+                pb.BackColor = Color.OrangeRed;
+                pb.ForeColor = Color.DarkRed;
             }else if(pb.Value > (pb.Maximum * 0.8))
             {
                 pb.BackColor = Color.Yellow;
-                pb.ForeColor = Color.Yellow;
+                pb.ForeColor = Color.Gold;
             }
             else
             {
-                pb.BackColor = Color.Green;
+                pb.BackColor = Color.GreenYellow;
                 pb.ForeColor = Color.Green;
             }
 
