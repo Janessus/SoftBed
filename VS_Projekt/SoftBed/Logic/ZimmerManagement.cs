@@ -83,76 +83,63 @@ namespace Logic
          */
         public string suchePassendesBett(Patient patient)
         {
-            if (patient.SollStation.Equals(""))
-                patient.SollStation = patient.Station;
-
-            string bett = null; //DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
+            string bett = "NULL"; //DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
             
             if (patient.Station.Equals("Pädiatrie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
             {
                 //suche bett in Gynäkologie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Pädiatrie", patient);
-                if (bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+                
             }
             else if (patient.Station.Equals("Gynäkologie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
             {
                 //suche bett in Gynäkologie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Gynäkologie", patient);
-                if(bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+             
             }
             else if(patient.Station.Equals("Innere Medizin") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50))
             {
                 //suche bett in Innere Medizin
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Innere Medizin", patient);
-                if (bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+               
             }
             else if(patient.Station.Equals("Onkologie") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Onkologie < 50))
             {
                 //suche bett in Onkologie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Onkologie", patient);
-                if (bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+                
             }
             else if(patient.Station.Equals("Orthopädie") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Orthopaedie < 50))
             {
                 //suche bett in Orthopädie
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Orthopädie", patient);
-                if (bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+              
             }
             else if(patient.Station.Equals("Intensivstation") &&
                     (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Intensiv < 10))
             {
                 // suche bett in Intensivstation
                 bett = DatabaseManagement.GetInstance().GetPassendesBett("Intensivstation", patient);
-                if (bett == "NULL")
-                {
-                    bett = SucheBettAufAndererStation(patient);
-                }
+                
             }
-            else
+
+            if (bett == "NULL")
             {
-                // patient auf station mit größter freier kapaziät unterbringen
+                if (patient.SollStation.Equals(""))
+                {
+                    patient.SollStation = patient.Station;
+                    DatabaseManagement.GetInstance().PatientAendern(patient);
+                }
+                   
+
                 bett = SucheBettAufAndererStation(patient);
             }
+            
             
             return bett;
         }
@@ -206,25 +193,43 @@ namespace Logic
 
         private string SucheBettAufAndererStation(Patient patient)
         {
-            if (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50)
+            bool found = false;
+            int count = 4;
+            string bett = "NULL";
+
+            while (!found && (count >= 0))
             {
-                string bett = DatabaseManagement.GetInstance().GetPassendesBett("Innere Medizin", patient);
-                //suche bett in innere, wenn patient nicht in eigene station kann
+                if (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Innere < 50)
+                {
+                    bett = DatabaseManagement.GetInstance().GetPassendesBett("Innere Medizin", patient);
+                    //suche bett in innere, wenn patient nicht in eigene station kann
+                    
+                }
+
+                // patient auf station mit größter freier kapaziät unterbringen
                 if (bett == "NULL")
                 {
-                    // patient auf station mit größter freier kapaziät unterbringen
-                    return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[4], patient);
+                    if (UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count].Equals("Gynäkologie"))
+                    {
+                        bett = DatabaseManagement.GetInstance().GetPassendesBett("Gynäkologie", patient);
+                    }
+                    else
+                    {
+                        bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
+                        if (bett != "NULL")
+                        {
+                            found = true;
+                        }
+                    }
+                    
                 }
-                else
-                {
-                    return bett;
-                }
+
+                count--;
             }
 
-            
-            // patient auf station mit größter freier kapaziät unterbringen
-            return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[4], patient);
+            return bett;
         }
+        
 
         public bool ITSVoll()
         {
