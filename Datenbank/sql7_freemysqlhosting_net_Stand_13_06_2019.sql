@@ -26,17 +26,15 @@ USE `sql7294766`;
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur für Tabelle `Mitarbeiter`
---
-
-CREATE TABLE `Mitarbeiter` (
-  `MitarbeiterID` int(11) NOT NULL,
-  `PersonID` int(11) DEFAULT NULL,
-  `Rechte` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- --------------------------------------------------------
+
+drop table if exists Users;
+drop table if exists TransferListe;
+drop table if exists Patient;
+drop table if exists Zimmer;
+drop table if exists Station;
+drop table if exists Person;
+
 
 --
 -- Tabellenstruktur für Tabelle `Patient`
@@ -48,7 +46,7 @@ CREATE TABLE `Patient` (
   `ZimmerNr` int(11) DEFAULT NULL,
   `StationsBezeichnung` varchar(40) DEFAULT NULL,
   `Bett` varchar(1) DEFAULT NULL,
-  `Beschwerde` varchar(255) DEFAULT NULL,
+  `Sollstation` varchar(255) DEFAULT NULL,
   `Aufnahmedatum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,7 +54,7 @@ CREATE TABLE `Patient` (
 -- Daten für Tabelle `Patient`
 --
 
-INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezeichnung`, `Bett`, `Beschwerde`, `Aufnahmedatum`) VALUES
+INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezeichnung`, `Bett`, `Sollstation`, `Aufnahmedatum`) VALUES
 ('A394204234', 299, 12, 'Innere Medizin', 'F', '', '2019-06-11 11:00:54'),
 ('A455002282', 35, 2, 'Onkologie', 'T', '', '2019-06-07 10:36:40'),
 ('B337711929', 321, 18, 'Innere Medizin', 'T', '', '2019-06-11 14:45:16'),
@@ -77,7 +75,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('B797576463', 90, 7, 'Orthopädie', 'T', '', '2019-06-07 10:36:40'),
 ('B873831212', 333, 18, 'Gynäkologie', 'T', '', '2019-06-11 14:51:08'),
 ('C136116913', 34, 2, 'Onkologie', 'F', '', '2019-06-07 10:36:40'),
-('C177216257', 68, 5, 'Innere Medizin', 'F', 'Magen-Darm-Grippe', '2019-06-07 10:36:40'),
+('C177216257', 68, 5, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('C448591791', 208, 10, 'Pädiatrie', 'T', '', '2019-06-11 09:53:08'),
 ('C733834423', 334, 20, 'Gynäkologie', 'F', '', '2019-06-11 14:51:27'),
 ('C838311928', 312, 14, 'Innere Medizin', 'T', '', '2019-06-11 14:39:12'),
@@ -90,7 +88,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('E134678378', 234, 13, 'Pädiatrie', 'T', '', '2019-06-11 10:01:12'),
 ('E186797945', 92, 7, 'Onkologie', 'T', '', '2019-06-07 10:36:40'),
 ('E712249317', 65, 5, 'Onkologie', 'F', '', '2019-06-07 10:36:40'),
-('E735255429', 58, 4, 'Innere Medizin', 'F', 'Leberzirrhose', '2019-06-07 10:36:40'),
+('E735255429', 58, 4, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('E799153920', 32, 1, 'Onkologie', 'F', '', '2019-06-07 10:36:40'),
 ('F123746238', 122, 12, 'Orthopädie', 'F', '', '2019-06-10 15:19:37'),
 ('F236873846', 237, 14, 'Pädiatrie', 'F', '', '2019-06-11 10:03:54'),
@@ -105,7 +103,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('F474381723', 182, 8, 'Innere Medizin', 'T', '', '2019-06-11 09:10:02'),
 ('F475564829', 176, 9, 'Innere Medizin', 'T', '', '2019-06-11 08:57:20'),
 ('F569918774', 52, 3, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
-('F884813391', 40, 2, 'Orthopädie', 'F', 'Armbruch', '2019-06-07 10:36:40'),
+('F884813391', 40, 2, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
 ('G172260987', 127, 14, 'Orthopädie', 'T', '', '2019-06-10 15:22:55'),
 ('G193700685', 60, 4, 'Orthopädie', 'T', '', '2019-06-07 10:36:40'),
 ('G213435346', 289, 23, 'Gynäkologie', 'F', '', '2019-06-11 10:27:56'),
@@ -130,7 +128,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('H475644192', 242, 17, 'Pädiatrie', 'F', '', '2019-06-11 10:05:24'),
 ('H4756441921', 243, 17, 'Pädiatrie', 'T', '', '2019-06-11 10:05:54'),
 ('H478639021', 245, 16, 'Pädiatrie', 'T', '', '2019-06-11 10:06:05'),
-('H550247948', 31, 1, 'Gynäkologie', 'F', 'Endometriose', '2019-06-07 10:36:40'),
+('H550247948', 31, 1, 'Gynäkologie', 'F', '', '2019-06-07 10:36:40'),
 ('H574611987', 293, 25, 'Gynäkologie', 'F', '', '2019-06-11 10:31:12'),
 ('H575757111', 295, 24, 'Orthopädie', 'T', '', '2019-06-11 10:36:41'),
 ('H733812903', 332, 20, 'Innere Medizin', 'T', '', '2019-06-11 14:50:23'),
@@ -140,7 +138,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('I345267189', 200, 8, 'Pädiatrie', 'T', '', '2019-06-11 09:42:34'),
 ('I592724450', 77, 3, 'Pädiatrie', 'F', '', '2019-06-07 10:36:40'),
 ('I733644283', 131, 17, 'Orthopädie', 'F', '', '2019-06-10 15:27:25'),
-('I803109599', 28, 2, 'Innere Medizin', 'T', 'Schlafstörung', '2019-06-07 10:36:40'),
+('I803109599', 28, 2, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('I926583802', 95, 7, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('J003546236', 202, 7, 'Pädiatrie', 'T', '', '2019-06-11 09:47:05'),
 ('J272901112', 89, 6, 'Orthopädie', 'T', '', '2019-06-07 10:36:40'),
@@ -148,7 +146,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('J463371982', 158, 14, 'Onkologie', 'T', '', '2019-06-11 08:25:34'),
 ('J553022772', 53, 3, 'Onkologie', 'T', '', '2019-06-07 10:36:40'),
 ('J734663526', 232, 25, 'Onkologie', 'F', '', '2019-06-11 10:00:39'),
-('J737936747', 37, 1, 'Orthopädie', 'F', 'Beinbruch', '2019-06-07 10:36:40'),
+('J737936747', 37, 1, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
 ('J837446578', 227, 23, 'Onkologie', 'F', '', '2019-06-11 09:58:48'),
 ('K123456789', 291, 24, 'Gynäkologie', 'F', '', '2019-06-11 10:29:50'),
 ('K243546379', 74, 6, 'Gynäkologie', 'F', '', '2019-06-07 10:36:40'),
@@ -161,7 +159,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('K475564382', 193, 3, 'Intensivstation', 'F', '', '2019-06-11 09:24:26'),
 ('K475564738', 205, 10, 'Onkologie', 'T', '', '2019-06-11 09:52:10'),
 ('K574461110', 229, 24, 'Onkologie', 'F', '', '2019-06-11 09:59:35'),
-('K578076968', 59, 4, 'Innere Medizin', 'T', 'Lungenentzündung', '2019-06-07 10:36:40'),
+('K578076968', 59, 4, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('K655744833', 217, 19, 'Onkologie', 'T', '', '2019-06-11 09:55:57'),
 ('K7446511928', 231, 24, 'Onkologie', 'T', '', '2019-06-11 09:59:57'),
 ('K822642901', 120, 11, 'Orthopädie', 'F', '', '2019-06-10 15:18:42'),
@@ -181,11 +179,11 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('L4833747389', 149, 5, 'Onkologie', 'T', '', '2019-06-11 08:22:08'),
 ('L687905826', 83, 2, 'Pädiatrie', 'F', '', '2019-06-07 10:36:40'),
 ('L778635577', 88, 7, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
-('L824049419', 36, 1, 'Gynäkologie', 'T', 'Uterusmyom', '2019-06-07 10:36:40'),
+('L824049419', 36, 1, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('L834736271', 220, 20, 'Onkologie', 'T', '', '2019-06-11 09:56:38'),
 ('L843711726', 336, 24, 'Gynäkologie', 'T', '', '2019-06-12 11:49:24'),
 ('M179715172', 62, 4, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
-('M226863567', 44, 3, 'Innere Medizin', 'T', 'Magengeschwür', '2019-06-07 10:36:40'),
+('M226863567', 44, 3, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('M273661152', 301, 10, 'Innere Medizin', 'T', '', '2019-06-11 11:06:00'),
 ('M277363481', 119, 10, 'Orthopädie', 'T', '', '2019-06-10 15:18:17'),
 ('M344629333', 298, 11, 'Innere Medizin', 'T', '', '2019-06-11 10:59:13'),
@@ -196,15 +194,15 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('M474711827', 310, 13, 'Innere Medizin', 'F', '', '2019-06-11 14:38:22'),
 ('M475564837', 206, 16, 'Onkologie', 'F', '', '2019-06-11 09:52:30'),
 ('M475655887', 226, 22, 'Onkologie', 'T', '', '2019-06-11 09:58:27'),
-('M574487657', 86, 7, 'Innere Medizin', 'F', 'Herzklappenfehler', '2019-06-07 10:36:40'),
+('M574487657', 86, 7, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('N032790845', 223, 12, 'Pädiatrie', 'T', '', '2019-06-11 09:57:35'),
 ('N194702969', 85, 6, 'Onkologie', 'T', '', '2019-06-07 10:36:40'),
-('N300322214', 30, 2, 'Innere Medizin', 'F', 'Gallensteine', '2019-06-07 10:36:40'),
+('N300322214', 30, 2, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('N374645654', 136, 19, 'Orthopädie', 'T', '', '2019-06-10 15:29:34'),
-('O278669394', 80, 6, 'Innere Medizin', 'T', 'Schilddrüsenüberfunktion', '2019-06-07 10:36:40'),
+('O278669394', 80, 6, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('O337113833', 330, 23, 'Innere Medizin', 'T', '', '2019-06-11 14:49:25'),
 ('O369230490', 91, 7, 'Onkologie', 'F', '', '2019-06-07 10:36:40'),
-('O410118968', 27, 1, 'Innere Medizin', 'F', 'Reizdarm', '2019-06-07 10:36:40'),
+('O410118968', 27, 1, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('O436317821', 326, 21, 'Innere Medizin', 'T', '', '2019-06-11 14:47:51'),
 ('O475561928', 239, 15, 'Pädiatrie', 'F', '', '2019-06-11 10:04:26'),
 ('O733812632', 329, 23, 'Innere Medizin', 'F', '', '2019-06-11 14:49:07'),
@@ -251,13 +249,13 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('S803953398', 75, 6, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('S845598351', 46, 3, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('T354762668', 230, 13, 'Pädiatrie', 'F', '', '2019-06-11 09:59:40'),
-('T405304674', 38, 2, 'Gynäkologie', 'F', 'Eierstockzyste', '2019-06-07 10:36:40'),
+('T405304674', 38, 2, 'Gynäkologie', 'F', '', '2019-06-07 10:36:40'),
 ('T408383418', 97, 8, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('T463374682', 147, 9, 'Onkologie', 'T', '', '2019-06-11 08:21:18'),
 ('T463423713', 327, 22, 'Innere Medizin', 'F', '', '2019-06-11 14:48:20'),
 ('T465574638', 207, 16, 'Onkologie', 'T', '', '2019-06-11 09:52:54'),
 ('T498541053', 66, 5, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
-('U102567296', 73, 6, 'Innere Medizin', 'F', 'Schilddrüsenunterfunktion', '2019-06-07 10:36:40'),
+('U102567296', 73, 6, 'Innere Medizin', 'F', '', '2019-06-07 10:36:40'),
 ('U474933289', 252, 20, 'Pädiatrie', 'T', '', '2019-06-11 10:08:20'),
 ('U759333035', 51, 3, 'Onkologie', 'F', '', '2019-06-07 10:36:40'),
 ('V129854545', 141, 22, 'Orthopädie', 'F', '', '2019-06-10 15:32:34'),
@@ -274,21 +272,21 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('W373811928', 317, 16, 'Innere Medizin', 'T', '', '2019-06-11 14:42:31'),
 ('W374462719', 155, 13, 'Onkologie', 'T', '', '2019-06-11 08:24:16'),
 ('W383811192', 313, 15, 'Innere Medizin', 'F', '', '2019-06-11 14:39:38'),
-('W471603762', 70, 5, 'Innere Medizin', 'T', 'Magen-Darm-Grippe', '2019-06-07 10:36:40'),
+('W471603762', 70, 5, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('W736440091', 224, 21, 'Onkologie', 'T', '', '2019-06-11 09:57:42'),
 ('W738447733', 276, 17, 'Gynäkologie', 'F', '', '2019-06-11 10:20:13'),
 ('W746650987', 138, 20, 'Orthopädie', 'F', '', '2019-06-10 15:30:28'),
 ('W837446362', 215, 19, 'Onkologie', 'F', '', '2019-06-11 09:54:58'),
-('W962939658', 87, 7, 'Innere Medizin', 'T', 'Herzschwäche', '2019-06-07 10:36:40'),
+('W962939658', 87, 7, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('X123654789', 192, 6, 'Pädiatrie', 'T', '', '2019-06-11 09:24:25'),
 ('X237348734', 216, 11, 'Pädiatrie', 'T', '', '2019-06-11 09:55:17'),
 ('X273361829', 130, 16, 'Orthopädie', 'F', '', '2019-06-10 15:24:55'),
-('X275356840', 39, 2, 'Gynäkologie', 'T', 'Harnwegsinfekt', '2019-06-07 10:36:40'),
+('X275356840', 39, 2, 'Gynäkologie', 'T', '', '2019-06-07 10:36:40'),
 ('X473441827', 164, 9, 'Gynäkologie', 'F', '', '2019-06-11 08:41:19'),
 ('X553703850', 94, 7, 'Gynäkologie', 'F', '', '2019-06-07 10:36:40'),
 ('Y106009645', 79, 1, 'Pädiatrie', 'T', '', '2019-06-07 10:36:40'),
 ('Y387900233', 241, 16, 'Pädiatrie', 'F', '', '2019-06-11 10:05:04'),
-('Y567953011', 29, 1, 'Innere Medizin', 'T', 'Refluxerkrankung', '2019-06-07 10:36:40'),
+('Y567953011', 29, 1, 'Innere Medizin', 'T', '', '2019-06-07 10:36:40'),
 ('Y731282103', 56, 4, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
 ('Z239472346', 275, 16, 'Gynäkologie', 'T', '', '2019-06-11 10:19:49'),
 ('Z3274637281', 175, 10, 'Orthopädie', 'F', '', '2019-06-11 09:39:05'),
@@ -297,7 +295,7 @@ INSERT INTO `Patient` (`VersicherungsNr`, `PersonID`, `ZimmerNr`, `StationsBezei
 ('Z541029313', 221, 12, 'Pädiatrie', 'F', '', '2019-06-11 09:56:42'),
 ('Z543540514', 76, 6, 'Orthopädie', 'F', '', '2019-06-07 10:36:40'),
 ('Z733721616', 328, 22, 'Innere Medizin', 'T', '', '2019-06-11 14:48:38'),
-('Z861031584', 41, 2, 'Orthopädie', 'T', 'Bandscheibenvorfall', '2019-06-07 10:36:40');
+('Z861031584', 41, 2, 'Orthopädie', 'T', '', '2019-06-07 10:36:40');
 
 -- --------------------------------------------------------
 
@@ -882,15 +880,6 @@ INSERT INTO `Zimmer` (`ZimmerNr`, `StationsBezeichnung`) VALUES
 --
 -- Indizes der exportierten Tabellen
 --
-
---
--- Indizes für die Tabelle `Mitarbeiter`
---
-ALTER TABLE `Mitarbeiter`
-  ADD PRIMARY KEY (`MitarbeiterID`),
-  ADD KEY `PersonID` (`PersonID`);
-
---
 -- Indizes für die Tabelle `Patient`
 --
 ALTER TABLE `Patient`
@@ -951,11 +940,6 @@ ALTER TABLE `Person`
 -- Constraints der exportierten Tabellen
 --
 
---
--- Constraints der Tabelle `Mitarbeiter`
---
-ALTER TABLE `Mitarbeiter`
-  ADD CONSTRAINT `Mitarbeiter_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE CASCADE;
 
 --
 -- Constraints der Tabelle `Patient`

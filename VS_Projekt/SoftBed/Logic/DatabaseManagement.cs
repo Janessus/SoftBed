@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Wrapperklassen;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.CRUD;
 
 namespace Logic
 {
@@ -608,6 +609,7 @@ namespace Logic
                     item.Stempel = DateTime.Parse(Reader.GetString(5));
 
                     verlegungsliste.Transferliste.Add(item);
+                    RemoveDuplicateEntries(verlegungsliste);
                 }
             }
             catch (Exception e)
@@ -625,7 +627,24 @@ namespace Logic
             return verlegungsliste;
         }
 
-
+        private Verlegungsliste RemoveDuplicateEntries(Verlegungsliste verlegungsliste)
+        {
+            foreach (var Item1 in verlegungsliste.Transferliste)
+            {
+                foreach (var Item2 in verlegungsliste.Transferliste)
+                {
+                    if ((Item1.Person.Vorname + Item1.Person.Nachname).Equals(
+                        Item2.Person.Vorname + Item2.Person.Nachname))
+                    {
+                        if (DateTime.Compare(Item1.Stempel, Item2.Stempel) > 0)
+                            verlegungsliste.Transferliste.Remove(Item2);
+                        else if (DateTime.Compare(Item1.Stempel, Item2.Stempel) < 0)
+                            verlegungsliste.Transferliste.Remove(Item1);
+                    }
+                }
+            }
+            return verlegungsliste;
+        }
 
 
         public bool DeleteMemberTransferliste(string vorname, string nachname)
