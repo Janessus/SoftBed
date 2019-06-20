@@ -384,7 +384,7 @@
             // refreshButton
             // 
             this.refreshButton.Location = new System.Drawing.Point(707, 489);
-            this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(136, 32);
             this.refreshButton.TabIndex = 28;
@@ -427,6 +427,8 @@
             this.Controls.Add(this.progBarGesLbl);
             this.Controls.Add(this.transferListeDGV);
             this.Controls.Add(this.gesKHProgBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "HauptFenster";
             this.Text = "HauptFenster";
             ((System.ComponentModel.ISupportInitialize)(this.transferListeDGV)).EndInit();

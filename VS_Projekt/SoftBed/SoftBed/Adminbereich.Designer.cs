@@ -240,6 +240,8 @@
             this.Controls.Add(this.pwLbl);
             this.Controls.Add(this.userLbl);
             this.Controls.Add(this.zurueckBtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Adminbereich";
             this.Text = "Adminbereich";
             this.ResumeLayout(false);
