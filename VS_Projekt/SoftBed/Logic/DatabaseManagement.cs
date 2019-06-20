@@ -354,6 +354,12 @@ namespace Logic
             MySqlConnection connection = null;
             MySqlDataReader reader = null;
 
+            if (DebugMode)
+            {
+                Console.WriteLine("BedGotFree Called ");
+                PrintPatient(p);
+            }
+
             try
             {
                 connection = Connect();
@@ -362,15 +368,28 @@ namespace Logic
 
                 if (reader != null)
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
+
+                        if (DebugMode)
+                        {
+                            Console.WriteLine("Patient auf falscher READER: " + reader.GetString(1));
+                            PrintPatient(p);
+                        }
+
                         if (reader.GetString(1).Equals(p.Station))
                         {
                             Patient falscheStation = GetPatient(reader.GetString(0));
 
+                            if (DebugMode)
+                            {
+                                Console.WriteLine("Patient auf falscher station1: ");
+                                PrintPatient(p);
+                            }
+
                             string longBed = GetPassendesBett(p.Station, falscheStation);
 
-                            if (!longBed.Equals("NULL") && !p.Station.Equals(falscheStation.SollStation))
+                            if (!longBed.Equals("NULL") && p.Station.Equals(falscheStation.SollStation))
                             {
                                 string[] subs = longBed.Split('-');
                                 string zimmerNr = subs[1];
@@ -382,7 +401,13 @@ namespace Logic
                                 falscheStation.Station = p.Station;
                                 falscheStation.ZimmerNr = zimmerNr;
                                 falscheStation.Bett = bett;
+                                if (DebugMode)
+                                {
+                                    Console.WriteLine("Patient auf falscher station2: ");
+                                    PrintPatient(p);
+                                }
                                 PatientAendern(falscheStation);
+                                break;
                             }
                         }
                     }
