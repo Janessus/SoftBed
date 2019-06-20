@@ -929,10 +929,11 @@ namespace Logic
                             break;
                         }
                     }
-                    connection.Close();
+                    
                 }
 
-
+                connection.Close();
+                
                 //Select all empty rooms from the given station
                 if (!found)
                 {

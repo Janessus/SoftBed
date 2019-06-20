@@ -140,7 +140,6 @@ namespace Logic
                 bett = SucheBettAufAndererStation(patient);
             }
             
-            
             return bett;
         }
 
@@ -210,10 +209,7 @@ namespace Logic
                     if (patient.Geschlecht.Equals("w"))
                     {
                         bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
-                        if (bett != "NULL")
-                        {
-                            found = true;
-                        }
+                        
                     }
                     else
                     {
@@ -222,7 +218,16 @@ namespace Logic
                             count--;
                             bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
                         }
+                        else
+                        {
+                            bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
+                        }
                     }
+                }
+
+                if (bett != "NULL")
+                {
+                    found = true;
                 }
 
                 count--;
