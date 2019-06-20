@@ -89,7 +89,7 @@ namespace SoftBed
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(138, 36);
             this.loginBtn.TabIndex = 3;
-            this.loginBtn.Text = "anmelden";
+            this.loginBtn.Text = "Anmelden";
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 

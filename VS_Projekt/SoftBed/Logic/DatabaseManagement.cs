@@ -14,7 +14,7 @@ namespace Logic
 
         private DatabaseManagement(){}
 
-        private bool DebugMode = true;
+        private bool DebugMode = false;
 
         public static DatabaseManagement GetInstance()
         {
@@ -31,9 +31,9 @@ namespace Logic
         {
             // Public
             string connectionString = "SERVER=sql7.freemysqlhosting.net;" +
-                                      "DATABASE=sql7294766;" +
-                                      "UID=sql7294766;" +
-                                      "PASSWORD=jy3wzdVUHg;";
+                                      "DATABASE=sql7296187;" +
+                                      "UID=sql7296187;" +
+                                      "PASSWORD=v75I1Dfz77;";
 
             MySqlConnection Connection = null;
 
