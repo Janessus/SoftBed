@@ -46,7 +46,7 @@ namespace SoftBed
             else if(sUser.Equals("") && sUser.Equals(""))
             {
                 Message("hä", "Sorry aber nix eingeben bringt nix");
-            }else if(sUser.Contains("Drop") || sPW.Contains("Drop") || sUser.Contains("DROP") || sPW.Contains("DROP"))
+            }else if(sUser.Contains("Drop") || sPW.Contains("Drop") || sUser.Contains("DROP") || sPW.Contains("DROP") || sUser.Contains("drop") || sPW.Contains("drop"))
             {
                 Message("Nice Try", "NENENE so nich");
             }else 
