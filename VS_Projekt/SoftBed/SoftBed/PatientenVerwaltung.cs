@@ -175,6 +175,15 @@ namespace SoftBed
                         // Message kann niemanden aufnehemn
                         showKHFullWarning();
                     }
+                    else if (isFull == 4 && (selectedIndex == 1 || selectedIndex == 2 ||
+                                             selectedIndex == 3 || selectedIndex == 4) && mRadBtn.Checked) // If Stations except ITS full and patient should be put there
+                    {
+                        showStationsExceptGynFullWarning();
+                    }
+                    else if (isFull == 5 && mRadBtn.Checked)
+                    {
+                        showKHExceptGynFullWarning();
+                    }
                     else
                     {
                         if (abteilungDropDown.SelectedIndex == 0 && mRadBtn.Checked) // is Gyn and male??
@@ -533,17 +542,31 @@ namespace SoftBed
         {
             int full = 0;
             int currentBelegungITS = UpdateManagement.GetInstance().GetCurrentBettenbelegung().Intensiv;
+            int currentBelegungGyn = UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie;
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             if (currentBelegungITS >= 10)
             {
                 editMeldungLdl.Text = "Die Intensivstation ist voll! Legen Sie keinen Patienten mehr in die Intensivstation!";
                 full = 1;
             }
-            else if(currentBelegung.Gesamt()-currentBelegungITS >= 250)
+            else if ((currentBelegung.Gesamt() - currentBelegungITS - currentBelegungGyn) >= 200)
+            {
+                editMeldungLdl.Text = "Alle Stationen außer die Intensivstation und die Gynäkologie sind voll!";
+                full = 4;
+            }
+
+            if (currentBelegung.Gesamt() - currentBelegungITS >= 250)
             {
                 editMeldungLdl.Text = "Alle Stationen außer die Intensivstation sind voll! Sie können Patienten nur noch in die Intensivstation legen!";
                 full = 2;
             }
+
+            if ((currentBelegung.Gesamt() - currentBelegungGyn) >= 210)
+            {
+                editMeldungLdl.Text = "Alle Stationen außer die Gynäkologie sind voll! Sie können nur noch Frauen aufnehmen!";
+                full = 5;
+            }
+
             if (currentBelegung.Gesamt() >= 260)
             {
                 editMeldungLdl.Text = "Das Krankenhaus ist voll! Es kann kein weiterer Patient mehr aufgenommen werden!";
@@ -596,5 +619,32 @@ namespace SoftBed
             editMeldungLdl.Text = "Die Krankenhaus ist voll! Der Patient wurde nicht aufgenommen!";
         }
 
+
+        /**
+         * shows warning for User if stations except Gyn is full
+         */
+        private void showStationsExceptGynFullWarning()
+        {
+            string messageBoxText;
+            messageBoxText = "Die Stationen außer Gynäkologie sind voll! Es kann kein männlicher Patient mehr aufgenommen werden!";
+
+            string caption = "Warnung!";
+            MessageBoxButtons button = MessageBoxButtons.OK; MessageBox.Show(messageBoxText, caption, button);
+            editMeldungLdl.Text = "Die Stationen sind voll! Der Patient wurde nicht aufgenommen!";
+        }
+
+
+        /**
+         * shows warning for User if KH ist full
+         */
+        private void showKHExceptGynFullWarning()
+        {
+            string messageBoxText;
+            messageBoxText = "Das Krankenhaus außer die Gynäkologie ist voll! Es kann kein männlicher Patient mehr aufgenommen werden!";
+
+            string caption = "Warnung!";
+            MessageBoxButtons button = MessageBoxButtons.OK; MessageBox.Show(messageBoxText, caption, button);
+            editMeldungLdl.Text = "Die Krankenhaus ist voll! Der Patient wurde nicht aufgenommen!";
+        }
     }
 }
