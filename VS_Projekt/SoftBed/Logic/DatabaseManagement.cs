@@ -111,7 +111,7 @@ namespace Logic
             {
                 Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht ,Bett, ZimmerNr " +
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht, Bett, ZimmerNr " +
                                       "FROM Patient, Person " +
                                       "WHERE VersicherungsNr = \"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
@@ -122,7 +122,16 @@ namespace Logic
                     string nachname = Reader.GetString(2);
                     DateTime gebdat = DateTime.Parse(Reader.GetString(3));
                     string station = Reader.GetString(4);
-                    string sollstation = Reader.GetString(5);
+                    string sollstation = "";
+                    try
+                    {
+                        sollstation = Reader.GetString(5);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
 
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
@@ -168,7 +177,7 @@ namespace Logic
             {
                 Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT pa.VersicherungsNr, pe.Vorname, pe.Nachname, pe.Geburtsdatum, pa.StationsBezeichnung, pa.Sollstation, pa.Aufnahmedatum, pe.Geschlecht, pa.ZimmerNr " +
+                Reader = ExecuteQuery("SELECT pa.VersicherungsNr, pe.Vorname, pe.Nachname, pe.Geburtsdatum, pa.StationsBezeichnung, pa.Sollstation, pa.Aufnahmedatum, pe.Geschlecht, pa.Bett, pa.ZimmerNr " +
                                       "FROM Patient pa, Person pe " +
                                       "WHERE pe.PersonID = pa.PersonID " +
                                       "AND pe.Vorname = \"" + vorname + "\" " +
@@ -196,10 +205,18 @@ namespace Logic
 
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
-                    //string bett = Reader.GetString(8);
-                    //string zimmerNr = Reader.GetString(9);
 
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
+
+                    try
+                    {
+                        p.Bett = Reader.GetString(8); ;
+                    }
+                    catch (Exception e)
+                    {
+                        if (DebugMode)
+                            Console.WriteLine("Bett war NULL");
+                    }
 
                     try
                     {
@@ -567,7 +584,10 @@ namespace Logic
             Verlegungsliste verlegungsliste = new Verlegungsliste();
             MySqlDataReader Reader = null;
             MySqlConnection Connection = null;
-            string query = "SELECT p.PersonID, p.Vorname, p.Nachname, t.Von, t.Nach, t.Stempel FROM TransferListe t, Person p Where t.PersonID = p.PersonID;";
+            string query = "SELECT p.PersonID, p.Vorname, p.Nachname, t.Von, t.Nach, t.Stempel " +
+                           "FROM TransferListe t, Person p " +
+                           "WHERE t.PersonID = p.PersonID " +
+                           "ORDER BY t.Stempel ASC;";
 
             try
             {
