@@ -83,6 +83,9 @@ namespace Logic
          */
         public string suchePassendesBett(Patient patient)
         {
+            if (patient.SollStation.Equals(""))
+                patient.SollStation = patient.Station;
+
             string bett = DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
 
             
@@ -211,7 +214,7 @@ namespace Logic
                 if (bett == "NULL")
                 {
                     // patient auf station mit größter freier kapaziät unterbringen
-                    return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[0], patient);
+                    return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[4], patient);
                 }
                 else
                 {
@@ -221,7 +224,7 @@ namespace Logic
 
             
             // patient auf station mit größter freier kapaziät unterbringen
-            return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[0], patient);
+            return DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[4], patient);
         }
 
         public bool ITSVoll()
