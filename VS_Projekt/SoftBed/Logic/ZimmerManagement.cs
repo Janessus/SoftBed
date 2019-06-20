@@ -86,8 +86,7 @@ namespace Logic
             if (patient.SollStation.Equals(""))
                 patient.SollStation = patient.Station;
 
-            string bett = DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
-
+            string bett = null; //DatabaseManagement.GetInstance().GetPassendesBett(patient.Station, patient);
             
             if (patient.Station.Equals("Pädiatrie") &&
                 (UpdateManagement.GetInstance().GetCurrentBettenbelegung().Gynaekologie < 50))
