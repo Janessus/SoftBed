@@ -12,7 +12,8 @@ namespace Logic
         public static DatabaseManagement Instance { get => _instance; set => _instance = value; }
 
         private DatabaseManagement(){}
-        
+
+        private bool DebugMode = true;
 
         public static DatabaseManagement GetInstance()
         {
@@ -54,6 +55,9 @@ namespace Logic
         {
             MySqlDataReader Reader = null;
 
+            if(DebugMode)
+                Console.WriteLine("EXECUTE QUERY: " + query);
+
             try
             {
                 MySqlCommand cmd = new MySqlCommand(query, Connection);
@@ -71,7 +75,8 @@ namespace Logic
         //Insert, Update, Delete ...
         private bool ExecuteInsert(String query, MySqlConnection Connection)
         {
-            Console.WriteLine("EXECUTEINSERT: " + query);
+            if (DebugMode)
+                Console.WriteLine("EXECUTEINSERT: " + query);
             try
             {
                 Connection.Open();
@@ -106,7 +111,7 @@ namespace Logic
             {
                 Connection = Connect();
                 Connection.Open();
-                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht " + //, Bett, ZimmerNr " +
+                Reader = ExecuteQuery("SELECT VersicherungsNr, Vorname, Nachname, Geburtsdatum, StationsBezeichnung, Sollstation, Aufnahmedatum, Geschlecht ,Bett, ZimmerNr " +
                                       "FROM Patient, Person " +
                                       "WHERE VersicherungsNr = \"" + versicherungsNummer + "\" " +
                                       "AND Patient.PersonID = Person.PersonID;", Connection);
@@ -121,6 +126,8 @@ namespace Logic
                     DateTime aufnahmedatum = DateTime.Parse(Reader.GetString(6));
                     string geschlecht = Reader.GetString(7);
                     p = new Patient(vorname, nachname, versicherungsNummer, gebdat, station, sollstation, aufnahmedatum, geschlecht);
+                    p.Bett = Reader.GetString(8);
+                    p.ZimmerNr = Reader.GetString(9);
                 }
             }
             catch (Exception e)
@@ -176,7 +183,10 @@ namespace Logic
             }
             finally
             {
-                if(Connection != null){Connection.Close();}
+                if (Connection != null)
+                {
+                    Connection.Close();
+                }
             }
 
             return p;
@@ -304,6 +314,7 @@ namespace Logic
                            "FROM Patient pa " +
                            "WHERE NOT (pa.Sollstation = \"\") " +
                            "ORDER BY pa.Aufnahmedatum ASC;";
+
             MySqlConnection connection = null;
             MySqlDataReader reader = null;
 
@@ -320,6 +331,7 @@ namespace Logic
                         if (reader.GetString(1).Equals(p.Station))
                         {
                             Patient falscheStation = GetPatient(reader.GetString(0));
+
                             string longBed = GetPassendesBett(p.Station, falscheStation);
 
                             string[] subs = longBed.Split('-');
@@ -378,13 +390,19 @@ namespace Logic
                 {
                     if (GetPatient(patient.Versicherungsnr) == null)
                     {
-                        PersonAnlegen(patient);
+                        try
+                        {
+                            PersonAnlegen(patient);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Person konnte nicht angelegt werden.\n" + e.Message);
+                        }
                         Connection = Connect();
                         bool response = ExecuteInsert(query, Connection);
                         Connection.Close();
                         return response & AddToTransferList(patient, zimmerDst);
                     }
-
                     return false;
                 }
                 catch (Exception e)
@@ -410,11 +428,22 @@ namespace Logic
 
             try
             {
+                string vonStation = patient.Station;
+                string vonZimmer = patient.ZimmerNr;
+                string vonBett = patient.Bett;
+
+                string longBed = "";
+
+                if ((vonStation != null) && (!vonStation.Equals("")) &&
+                    ((vonZimmer != null) && (!vonZimmer.Equals("")) && ((vonBett != null) && (!vonBett.Equals("")))))
+                    longBed = vonStation + "-" + vonZimmer + "-" + vonBett;
+
                 string query =
                     "INSERT INTO TransferListe(PersonID, Von, Nach) VALUES((SELECT PersonID FROM Person WHERE Vorname = \"" +
-                    patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"\"" + ", \"" +
+                    patient.Vorname + "\" AND Nachname = \"" + patient.Nachname + "\"), " + "\"" + longBed + "\"" + ", \"" +
                     zimmerDst + "\");";
 
+                Connection = Connect();
                 result = ExecuteInsert(query, Connection);
             }
             catch (Exception e)
@@ -491,7 +520,6 @@ namespace Logic
 
         public bool DeleteMemberTransferliste(string vorname, string nachname)
         {
-            
             string query = "DELETE FROM TransferListe " +
                            "WHERE PersonID IN" +
                            "(" +
@@ -505,6 +533,7 @@ namespace Logic
 
             try
             {
+                /*
                 Patient p = GetPatient(vorname, nachname);
                 if (p.Station != null && !p.Station.Equals(""))
                 {
@@ -513,7 +542,7 @@ namespace Logic
                 }
 
                 PatientAendern(p);
-
+                */
                 Connection = Connect();
                 response = ExecuteInsert(query, Connection);
             }
@@ -652,20 +681,20 @@ namespace Logic
                 if (GetUser(user.Benutzername) == null)
                 {
                     Connection = Connect();
-
                     Connection.Open();
                     MySqlDataReader reader = ExecuteQuery(CheckPersonQuery, Connection);
 
                     if (reader.Read())
                     {
                         short count = reader.GetInt16(0);
+                        
 
                         if (count == 0)
                         {
                             PersonAnlegen(user.Vorname, user.Nachname);
                         }
                     }
-
+                    Connection.Close();
                     response = ExecuteInsert(InsertQuery, Connection);
                 }
             }
@@ -694,8 +723,8 @@ namespace Logic
             {
                 Connection = Connect();
 
-                response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";",
-                    Connection);
+                if(GetUser(userName) != null)
+                    response = ExecuteInsert("DELETE FROM Users WHERE Benutzername = \"" + userName + "\";", Connection);
             }
             catch (Exception e)
             {
@@ -871,6 +900,7 @@ namespace Logic
                             break;
                         }
                     }
+                    connection.Close();
                 }
 
 
@@ -881,13 +911,13 @@ namespace Logic
                             "from Zimmer z " +
                             "where not exists " +
                             "(" +
-                            "select * " +
-                            "from Patient, Zimmer " +
-                            "where Patient.ZimmerNr = z.ZimmerNr " +
-                            "and Patient.StationsBezeichnung = z.StationsBezeichnung" +
+                                "select * " +
+                                "from Patient, Zimmer " +
+                                "where Patient.ZimmerNr = z.ZimmerNr " +
+                                "and Patient.StationsBezeichnung = z.StationsBezeichnung" +
                             ") " +
                             "and z.StationsBezeichnung = \"" + Station + "\";";
-
+                    connection.Open();
                     reader = ExecuteQuery(query, connection);
                     if (reader.Read())
                     {
@@ -907,34 +937,30 @@ namespace Logic
                     if (patient.SollStation.Equals(""))
                         patient.SollStation = Station;
                     PatientAendern(patient);
-                }
+                
 
-                /*
-                List<string> prioritiyList = new List<string>();
-                prioritiyList.Add("Innere Medizin");
-                prioritiyList.Add("Onkologie");
-                prioritiyList.Add("Orthopädie");
-                prioritiyList.Add("Gynäkologie");
-                prioritiyList.Add("Pädiatrie");
+                    //Andere Station auswählen
+                    List<string> prioritiyList = new List<string>();
+                    prioritiyList.Add("Innere Medizin");
+                    prioritiyList.Add("Onkologie");
+                    prioritiyList.Add("Orthopädie");
+                    prioritiyList.Add("Gynäkologie");
+                    prioritiyList.Add("Pädiatrie");
 
-                var enumerator = prioritiyList.GetEnumerator();
+                    var enumerator = prioritiyList.GetEnumerator();
 
-                while (enumerator.MoveNext())
-                {
-                    if (enumerator.Current != Station)
+                    while (enumerator.MoveNext())
                     {
-                        if ((result = GetPassendesBett(enumerator.Current, patient)).Equals("NULL"))
-                            continue;
-                        else
+                        if (enumerator.Current != Station)
                         {
-                            break;
+                            if ((result = GetPassendesBett(enumerator.Current, patient)).Equals("NULL"))
+                                continue;
+                            else
+                                break;
                         }
                     }
                 }
-
                 connection.Close();
-            }
-            */
             }
             catch (Exception e)
             {
@@ -991,8 +1017,11 @@ namespace Logic
 
         public void UncaughtExeption(string callerName, Exception e)
         {
-            Console.Error.WriteLine("\nUnhandled Exception at " + callerName);
-            Console.Error.WriteLine(e.Message);
+            if (DebugMode)
+            {
+                Console.Error.WriteLine("\nUnhandled Exception at " + callerName);
+                Console.Error.WriteLine(e.Message);
+            }
         }
 
 
