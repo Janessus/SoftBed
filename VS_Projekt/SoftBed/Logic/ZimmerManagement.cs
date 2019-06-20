@@ -204,7 +204,8 @@ namespace Logic
                     //suche bett in innere, wenn patient nicht in eigene station kann
                     
                 }
-                else if (bett == "NULL")  // patient auf station mit größter freier kapaziät unterbringen
+
+                if (bett == "NULL")  // patient auf station mit größter freier kapaziät unterbringen
                 {
                     if (patient.Geschlecht.Equals("w"))
                     {
