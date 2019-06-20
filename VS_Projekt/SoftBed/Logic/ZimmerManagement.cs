@@ -205,16 +205,24 @@ namespace Logic
                     //suche bett in innere, wenn patient nicht in eigene station kann
                     
                 }
-
-                // patient auf station mit größter freier kapaziät unterbringen
-                if (bett == "NULL")
+                else if (bett == "NULL")  // patient auf station mit größter freier kapaziät unterbringen
                 {
-                    bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
-                    if (bett != "NULL")
+                    if (patient.Geschlecht.Equals("w"))
                     {
-                        found = true;
+                        bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
+                        if (bett != "NULL")
+                        {
+                            found = true;
+                        }
                     }
-                    
+                    else
+                    {
+                        if (UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count].Equals("Gynäkologie"))
+                        {
+                            count--;
+                            bett = DatabaseManagement.GetInstance().GetPassendesBett(UpdateManagement.GetInstance().GetBettenbelegungSortiert(UpdateManagement.GetInstance().GetCurrentBettenbelegung())[count], patient);
+                        }
+                    }
                 }
 
                 count--;
