@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Wrapperklassen;
+using System.Drawing.Drawing2D;
 
 namespace SoftBed
 {
@@ -108,36 +109,44 @@ namespace SoftBed
             Bettenbelegung currentBelegung = UpdateManagement.GetInstance().GetCurrentBettenbelegung();
             gynProgBar.Value = currentBelegung.Gynaekologie;
             labelGyn.Text = currentBelegung.Gynaekologie.ToString() + "/50";
-            RefreshBettenbelegungColor(gynProgBar);
+            RefreshColorProgBar(gynProgBar);
             iMProgBar.Value = currentBelegung.Innere;
             labelIm.Text = currentBelegung.Innere.ToString() + "/50";
-            RefreshBettenbelegungColor(iMProgBar);
+            RefreshColorProgBar(iMProgBar);
             onkProgBar.Value = currentBelegung.Onkologie;
             labelOnk.Text = currentBelegung.Onkologie.ToString() + "/50";
-            RefreshBettenbelegungColor(onkProgBar);
+            RefreshColorProgBar(onkProgBar);
             orthProgBar.Value = currentBelegung.Orthopaedie;
             labelOrth.Text = currentBelegung.Orthopaedie.ToString() + "/50";
-            RefreshBettenbelegungColor(orthProgBar);
+            RefreshColorProgBar(orthProgBar);
             paedProgBar.Value = currentBelegung.Paediatrie;
             labelPaed.Text = currentBelegung.Paediatrie.ToString() + "/50";
-            RefreshBettenbelegungColor(paedProgBar);
+            RefreshColorProgBar(paedProgBar);
             itsProgBar.Value = currentBelegung.Intensiv;
             labelIts.Text = currentBelegung.Intensiv.ToString() + "/10";
-            RefreshBettenbelegungColor(itsProgBar);
+            RefreshColorProgBar(itsProgBar);
             gesKHProgBar.Value = currentBelegung.Gesamt();
             labelGes.Text = currentBelegung.Gesamt().ToString() + "/260";
-            RefreshBettenbelegungColor(gesKHProgBar);
+            RefreshColorProgBar(gesKHProgBar);
         }
 
-        private void RefreshBettenbelegungColor(ProgressBar pb)
+        private void RefreshColorProgBar(ProgressBar pb)
         {
-            int max = pb.Maximum;
-            if (pb.Value < (max * 0.8))
-                ModifyProgressBarColor.SetState(pb, 1);
-            else if (pb.Value < (max * 0.9))
-                ModifyProgressBarColor.SetState(pb, 3);
+            if (pb.Value > (pb.Maximum * 0.9))
+            {
+                pb.BackColor = Color.Red;
+                pb.ForeColor = Color.Red;
+            }else if(pb.Value > (pb.Maximum * 0.8))
+            {
+                pb.BackColor = Color.Yellow;
+                pb.ForeColor = Color.Yellow;
+            }
             else
-                ModifyProgressBarColor.SetState(pb, 2);
+            {
+                pb.BackColor = Color.Green;
+                pb.ForeColor = Color.Green;
+            }
+
         }
         
         /**
@@ -172,27 +181,48 @@ namespace SoftBed
             return result;
         }
 
-        /**
-         * mouse enter event for refreshes
-         */
-        private void HauptFenster_MouseEnter(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
         {
             RefreshHauptfenster();
         }
-
-        private void TransferListeDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 
-    public static class ModifyProgressBarColor
+    public class NewProgressBar : ProgressBar
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
-        public static void SetState(this ProgressBar pBar, int state)
+        public NewProgressBar()
         {
-            SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
+            this.SetStyle(ControlStyles.UserPaint, true);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            // None... Helps control the flicker.
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            const int inset = 2; // A single inset value to control teh sizing of the inner rect.
+
+            using (Image offscreenImage = new Bitmap(this.Width, this.Height))
+            {
+                using (Graphics offscreen = Graphics.FromImage(offscreenImage))
+                {
+                    Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+
+                    if (ProgressBarRenderer.IsSupported)
+                        ProgressBarRenderer.DrawHorizontalBar(offscreen, rect);
+
+                    rect.Inflate(new Size(-inset, -inset)); // Deflate inner rect.
+                    rect.Width = (int)(rect.Width * ((double)this.Value / this.Maximum));
+                    if (rect.Width == 0) rect.Width = 1; // Can't draw rec with width of 0.
+
+                    LinearGradientBrush brush = new LinearGradientBrush(rect, this.BackColor, this.ForeColor, LinearGradientMode.Vertical);
+                    offscreen.FillRectangle(brush, inset, inset, rect.Width, rect.Height);
+
+                    e.Graphics.DrawImage(offscreenImage, 0, 0);
+                    offscreenImage.Dispose();
+                }
+            }
         }
     }
 }
